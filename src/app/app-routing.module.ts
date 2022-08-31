@@ -2,9 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
 import { DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
-import { JobshiftComponent } from './dialogs/jobshift/jobshift.component';
+import {  EmployeeShiftManagementDialog } from './dialogs/employee-shift-management/employee-shift-management.dialog';
+import {JobshiftDialog } from './dialogs/jobshift/jobshift.dialog';
+import { MorningJobShiftDialog } from './dialogs/morning-job-shift/morning-job-shift.dialog';
+import { NightJobShiftDialog } from './dialogs/night-job-shift/night-job-shift.dialog';
 import { OvertimeAdjustmentDialog } from './dialogs/overtime-adjustment/overtime-adjustment.dialog';
-import { ShiftManagmentComponent } from './dialogs/shift-managment/shift-managment.component';
+import { OvertimeHoursAdjusmentDialog } from './dialogs/overtime-hours-adjusment/overtime-hours-adjusment.dialog';
+import { ShiftManagmentDialog } from './dialogs/shift-managment/shift-managment.dialog';
 import { SingleShiftAllocationDialog } from './dialogs/single-shift-allocation/single-shift-allocation.dialog';
 import { SingleShiftDetailDialog } from './dialogs/single-shift-detail/single-shift-detail.dialog';
 import { RosterCplComponent } from './pages/roster-cpl/roster-cpl.component';
@@ -55,7 +59,7 @@ const routes: Routes = [
   },
   {
     path:'shiftmanagement',
-    component:ShiftManagmentComponent,
+    component:ShiftManagmentDialog,
     children: [
       {
         path:'sortbydate',
@@ -68,13 +72,26 @@ const routes: Routes = [
     ]
   },
   {
-    path:'jobshift',
-    component:JobshiftComponent
+    path:'morningshift',
+    component:MorningJobShiftDialog
+  },
+  {
+    path:'nightshift',
+    component:NightJobShiftDialog
   },
   {
     path:'shiftrequest',
     component:ShiftRequestComponent
   },
+  {
+    path:'employeeshift',
+    component:EmployeeShiftManagementDialog
+  },
+  {
+    path:'overtimehours',
+    component:OvertimeHoursAdjusmentDialog
+  },
+  
 ];
 
 @NgModule({

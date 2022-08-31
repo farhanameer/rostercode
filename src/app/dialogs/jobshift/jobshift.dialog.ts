@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-jobshift',
-  templateUrl: './jobshift.component.html',
-  styleUrls: ['./jobshift.component.css']
+  templateUrl: './jobshift.dialog.html',
+  styleUrls: ['./jobshift.dialog.css']
 })
-export class JobshiftComponent implements OnInit {
+export class JobshiftDialog implements OnInit {
 
   constructor() { }
 
