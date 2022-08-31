@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-overtime-adjustment',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OvertimeAdjustmentDialog implements OnInit {
 
-  constructor() { }
+  constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
+
+  overTimeForm=this.fb.group({
+    overTime:[''],
+    tillDate:[''],
+    adjustOvertimeIn:this.fb.group({
+      addCPL:[''],
+      paymentForOvertime:[''],
+      cpl:[''],
+      payForHours:['']
+    })
+  })
+
+
+  submit(form:FormGroup){
+    console.warn(form)
+  }
+
+
+  get validateAForm(): any {
+    return this.overTimeForm.controls
+  }
+
 
 }
