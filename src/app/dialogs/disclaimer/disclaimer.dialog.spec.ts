@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SingleShiftDetailComponent } from './single-shift-detail.component';
+import { DisclaimerDialog } from './disclaimer.dialog';
 
-describe('SingleShiftDetailComponent', () => {
-  let component: SingleShiftDetailComponent;
-  let fixture: ComponentFixture<SingleShiftDetailComponent>;
+describe('DisclaimerComponent', () => {
+  let component: DisclaimerDialog;
+  let fixture: ComponentFixture<DisclaimerDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SingleShiftDetailComponent ]
+      declarations: [ DisclaimerDialog ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SingleShiftDetailComponent);
+    fixture = TestBed.createComponent(DisclaimerDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

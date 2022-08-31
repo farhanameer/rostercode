@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DisclaimerComponent } from './dialogs/disclaimer/disclaimer.component';
-import { OvertimeAdjustmentComponent } from './dialogs/overtime-adjustment/overtime-adjustment.component';
-import { SingleShiftAllocationComponent } from './dialogs/single-shift-allocation/single-shift-allocation.component';
-import { SingleShiftDetailComponent } from './dialogs/single-shift-detail/single-shift-detail.component';
+import { AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
+import { DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
+import { OvertimeAdjustmentDialog } from './dialogs/overtime-adjustment/overtime-adjustment.dialog';
+import { SingleShiftAllocationDialog } from './dialogs/single-shift-allocation/single-shift-allocation.dialog';
+import { SingleShiftDetailDialog } from './dialogs/single-shift-detail/single-shift-detail.dialog';
 import { RosterCplComponent } from './pages/roster-cpl/roster-cpl.component';
 import { RosterComponent } from './pages/roster/roster.component';
 import { ShiftAllocationComponent } from './pages/shift-allocation/shift-allocation.component';
@@ -29,19 +30,23 @@ const routes: Routes = [
   },
   {
     path:'single',
-    component:SingleShiftAllocationComponent
+    component:SingleShiftAllocationDialog
   },
   {
     path:'overtime',
-    component:OvertimeAdjustmentComponent
+    component:OvertimeAdjustmentDialog
   },
   {
-    path:'shiftDetails',
-    component:SingleShiftDetailComponent
+    path:'shiftdetails',
+    component:SingleShiftDetailDialog
   },
   {
     path:'disclaimer',
-    component:DisclaimerComponent
+    component:DisclaimerDialog
+  },
+  {
+    path:'avaliableshift',
+    component:AvaliableShiftDialog
   }
 ];
 

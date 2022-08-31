@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-disclaimer',
-  templateUrl: './disclaimer.component.html',
-  styleUrls: ['./disclaimer.component.css']
+  templateUrl: './disclaimer.dialog.html',
+  styleUrls: ['./disclaimer.dialog.css']
 })
-export class DisclaimerComponent implements OnInit {
+export class DisclaimerDialog implements OnInit {
 
   constructor() { }
 

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SingleShiftAllocationComponent } from './single-shift-allocation.component';
+import { SingleShiftAllocationDialog } from './single-shift-allocation.dialog';
 
 describe('SingleShiftAllocationComponent', () => {
-  let component: SingleShiftAllocationComponent;
-  let fixture: ComponentFixture<SingleShiftAllocationComponent>;
+  let component: SingleShiftAllocationDialog;
+  let fixture: ComponentFixture<SingleShiftAllocationDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SingleShiftAllocationComponent ]
+      declarations: [ SingleShiftAllocationDialog ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SingleShiftAllocationComponent);
+    fixture = TestBed.createComponent(SingleShiftAllocationDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OvertimeAdjustmentComponent } from './overtime-adjustment.component';
+import { AvaliableShiftDialog } from './avaliable-shift.dialog';
 
-describe('OvertimeAdjustmentComponent', () => {
-  let component: OvertimeAdjustmentComponent;
-  let fixture: ComponentFixture<OvertimeAdjustmentComponent>;
+describe('AvaliableShiftComponent', () => {
+  let component: AvaliableShiftDialog;
+  let fixture: ComponentFixture<AvaliableShiftDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OvertimeAdjustmentComponent ]
+      declarations: [ AvaliableShiftDialog ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OvertimeAdjustmentComponent);
+    fixture = TestBed.createComponent(AvaliableShiftDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
