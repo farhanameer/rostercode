@@ -30,6 +30,15 @@ import {  SingleShiftDetailDialog } from './dialogs/single-shift-detail/single-s
 import {DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
 import {  AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
 import { CheckInOutCalenderComponent } from './roster/check-in-out-calender/check-in-out-calender.component';
+import { ShiftManagmentComponent } from './dialogs/shift-managment/shift-managment.component';
+import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { SortByDateComponent } from './roster/sort-by-date/sort-by-date.component';
+import { SortByEmployeeComponent } from './roster/sort-by-employee/sort-by-employee.component';
+import { MainCardComponent } from './roster/main-card/main-card.component';
+import { SubCardComponent } from './roster/sub-card/sub-card.component';
+import { JobshiftComponent } from './dialogs/jobshift/jobshift.component';
+import { ShiftRequestComponent } from './pages/shift-request/shift-request.component';
+import { ShiftListComponent } from './shift-list/shift-list.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +67,16 @@ import { CheckInOutCalenderComponent } from './roster/check-in-out-calender/chec
     OvertimeAdjustmentDialog,
     SingleShiftDetailDialog,
     DisclaimerDialog,
-    CheckInOutCalenderComponent
+    CheckInOutCalenderComponent,
+    ShiftManagmentComponent,
+    RadioButtonComponent,
+    SortByDateComponent,
+    SortByEmployeeComponent,
+    MainCardComponent,
+    SubCardComponent,
+    JobshiftComponent,
+    ShiftRequestComponent,
+    ShiftListComponent
     
   ],
   imports: [
