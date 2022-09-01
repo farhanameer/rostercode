@@ -44,6 +44,7 @@ import { OvertimeHoursAdjusmentDialog } from './dialogs/overtime-hours-adjusment
 import { ShiftRequestDetailComponent } from './roster/shift-request-detail/shift-request-detail.component';
 import { MorningJobShiftDialog } from './dialogs/morning-job-shift/morning-job-shift.dialog';
 import { NightJobShiftDialog } from './dialogs/night-job-shift/night-job-shift.dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { NightJobShiftDialog } from './dialogs/night-job-shift/night-job-shift.d
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
