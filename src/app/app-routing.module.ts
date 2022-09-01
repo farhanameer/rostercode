@@ -17,6 +17,7 @@ import { ShiftAllocationComponent } from './pages/shift-allocation/shift-allocat
 import { ShiftRequestComponent } from './pages/shift-request/shift-request.component';
 import { AttendenceCalenderComponent } from './roster/attendence-calender/attendence-calender.component';
 import { JobShiftDetailComponent } from './roster/job-shift-detail/job-shift-detail.component';
+import { ShiftRequestDetailComponent } from './roster/shift-request-detail/shift-request-detail.component';
 import { SortByDateComponent } from './roster/sort-by-date/sort-by-date.component';
 import { SortByEmployeeComponent } from './roster/sort-by-employee/sort-by-employee.component';
 
@@ -91,6 +92,7 @@ const routes: Routes = [
     path:'overtimehours',
     component:OvertimeHoursAdjusmentDialog
   },
+ 
   
 ];
 
