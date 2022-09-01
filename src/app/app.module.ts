@@ -11,7 +11,7 @@ import { ShiftAllocationComponent } from './pages/shift-allocation/shift-allocat
 import { SelectBoxComponent } from './pages/boxes/select-box/select-box.component';
 import { DateBoxComponent } from './pages/boxes/date-box/date-box.component';
 import { FileUploadComponent } from './roster/file-upload/file-upload.component';
-import { ButtonComponent } from './roster/button/button.component';
+import { ButtonComponent } from './pages/boxes/button/button.component';
 import { EmployeeShiftAlloctionComponent } from './roster/employee-shift-alloction/employee-shift-alloction.component';
 
 import { EmployeeShiftDetailsComponent } from './roster/employee-shift-details/employee-shift-details.component';
@@ -30,15 +30,20 @@ import {  SingleShiftDetailDialog } from './dialogs/single-shift-detail/single-s
 import {DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
 import {  AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
 import { CheckInOutCalenderComponent } from './roster/check-in-out-calender/check-in-out-calender.component';
-import { ShiftManagmentComponent } from './dialogs/shift-managment/shift-managment.component';
-import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { ShiftManagmentDialog } from './dialogs/shift-managment/shift-managment.dialog';
+import { RadioButtonComponent } from './pages/boxes/radio-button/radio-button.component';
 import { SortByDateComponent } from './roster/sort-by-date/sort-by-date.component';
 import { SortByEmployeeComponent } from './roster/sort-by-employee/sort-by-employee.component';
 import { MainCardComponent } from './roster/main-card/main-card.component';
 import { SubCardComponent } from './roster/sub-card/sub-card.component';
-import { JobshiftComponent } from './dialogs/jobshift/jobshift.component';
+import { JobshiftDialog } from './dialogs/jobshift/jobshift.dialog';
 import { ShiftRequestComponent } from './pages/shift-request/shift-request.component';
-import { ShiftListComponent } from './shift-list/shift-list.component';
+import { ShiftListComponent } from './roster/shift-list/shift-list.component';
+import { EmployeeShiftManagementDialog } from './dialogs/employee-shift-management/employee-shift-management.dialog';
+import { OvertimeHoursAdjusmentDialog } from './dialogs/overtime-hours-adjusment/overtime-hours-adjusment.dialog';
+import { ShiftRequestDetailComponent } from './roster/shift-request-detail/shift-request-detail.component';
+import { MorningJobShiftDialog } from './dialogs/morning-job-shift/morning-job-shift.dialog';
+import { NightJobShiftDialog } from './dialogs/night-job-shift/night-job-shift.dialog';
 
 @NgModule({
   declarations: [
@@ -68,15 +73,20 @@ import { ShiftListComponent } from './shift-list/shift-list.component';
     SingleShiftDetailDialog,
     DisclaimerDialog,
     CheckInOutCalenderComponent,
-    ShiftManagmentComponent,
+    ShiftManagmentDialog,
     RadioButtonComponent,
     SortByDateComponent,
     SortByEmployeeComponent,
     MainCardComponent,
     SubCardComponent,
-    JobshiftComponent,
+    JobshiftDialog,
     ShiftRequestComponent,
-    ShiftListComponent
+    ShiftListComponent,
+    EmployeeShiftManagementDialog,
+    OvertimeHoursAdjusmentDialog,
+    ShiftRequestDetailComponent,
+    MorningJobShiftDialog,
+    NightJobShiftDialog
     
   ],
   imports: [

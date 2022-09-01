@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JobshiftComponent } from './jobshift.component';
+import { MorningJobShiftDialog } from './morning-job-shift.dialog';
 
-describe('JobshiftComponent', () => {
-  let component: JobshiftComponent;
-  let fixture: ComponentFixture<JobshiftComponent>;
+describe('MorningJobShiftDialog', () => {
+  let component: MorningJobShiftDialog;
+  let fixture: ComponentFixture<MorningJobShiftDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JobshiftComponent ]
+      declarations: [ MorningJobShiftDialog ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JobshiftComponent);
+    fixture = TestBed.createComponent(MorningJobShiftDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

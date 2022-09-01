@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShiftManagmentComponent } from './shift-managment.component';
+import { ShiftManagmentDialog } from './shift-managment.dialog';
 
-describe('ShiftManagmentComponent', () => {
-  let component: ShiftManagmentComponent;
-  let fixture: ComponentFixture<ShiftManagmentComponent>;
+describe('ShiftManagmentDialog', () => {
+  let component: ShiftManagmentDialog;
+  let fixture: ComponentFixture<ShiftManagmentDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShiftManagmentComponent ]
+      declarations: [ ShiftManagmentDialog ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShiftManagmentComponent);
+    fixture = TestBed.createComponent(ShiftManagmentDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
