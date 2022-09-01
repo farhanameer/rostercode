@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-overtime-hours-adjusment',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OvertimeHoursAdjusmentDialog implements OnInit {
 
-  constructor() { }
+  constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
+  }
+
+  overTimeHoursAdjustment=this.fb.group({
+    overtimeHours:["",Validators.required],
+    approvedHours:["",Validators.required],
+    comments:["",Validators.required]
+  })
+
+  submit(form:FormGroup){
+    console.warn(form)
+  }
+
+  get validateAForm(): any {
+    return this.overTimeHoursAdjustment.controls
   }
 
 }
