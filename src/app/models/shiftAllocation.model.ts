@@ -1,7 +1,7 @@
 export class ShiftAllocationModel{
     shiftName:string;
-    shiftPeriodStartDate:number;
-    shiftPeriodEndDate:number;
+    shiftPeriodStartDate:Date;
+    shiftPeriodEndDate:Date;
     setasDefault:boolean;
 }
 

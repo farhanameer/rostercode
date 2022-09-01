@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-shift-request',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShiftRequestComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
+  }
+
+  shiftRequestForm=this.fb.group({
+    shiftType:["",Validators.required],
+    shiftName:["",Validators.required],
+    from:["",Validators.required],
+    comments:["",Validators.required]
+  })
+
+
+  submit(form:FormGroup){
+    console.warn(form)
+  }
+
+  get validateAForm(): any {
+    return this.shiftRequestForm.controls
   }
 
 }
