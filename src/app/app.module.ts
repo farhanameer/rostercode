@@ -48,6 +48,7 @@ import { NightJobShiftDialog } from './dialogs/night-job-shift/night-job-shift.d
 import { ShiftRequestCardComponent } from './roster/shift-request-card/shift-request-card.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { ShiftRequestApprovalComponent } from './roster/shift-request-approval/shift-request-approval.component';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MorningJobShiftDialog,
     NightJobShiftDialog,
     ShiftRequestCardComponent,
+    ShiftRequestApprovalComponent,
    
     
   ],
