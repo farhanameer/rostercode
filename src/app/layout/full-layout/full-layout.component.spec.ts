@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SecondaryLayoutComponent } from './secondary-layout.component';
+import { FullLayoutComponent } from './full-layout.component';
 
-describe('SecondaryLayoutComponent', () => {
-  let component: SecondaryLayoutComponent;
-  let fixture: ComponentFixture<SecondaryLayoutComponent>;
+describe('FullLayoutComponent', () => {
+  let component: FullLayoutComponent;
+  let fixture: ComponentFixture<FullLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SecondaryLayoutComponent ]
+      declarations: [ FullLayoutComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SecondaryLayoutComponent);
+    fixture = TestBed.createComponent(FullLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

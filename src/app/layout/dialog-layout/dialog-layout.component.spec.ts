@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RosterLayoutComponent } from './roster-layout.component';
+import { DialogLayoutComponent } from './dialog-layout.component';
 
-describe('RosterLayoutComponent', () => {
-  let component: RosterLayoutComponent;
-  let fixture: ComponentFixture<RosterLayoutComponent>;
+describe('DialogLayoutComponent', () => {
+  let component: DialogLayoutComponent;
+  let fixture: ComponentFixture<DialogLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RosterLayoutComponent ]
+      declarations: [ DialogLayoutComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RosterLayoutComponent);
+    fixture = TestBed.createComponent(DialogLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

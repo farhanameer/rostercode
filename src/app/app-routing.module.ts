@@ -15,12 +15,12 @@ import { RosterCplComponent } from './pages/roster-cpl/roster-cpl.component';
 import { RosterComponent } from './pages/roster/roster.component';
 import { ShiftAllocationComponent } from './pages/shift-allocation/shift-allocation.component';
 import { ShiftRequestComponent } from './pages/shift-request/shift-request.component';
-import { AttendenceCalenderComponent } from './roster/attendence-calender/attendence-calender.component';
-import { JobShiftDetailComponent } from './roster/job-shift-detail/job-shift-detail.component';
-import { ShiftRequestApprovalComponent } from './roster/shift-request-approval/shift-request-approval.component';
-import { ShiftRequestDetailComponent } from './roster/shift-request-detail/shift-request-detail.component';
-import { SortByDateComponent } from './roster/sort-by-date/sort-by-date.component';
-import { SortByEmployeeComponent } from './roster/sort-by-employee/sort-by-employee.component';
+import { AttendenceCalenderComponent } from './components/attendence-calender/attendence-calender.component';
+import { JobShiftDetailComponent } from './components/job-shift-detail/job-shift-detail.component';
+import { ShiftRequestApprovalComponent } from './components/shift-request-approval/shift-request-approval.component';
+import { ShiftRequestDetailComponent } from './components/shift-request-detail/shift-request-detail.component';
+import { SortByDateComponent } from './components/sort-by-date/sort-by-date.component';
+import { SortByEmployeeComponent } from './components/sort-by-employee/sort-by-employee.component';
 
 const routes: Routes = [
   {
