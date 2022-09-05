@@ -1,0 +1,35 @@
+<div class="module-style lm-portal-nms">
+  <notification-settings
+    (onResetFilters)="onResetFilters()"
+    [filters]="{ 'lmFilters': filters }"
+    [userCount]="userCount"
+    [portal]="'lm'"
+  >
+    <form [formGroup]="form" class="mb-cus-3">
+      <div class="emp-content justify-bw p-cus-0 border-0 row m-0 p-0-lr-10">
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="getUserCount()"
+            [form]="form"
+            [isLoaded]="true"
+            [data]="reporting.reportingLevel"
+            [label]="'Reporting Level'"
+            [control]="'reportingLevel'"
+          ></custom-select>
+        </div>
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="getUserCount()"
+            [form]="form"
+            [isLoaded]="true"
+            [data]="reporting.reportingDepartment"
+            [label]="'Reporting Department'"
+            [control]="'reportingDepartment'"
+          ></custom-select>
+        </div>
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3"></div>
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3"></div>
+      </div>
+    </form>
+  </notification-settings>
+</div>

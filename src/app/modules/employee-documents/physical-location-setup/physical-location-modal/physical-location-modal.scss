@@ -1,0 +1,188 @@
+.module-style.physical-location-setup {
+  .set-padding {
+    padding-right: 25px !important;
+  }
+
+  .def-btn {
+    float: right !important;
+  }
+
+  .comp-card {
+    box-shadow: 0px 3px 5px #0000001a !important;
+  }
+
+  .justify-heading {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .add-address {
+    border-top: 1px solid #eee !important;
+    border-bottom: none !important;
+    height: 112px !important;
+    overflow-y: auto !important;
+  }
+
+  .add-address > div {
+    padding: 7px 10px !important;
+    border-left: 1px solid #eee !important;
+    border-right: 1px solid #eee !important;
+    border-bottom: 1px solid #eee !important;
+    font: normal normal normal 12px/14px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #3080ea !important;
+    opacity: 1 !important;
+  }
+
+  .add-address > div:nth-child(even) {
+    background-color: #fafafa !important;
+  }
+
+  .add-address > div:nth-child(odd) {
+    background-color: #fff !important;
+  }
+
+  .add-address > div.location-del{
+    background-color: #fbebe8 !important;
+  }
+
+  .doc-content .doc-records tr th {
+    font: normal normal 500 13px/15px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #3080ea !important;
+    text-align: left !important;
+    opacity: 1 !important;
+  }
+  .doc-content .doc-records tr td {
+    font: normal normal normal 11px/13px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #343434 !important;
+    text-align: left !important;
+    opacity: 1 !important;
+  }
+
+  .doc-content .doc-records tr th:first-child,
+  .doc-content .doc-records tr td:first-child {
+    padding-left: 10px !important;
+  }
+
+  .justify-bw {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .justify-right {
+    display: flex !important;
+    justify-content: right !important;
+    align-items: center !important;
+  }
+
+  .set-btn {
+    margin: 3px 10px 3px 0 !important;
+    float: left !important;
+  }
+
+  .btn-modal-wrapper {
+    background: #d8dcdf 0% 0% no-repeat padding-box !important;
+  }
+
+  .minus-icon {
+    background: #3080ea 0% 0% no-repeat padding-box !important;
+    color: #fff !important;
+    border-radius: 3px !important;
+    opacity: 1 !important;
+    height: 16px !important;
+    width: 16px !important;
+    padding: 2px 3px !important;
+  }
+
+  .close {
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    cursor: pointer !important;
+    color: #343434 !important;
+  }
+
+  .modal-btn {
+    height: 26px !important;
+  }
+
+  .set-add-btn {
+    height: 20px !important;
+  }
+
+  .modal-popup > div {
+    height: initial;
+  }
+
+  .modal-popup > div > input {
+    height: 26px;
+  }
+
+  .mat-dialog-container {
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+  .p-cus-20-0-10-0 {
+    padding: 20px 0 10px 0 !important;
+  }
+  .p-6-5-10 {
+    padding: 6.5px 10px !important;
+  }
+  .modal-popup {
+    align-items: flex-start !important;
+  }
+  .p-cus-0 {
+    padding: 0 !important;
+  }
+  .remove-icon {
+    height: 16px !important;
+    width: 20px !important;
+    background: #3080ea !important;
+    border-radius: 3px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    & > div {
+      margin-top: 0.5px;
+      width: 12px !important;
+      height: 2px !important;
+      background: #fff !important;
+      border-radius: 2px !important;
+    }
+  }
+
+
+  
+  .confirmation-action{
+    display: flex;
+    justify-content: space-between;
+    /* justify-content: center; */
+    align-items: center;
+
+    & > span {
+      font: normal normal normal 11px/13px Roboto !important;
+      color: #3080EA !important;
+      padding-left: 20px !important;
+    }
+
+    & > .action-buttons > .success-btn {
+      padding-left: 11px !important;
+      padding-right: 11px !important;
+      margin-right: 10px !important;
+    }
+
+    & > .action-buttons > .cancel-btn{
+      padding-left: 13px !important;
+      padding-right: 13px !important;
+    }
+  }
+
+  .confirmation-action .action-buttons .mr-cus-3 {
+    margin-right: 3px !important;
+  }
+
+}

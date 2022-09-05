@@ -1,0 +1,95 @@
+<div class="module-style notification-panel">
+  <div #notificationRef class="row w-100 bg-white m-0 px-cus-20">
+    <div class="col-12 nms-card p-2">
+      <div class="row align-center m-0 pb-2">
+        <div class="row col m-0 p-0" (click)="navigateBack()">
+          <div class="cur-p" [hidden]="hideBackBtn">
+            <i class="bi bi-chevron-left"></i>
+          </div>
+          <div class="cur-p col heading px-1">Updates & Notifications</div>
+        </div>
+        <div class="just-end row unread m-0">
+          <div class="text-center custom-badge">
+            <div>{{ unreadNotificationCount }}</div>
+          </div>
+          <div class="sub-text mx-1">unread</div>
+          <div>
+            <div *ngIf="showViewAll" class="view-all mr-1">
+              <button (click)="gotoAllNotifications()">View All</button>
+            </div>
+          </div>
+          <div (click)="minMaxUserNotification()" class="minimize text-center pl-2">
+            <i class="bi bi-dash-lg"></i>
+          </div>
+        </div>
+      </div>
+      <div
+        [@openClose]="stateUserNotification"
+        class="scroll-notifications w-100 col-md-12 doc-content comp-card p-0"
+        [class.cus-scroll-mini]="minHeight"
+        [class.cus-scroll]="!minHeight"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [scrollWindow]="false"
+        (scrolled)="getDataOnScroll()"
+      >
+        <div
+          *ngFor="
+            let notification of sliceData
+              ? (notifications | slice: 0:5)
+              : notifications
+          "
+          class="row m-0 align-center notification-item py-2"
+        >
+          <div
+            (click)="
+              [
+                openDialog(notification['userNotificationId']),
+                getSingleNotification(notification['userNotificationId']),
+                (notification['is_read'] = 1) , 
+                (unreadNotificationCount = unreadNotificationCount - 1)
+              ]
+            "
+            class="row col-11 m-0 p-0 cur-p"
+          >
+            <div [class.col-1]="isFitImage" class="avatar pl-0">
+              <img src="assets/images/male.png" alt="" />
+            </div>
+            <div class="col-11 pr-0">
+              <div class="row m-0">
+                <div class="badge-color mr-1">
+                  <div
+                    class="badge m-auto"
+                    [style.background]="colors[notification['role']]"
+                  >
+                    {{ notification["role"] == 'System' ? 'SYS' : notification["role"] }}
+                  </div>
+                </div>
+                <div class="name mr-1" [style.color]="colors[notification['role']]" *ngIf="notification['role'] !='System'">
+                  {{ notification["name"] }}
+                </div>
+      
+                <div class="name mr-1" [style.color]="colors[notification['role']]" *ngIf="notification['role'] =='System'">
+                  {{ notification["notification_subject"] }}
+                </div>
+                <div class="date">
+                  {{ parseDate(notification["completion_date"]) }}
+                </div>
+              </div>
+              <div
+                class="notification-msg"
+                [class.text-ellipsis]="ellipsisText"
+              >
+                {{ notification["notification_body"] }}
+              </div>
+            </div>
+          </div>
+          <div class="col-1 unread-dot">
+            <i *ngIf="notification['is_read'] == 0" class="bi bi-dot cur-p"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

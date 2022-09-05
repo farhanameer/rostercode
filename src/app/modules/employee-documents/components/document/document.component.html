@@ -1,0 +1,348 @@
+<div class="module-style document-comp">
+  <form
+    #documentRefForm="ngForm"
+    [formGroup]="documentForm"
+    (submit)="addDocument()"
+    class="bg-white w-100 col-md-12 row m-0 p-0"
+  >
+    <div class="col-md-12 mb-2 p-0">
+      <div class="people-title-heading justify-bw pl-0">
+        <h4>Add Document</h4>
+        <div class="pr-cus-10" (click)="minMaxAddDocument()">
+          <div *ngIf="stateAddDocument == 'maximize'">
+            <i class="fas fa-caret-down"></i>
+          </div>
+          <div *ngIf="stateAddDocument == 'minimize'">
+            <i class="fas fa-caret-up"></i>
+          </div>
+        </div>
+      </div>
+      <div class="shadow" [@openClose]="stateAddDocument">
+        <div class="emp-content justify-bw b-cus-0 row p-cus-20 pb-cus-0 m-0">
+          <div class="select-wrapper w-cus-260 col px-cus-0">
+            <mat-form-field appearance="fill">
+              <mat-label>Document Type</mat-label>
+              <mat-select
+                #documentCategory
+                panelClass="options-panel"
+                formControlName="documentCategoryId"
+                (selectionChange)="
+                  [
+                    resetTitle('documentCategoryFieldId'),
+                    getDocumentCategoryField(documentCategory.value),
+                    (submitted = false),
+                    (recruitementPack = null)
+                  ]
+                "
+              >
+                <div class="">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <input
+                  [(ngModel)]="filter['categoriesWithFields']"
+                  name="searchWord"
+                  *ngIf="categoriesWithFields.length > 10"
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option *ngIf="categoriesWithFields.length == 0"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  *ngFor="
+                    let item of categoriesWithFields
+                      | searchFilter
+                        : filter['categoriesWithFields']
+                        : 'name'
+                      | slice: 0:10
+                  "
+                  [value]="item.id"
+                  >{{ item.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="
+                (validation.documentCategoryId.touched || submitted) &&
+                validation.documentCategoryId.errors?.required
+              "
+              class="error-message"
+            >
+              Required*
+            </div>
+          </div>
+
+          <div class="select-wrapper w-cus-260 col px-cus-0">
+            <mat-form-field appearance="fill">
+              <mat-label>Title</mat-label>
+              <mat-select
+                #documentCategoryField
+                [disabled]="!documentCategory.value"
+                panelClass="options-panel"
+                formControlName="documentCategoryFieldId"
+                (selectionChange)="
+                  [
+                    (documentCategoryFieldTitle = documentCategoryField.value),
+                    (submitted = false),
+                    (recruitementPack = null)
+                  ]
+                "
+              >
+                <input
+                  [(ngModel)]="filter['documentCategoryFields']"
+                  name="searchWord"
+                  *ngIf="documentCategoryFields.length > 10"
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option *ngIf="documentCategoryFields.length == 0"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  *ngFor="
+                    let item of documentCategoryFields
+                      | searchFilter
+                        : filter['documentCategoryFields']
+                        : 'categoryFieldName'
+                      | slice: 0:10
+                  "
+                  (click) = "changeSelectedItem(item)"
+                  [value]="item.documentCategoryFieldId"
+                  >{{ item.categoryFieldName }}
+                  <span style="color: #fb887a">{{
+                    item.isRequired ? "*" : ""
+                  }}</span></mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="
+                (validation.documentCategoryFieldId.touched || submitted) &&
+                validation.documentCategoryFieldId.errors?.required
+              "
+              class="error-message"
+            >
+              Required*
+            </div>
+          </div>
+
+
+          
+          <div class="col w-cus-260 px-cus-0">
+            <div class="date-field toggle-date">
+              <input
+                matInput
+                readonly
+                placeholder="Issue Date"
+                formControlName="issueDate"
+                [matDatepicker]="varIssueDate"
+                (change)="[(submitted = false)]"
+              />
+              <mat-datepicker-toggle
+                (click)="markAsTouched('issueDate')"
+                [disableRipple]="true"
+                [for]="varIssueDate"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #varIssueDate></mat-datepicker>
+            </div>
+            <div
+              *ngIf="
+                (validation.issueDate.touched || submitted) &&
+                validation.issueDate.errors?.required
+              "
+              class="error-message"
+            >
+              Required*
+            </div>
+          </div>
+          <div class="check w-55 px-cus-0">
+            <mat-checkbox class="validity px-cus-0"
+              formControlName="validity"
+              color="primary"
+              checked="true"
+            >
+              Validity
+            </mat-checkbox>
+          </div>
+          <div class="col w-cus-260 px-cus-0">
+            <div class="date-field toggle-date">
+              <input
+                readonly
+                [disabled]="!validation.validity.value"
+                matInput
+                placeholder="Valid Till"
+                formControlName="validTill"
+                [matDatepicker]="varValidTill"
+                [value]="
+                  !validation.validity.value ? '' : validation.validTill.value
+                "
+                (change)="[(submitted = false)]"
+              />
+              <mat-datepicker-toggle
+                (click)="markAsTouched('validTill')"
+                [disableRipple]="true"
+                [for]="varValidTill"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #varValidTill></mat-datepicker>
+            </div>
+            <div
+              *ngIf="
+                (validation.validTill.touched || submitted) &&
+                validation.validTill.errors?.dateLesserThen
+              "
+              class="error-message"
+            >
+              Must be greater then Issue Date
+            </div>
+            <div
+              *ngIf="
+                (validation.validTill.touched || submitted) &&
+                validation.validTill.errors?.requiredIfNotValid
+              "
+              class="error-message"
+            >
+              Required*
+            </div>
+          </div>
+        </div>
+        <div class="emp-content justify-bw b-cus-0 px-cus-20 pt-cus-0 pb-cus-5 row m-0">
+          <div class="col w-cus-260 px-cus-0">
+            <div class="attachment">
+              <label class="m-0">
+                <div class="cut-text">
+                  {{
+                    fileName && fileFormat
+                      ? fileName + "." + fileFormat
+                      : "Attachment"
+                  }}
+                </div>
+                <input
+                  (change)="uploadFile($event)"
+                  formControlName="attachment"
+                  hidden
+                  type="file"
+                  name=""
+                />
+                <i class="bi bi-paperclip"></i>
+              </label>
+              <div
+                *ngIf="
+                  (validation.attachment.touched || submitted) &&
+                  validation.attachment.errors?.required
+                "
+                class="error-message"
+              >
+                Required*
+              </div>
+            </div>
+          </div>
+          <div class="col w-cus-260 pt-cus-3 px-cus-0 dl-template" *ngIf="recruitementPack?.templateUrl"><a download (click)="downloadFile(recruitementPack?.templateUrl , 'template' , 'docx')">Download Template</a></div>
+          <div class="col w-cus-260 px-cus-0"></div>
+          <div class="w-55 px-cus-0"></div>
+          <div class="col w-cus-260 px-cus-0"></div>
+        </div>
+      </div>
+      <div [@openClose]="stateAddDocument">
+        <div class="btn-wrapper justify-right">
+          <button
+            [disabled]="!documentForm.valid || submitted"
+            class="def-btn mr-cus-3"
+            type="submit"
+          >
+            Add
+          </button>
+          <button class="def-btn ml-cus-3" type="reset">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="bg-white col-md-12 p-0">
+    <div class="people-title-heading justify-bw m-0 pl-0">
+      <h4>Document List</h4>
+      <div class="pr-cus-10" (click)="minMaxDocumentList()">
+        <div *ngIf="stateDocumentList == 'maximize'">
+          <i class="fas fa-caret-down"></i>
+        </div>
+        <div *ngIf="stateDocumentList == 'minimize'">
+          <i class="fas fa-caret-up"></i>
+        </div>
+      </div>
+    </div>
+    <div [@openClose]="stateDocumentList" class="p-cus-20 pb-cus-0 shadow doc-content">
+      <div class="is-no-record" *ngIf="isNoRecord">No records found!</div>
+      <div
+        *ngFor="let document of documentList; let i = index"
+        class="m-0"
+        [hidden]="document.documents.length == 0"
+      >
+        <div class="people-sub-title-heading p-0">
+          <h4>{{ document.name }}</h4>
+        </div>
+        <div class="row w-100 mb-3 m-0 bg-white p-0">
+          <div class="col-md-12 p-0">
+            <table class="doc-records personal-docs">
+              <tr>
+                <th>Sr. No</th>
+                <th>Document Title</th>
+                <th>Document Version</th>
+                <th>Issue Date</th>
+                <th>Valid Till</th>
+                <th>Uploaded On</th>
+                <th>Uploaded By</th>
+                <th *ngIf="canDelete"></th>
+              </tr>
+              <tr *ngFor="let item of document.documents; let j = index">
+                <td>{{ j + 1 }}</td>
+                <td (click)="openDoc(document.documents, item)">
+                  {{ item.category_field_name }}
+                </td>
+                <td>{{ item.version }}</td>
+                <td>{{ transformDate(item.issue_date) }}</td>
+                <td>
+                  {{
+                    item.validity
+                      ? transformDate(item.valid_till)
+                      : "Not Applicable"
+                  }}
+                </td>
+                <td>{{ transformDate(item.uploaded_on) }}</td>
+                <td>{{ item.uploaded_by }}</td>
+                <td *ngIf="canDelete">
+                  <div class="justify-center m-0">
+                    <div (click)="openConfirmDialog(item.category_field_name, item.id, j, i)" class="remove-icon">
+                      <div></div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="btn-wrapper justify-right">
+        <button
+          *ngIf="isUpdating"
+          class="def-btn"
+          [disabled]="disabledUpdate"
+          (click)="update()"
+        >
+          Update
+        </button>
+        <button
+          [disabled]="disabledSave"
+          *ngIf="!isUpdating"
+          class="def-btn"
+          (click)="save()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

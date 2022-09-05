@@ -1,0 +1,164 @@
+
+    {  
+        "stages" : [
+            {
+                "id" : 1,
+                "stageName" : "Applied/Suggested",
+                "candidatesCount" : 5,
+                "candidates" : [
+                    {
+                        "id" : 1,
+                        "name" : "Mustafa Ali",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "UI/UX Designer",
+                        "companyName" : "Zeetech",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    },
+                    {
+                        "id" : 2,
+                        "name" : "Zahid Khan",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "UI/UX Designer",
+                        "companyName" : "Arbisoft",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    },
+                    {
+                        "id" : 3,
+                        "name" : "Afifa Tariq",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Jr. UI/UX Designer",
+                        "companyName" : "Arbisoft",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    },
+                    {
+                        "id" : 4,
+                        "name" : "Hisham Talib",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Sr. UI/UX Designer",
+                        "companyName" : "Arbisoft",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    },
+                    {
+                        "id" : 5,
+                        "name" : "Abdullah Sultan",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Lead. UI/UX Designer",
+                        "companyName" : "Arbisoft",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    }
+                ]
+            },
+            {
+                "id" : 2,
+                "stageName" : "Initially Rejected",
+                "candidatesCount" : 2,
+                "candidates" : [
+                    {
+                        "id" : 1,
+                        "name" : "Zuhaib Faiz",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "UI/UX Designer",
+                        "companyName" : "Arbisoft",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    },
+                    {
+                        "id" : 2,
+                        "name" : "Amjad Mateen",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Lead UI/UX Designer",
+                        "companyName" : "Devbatch",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    }
+                ]
+            },
+            {
+                "id" : 3,
+                "stageName" : "Pre-Screening",
+                "candidatesCount" : 1,
+                "candidates" : [
+                    {
+                        "id" : 1,
+                        "name" : "Sarwat Iftikhar",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Frintend UI/UX Designer",
+                        "companyName" : "Systems",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    }
+                ]
+            },
+            {
+                "id" : 4,
+                "stageName" : "Shortlisted",
+                "candidatesCount" : 2,
+                "candidates" : [
+                    {
+                        "id" : 1,
+                        "name" : "Imtiaz Ali",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Web Designer",
+                        "companyName" : "Arhamsoft",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    },
+                    {
+                        "id" : 2,
+                        "name" : "Rehan Zubair",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Lead UI/UX Designer",
+                        "companyName" : "Devbatch",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    }
+                ]
+            },
+            {
+                "id" : 5,
+                "stageName" : "Phone-Screening",
+                "candidatesCount" : 1,
+                "candidates" : [
+                    {
+                        "id" : 1,
+                        "name" : "Waleed Ashraf",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Frintend UI/UX Designer",
+                        "companyName" : "Probase",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    }
+                ]
+            },
+            {
+                "id" : 6,
+                "stageName" : "Not Interested",
+                "candidatesCount" : 2,
+                "candidates" : [
+                    {
+                        "id" : 1,
+                        "name" : "Bilal Akram",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Sr. UI/UX Designer",
+                        "companyName" : "Ab Developers",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    },
+                    {
+                        "id" : 2,
+                        "name" : "Moin Khan",
+                        "image" : "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+                        "designation" : "Jr. UI/UX Designer",
+                        "companyName" : "HK Marketing",
+                        "dateAdded" : "2 months",
+                        "dateUpdated" : "1 month"
+                    }
+                ]
+            }
+        ]
+    }

@@ -1,0 +1,13 @@
+{
+  "nodeApiUrl": "https://api.appgenii.people.com.pk/api2/3.0/",
+  "phpApiHeader_300_23": "https://api.appgenii.people.com.pk/api2/3.0/",
+  "phpApiHeader_300": "https://api.appgenii.people.com.pk/api2/3.0/",
+  "phpApiHeader": "https://api.appgenii.people.com.pk/api2/3.0/",
+  
+  "mongoApiUrl": "https://api.appgenii.people.com.pk/api2/3.0/",
+  "laravelApiUrl": "https://api.appgenii.people.com.pk/api2/3.0/",
+  "phpSiteUrl": "https://api.appgenii.people.com.pk/api2/3.0/",
+  "stagingHeader": "https://api.appgenii.people.com.pk/api2/3.0/",
+  "imageUIServer": "https://api.appgenii.people.com.pk/api2/3.0/",
+  "phpSiteLink": "https://api.appgenii.people.com.pk/api2/3.0/"
+}

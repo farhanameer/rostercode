@@ -1,0 +1,12 @@
+.module-style {
+    .cus-m-0 {
+        margin: 0 !important;
+    }
+    .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{
+        padding: 0px !important;
+    }
+    input.search-input::placeholder {
+        color:green !important;
+        font-size: 5px !important;
+    }
+}

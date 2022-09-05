@@ -1,0 +1,189 @@
+$toolbar-breakpoint: 600px;
+
+$fa-font-path: "~@fortawesome/fontawesome-free-webfonts/webfonts";
+
+$link-hover-decoration: none;
+$label-margin-bottom: 0;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+$primarey-color: #5a89ff;
+$text-primarey: #1a73e8;
+$text-color: #343434;
+
+$bg-color: #d8dcdf;
+$bg-color-2: #f5f5f5;
+
+$border-color: #efefef;
+$border-color-2: #d8d8d8;
+
+$footer-bg: $bg-color;
+
+$btn-hover: #8addff;
+
+:root {
+  --l: 50%; /*the initial lightness*/
+  --designation: #5a89ff;
+  --band: #14b5d0;
+  --department: #00a651;
+  --name: #50627d;
+  --duration_date: #edbb07;
+  --location: #29cb97;
+  --office_name: #6e6c8f;
+
+  // Year
+  --foreground: #5a89ff;
+  --background: #5a89ff;
+  --background_opacity: 20;
+
+  // Graph Values
+  --graph_foreground: #5a89ff;
+  --graph_background: #5a89ff;
+
+  --appriasal_name: #fe8f2d;
+  --appriasal_rating: #827dec;
+  --salary_change: #0b9694;
+
+  // perfomance history
+  --rewards: #00a651;
+  --appericiation: #edbb07;
+  --warning: #50627d;
+  --perfomance_department: #00a651;
+
+  // Arrows
+  --appriasal_name_year: #fe8f2d;
+  --arrow_designation: #5a89ff;
+  --arrow_name: #50627d;
+  --arrow_department: #00a651;
+
+  // Common
+  --font_color: #ffffff;
+  --title_background_color: #d8dcdf;
+  --title_font_color: #343434;
+  --background_color: #fafbfb;
+}
+
+// pass variables into a sass map
+// :root {
+//   //common
+//   --common_foreground: red;
+//   --common_background: #5a89ff;
+//   --common-title_font_color: #5a89ff;
+//   --common-white_font_color: #5a89ff;
+//   --common-black_font_color: #5a89ff;
+// }
+
+$variables: (
+  //common
+  --common_foreground: var(--common_foreground),
+  --common_background: var(--common_background),
+  --common-title_font_color: var(--common-title_font_color),
+  --common-white_font_color: var(--common-white_font_color),
+  --common-black_font_color: var(--common-black_font_color),
+  --common_scroll_color: var(--common_scroll_color),
+  //
+  //
+  //emp_details
+  --emp_details_band_color: var(--emp_details_band_color),
+  --emp_details_department_color: var(--emp_details_department_color),
+  --emp_details_designation_color: var(--emp_details_designation_color),
+  --emp_details_name_color: var(--emp_details_name_color),
+  //
+  //
+  //arrows
+  --arrows_designation_department_color:
+    var(--arrows_designation_department_color),
+  --arrows_salary_chaange_history_border:
+    var(--arrows_salary_chaange_history_border),
+  --arrows_salary_chaange_history_size:
+    var(--arrows_salary_chaange_history_size),
+  --arrows_lm_history_color: var(--arrows_lm_history_color),
+  //
+  //
+  //emp_story"
+  --emp_story_band_background_color: var(--emp_story_band_background_color),
+  --emp_story_band_foreground_color: var(--emp_story_band_foreground_color),
+  --emp_story_department_color: var(--emp_story_department_color),
+  --emp_story_designation_color: var(--emp_story_designation_color),
+  --emp_story_duration_date_color: var(--emp_story_duration_date_color),
+  --emp_story_lm_name_color: var(--emp_story_lm_name_color),
+  --emp_story_lm_office_name_color: var(--emp_story_lm_office_name_color),
+  //
+  //
+  //emp_story => salary_details
+  --emp_story_salary_details_appriasal_name_color:
+    var(--emp_story_salary_details_appriasal_name_color),
+  --emp_story_salary_details_appriasal_rating_color:
+    var(--emp_story_salary_details_appriasal_rating_color),
+  --emp_story_salary_details_salary_change_color:
+    var(--emp_story_salary_details_salary_change_color),
+  //
+  //
+  // graph_values
+  --graph_toggle_defauly_color: var(--graph_toggle_defauly_color),
+  --graph_toggle_font_color: var(--graph_toggle_font_color),
+  --graph_toggle_opacity: var(--graph_toggle_opacity),
+  --graph_toggle_selected_first_color: var(--graph_toggle_selected_first_color),
+  --graph_toggle_selected_second_color:
+    var(--graph_toggle_selected_second_color),
+  //
+  //
+  // band_designation
+  --graph_designation_selected_color: var(--graph_designation_selected_color),
+  --graph_designation_shadow_color: var(--graph_designation_shadow_color),
+  --graph_band_selected_color: var(--graph_band_selected_color),
+  --graph_band_shadow_color: var(--graph_band_shadow_color),
+  //
+  //
+  // perfomance_history
+  --appericiation_selected_color: var(--appericiation_selected_color),
+  --appericiation_shadow_color: var(--appericiation_shadow_color),
+  --rewards_selected_color: var(--rewards_selected_color),
+  --rewards_shadow_color: var(--rewards_shadow_color),
+  --training_selected_color: var(--training_selected_color),
+  --training_shadow_color: var(--training_shadow_color),
+  --warning_selected_color: var(--warning_selected_color),
+  --warning_shadow_color: var(--warning_shadow_color),
+  //
+  //
+  // salarly change histroy
+  --salary_change_history_color: var(--salary_change_history_color),
+  --salary_change_history_border: var(--salary_change_history_border),
+  --salary_change_history_size: var(--salary_change_history_size),
+  //
+  //
+  //transfer story
+  --department_color: var(--department_color),
+  --designation_color: var(--designation_color),
+  --location_color: var(--location_color),
+  --office_name_color: var(--office_name_color),
+  --year_color: var(--year_color)
+);
+
+$success-btn: #00a651;
+
+$warning-btn: #edbb07;
+
+$danger-btn: #fe5f2d;
+
+$info-btn: #5a89ff;
+
+$band-btn: #14b5d0;
+
+$disabled-graph: #d8dcdf;
+
+$primarey-color: #5a89ff;
+
+$text-primarey: #1a73e8;
+
+$text-color: #343434;
+
+$table-row-bg: #fafafb;
+
+$table-border: #d8dcdf;

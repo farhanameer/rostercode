@@ -1,0 +1,27 @@
+<div class="module-style allow-notification">
+  <div class="m-0 justify-bw people-title-heading px-cus-10">
+    <h4 class="px-0">Notification Alert</h4>
+    <div (click)="close()" class="close"><img src="assets/images/close.svg" /></div>
+  </div>
+  <div class="p-3 bg-fff">
+    <div class="notification-title">
+      "PEOPLE" would like to send you notifications
+    </div>
+    <div class="notification-description">
+      Notifications may include alerts, sounds and icon badges. These can be
+      configured in Settings.
+    </div>
+  </div>
+  <div class="btn-modify btn-wrapper h-fit justify-end pr-cus-10 row m-0">
+    <button type="button" (click)="allow()" class="def-btn cus-m-r-3">
+      Allow
+    </button>
+    <button
+      type="button"
+      (click)="close()"
+      class="def-btn cus-m-l-3"
+    >
+      Don't Allow
+    </button>
+  </div>
+</div>

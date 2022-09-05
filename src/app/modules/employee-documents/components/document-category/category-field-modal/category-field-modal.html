@@ -1,0 +1,67 @@
+<div class="module-style category-field">
+  <div class="m-0 justify-bw people-title-heading px-cus-10">
+    <h4 class="px-cus-0">Add New Category Field</h4>
+    <div class="col-1 justify-end px-cus-0 close" (click)="close()"><img src="assets/images/close.svg" /></div>
+  </div>
+  <div class="p-cus-20">
+    <form
+      [formGroup]="addCategoryFieldForm"
+      (submit)="addCategoryField($event, input.value)"
+    >
+      <div class="row m-0 border-0 modal-popup emp-content pt-cus-0">
+        <div class="col px-cus-0 modal-field mr-cus-6">
+          <input
+            #input
+            formControlName="categoryField"
+            type="text"
+            placeholder="Category Field"
+            class="emp-input"
+          />
+
+          <div
+            *ngIf="
+                  (validation.categoryField.touched || submitted) &&
+                  validation.categoryField.errors?.required
+                "
+            class="error-message col-9 pr-0 text-right h-auto"
+          >
+            Required*
+          </div>
+        </div>
+        <div class="px-cus-0 modal-btn justify-center">
+          <button
+            [disabled]="!addCategoryFieldForm.valid"
+            type="submit"
+            class="def-btn set-add-btn m-0"
+          >
+            Add More
+          </button>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div><h4 class="p-cus-20-0-10-0">Category Fields:</h4></div>
+      <div class="add-address">
+        <div
+          *ngFor="let item of categoryFields; let i = index;"
+          class="justify-bw p-6-5-10"
+        >
+          <div>{{item.name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="justify-right btn-modal-wrapper btn-wrapper">
+    <button
+      [disabled]="newCategoryFields.length == 0"
+      type="button"
+      (click)="saveCategoryFields()"
+      class="def-btn mr-cus-3"
+    >
+      Save
+    </button>
+    <button type="button" (click)="close()" class="def-btn ml-cus-3">
+      Cancel
+    </button>
+  </div>
+</div>

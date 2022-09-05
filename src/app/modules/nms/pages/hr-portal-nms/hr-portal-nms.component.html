@@ -1,0 +1,216 @@
+<div class="module-style">
+  <notification-settings
+    (onResetFilters)="onResetFilters()"
+    [filters]="{ filters: filters }"
+    [userCount]="userCount"
+    [portal]="'hr'"
+    [companyId]="clientId"
+  >
+    <form [formGroup]="form">
+      <div class="emp-content justify-bw p-cus-0 border-0 row m-0">
+        <!--
+          Company
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            [form]="form"
+            [isLoaded]="isLoaded.company"
+            [data]="locations.company"
+            [label]="'Company'"
+            [control]="'companyId'"
+            (selectionChange)="
+              [
+                updateClientId(form.controls.companyId.value),
+                getRegion('getMarket', 'market', {}),
+                getUserCount()
+              ]
+            "
+            (onResetDropDown)="onResetDropDown('company')"
+          ></custom-select>
+        </div>
+        <!--
+          Market
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="
+              checkIfClusterExists({ market_id: form.get('marketId').value })
+
+              
+            "
+            (onResetDropDown)="onResetDropDown('market')"
+            [form]="form"
+            [isLoaded]="isLoaded.market"
+            [data]="locations.market"
+            [label]="'Market'"
+            [control]="'marketId'"
+            [disabled]="!form.get('companyId').value"
+          ></custom-select>
+        </div>
+        <!--
+          Cluster
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="
+              checkIfSubClusterExists({
+                market_id: form.get('marketId').value,
+                cluster_id: form.get('clusterId').value
+              })
+            "
+            (onResetDropDown)="onResetDropDown('cluster')"
+            [form]="form"
+            [isLoaded]="isLoaded.cluster"
+            [data]="locations.cluster"
+            [label]="'Cluster'"
+            [control]="'clusterId'"
+            [disabled]="!form.get('marketId').value"
+          ></custom-select>
+        </div>
+        <!--
+          Sub Cluster
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="
+              checkIfCountryExists({
+                market_id: form.get('marketId').value,
+                cluster_id: form.get('clusterId').value,
+                sub_cluster_id: form.get('subClusterId').value
+              })
+            "
+            (onResetDropDown)="onResetDropDown('subCluster')"
+            [form]="form"
+            [isLoaded]="isLoaded.subCluster"
+            [data]="locations.subCluster"
+            [label]="'Sub Cluster'"
+            [control]="'subClusterId'"
+            [disabled]="!form.get('clusterId').value"
+          ></custom-select>
+        </div>
+        <!--
+          Country
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="
+              getLocation('getStatesByCountry', 'state', {
+                country_id: form.get('countryId').value
+              })
+            "
+            (onResetDropDown)="onResetDropDown('country')"
+            [form]="form"
+            [isLoaded]="isLoaded.country"
+            [data]="locations.country"
+            [label]="'Country'"
+            [control]="'countryId'"
+            [disabled]='!((form.get("marketId").value && form.get("subClusterId").value) ||
+            (form.get("marketId").value && !form.get("clusterId").enabled && !form.get("subClusterId").enabled) ||
+            (form.get("marketId").value && form.get("clusterId").value && !form.get("subClusterId").enabled))'
+          ></custom-select>
+        </div>
+        <!--
+          Province/State
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="
+              getLocation('getCityByState', 'city', {
+                state_id: form.get('stateId').value
+              })
+            "
+            (onResetDropDown)="onResetDropDown('state')"
+            [form]="form"
+            [isLoaded]="isLoaded.state"
+            [data]="locations.state"
+            [label]="'Province/State'"
+            [control]="'stateId'"
+            [disabled]="!form.get('countryId').value"
+          ></custom-select>
+        </div>
+        <!--
+          City
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="[
+              
+              getLocation('getBranch', 'branch', {
+                city_id: form.get('cityId').value
+              })
+              ]
+            "
+            (onResetDropDown)="onResetDropDown('city')"
+            [form]="form"
+            [isLoaded]="isLoaded.city"
+            [data]="locations.city"
+            [label]="'City'"
+            [control]="'cityId'"
+            [disabled]="!form.get('stateId').value"
+          ></custom-select>
+        </div>
+        <!--
+          Branch
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="getUserCount()"
+            (onResetDropDown)="onResetDropDown('branch')"
+            [form]="form"
+            [isLoaded]="isLoaded.branch"
+            [data]="locations.branch"
+            [label]="'Branch'"
+            [control]="'branchId'"
+            [disabled]="!form.get('cityId').value"
+          ></custom-select>
+        </div>
+        <!--
+          Department
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="getUserCount()"
+            [form]="form"
+            [isLoaded]="isLoaded.department"
+            [data]="locations.department"
+            [label]="'Department'"
+            [control]="'departmentId'"
+            [disabled]="!form.get('companyId').value"
+            (onClick)="getLocation('getDepartment', 'department', {})"
+          ></custom-select>
+        </div>
+        <!--
+          Designation
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="getUserCount()"
+            [form]="form"
+            [isLoaded]="isLoaded.designation"
+            [data]="locations.designation"
+            [label]="'Designation'"
+            [control]="'designationId'"
+            [disabled]="!form.get('companyId').value"
+            (onClick)="getLocation('getDesignation', 'designation', {})"
+          ></custom-select>
+        </div>
+        <!--
+          Band
+        -->
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3">
+          <custom-select
+            (selectionChange)="getUserCount()"
+            [form]="form"
+            [isLoaded]="isLoaded.band"
+            [data]="locations.band"
+            [label]="'Band'"
+            [control]="'bandId'"
+            [disabled]="!form.get('companyId').value"
+            (onClick)="getLocation('getBand', 'band', {})"
+          ></custom-select>
+        </div>
+        <div class="select-wrapper w-cus-260 px-cus-0 col-3"></div>
+      </div>
+    </form>
+  </notification-settings>
+</div>

@@ -1,0 +1,321 @@
+<div class="module-style notification-settings">
+  <div class="bg-white w-100 col-md-12 row m-0 p-cus-20">
+    <div class="card-shadow col-md-12 p-0">
+      <div class="people-title-heading justify-bw mt-0 py-0">
+        <h4>Receiver Filter Criteria</h4>
+      </div>
+      <div class="pt-cus-20 px-cus-10 doc-content">
+        <div class="m-0">
+          <ng-content></ng-content>
+        </div>
+      </div>
+      <form [formGroup]="form" class="px-cus-10" (submit)="sendNotification()">
+        <div class="doc-content">
+          <div class="m-0">
+            <div class="people-sub-title-heading p-0">
+              <h4>Notification Settings</h4>
+            </div>
+            <div class="emp-content p-cus-0">
+              <div
+                class="row m-0 pt-cus-17 align-center"
+                formGroupName="notificationCategory"
+              >
+                <div class="label-font-12 col-3">Notification Category</div>
+                <div class="notification-category">
+                  <div class="check">
+                    <mat-checkbox
+                      class="cus-pad-top-2"
+                      formControlName="notification"
+                      color="primary"
+                    >
+                      Notification
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div class="notification-category mx-4">
+                  <div class="check">
+                    <mat-checkbox class="cus-pad-top-2" formControlName="email" color="primary">
+                      Email
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div class="notification-category">
+                  <div class="check">
+                    <mat-checkbox class="cus-pad-top-2" formControlName="sms" color="primary">
+                      SMS
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div
+                  *ngIf="
+                    (form.get('notificationCategory').get('sms').touched ||
+                      form.get('notificationCategory').get('email').touched ||
+                      form.get('notificationCategory').get('notification')
+                        .touched) &&
+                    form.get('notificationCategory').errors
+                      ?.requiredIfNoneSelected
+                  "
+                  class="error-message mx-5"
+                >
+                  Select at least one category
+                </div>
+              </div>
+              <div class="row m-0 fit-height py-cus-17 align-center">
+                <div class="label-font-12 col-3">Notification Type</div>
+                <div class="notification-category">
+                  <div class="example-section">
+                    <mat-radio-group formControlName="notificationType">
+                      <mat-radio-button class="cus-pad-top-2 mr-3 pl-0" value="multicast"
+                        >MultiCast - Notification</mat-radio-button
+                      >
+                      <mat-radio-button class="cus-pad-top-2 ml-3" value="broadcast"
+                        >Broadcast - Notification</mat-radio-button
+                      >
+                    </mat-radio-group>
+                    <div
+                      *ngIf="
+                        form.get('notificationType').touched &&
+                        form.get('notificationType').errors?.required
+                      "
+                      class="error-message"
+                    >
+                      Required*
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row m-0 fit-height pb-cus-11 h-unset">
+                <div class="label-font-12 col-3">
+                  Notifications<br />Date/Time
+                </div>
+                <div class="col-8 px-0 p-cus-y notification-date">
+                  <div class="row mx-0 mb-cus-18">
+                    <div class="notification-time col-1">Send</div>
+                    <div class="col-9 row m-0 pl-cus-0 align-center">
+                      <mat-radio-group
+                        (change)="onChangeSendType('notificationSendType')"
+                        formControlName="notificationSendType"
+                        class="mat-checkbox pl-cus-0"
+                      >
+                        <mat-radio-button class="cus-pad-top-2 mr-3 pl-cus-0" value="now"
+                          >Now</mat-radio-button
+                        >
+                        <mat-radio-button class="cus-pad-top-2 ml-3" value="schedule"
+                          >Scheduler on Date</mat-radio-button
+                        >
+                        <mat-radio-button class="cus-pad-top-2 ml-3" value="timeschedule"
+                          >Scheduler on Date & Time</mat-radio-button
+                        >
+                      </mat-radio-group>
+                      <div
+                        *ngIf="
+                          form.get('notificationSendType').touched &&
+                          form.get('notificationSendType').errors?.required
+                        "
+                        class="error-message"
+                      >
+                        Required*
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mx-0 mt-cus-18">
+                    <div
+                      class="notification-category align-center row m-0 col-5"
+                    >
+                      <div class="notification-time col-2">Date</div>
+                      <div class="date-field toggle-date col-9">
+                        <mat-label class="date-time"
+                          [style.color]="disabledDatePicker() ? '#cfcfcf' : 'initial'"
+                          [class.float-label]="form.get('notificationDate').value"
+                        >Date</mat-label>
+                        <input
+                          (dateChange)="dateChange($event)"
+                          formControlName="notificationDate"
+                          matInput
+                          [min]="todayDate"
+                          [matDatepicker]="varScheduleDate"
+                        />
+                        <mat-datepicker-toggle
+                          [disabled]="disabledDatePicker()"
+                          [disableRipple]="true"
+                          [for]="varScheduleDate"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker
+                          (closed)="
+                            form.get('notificationDate').markAsTouched()
+                          "
+                          #varScheduleDate
+                        ></mat-datepicker>
+                      </div>
+                      <div class="date-field toggle-date col-11 just-end">
+                        <div
+                          *ngIf="
+                            form.get('notificationDate').touched &&
+                            form.get('notificationDate').errors
+                              ?.requiredIfScheduledDate
+                          "
+                          class="error-message"
+                        >
+                          Required*
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="notification-category align-center row m-0 col-5"
+                    >
+                      <div class="notification-time col-2">Time</div>
+                      <div class="date-field toggle-date col-9">
+                        <mat-label class="date-time"
+                          [style.color]="disabledTimePicker() ? '#cfcfcf' : 'initial'"
+                          [class.float-label]="form.get('notificationTime').value"
+                        >Time</mat-label>
+                        <div class="time-field">
+                          <input
+                            [ngxTimepicker]="toggleTimepicker"
+                            formControlName="notificationTime"
+                            [disableClick]="true"
+                            readonly
+                            [format]="24"
+                          />
+                          <ngx-material-timepicker-toggle
+                            #timePickerToggler
+                            [disabled]="disabledTimePicker()"
+                            [for]="toggleTimepicker"
+                          ></ngx-material-timepicker-toggle>
+                          <ngx-material-timepicker
+                            (closed)="
+                              form.get('notificationTime').markAsTouched()
+                            "
+                            #toggleTimepicker
+                          ></ngx-material-timepicker>
+                        </div>
+                      </div>
+                      <div class="date-field toggle-date col-11 just-end">
+                        <div
+                          *ngIf="
+                            form.get('notificationTime').touched &&
+                            form.get('notificationTime').errors
+                              ?.requiredIfScheduledTime
+                          "
+                          class="error-message"
+                        >
+                          Required*
+                        </div>
+                        <div
+                          *ngIf="
+                            form.get('notificationTime').touched &&
+                            form.get('notificationTime').errors?.dateLesser
+                          "
+                          class="error-message"
+                        >
+                          Date & Time should be greater than current date & time
+                        </div>
+                      </div>
+                    </div>
+                    <div class="hr-format align-center col-2">24 HR Format</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="doc-content my-cus-10">
+          <div class="m-0">
+            <div class="people-sub-title-heading p-0">
+              <h4>Notification Message</h4>
+            </div>
+            <div class="emp-content p-cus-10 row m-0">
+              <div
+                [hidden]="
+                  !form.get('notificationCategory').get('notification').value &&
+                  !form.get('notificationCategory').get('email').value &&
+                  form.get('notificationCategory').get('sms').value
+                "
+                class="notification-subject h-unset mb-2 col-12"
+              >
+                <input
+                  formControlName="notificationSubject"
+                  class=""
+                  placeholder="Please provide notification message subject"
+                  type="text"
+                />
+                <div
+                  *ngIf="
+                    form.get('notificationSubject').touched &&
+                    form.get('notificationSubject').errors?.requiredIfNotSMS
+                  "
+                  class="error-message"
+                >
+                  Required*
+                </div>
+              </div>
+              <div class="notification-msg h-unset col-12">
+                <textarea
+                  formControlName="notificationBody"
+                  class="label-font-12 h-noti-msg"
+                  placeholder="Please provide notification message body"
+                  rows="10"
+                ></textarea>
+                <div
+                  *ngIf="
+                    form.get('notificationBody').touched &&
+                    form.get('notificationBody').errors?.required
+                  "
+                  class="error-message"
+                >
+                  Required*
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="doc-content mb-cus-14">
+          <div class="m-0">
+            <div class="people-sub-title-heading p-0">
+              <h4>Notification Settings</h4>
+            </div>
+            <div class="row m-0 justify-bw emp-content py-cus-16-23">
+              <div class="col-4 row m-0 h-fit justify-around">
+                <div class="reciever-count-label">Target Receivers Count</div>
+                <div class="set-icon-font">
+                  <i class="bi bi-people-fill"></i>
+                </div>
+                <div class="reciever-count">{{ userCount }}</div>
+                <div>
+                  <button
+                    class="anchor label-font-13"
+                    type="button"
+                    (click)="viewEdit()"
+                    [disabled]="
+                      !form.get('notificationType') ||
+                      form.get('notificationType').value == 'broadcast'
+                    "
+                  >
+                    View or Edit
+                  </button>
+                </div>
+              </div>
+              <div class="col-2 h-fit justify-end p-cus-0 row m-0">
+                <div class="btn-wrapper pr-cus-20">
+                  <button (click)="reset()" class="def-btn cus-m-l-3" type="button">
+                    Cancel
+                  </button>
+                  <button
+                    [disabled]="!form.valid"
+                    class="def-btn cus-m-r-3"
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

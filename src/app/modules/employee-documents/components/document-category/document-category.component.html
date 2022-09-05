@@ -1,0 +1,284 @@
+<div class="module-style document-category">
+  <div class="personal-file">
+    <h4 class="m-0">{{ category.name }}</h4>
+    <div class="documents-head row m-0">
+      <div
+        [class.col-8]="hideAllFields"
+        class="d-flex align-items-center col-6 pl-cus-20 doc-table py-1"
+      >
+        <div class="head-th custom-head">Document Title</div>
+      </div>
+      <div
+        class="col-4 d-flex justify-center doc-table py-1"
+        *ngIf="isMandatoryFields"
+      >
+        <div class="head-th custom-head">Mandatory</div>
+      </div>
+
+      <div
+        class="col-4 d-flex justify-center doc-table py-1"
+        *ngIf="templateUrlFields"
+      >
+        <div class="head-th custom-head">Template</div>
+      </div>
+
+      <div class="col-2 d-flex justify-center doc-table px-0" *ngIf="forReviewFields">
+        <div class="head-th custom-head">For Review</div>
+      </div>
+      <div class="px-0 justify-center doc-table" *ngIf="forReviewFields">
+        <div class="head-th font-adjust custom-head">For Submission</div>
+      </div>
+      <div [hidden]="hideAllFields || category.name == 'Original Documents'" class="col-2 doc-table py-1 border-right-0">
+        <div class="head-th"></div>
+      </div>
+    </div>
+
+    <div class="row m-0 category-row border-bottom-set">
+      <!--
+        category field dropdown
+      -->
+      <div
+        [class.col-8]="hideAllFields"
+        class="col-6 row m-0 doc-table fields-wrapper emp-content p-0"
+      >
+        <div class="body-td fields-content col-12 pl-cus-20">
+          <mat-form-field (click)="[getCategoryFields()]" appearance="fill">
+            <mat-label class="add-cat-field float-left">Add Category Field</mat-label>
+            <mat-select
+              #selectedField
+              panelClass="options-panel"
+              (closed)="[(filter['name'] = null), (selectedField.value = null)]"
+              (selectionChange)="addNewCategoryFromDropDown(selectedField)"
+            >
+              <input
+                [(ngModel)]="filter['name']"
+                *ngIf="dropDownCategoryFields.length > 10"
+                name="searchWord"
+                type="text"
+                class="search-input"
+                placeholder="Search"
+              />
+              <mat-option *ngIf="dropDownCategoryFields.length == 0"
+                >No Record Found</mat-option
+              >
+              <mat-option
+                *ngFor="
+                  let item of dropDownCategoryFields
+                    | searchFilter: filter['name']:'name'
+                    | slice: 0:10
+                "
+                [value]="item.id"
+                >{{ item.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="documents-body scroll" [formGroup]="personalSetupForm">
+      <!-- <div class="row m-0">
+            <div class="col-9 doc-table emp-content px-0 py-2">
+              <div class="body-td">
+                <input
+                  formControlName="catField"
+                  class="emp-input"
+                  type="text"
+                  name=""
+                  id=""
+                  placeholder="Field Name"
+                />
+                <div
+                  *ngIf="
+                    (record.controls.catField.touched || submitted) &&
+                    record.controls.catField.errors?.required
+                  "
+                  class="error-message"
+                >
+                  Required*
+                </div>
+              </div>
+            </div>
+            <div class="col-3 doc-table justify-center px-0 py-2">
+              <div class="body-td">
+                <input type="checkbox" name="" id="" />
+              </div>
+            </div>
+            <div class="col-1 justify-center px-0 py-2">
+              <div class="body-td">-</div>
+            </div>
+          </div> -->
+      <div
+        formArrayName="fieldsConfiguration"
+        *ngFor="let record of fieldsConfiguration.controls; let i = index"
+      >
+        <div class="row m-0 category-row justify-bw" [formGroup]="record">
+          <!--
+            document title
+          -->
+          <div
+            [class.col-8]="hideAllFields"
+            class="col-6 doc-table emp-content p-0"
+          >
+            <div class="body-td pl-cus-20">
+              <input
+                disabled
+                formControlName="catField"
+                class="emp-input"
+                type="text"
+                name="catField"
+                id="catField"
+                placeholder="Field Name"
+              />
+              <div
+                *ngIf="
+                  record.controls.catField &&
+                  (record.controls.catField.touched || submitted) &&
+                  record.controls.catField.errors?.required
+                "
+                class="error-message"
+              >
+                Required*
+              </div>
+            </div>
+          </div>
+          <!--
+            Is Mandatory
+          -->
+          <div
+            class="col-4 doc-table justify-center p-0"
+            *ngIf="isMandatoryFields"
+          >
+            <div class="body-td cus-pad-top-2 check-box-left">
+              <mat-checkbox
+                disableRipple
+                color="primary"
+                (change)="inputChanged(record.controls, 'isMandatory')"
+                formControlName="isMandatory"
+                name="isMandatory"
+                [checked]="record.controls.isMandatory.value"
+              >
+              </mat-checkbox>
+            </div>
+          </div>
+          <!--
+            For review
+          -->
+          <div
+            class="col-2 justify-center doc-table p-0"
+            *ngIf="forReviewFields"
+          >
+            <div class="body-td cus-pad-top-2 check-box-left">
+              <mat-checkbox
+                color="primary"
+                (change)="inputChanged(record.controls, 'forReview')"
+                formControlName="forReview"
+                type="checkbox"
+                name=""
+                [checked]="record.controls.forReview.value"
+                [disabled]="!!record.controls.forSubmission.value"
+              >
+              </mat-checkbox>
+            </div>
+          </div>
+          <!--
+            For submission
+          -->
+          <div
+          
+            class="col-2 justify-center doc-table p-0"
+            *ngIf="forReviewFields"
+          >
+            <div class="body-td cus-pad-top-2 submission-check">
+              <mat-checkbox
+                color="primary"
+                (change)="inputChanged(record.controls, 'forSubmission')"
+                formControlName="forSubmission"
+                type="checkbox"
+                name=""
+                [checked]="record.controls.forSubmission.value"
+                [disabled]="!!record.controls.forReview.value"
+              >
+              </mat-checkbox>
+            </div>
+          </div>
+          <!--
+            Available template
+          -->
+          <div
+            class="col-4 justify-left doc-table p-0"
+            *ngIf="templateUrlFields"
+          >
+            <div
+              class="body-td check-box-left"
+              *ngIf="record.controls.templateUrl.value != null"
+            >
+              <a
+                (click)="
+                  downloadFile(
+                    record.controls.templateUrl.value,
+                    record.controls.catField.value
+                  )
+                "
+                class="template-file"
+                >Template Available</a
+              >
+            </div>
+
+            <div
+              class="body-td"
+              *ngIf="record.controls.templateUrl.value == null"
+            >
+              <div class="btn-wrapper justify-center px-cus-0 btn-modal-none btn-wrapper-set">
+                <button
+                  class="def-btn m-0 float-none"
+                  (click)="[fileUploader.click()]"
+                >
+                  Upload
+                </button>
+              </div>
+              <input
+                [hidden]="true"
+                type="file"
+                id="fileUpload"
+                #fileUploader
+                (change)="upload($event, record.controls, i)"
+              />
+            </div>
+          </div>
+          <!--
+            Remove item
+          -->
+          <div [class.col-4]="hideAllFields" class="col-2 justify-right p-0">
+            <div class="body-td width-fit justify-center">
+              <div
+                class="justify-center pt-cus-1"
+                (click)="
+                  openConfirmDialog(
+                    i,
+                    record.controls.catField.value,
+                    category.id
+                  )
+                "
+              >
+               <div class="remove-icon">
+                 <div></div>
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row b-bottom m-0">
+      <div class="btn-wrapper justify-right">
+        <button
+          class="def-btn"
+          type="submit"
+          (click)="openDialog(fieldsConfiguration.controls)"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

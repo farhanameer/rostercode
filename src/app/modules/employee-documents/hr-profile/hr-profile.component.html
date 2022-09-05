@@ -1,0 +1,592 @@
+<div class="module-style hr-profile-comp" *ngIf="isLoadedAll">
+  <div class="row w-100 m-0 bg-white p-cus-20">
+    <form
+      [formGroup]="physicalLocationForm"
+      class="bg-white w-100 col-md-12 row m-0 px-cus-0 mb-cus-10 hr-profile"
+    >
+      <div class="col-md-12 p-0">
+        <div class="people-title-heading justify-bw pl-0">
+          <h4>Physical Location Setup</h4>
+          <div class="pr-cus-10" (click)="minMaxPhysicalLocation()">
+            <div *ngIf="statePhysicalLocation == 'maximize'">
+              <i class="fas fa-caret-down"></i>
+            </div>
+            <div *ngIf="statePhysicalLocation == 'minimize'">
+              <i class="fas fa-caret-up"></i>
+            </div>
+          </div>
+        </div>
+        <div class="shadow" [@openClose]="statePhysicalLocation">
+
+          
+          <div class="emp-content row p-cus-20 justify-bw pb-cus-5 m-0">
+            <!--
+              branch
+            -->
+            <div class="select-wrapper px-cus-0 w-cus-260 col-3">
+              <mat-form-field
+                (click)="onEditGetLocation({}, 'branch')"
+                appearance="fill"
+              >
+                <mat-label>Branch</mat-label>
+                <mat-select
+                  
+                  value="1"
+                  (selectionChange)="
+                    [
+                      getFilteredLocationForDocument(
+                        { branchId: branch.value },
+                        'building'
+                      ),
+                      resetFields('branch'),
+                      enableUpdate()
+                    ]
+                  "
+                  #branch
+                  panelClass="options-panel"
+                  formControlName="branchId"
+                >
+                  <mat-option *ngIf="!isLoaded.branch" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.branch" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.branch" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['branch']"
+                    name="searchWord"
+                    *ngIf="locations.branch.length > 10 && isLoaded.branch"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="locations.branch.length == 0 && isLoaded.branch"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let location of locations.branch
+                        | searchFilter: filter['branch']:'branchValue'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.branch"
+                    [value]="location.branchId"
+                    >{{ location.branchValue }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <div
+                *ngIf="
+                  (validation.branchId.touched || submitted) &&
+                  validation.branchId.errors?.required
+                "
+                class="error-message"
+              >
+                Required*
+              </div>
+            </div>
+            <!--
+              building
+            -->
+            <div class="select-wrapper px-cus-0 w-cus-260 col-3">
+              <mat-form-field
+                (click)="onEditGetLocation(
+                    { branchId: branch.value },
+                    'building'
+                  )
+                "
+                appearance="fill"
+              >
+                <mat-label>Building</mat-label>
+                <mat-select
+                [class.prop-disabled] = "documentLocation && documentLocation.building && documentLocation.building[0].isDisabled"
+                  [disabled]="!validation.branchId.value"
+                  (selectionChange)="
+                    [
+                      getFilteredLocationForDocument(
+                        {
+                          branchId: branch.value,
+                          buildingId: building.value
+                        },
+                        'floor'
+                      ),
+                      resetFields('building'),
+                      enableUpdate() ,
+                      changeMessageAndDisabledClass('building')
+                    ]
+                  "
+                  #building
+                  panelClass="options-panel"
+                  formControlName="buildingId"
+                >
+                  <mat-option *ngIf="!isLoaded.building" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.building" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.building" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['building']"
+                    name="searchWord"
+                    *ngIf="locations.building.length > 10 && isLoaded.building"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="locations.building.length == 0 && isLoaded.building"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let location of locations.building
+                        | searchFilter: filter['building']:'buildingValue'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.building"
+                    [value]="location.buildingId"
+                    >{{ location.buildingValue }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <div
+                *ngIf="
+                  (validation.buildingId.touched || submitted) &&
+                  validation.buildingId.errors?.required
+                "
+                class="error-message"
+              >
+                Required*
+              </div>
+            </div>
+            <!--
+              floor
+            -->
+            <div class="select-wrapper px-cus-0 w-cus-260 col-3">
+              <mat-form-field
+                (click)="onEditGetLocation(
+                    {
+                      branchId: branch.value,
+                      buildingId: building.value
+                    },
+                    'floor'
+                  )
+                "
+                appearance="fill"
+              >
+                <mat-label>Floor</mat-label>
+                <mat-select
+                [class.prop-disabled] = "documentLocation && documentLocation.floor &&  documentLocation.floor[0].isDisabled"
+                  [disabled]="!validation.buildingId.value"
+                  (selectionChange)="
+                    [
+                      getFilteredLocationForDocument(
+                        {
+                          branchId: branch.value,
+                          buildingId: building.value,
+                          floorId: floor.value
+                        },
+                        'box'
+                      ),
+                      resetFields('floor'),
+                      enableUpdate() ,
+                      changeMessageAndDisabledClass('floor')
+                    ]
+                  "
+                  #floor
+                  panelClass="options-panel"
+                  formControlName="floorId"
+                >
+                  <mat-option *ngIf="!isLoaded.floor" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.floor" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.floor" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['floor']"
+                    name="searchWord"
+                    *ngIf="locations.floor.length > 10 && isLoaded.floor"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="locations.floor.length == 0 && isLoaded.floor"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let location of locations.floor
+                        | searchFilter: filter['floor']:'floorValue'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.floor"
+                    [value]="location.floorId"
+                    >{{ location.floorValue }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <div
+                *ngIf="
+                  (validation.floorId.touched || submitted) &&
+                  validation.floorId.errors?.required
+                "
+                class="error-message"
+              >
+                Required*
+              </div>
+            </div>
+            <!--
+              box
+            -->
+            <div class="select-wrapper px-cus-0 w-cus-260 col-3">
+              <mat-form-field
+                (click)="onEditGetLocation(
+                    {
+                      branchId: branch.value,
+                      buildingId: building.value,
+                      floorId: floor.value
+                    },
+                    'box'
+                  )
+                "
+                appearance="fill"
+              >
+                <mat-label>Box</mat-label>
+                <mat-select
+                [class.prop-disabled] = "documentLocation && documentLocation.box &&  documentLocation.box[0].isDisabled"
+                  [disabled]="!validation.floorId.value"
+                  (selectionChange)="
+                    [
+                      getFilteredLocationForDocument(
+                        {
+                          branchId: branch.value,
+                          buildingId: building.value,
+                          floorId: floor.value,
+                          boxId: box.value
+                        },
+                        'cabinet'
+                      ),
+                      resetFields('box'),
+                      enableUpdate() ,
+                      changeMessageAndDisabledClass('box')
+                    ]
+                  "
+                  #box
+                  panelClass="options-panel"
+                  formControlName="boxId"
+                >
+                  <mat-option *ngIf="!isLoaded.box" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.box" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.box" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['box']"
+                    name="searchWord"
+                    *ngIf="locations.box.length > 10 && isLoaded.box"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="locations.box.length == 0 && isLoaded.box"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let location of locations.box
+                        | searchFilter: filter['box']:'boxValue'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.box"
+                    [value]="location.boxId"
+                    >{{ location.boxValue }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <div
+                *ngIf="
+                  (validation.boxId.touched || submitted) &&
+                  validation.boxId.errors?.required
+                "
+                class="error-message"
+              >
+                Required*
+              </div>
+            </div>
+            <!--
+              cabinet
+            -->
+            <div class="select-wrapper px-cus-0 w-cus-260 col-3">
+              <mat-form-field
+                (click)="onEditGetLocation(
+                    {
+                      branchId: branch.value,
+                      buildingId: building.value,
+                      floorId: floor.value,
+                      boxId: box.value
+                    },
+                    'cabinet'
+                  )
+                "
+                appearance="fill"
+              >
+                <mat-label>Cabinet</mat-label>
+                <mat-select
+                  [class.prop-disabled] = "documentLocation && documentLocation.cabinet && documentLocation.cabinet[0].isDisabled"
+                  [disabled]="!validation.boxId.value"
+                  (selectionChange)="
+                    [
+                      getFilteredLocationForDocument(
+                        {
+                          branchId: branch.value,
+                          buildingId: building.value,
+                          floorId: floor.value,
+                          boxId: box.value,
+                          cabinetId: cabinet.value
+                        },
+                        'drawer'
+                      ),
+                      getFilteredLocationForDocument(
+                        {
+                          branchId: branch.value,
+                          buildingId: building.value,
+                          floorId: floor.value,
+                          boxId: box.value,
+                          cabinetId: cabinet.value
+                        },
+                        'flap'
+                      ),
+                      resetFields('cabinet'),
+                      enableUpdate() ,
+                      changeMessageAndDisabledClass('cabinet')
+                    ]
+                  "
+                  #cabinet
+                  panelClass="options-panel"
+                  formControlName="cabinetId"
+                >
+                  <mat-option *ngIf="!isLoaded.cabinet" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.cabinet" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.cabinet" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['cabinet']"
+                    name="searchWord"
+                    *ngIf="locations.cabinet.length > 10 && isLoaded.cabinet"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="locations.cabinet.length == 0 && isLoaded.cabinet"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let location of locations.cabinet
+                        | searchFilter: filter['cabinet']:'cabinetValue'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.cabinet"
+                    [value]="location.cabinetId"
+                    >{{ location.cabinetValue }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <div
+                *ngIf="
+                  (validation.cabinetId.touched || submitted) &&
+                  validation.cabinetId.errors?.required
+                "
+                class="error-message"
+              >
+                Required*
+              </div>
+            </div>
+            <!--
+              drawer
+            -->
+            <div class="select-wrapper px-cus-0 w-cus-260 col-3">
+              <mat-form-field
+                (click)="onEditGetLocation(
+                    {
+                      branchId: branch.value,
+                      buildingId: building.value,
+                      floorId: floor.value,
+                      boxId: box.value,
+                      cabinetId: cabinet.value
+                    },
+                    'drawer'
+                  )
+                "
+                appearance="fill"
+              >
+                <mat-label>Drawer</mat-label>
+                <mat-select
+                [class.prop-disabled] = "documentLocation && documentLocation.drawer && documentLocation?.drawer[0].isDisabled"
+                  [disabled]="!validation.cabinetId.value"
+                  #drawer
+                  panelClass="options-panel"
+                  formControlName="drawerId"
+                  (selectionChange)="
+                    [enableUpdate(), getFlapsByDrawers(drawer.value, flap.value) , changeMessageAndDisabledClass('drawer')]
+                  "
+                >
+                  <mat-option *ngIf="!isLoaded.drawer" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.drawer" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.drawer" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['drawer']"
+                    name="searchWord"
+                    *ngIf="locations.drawer.length > 10 && isLoaded.drawer"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="isArrayEmpty && isLoaded.drawer">No Record Found</mat-option>
+                  <mat-option
+                    *ngFor="
+                      let location of locations.drawer
+                        | searchFilter: filter['drawer']:'drawerValue'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.drawer"
+                    [hidden]="!location.drawerId"
+                    [value]="location.drawerId"
+                    >{{ location.drawerValue }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--
+              flap
+            -->
+            <div class="select-wrapper px-cus-0 w-cus-260 col-3">
+              <mat-form-field
+                (click)="onEditGetLocation(
+                    {
+                      branchId: branch.value,
+                      buildingId: building.value,
+                      floorId: floor.value,
+                      boxId: box.value,
+                      cabinetId: cabinet.value
+                    },
+                    'flap'
+                  )
+                "
+                appearance="fill"
+              >
+                <mat-label>Flap</mat-label>
+                <mat-select
+                [class.prop-disabled] = "documentLocation && documentLocation.flap && documentLocation?.flap[0]?.isDisabled"
+                  [disabled]="!validation.cabinetId.value"
+                  #flap
+                  panelClass="options-panel"
+                  formControlName="flapId"
+                  (selectionChange)="
+                    [enableUpdate(), getDrawersByFlaps(drawer.value, flap.value) , changeMessageAndDisabledClass('flap')]
+                  "
+                >
+                  <mat-option *ngIf="!isLoaded.flap" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.flap" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.flap" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['flap']"
+                    name="searchWord"
+                    *ngIf="locations.flap.length > 10 && isLoaded.flap"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="isArrayEmpty && isLoaded.flap">No Record Found</mat-option>
+                  <mat-option
+                    *ngFor="
+                      let location of locations.flap
+                        | searchFilter: filter['flap']:'flapValue'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.flap"
+                    [value]="location.flapId"
+                    [hidden]="!location.flapId"
+                    >{{ location.flapValue }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-3 px-cus-0 w-cus-260">
+              <input
+                (keyup)="enableUpdate()"
+                formControlName="fileNo"
+                class="emp-input"
+                type="text"
+                name=""
+                id=""
+                placeholder="File No."
+              />
+              <div
+                *ngIf="
+                  (validation.fileNo.touched || submitted) &&
+                  validation.fileNo.errors?.required
+                "
+                class="error-message"
+              >
+                Required*
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-wrapper d-flex disabled-location-message-container">
+          <h2 class="disabled-location-message" *ngIf="isDisabledLocation">* Selected location is non-active</h2>
+        </div>
+      </div>
+      
+    </form>
+    <document
+      [disable]="disabledUpdate"
+      [action]="isUpdating"
+      [form]="physicalLocationForm"
+      [userId]="userId"
+      [canDelete]="true"
+      [validForm]="physicalLocationForm.valid"
+      [documentFilesLocationId]="documentFilesLocationId"
+      (toggleDisable)="toggle($event)"
+      class="w-100 col-md-12 row m-0 p-0"
+    ></document>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+.module-style.notification-reciever-popup {
+  .close {
+    font-size: 15px;
+  }
+  .noti-reciever {
+    border: none !important;
+    padding: 4px 10px !important;
+
+    .mat-checkbox-layout {
+      margin-bottom: 0;
+    }
+  }
+  .select-recievers {
+    cursor: pointer;
+    color: #3080ea !important;
+    padding: 3px;
+    &:hover {
+      background: #3080ea26;
+    }
+  }
+
+  .noti-header {
+    padding: 5px 6px !important;
+  }
+
+  .noti-reciever > div {
+    height: unset !important;
+
+    .custom-input {
+      height: 20px !important;
+      color: #343434 !important;
+
+      &::placeholder {
+        color: #343434 !important;
+      }
+    }
+    h4 {
+      padding: 0 !important;
+    }
+  }
+
+  .text {
+    color: #3080ea !important;
+  }
+
+  .select-all {
+    text-align: center !important;
+  }
+  .fields-content .icon-wrapper {
+    text-align: right;
+
+    .bi-people-fill {
+      font-size: 13px;
+    }
+  }
+
+  .custom-input-wrapper {
+    display: flex !important;
+    justify-content: flex-end !important;
+    padding: 0 !important;
+
+    .custom-input {
+      width: 105px !important;
+    }
+  }
+
+  .just-end {
+    justify-content: flex-end !important;
+    align-items: center !important;
+  }
+
+  .p-cus-10-25 {
+    padding: 10px 10px 25px 10px !important;
+  }
+
+  .scroll-results {
+    max-height: 250px !important;
+  }
+}

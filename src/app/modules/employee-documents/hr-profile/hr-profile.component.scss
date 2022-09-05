@@ -1,0 +1,226 @@
+.module-style.hr-profile-comp {
+  .people-title-heading {
+    margin: 0 !important;
+  }
+  .hr-profile .people-title-heading h4 {
+    padding: 6.5px 10px !important;
+  }
+  .emp-content {
+    border: none !important;
+  }
+
+  .date-field {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  mat-checkbox .mat-checkbox-layout {
+    margin-bottom: 0 !important;
+  }
+
+  /* Document Viewer Start */
+
+  .doc-dialog {
+    height: calc(70vh - 64px) !important;
+  }
+
+  .def-btn {
+    float: right !important;
+  }
+
+  .justify-bw {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .justify-center {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .close {
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    cursor: pointer !important;
+    color: #343434 !important;
+  }
+
+  .mat-dialog-container {
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .doc-viewer {
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: transparent !important;
+  }
+
+  .carousel-inner {
+    height: calc(70vh - 96px) !important;
+  }
+
+  .carousel-inner .carousel-item {
+    height: inherit !important;
+  }
+
+  .nav-arrows {
+    cursor: pointer !important;
+  }
+
+  /* Document Viewer Ends */
+
+  /* Angular material deep */
+
+  .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: #3080ea !important;
+  }
+
+  .mat-form-field .mat-select.mat-select-invalid .mat-select-arrow {
+    color: #333 !important;
+  }
+
+  .mat-form-field {
+    width: -webkit-fill-available !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  .mat-form-field-wrapper {
+    padding: 0 !important;
+  }
+
+  .mat-form-field-wrapper .mat-form-field-flex:focus-within {
+    border: 2px solid #3080ea !important;
+  }
+
+  .mat-form-field-underline,
+  .mat-form-field-subscript-wrapper {
+    display: none !important;
+  }
+
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px !important;
+  }
+
+  .mat-form-field-wrapper .mat-form-field-flex {
+    border: 1px solid #d8dcdf !important;
+    padding: 0 !important;
+  }
+
+  .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #343434 !important;
+  }
+
+  .mat-form-field-label-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    position: absolute !important;
+    top: 0 !important;
+    height: -webkit-fill-available !important;
+    font: normal normal normal 11px/13px Roboto !important;
+  }
+
+  .mat-form-field-flex > .mat-form-field-infix {
+    padding: 5px 0 5px 10px !important;
+    border: none !important;
+  }
+
+  .mat-form-field-type-mat-select .mat-form-field-label {
+    top: 18px !important;
+    margin: 0 !important;
+    position: relative !important;
+    height: -webkit-fill-available !important;
+  }
+
+  .mat-form-field-appearance-fill.mat-form-field-can-float.mat-form-field-should-float
+    .mat-form-field-label {
+    transform: translateY(-15px) !important;
+    width: min-content !important;
+    background: #fff !important;
+    height: 11px !important;
+  }
+
+  .mat-select-panel {
+    width: min-content !important;
+    min-width: 0 !important;
+  }
+
+  .mat-select-panel .mat-option {
+    background: #fff 0% 0% no-repeat padding-box !important;
+    text-align: left !important;
+    height: 32px !important;
+    font: normal normal normal 11px/13px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #343434 !important;
+    opacity: 1 !important;
+  }
+
+  .mat-option.mat-active {
+    background: #d8dcdf 0% 0% no-repeat padding-box !important;
+  }
+
+  .mat-form-field .mat-form-field-label-wrapper {
+    height: 40px !important;
+    top: -12px !important;
+    padding: 0 10px !important;
+  }
+
+  /* For Date */
+
+  mat-datepicker-toggle {
+    position: absolute !important;
+    right: 2px !important;
+  }
+
+  mat-datepicker-toggle button {
+    position: static !important;
+  }
+
+  mat-datepicker-toggle button span svg {
+    height: 13px !important;
+    width: 13px !important;
+  }
+
+  /* .options-panel {
+    position: absolute !important;
+    transform: translate(6px, 19px) !important;
+  } */
+  .shadow {
+    box-shadow: 0px 3px 5px #0000001a !important;
+    border: 1px solid #d8dcdf !important;
+  }
+  .px-cus-18-5 {
+    padding-left: 18.5px !important;
+    padding-right: 18.5px !important;
+  }
+  .pr-cus-0 {
+    padding-right: 0 !important;
+  }
+  .pl-cus-0 {
+    padding-left: 0 !important;
+  }
+
+  .disabled-location-message-container{
+    display: flex;
+    align-items: center;
+  }
+  .disabled-location-message{
+    // padding: 0px 20px;
+    // margin: 0px;
+    // color: #4b96ef;
+
+    // padding: 20px 20px; */
+    padding-left: 20px;
+    /* padding-bottom: 0px; */
+    color: #4b96ef;
+    margin: 0;
+    align-self: center;
+  }
+  .mat-form-field .mat-form-field-infix .mat-select.prop-disabled .mat-select-value-text span{
+    color: #d8dcdf !important;
+  }
+}

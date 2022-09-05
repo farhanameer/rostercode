@@ -1,0 +1,56 @@
+.module-style.single-notification-history {
+  .popup-card .emp-input {
+    color: #343434 !important;
+    cursor: auto;
+  }
+
+  .popup-card .emp-input:focus-within {
+    border: 1px solid #d8dcdf !important;
+  }
+
+  .popup-card label {
+    font: normal normal normal 11px/15px Roboto !important;
+    color: #3080ea !important;
+    margin-bottom: 0 !important;
+    padding: 0px 4px !important;
+    position: absolute !important;
+    top: -10px !important;
+    /* left: 20px !important; */
+    background: #fff !important;
+    margin-left: 6px;
+  }
+
+  .notification-msg textarea {
+    width: 100% !important;
+    color: #343434 !important;
+    font: normal normal normal 11px/15px Roboto !important;
+    cursor: auto;
+  }
+
+  .notification-msg textarea:focus-visible {
+    outline: none;
+  }
+
+  .h-unset {
+    height: unset !important;
+  }
+
+  .h-noti-msg {
+    height: 110px !important;
+    padding: 7px 10px 10px 10px;
+  }
+  .pt-cus-3 {
+    padding: 3px 0 0 0 !important;
+  }
+
+  .just-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .cus-close svg {
+    padding-bottom: 3px !important;
+    font-size: 21px !important;
+  }
+}

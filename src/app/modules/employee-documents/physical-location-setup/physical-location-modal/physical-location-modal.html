@@ -1,0 +1,177 @@
+<!-- <div class="module-style physical-location-setup">
+  <div class="m-0 justify-bw physical-setup-modal people-title-heading">
+    <h4 class="px-0">{{data.modalData.title}}</h4>
+    <div (click)="dialogRef.close()" class="close"><img src="assets/images/close.svg" /></div>
+  </div>
+  <div class="px-3">
+    <form
+      [formGroup]="addLocationForm"
+      (submit)="addressToBeAdded($event, addLocationForm)"
+    >
+      <div class="row m-0 border-0 modal-popup emp-content">
+        <div class="col modal-field">
+          <input
+            (keyup)="[addLocationForm.controls[fieldName].value ? disabledAddMore=false : disabledAddMore=true]"
+            formControlName="{{fieldName}}"
+            type="{{inputType}}"
+            [placeholder]="placeholder"
+            class="emp-input"
+          />
+        </div>
+        <div class="col pl-0 pr-2 modal-btn">
+          <button
+            [disabled]="disabledAddMore"
+            type="submit"
+            class="def-btn set-add-btn m-0"
+          >
+            Add More
+          </button>
+        </div>
+        <div
+          *ngIf="
+            (validation.touched || submitted) &&
+            validation.errors?.required
+          "
+          class="error-message col-9 pr-0 text-right"
+        >
+          Required*
+        </div>
+      </div>
+    </form>
+    <div class="px-2">
+      <div><h4 class="p-0">{{data.modalData.title.split(" ")[1]}}:</h4></div>
+      <div class="add-address my-3">
+        <div
+          *ngFor="let item of bulkCompanyAddress; let i = index;"
+          class="justify-bw p-1"
+        >
+          <div>{{item[fieldName]}}</div>
+          <div (click)="openConfirmDialog(item.id , i)" class="minus-icon">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="justify-right btn-wrapper">
+    <button type="button" (click)="saveCompanyAddresses()" class="def-btn" style="margin: 0 6px 0 0 !important;">
+      Save
+    </button>
+    <button type="button" (click)="dialogRef.close()" class="def-btn" style="margin: 0 6px 0 0 !important;">
+      Cancel
+    </button>
+  </div>
+</div> -->
+
+<div class="module-style physical-location-setup">
+  <div class="m-0 justify-bw people-title-heading px-cus-10">
+    <h4 class="px-cus-0">{{data.modalData.title}}</h4>
+    <div class="col-1 justify-end px-cus-0 close" (click)="dialogRef.close()">
+      <img src="assets/images/close.svg" />
+    </div>
+  </div>
+  <div class="p-cus-20">
+    <form
+      [formGroup]="addLocationForm"
+      (submit)="addressToBeAdded($event, addLocationForm)"
+    >
+      <div class="row m-0 border-0 modal-popup emp-content p-cus-0">
+        <div class="col px-cus-0 modal-field mr-cus-6">
+          <input
+            #input
+            (keyup)="[addLocationForm.controls[fieldName].value ? disabledAddMore=false : disabledAddMore=true]"
+            formControlName="{{fieldName}}"
+            type="{{inputType}}"
+            [placeholder]="placeholder"
+            class="emp-input"
+          />
+
+          <div
+            *ngIf="
+              (validation.touched || submitted) &&
+              validation.errors?.required
+            "
+            class="error-message col-9 pr-0 text-right h-auto"
+          >
+            Required*
+          </div>
+        </div>
+        <div class="px-cus-0 modal-btn justify-center">
+          <button
+            [disabled]="disabledAddMore"
+            type="submit"
+            class="def-btn set-add-btn m-0"
+          >
+            Add More
+          </button>
+        </div>
+      </div>
+    </form>
+    <div>
+      <div><h4 class="p-cus-20-0-10-0">{{data.modalData.title.split(" ")[1]}}:</h4></div>
+      <div class="add-address">
+        <div
+          *ngFor="let item of bulkCompanyAddress; let i = index;"
+          class="justify-bw p-6-5-10 {{(isDeletion && deletedIndex == i) ? 'location-del' : ''}}"
+
+        >
+          <div class="{{item.is_disabled == 1 ? 'disabled' : ''}} ">{{item[fieldName]}}</div>
+
+          <div *ngIf="item.is_disabled == 0 " (click)="openConfirmDialog(item.id , i)" class="remove-icon"><div></div></div>
+
+          <div class="add-new" *ngIf="item.is_disabled == 1">
+            <div    
+                  class="plus-icon"
+                  (click) = "enableAddress(item)"
+                >
+                  <i class="fas fa-plus"></i>
+                </div>
+          </div>
+          
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="justify-right btn-modal-wrapper btn-wrapper" *ngIf = "!isDeletion">
+    <button
+      [disabled]="!submitted"
+      type="button"
+      (click)="saveCompanyAddresses()"
+      class="def-btn mr-cus-3"
+    >
+      Save
+    </button>
+    <button type="button" (click)="dialogRef.close()" class="def-btn ml-cus-3">
+      Cancel
+    </button>
+  </div>
+
+
+  <div class="btn-modal-wrapper btn-wrapper confirmation-action" *ngIf = "isDeletion">
+
+    <span>Are you sure you want to delete?</span>
+    <div class="action-buttons">
+      
+    <button type="button" class="def-btn ml-cus-3 cancel-btn"
+    (click) = "[isDeletion = false , deletedIndex = -1, deletedId = null]"
+    >
+      
+      No
+    </button>
+
+    <button
+      (click) = "deleteConfirm()"
+      type="button"
+      
+      class="def-btn mr-cus-3 success-btn"
+    >
+      Yes
+    </button>
+    </div>
+  </div>
+
+
+
+</div>

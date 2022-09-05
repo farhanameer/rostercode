@@ -1,0 +1,65 @@
+<div class="module-style">
+  <div class="row doc-viewer m-0">
+    <div (click)="navDocument('prev')" class="doc-slider p-0 nav-arrows">
+      <a role="button" data-slide="prev"
+        ><img src="assets/icons/left-arrow.png" alt=""
+      /></a>
+    </div>
+    <!-- <div class="col-10 p-0 bg-white">
+      <div class="skeleton-loader progress pulse"></div>
+    </div> -->
+    <div class="col-12 p-0 bg-white doc-viewer-width">
+      <div class="m-0 justify-bw people-title-heading px-cus-10">
+        <h4 class="px-cus-0">{{currentDocument['title']}}</h4>
+        <div class="close px-cus-0" (click)="close()"><img src="assets/images/close.svg" /></div>
+      </div>
+      <div
+        id="docSlider"
+        data-ride="slider"
+        data-interval="false"
+        class="doc-dialog carousel slide"
+      >
+        <div class="carousel-inner">
+          <div
+            *ngFor="let document of documentsList; let i = index;"
+            data-target="#docSlider"
+            class="carousel-item"
+            [class.active]="currentIndex == i"
+          >
+            <div
+              *ngIf="viewer != 'pdf' && viewer != 'image' && viewer != 'google'"
+              class="px-cus-20 h-cus-400 d-flex justify-content-center align-item-center"
+            >
+              Can't load file.
+            </div>
+            <div class="px-cus-20 h-cus-400 justify-center set-item" *ngIf="viewer == 'pdf'">
+              <a (click)="openFileInNewTab(currentDocument['fileUrl'])"
+                >Click here to download file.</a
+              >
+            </div>
+            <div
+              class="px-cus-20 h-cus-400 justify-center set-item"
+              *ngIf="viewer == 'google'"
+            >
+              Can't load file.
+            </div>
+            <div class="justify-center set-item" *ngIf="viewer == 'image'">
+              <img class="slider-image" [src]="currentDocument['fileUrl']" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="justify-right btn-wrapper">
+        <button
+          (click)="downloadFile(currentDocument['fileUrl'], currentDocument['title'], currentDocument['fileFormat'])"
+          class="def-btn ml-cus-10"
+        >
+          <a>Download</a>
+        </button>
+      </div>
+    </div>
+    <div (click)="navDocument('next')" class="end-0 p-0 doc-slider nav-arrows text-right">
+      <a role="button"><img src="assets/icons/right-arrow.png" alt="" /></a>
+    </div>
+  </div>
+</div>

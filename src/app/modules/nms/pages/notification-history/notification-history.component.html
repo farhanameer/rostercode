@@ -1,0 +1,116 @@
+<div class="module-style notification-history">
+  <div class="row w-100 m-0 bg-white p-cus-20">
+    <div class="col-md-12 p-0 mb-2 card-shadow row m-0">
+      <div class="row justify-bw people-title-heading mt-0 col-md-12 m-0">
+        <div class="justify-start col-2 pl-cus-20">Notification History List</div>
+        <form
+          (submit)="search(notificationHistoryFilterForm.value)"
+          [formGroup]="notificationHistoryFilterForm"
+          class="row emp-content noti-reciever col-6 just-end m-0 px-2"
+        >
+          <!--
+            Date
+          -->
+          <div class="col-3 px-1">
+            <div class="re-size toggle-date">
+              <input
+                #date
+                formControlName="date"
+                class="m-0"
+                matInput
+                placeholder="Date"
+                [matDatepicker]="varDate"
+              />
+              <mat-datepicker-toggle [for]="varDate"></mat-datepicker-toggle>
+              <mat-datepicker #varDate></mat-datepicker>
+            </div>
+          </div>
+          <!--
+            Message Type
+          -->
+          <div class="col-3 cus-p-3">
+            <mat-form-field appearance="fill">
+              <mat-label class="label-color" [hidden]="messageType.value">Message Type</mat-label>
+              <mat-select
+                #messageType
+                formControlName="messageType"
+                panelClass="options-panel"
+              >
+                <mat-option value="multicast"
+                  >MultiCast - Notification</mat-option
+                >
+                <mat-option value="broadcast"
+                  >Broadcast - Notification</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--
+            Message Category
+          -->
+          <div class="col-3 cus-p-3">
+            <mat-form-field appearance="fill">
+              <mat-label class="label-color" [hidden]="messageCategory.value">Message Category</mat-label>
+              <mat-select
+                #messageCategory
+                formControlName="messageCategory"
+                panelClass="options-panel"
+              >
+                <mat-option value="notification">Notification</mat-option>
+                <mat-option value="email">Email</mat-option>
+                <mat-option value="sms">SMS</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="custom-btn btn-wrapper bg-transparent p-cus-0">
+            <button class="def-btn cus-mx-reset" type="reset" (click)="reset()">
+              Reset
+            </button>
+            <button class="def-btn cus-mx-search" type="submit">Search</button>
+          </div>
+        </form>
+      </div>
+      <div class="p-cus-0 doc-content col-12">
+        <div class="m-0">
+          <div
+            class="scroll-results table-scroll w-100 col-md-12 doc-content comp-card p-0"
+            infiniteScroll
+            [infiniteScrollDistance]="3"
+            [infiniteScrollThrottle]="50"
+            [alwaysCallback] = "true"
+            [scrollWindow]="false"
+            (scrolled)="getDataOnScroll(notificationHistoryFilterForm.value)"
+          >
+            <table *ngIf="allNotifications.length > 0" class="doc-records">
+              <tr>
+                <th>Creation Date</th>
+                <th>Scheduler Date</th>
+                <th>Created by</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Send Status</th>
+                <th>Send date</th>
+                <th>Send Count</th>
+              </tr>
+              <tr
+                class="notification-history-table"
+                (click)="getSingleNotification(notification.id)"
+                *ngFor="let notification of allNotifications"
+              >
+                <td>{{ notification.created_date | formatDate }}</td>
+                <td>{{ notification.notification_date ? (notification.notification_date | formatDate) : "Not Set" }}</td>
+                <td>{{ notification.created_by ? notification.created_by : "Not Set" }}</td>
+                <td>{{ notification.notification_category }}</td>
+                <td>{{ notification.notification_type }}</td>
+                <td>{{ notification.status }}</td>
+                <td>{{ notification.completion_date ? (notification.completion_date | formatDate) : 'Not Set' }}</td>
+                <td>{{ notification.send_count }}</td>
+              </tr>
+            </table>
+            <div class="not-found" *ngIf="allNotifications.length == 0">Record Not Found</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

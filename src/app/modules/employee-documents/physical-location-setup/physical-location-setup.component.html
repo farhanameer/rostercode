@@ -1,0 +1,1120 @@
+<div class="module-style physical-location-setup">
+  <div class="row w-100 m-0 bg-white p-cus-20 physical-location">
+    <form
+      novalidate
+      [formGroup]="physicalLocationForm"
+      #physicalLocationRefForm="ngForm"
+      (submit)="
+        addRecord(physicalLocationForm, {
+          countryId: countryFilter.value,
+          stateId: stateFilter.value,
+          cityId: cityFilter.value
+        })
+      "
+      class="w-100"
+    >
+      <div class="col-md-12 comp-card p-0 mb-cus-10">
+        <div class="justify-heading people-title-heading mt-cus-0">
+          <h4>Physical Location Setup</h4>
+          <div class="fields-wrapper row justify-right m-0">
+            <div class="fields-content col-2 p-0">
+              <mat-form-field
+                [class.errors]="
+                  (validationForm.countryId.touched || submitted) &&
+                  validationForm.countryId.errors?.required
+                "
+                class="filters-top"
+                appearance="fill"
+                (click)="getDropDownList('countries', 0)"
+              >
+                <mat-label
+                  [class.error-message]="
+                    (validationForm.countryId.touched || submitted) &&
+                    validationForm.countryId.errors?.required
+                  "
+                  class="float-left"
+                  *ngIf="country.value == '' || country.value == null"
+                  >{{
+                    (validationForm.countryId.touched || submitted) &&
+                    validationForm.countryId.errors?.required
+                      ? "Required*"
+                      : "Country"
+                  }}</mat-label
+                >
+                <mat-select
+                  panelClass="options-panel"
+                  #country
+                  [formControlName]="'countryId'"
+                  (selectionChange)="[getStates(country.value), enableSave()]"
+                  (openedChange)="[(filter['country'] = '')]"
+                >
+                  <mat-option *ngIf="!isLoaded.country" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.country" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.country" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['country']"
+                    name="searchWord"
+                    *ngIf="countries.length > 10 && isLoaded.country"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="countries.length == 0 && isLoaded.country"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    hidden
+                    *ngFor="
+                      let item of countries
+                        | searchFilter: filter['country']:'country'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.country"
+                    [value]="item.country_id"
+                    >{{ item.country }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="fields-content col-2 p-0">
+              <mat-form-field
+                [class.errors]="
+                  (validationForm.stateId.touched || submitted) &&
+                  validationForm.stateId.errors?.required
+                "
+                class="filters-top"
+                appearance="fill"
+                (click)="getDropDownList('states', country.value)"
+              >
+                <mat-label
+                  [class.error-message]="
+                    (validationForm.stateId.touched || submitted) &&
+                    validationForm.stateId.errors?.required
+                  "
+                  *ngIf="state.value == '' || state.value == null"
+                  class="float-left"
+                  >{{
+                    (validationForm.stateId.touched || submitted) &&
+                    validationForm.stateId.errors?.required
+                      ? "Required*"
+                      : "State"
+                  }}</mat-label
+                >
+                <mat-select
+                  [disabled]="!country.value"
+                  [formControlName]="'stateId'"
+                  #state
+                  panelClass="options-panel"
+                  (selectionChange)="[getCities(state.value), enableSave()]"
+                  (openedChange)="
+                    [(filter['state'] = '')]
+                  "
+                >
+                  <mat-option *ngIf="!isLoaded.state" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.state" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.state" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['state']"
+                    name="searchWord"
+                    *ngIf="states.length > 10 && isLoaded.state"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="states.length == 0 && isLoaded.state"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let item of states
+                        | searchFilter: filter['state']:'value'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.state"
+                    [value]="item.id"
+                    >{{ item.value }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="fields-content col-2 p-0">
+              <mat-form-field
+                [class.errors]="
+                  (validationForm.cityId.touched || submitted) &&
+                  validationForm.cityId.errors?.required
+                "
+                class="filters-top"
+                appearance="fill"
+                (click)="getDropDownList('cities', state.value)"
+              >
+                <mat-label
+                  [class.error-message]="
+                    (validationForm.cityId.touched || submitted) &&
+                    validationForm.cityId.errors?.required
+                  "
+                  *ngIf="city.value == '' || city.value == null"
+                  class="float-left"
+                  >{{
+                    (validationForm.cityId.touched || submitted) &&
+                    validationForm.cityId.errors?.required
+                      ? "Required*"
+                      : "City"
+                  }}</mat-label
+                >
+                <mat-select
+                  [disabled]="!state.value"
+                  #city
+                  panelClass="options-panel"
+                  formControlName="cityId"
+                  (selectionChange)="[getBranches(city.value), enableSave()]"
+                  (openedChange)="[(filter['city'] = '')]"
+                >
+                  <mat-option *ngIf="!isLoaded.city" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.city" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.city" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['city']"
+                    name="searchWord"
+                    *ngIf="cities.length > 10 && isLoaded.city"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="cities.length == 0 && isLoaded.city"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let item of cities
+                        | searchFilter: filter['city']:'city_name' ; let i = index;
+                    "
+                    [ngStyle] = "{ 'display' : (i > 10)  ? 'none ' : '' }"
+                    [hidden]="!isLoaded.city"
+                    [value]="item.id"
+                    >{{ item.city_name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="pl-cus-7" (click)="minMaxPhysicalLocation()">
+              <div *ngIf="statePhysicalLocation == 'maximize'">
+                <i class="fas fa-caret-down"></i>
+              </div>
+              <div *ngIf="statePhysicalLocation == 'minimize'">
+                <i class="fas fa-caret-up"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [@openClose]="statePhysicalLocation">
+          <div class="emp-content row m-0 pb-cus-6">
+            <div class="select-wrapper pl-cus-0 set-padding col-3">
+              <mat-form-field
+                appearance="fill"
+                (click)="getDropDownList('branches', city.value)"
+              >
+                <mat-label>Branch</mat-label>
+                <mat-select
+                  [disabled]="!city.value"
+                  panelClass="options-panel"
+                  #branch
+                  formControlName="branchId"
+                  (selectionChange)="[getBuildings(branch.value), enableSave()]"
+                  (openedChange)="[(filter['branch'] = '')]"
+                >
+                  <mat-option *ngIf="!isLoaded.branch" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.branch" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.branch" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['branch']"
+                    name="searchWord"
+                    *ngIf="branches.length > 10 && isLoaded.branch"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="branches.length == 0 && isLoaded.branch"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let item of branches
+                        | searchFilter: filter['branch']:'loc_desc' ; let i= index;
+                    "
+                    class="{{i > 10 ? 'hidden-options' : ''}}"
+                    [hidden]="!isLoaded.branch"
+                    [value]="item.loc_id"
+                    >{{ item.loc_desc }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <div
+                *ngIf="
+                  (validationForm.branchId.touched || submitted) &&
+                  validationForm.branchId.errors?.required
+                "
+                class="error-message"
+              >
+                Required*
+              </div>
+            </div>
+            
+            <div class="select-wrapper col-3">
+              <div class="add-new">
+                <mat-form-field
+                  appearance="fill"
+                  (click)="getDropDownList('building', branch.value)"
+                >
+                  <mat-label>Building</mat-label>
+                  <mat-select
+                    [disabled]="!branch.value"
+                    panelClass="options-panel"
+                    #building
+                    formControlName="buildingId"
+                    [(ngModel)]="dropDownNgModels.building"
+                    (selectionChange)="
+                      [
+                        registerDropDown('building', building.value),
+                        getFloors(building.value),
+                        enableSave()
+                      ]
+                    "
+                    (openedChange)="[(filter['building'] = '')]"
+                  >
+                    <mat-option *ngIf="!isLoaded.building" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.building" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.building" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <input
+                      [(ngModel)]="filter['building']"
+                      name="searchWord"
+                      *ngIf="buildings.length > 10 && isLoaded.building"
+                      [ngModelOptions]="{ standalone: true }"
+                      type="text"
+                      class="search-input"
+                      placeholder="Search"
+                    />
+                    <mat-option
+                      *ngIf="buildings.length == 0 && isLoaded.building"
+                      >No Record Found</mat-option
+                    >
+                    <mat-option
+                      *ngFor="
+                        let item of buildings
+                          | searchFilter: filter['building']:'building_name' ; let i = index;
+                      "
+                      [ngStyle] = "{ 'display' : (i > 10)  ? 'none ' : '' }"
+                      [hidden]="!isLoaded.building"
+                      [value]="item.id"
+                      >{{ item.building_name }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <div
+                  class="plus-icon"
+                  (click)="
+                    openDialog(
+                      building,
+                      {
+                        inputType: 'text',
+                        placeholder: 'Building',
+                        title: 'Add Buildings',
+                        parentId: 'branchId',
+                        idName: 'buildingId',
+                        fieldName: 'buildingName',
+                        locations: buildings
+                      },
+                      !branch.value
+                    )
+                  "
+                >
+                  <i class="fas fa-plus"></i>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  (validationForm.buildingId.touched || submitted) &&
+                  validationForm.buildingId.errors?.required
+                "
+                class="align-error-msg error-message"
+              >
+                Required*
+              </div>
+            </div>
+            <div class="select-wrapper col-3">
+              <div class="add-new">
+                <mat-form-field
+                  appearance="fill"
+                  (click)="getDropDownList('floor', building.value)"
+                >
+                  <mat-label>Floor</mat-label>
+                  <mat-select
+                    [disabled]="!building.value"
+                    panelClass="options-panel"
+                    #floor
+                    formControlName="floorId"
+                    [(ngModel)]="dropDownNgModels.floor"
+                    (selectionChange)="
+                      [
+                        registerDropDown('floor', floor.value),
+                        getBoxes(floor.value),
+                        enableSave()
+                      ]
+                    "
+                    (openedChange)="[(filter['floor'] = '')]"
+                  >
+                    <mat-option *ngIf="!isLoaded.floor" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.floor" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.floor" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <input
+                      [(ngModel)]="filter['floor']"
+                      name="searchWord"
+                      *ngIf="floors.length > 10 && isLoaded.floor"
+                      [ngModelOptions]="{ standalone: true }"
+                      type="text"
+                      class="search-input"
+                      placeholder="Search"
+                    />
+                    <mat-option *ngIf="floors.length == 0 && isLoaded.floor"
+                      >No Record Found</mat-option
+                    >
+                    <mat-option
+                      *ngFor="
+                        let item of floors
+                          | searchFilter: filter['floor']:'floor_number'; let i = index;
+                      "
+
+                      [ngStyle] = "{ 'display' : (i > 10)  ? 'none ' : '' }"
+                      [hidden]="!isLoaded.floor"
+                      [value]="item.id"
+                      >{{ item.floor_number }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <div
+                  class="plus-icon"
+                  (click)="
+                    openDialog(
+                      floor,
+                      {
+                        inputType: 'number',
+                        placeholder: 'Floor',
+                        title: 'Add Floors',
+                        parentId: 'buildingId',
+                        idName: 'floorId',
+                        fieldName: 'floorNumber',
+                        locations: floors
+                      },
+                      !building.value
+                    )
+                  "
+                >
+                  <i class="fas fa-plus"></i>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  (validationForm.floorId.touched || submitted) &&
+                  validationForm.floorId.errors?.required
+                "
+                class="align-error-msg error-message"
+              >
+                Required*
+              </div>
+            </div>
+            <div class="select-wrapper pr-cus-0 col-3">
+              <div class="add-new">
+                <mat-form-field
+                  appearance="fill"
+                  (click)="getDropDownList('box', floor.value)"
+                >
+                  <mat-label>Box</mat-label>
+                  <mat-select
+                    [disabled]="!floor.value"
+                    panelClass="options-panel"
+                    #box
+                    formControlName="boxId"
+                    [(ngModel)]="dropDownNgModels.box"
+                    (selectionChange)="
+                      [
+                        registerDropDown('box', box.value),
+                        getCabinets(box.value),
+                        enableSave()
+                      ]
+                    "
+                    (openedChange)="[(filter['box'] = '')]"
+                  >
+                    <mat-option *ngIf="!isLoaded.box" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.box" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.box" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <input
+                      [(ngModel)]="filter['box']"
+                      name="searchWord"
+                      *ngIf="boxes.length > 10 && isLoaded.box"
+                      [ngModelOptions]="{ standalone: true }"
+                      type="text"
+                      class="search-input"
+                      placeholder="Search"
+                    />
+                    <mat-option *ngIf="boxes.length == 0 && isLoaded.box"
+                      >No Record Found</mat-option
+                    >
+                    <mat-option
+                      *ngFor="
+                        let item of boxes
+                          | searchFilter: filter['box']:'box_number' ; let i = index;
+                      "
+
+                      [ngStyle] = "{ 'display' : (i > 10)  ? 'none ' : '' }"
+                      [hidden]="!isLoaded.box"
+                      [value]="item.id"
+                      >{{ item.box_number }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <div
+                  class="plus-icon"
+                  (click)="
+                    openDialog(
+                      box,
+                      {
+                        inputType: 'number',
+                        placeholder: 'Box',
+                        title: 'Add Boxes',
+                        parentId: 'floorId',
+                        idName: 'boxId',
+                        fieldName: 'boxNumber',
+                        locations: boxes
+                      },
+                      !floor.value
+                    )
+                  "
+                >
+                  <i class="fas fa-plus"></i>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  (validationForm.boxId.touched || submitted) &&
+                  validationForm.boxId.errors?.required
+                "
+                class="align-error-msg error-message"
+              >
+                Required*
+              </div>
+            </div>
+            <div class="select-wrapper pl-cus-0 pr-cus-12 col-3">
+              <div class="add-new">
+                <mat-form-field
+                  appearance="fill"
+                  (click)="getDropDownList('cabinet', box.value)"
+                >
+                  <mat-label>Cabinet</mat-label>
+                  <mat-select
+                    [disabled]="!box.value"
+                    panelClass="options-panel"
+                    #cabinet
+                    formControlName="cabinetId"
+                    [(ngModel)]="dropDownNgModels.cabinet"
+                    (selectionChange)="
+                      [
+                        registerDropDown('cabinet', cabinet.value),
+                        getDrawersAndFlaps(cabinet.value),
+                        enableSave()
+                      ]
+                    "
+                    (openedChange)="[(filter['cabinet'] = '')]"
+                  >
+                    <mat-option *ngIf="!isLoaded.cabinet" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.cabinet" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.cabinet" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <input
+                      [(ngModel)]="filter['cabinet']"
+                      name="searchWord"
+                      *ngIf="cabinets.length > 10 && isLoaded.cabinet"
+                      [ngModelOptions]="{ standalone: true }"
+                      type="text"
+                      class="search-input"
+                      placeholder="Search"
+                    />
+                    <mat-option *ngIf="cabinets.length == 0 && isLoaded.cabinet"
+                      >No Record Found</mat-option
+                    >
+                    <mat-option
+                      *ngFor="
+                        let item of cabinets
+                          | searchFilter: filter['cabinet']:'cabinet_number' ; let i = index;
+                      "
+                      [ngStyle] = "{ 'display' : (i > 10)  ? 'none ' : '' }"
+                      [hidden]="!isLoaded.cabinet"
+                      [value]="item.id"
+                      >{{ item.cabinet_number }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <div
+                  class="plus-icon"
+                  (click)="
+                    openDialog(
+                      cabinet,
+                      {
+                        inputType: 'number',
+                        placeholder: 'Cabinet',
+                        title: 'Add Cabinets',
+                        parentId: 'boxId',
+                        idName: 'cabinetId',
+                        fieldName: 'cabinetNumber',
+                        locations: cabinets
+                      },
+                      !box.value
+                    )
+                  "
+                >
+                  <i class="fas fa-plus"></i>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  (validationForm.cabinetId.touched || submitted) &&
+                  validationForm.cabinetId.errors?.required
+                "
+                class="align-error-msg error-message"
+              >
+                Required*
+              </div>
+            </div>
+            <div class="select-wrapper col-3">
+              <div class="add-new">
+                <mat-form-field
+                  appearance="fill"
+                  (click)="getDropDownList('drawer', cabinet.value)"
+                >
+                  <mat-label>Drawer</mat-label>
+                  <mat-select
+                    [disabled]="!cabinet.value"
+                    panelClass="options-panel"
+                    #drawer
+                    formControlName="drawerId"
+                    [(ngModel)]="dropDownNgModels.drawer"
+                    (selectionChange)="
+                      [registerDropDown('drawer', drawer.value), enableSave()]
+                    "
+                    (openedChange)="[(filter['drawer'] = '')]"
+                  >
+                    <mat-option *ngIf="!isLoaded.drawer" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.drawer" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.drawer" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <input
+                      [(ngModel)]="filter['drawer']"
+                      name="searchWord"
+                      *ngIf="drawers.length > 10 && isLoaded.drawer"
+                      [ngModelOptions]="{ standalone: true }"
+                      type="text"
+                      class="search-input"
+                      placeholder="Search"
+                    />
+                    <mat-option *ngIf="drawers.length == 0 && isLoaded.drawer"
+                      >No Record Found</mat-option
+                    >
+                    <mat-option
+                      *ngFor="
+                        let item of drawers
+                          | searchFilter: filter['drawer']:'drawer_number' ; let i = index;
+                      "
+                      [ngStyle] = "{ 'display' : (i > 10)  ? 'none ' : '' }"
+                      [hidden]="!isLoaded.drawer"
+                      [value]="item.id"
+                      >{{ item.drawer_number }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <div
+                  class="plus-icon"
+                  (click)="
+                    openDialog(
+                      drawer,
+                      {
+                        inputType: 'number',
+                        placeholder: 'Drawer',
+                        title: 'Add Drawers',
+                        parentId: 'cabinetId',
+                        locations: drawers,
+                        idName: 'drawerId',
+                        fieldName: 'drawerNumber'
+                      },
+                      !cabinet.value
+                    )
+                  "
+                >
+                  <i class="fas fa-plus"></i>
+                </div>
+              </div>
+            </div>
+            <div class="select-wrapper col-3">
+              <div class="add-new">
+                <mat-form-field
+                  appearance="fill"
+                  (click)="getDropDownList('flap', cabinet.value)"
+                >
+                  <mat-label>Flap</mat-label>
+                  <mat-select
+                    [disabled]="!cabinet.value"
+                    panelClass="options-panel"
+                    #flap
+                    formControlName="flapId"
+                    [(ngModel)]="dropDownNgModels.flap"
+                    (selectionChange)="
+                      [registerDropDown('flap', flap.value), enableSave()]
+                    "
+                    (openedChange)="[(filter['flap'] = '')]"
+                  >
+                    <mat-option *ngIf="!isLoaded.flap" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.flap" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <mat-option *ngIf="!isLoaded.flap" class="module-style">
+                      <div class="skeleton-loader progress pulse"></div>
+                    </mat-option>
+                    <input
+                      [(ngModel)]="filter['flap']"
+                      name="searchWord"
+                      *ngIf="flaps.length > 10 && isLoaded.flap"
+                      [ngModelOptions]="{ standalone: true }"
+                      type="text"
+                      class="search-input"
+                      placeholder="Search"
+                    />
+                    <mat-option *ngIf="flaps.length == 0 && isLoaded.flap"
+                      >No Record Found</mat-option
+                    >
+                    <mat-option
+                      *ngFor="
+                        let item of flaps
+                          | searchFilter: filter['flap']:'flap_number' ; let i = index;
+                      "
+                      [ngStyle] = "{ 'display' : (i > 10)  ? 'none ' : '' }"
+                      [hidden]="!isLoaded.flap"
+                      [value]="item.id"
+                      >{{ item.flap_number }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <div
+                  class="plus-icon"
+                  (click)="
+                    openDialog(
+                      flap,
+                      {
+                        inputType: 'number',
+                        placeholder: 'Flap',
+                        title: 'Add Flaps',
+                        parentId: 'cabinetId',
+                        locations: flaps,
+                        idName: 'flapId',
+                        fieldName: 'flapNumber'
+                      },
+                      !cabinet.value
+                    )
+                  "
+                >
+                  <i class="fas fa-plus"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [@openClose]="statePhysicalLocation" class="btn-wrapper justify-right">
+          <button
+            *ngIf="!isUpdating"
+            [disabled]="!physicalLocationForm.valid || disabledSave"
+            class="def-btn mr-cus-3"
+            type="submit"
+          >
+            Save
+          </button>
+          <button
+            *ngIf="isUpdating"
+            [disabled]="!physicalLocationForm.valid"
+            class="def-btn mr-cus-3"
+            type="submit"
+          >
+            Update
+          </button>
+          <button
+            (click)="cancelEditForm(physicalLocationForm)"
+            [hidden]="!isUpdating"
+            class="def-btn ml-cus-3"
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <form
+      #filtersRefForm="ngForm"
+      [formGroup]="filtersForm"
+      (submit)="resetFilters()"
+      class="col-md-12 doc-content comp-card p-0"
+    >
+      <div class="justify-heading people-title-heading m-0 pl-0 pr-2">
+        <h4>Physical Location List</h4>
+        <div class="fields-wrapper row justify-right m-0">
+          <div class="fields-content col-2 p-0">
+            <mat-form-field
+              [class.errors]="
+                validationFilters.countryId.touched &&
+                validationFilters.countryId.errors?.required
+              "
+              class="filters-top"
+              appearance="fill"
+            >
+              <mat-label
+                [class.error-message]="
+                  validationFilters.countryId.touched &&
+                  validationFilters.countryId.errors?.required
+                "
+                *ngIf="countryFilter.value == '' || countryFilter.value == null"
+                class="float-left"
+                >{{
+                  validationFilters.countryId.touched &&
+                  validationFilters.countryId.errors?.required
+                    ? "Required*"
+                    : "Country"
+                }}</mat-label
+              >
+              <mat-select
+                panelClass="options-panel"
+                #countryFilter
+                formControlName="countryId"
+                (selectionChange)="
+                  [
+                    (pageNumber = 1),
+                    (disableInfinitScroll = false),
+                    getStates(countryFilter.value, {
+                      countryId: countryFilter.value
+                    })
+                  ]
+                "
+                (openedChange)="[(filter['countryFilter'] = '')]"
+              >
+                <mat-option
+                  *ngIf="!isLoaded.countryFilter"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="!isLoaded.countryFilter"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="!isLoaded.countryFilter"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  [(ngModel)]="filter['countryFilter']"
+                  name="searchWord"
+                  *ngIf="countriesFilter.length > 10 && isLoaded.countryFilter"
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option
+                  *ngIf="countriesFilter.length == 0 && isLoaded.countryFilter"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  *ngFor="
+                    let item of countriesFilter
+                      | searchFilter: filter['countryFilter']:'country' ; let i = index;
+                  "
+                  [ngStyle] = "{ 'display' : (i > 10)  ? 'none ' : '' }"
+                  [hidden]="!isLoaded.countryFilter"
+                  [value]="item.country_id"
+                  >{{ item.country }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="fields-content col-2 p-0">
+            <mat-form-field
+              [class.errors]="
+                validationFilters.stateId.touched &&
+                validationFilters.stateId.errors?.required
+              "
+              class="filters-top"
+              appearance="fill"
+            >
+              <mat-label
+                [class.error-message]="
+                  validationFilters.stateId.touched &&
+                  validationFilters.stateId.errors?.required
+                "
+                *ngIf="stateFilter.value == '' || stateFilter.value == null"
+                class="float-left"
+                >{{
+                  validationFilters.stateId.touched &&
+                  validationFilters.stateId.errors?.required
+                    ? "Required*"
+                    : "State"
+                }}</mat-label
+              >
+              <mat-select
+                [disabled]="!countryFilter.value"
+                #stateFilter
+                panelClass="options-panel"
+                formControlName="stateId"
+                [(ngModel)]="stateFilterVariable"
+                (selectionChange)="
+                  [
+                    (pageNumber = 1),
+                    (disableInfinitScroll = false),
+                    getCities(stateFilter.value, {
+                      countryId: countryFilter.value,
+                      stateId: stateFilter.value
+                    })
+                  ]
+                "
+                (openedChange)="[(filter['stateFilter'] = '')]"
+              >
+                <mat-option *ngIf="!isLoaded.stateFilter" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.stateFilter" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.stateFilter" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  [(ngModel)]="filter['stateFilter']"
+                  name="searchWord"
+                  *ngIf="statesFilter.length > 10 && isLoaded.stateFilter"
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option
+                  *ngIf="statesFilter.length == 0 && isLoaded.stateFilter"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  *ngFor="
+                    let item of statesFilter
+                      | searchFilter: filter['stateFilter']:'value' ; let i = index;
+                  "
+                  [hidden]="!isLoaded.stateFilter"
+                  [value]="item.id"
+                  >{{ item.value }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="fields-content col-2 p-0">
+            <mat-form-field
+              [class.errors]="
+                validationFilters.cityId.touched &&
+                validationFilters.cityId.errors?.required
+              "
+              class="filters-top"
+              appearance="fill"
+            >
+              <mat-label
+                [class.error-message]="
+                  validationFilters.cityId.touched &&
+                  validationFilters.cityId.errors?.required
+                "
+                *ngIf="cityFilter.value == '' || cityFilter.value == null"
+                class="float-left"
+                >{{
+                  validationFilters.cityId.touched &&
+                  validationFilters.cityId.errors?.required
+                    ? "Required*"
+                    : "City"
+                }}</mat-label
+              >
+              <mat-select
+                [disabled]="!stateFilter.value"
+                #cityFilter
+                panelClass="options-panel"
+                formControlName="cityId"
+                (openedChange)="[(filter['cityFilter'] = '')]"
+              >
+                <mat-option *ngIf="!isLoaded.cityFilter" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.cityFilter" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.cityFilter" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  [(ngModel)]="filter['cityFilter']"
+                  name="searchWord"
+                  *ngIf="citiesFilter.length > 10 && isLoaded.cityFilter"
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option
+                  *ngIf="citiesFilter.length == 0 && isLoaded.cityFilter"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  (click)="
+                    [
+                      (pageNumber = 1),
+                      (disableInfinitScroll = false),
+                      getLocationsList({
+                        countryId: countryFilter.value,
+                        stateId: stateFilter.value,
+                        cityId: item.id
+                      })
+                    ]
+                  "
+                  *ngFor="
+                    let item of citiesFilter
+                      | searchFilter: filter['cityFilter']:'city_name' ; let i = index;
+                  "
+                  [ngStyle] = "{ 'display' : (i > 10)  ? 'none ' : '' }"
+                  [hidden]="!isLoaded.cityFilter"
+                  [value]="item.id"
+                  >{{ item.city_name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="fields-content custom-margin">
+            <button [disabled]="disabledReset" class="def-btn" type="submit">
+              Reset
+            </button>
+          </div>
+          <div class="pl-cus-7" (click)="minMaxPhysicalList()">
+            <div *ngIf="statePhysicalList == 'maximize'">
+              <i class="fas fa-caret-down"></i>
+            </div>
+            <div *ngIf="statePhysicalList == 'minimize'">
+              <i class="fas fa-caret-up"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div [@openClose]="statePhysicalList">
+        <div class="">
+          <div
+            class="scroll-results h-cus"
+            infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [scrollWindow]="false"
+            [alwaysCallback] = true
+            (scrolled)="
+              getDataOnScroll({
+                countryId: countryFilter.value,
+                stateId: stateFilter.value,
+                cityId: cityFilter.value
+              })
+            "
+          >
+            <table class="doc-records">
+              <tr>
+                <th>Branch</th>
+                <th>Building</th>
+                <th>Floor</th>
+                <th>Box</th>
+                <th>Cabinet</th>
+                <th>Drawer</th>
+                <th>Flap</th>
+              </tr>
+              <tr
+                
+                (click)="[apiCallsCache = {} ,editLocation(location.id, i)]"
+                *ngFor="let location of locationsList; let i = index"
+                class="{{location.is_disabled == 1 ? 'disabled-row' : ''}}"
+              >
+                <td>{{ location.branchName }}</td>
+                <td>{{ location.building_name }}</td>
+                <td>{{ location.floor_number }}</td>
+                <td>{{ location.box_number }}</td>
+                <td>{{ location.cabinet_number }}</td>
+                <td>
+                  {{ location.drawer_number ? location.drawer_number : "-" }}
+                </td>
+                <td>{{ location.flap_number ? location.flap_number : "-" }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

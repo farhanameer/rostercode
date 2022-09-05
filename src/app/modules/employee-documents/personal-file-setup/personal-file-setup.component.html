@@ -1,0 +1,890 @@
+<div class="module-style personal-file-setup">
+  <div class="row w-100 m-0 bg-white pt-3 cus-px-20">
+    <form
+      #personalFileRefForm="ngForm"
+      class="row col-12 p-0 m-0"
+      [formGroup]="personalSetupForm"
+    >
+      <div class="col-md-12 comp-card p-0">
+        <div class="people-title-heading px-cus-10 justify-bw">
+          <h4 class="col-1 p-cus-0">Personal File</h4>
+          <div class="fields-wrapper cat-filters emp-content row mx-0">
+            <!--
+                title
+              -->
+            <div class="fields-content col-2 cus-pad-3">
+              <input
+                formControlName="title"
+                class="emp-input custom-input"
+                type="text"
+                name=""
+                (keyup)="enableSave()"
+                [class.errors-input-text]="
+                  (validation.title.touched || submitted) &&
+                  validation.title.errors?.required
+                "
+                [class.error-placeholder]="
+                  (validation.title.touched || submitted) &&
+                  validation.title.errors?.required
+                "
+                [placeholder]="
+                  (validation.title.touched || submitted) &&
+                  validation.title.errors?.required
+                    ? 'Required*'
+                    : 'Personal File Title'
+                "
+              />
+            </div>
+            <!--
+                region
+              -->
+            <div class="fields-content col-1 cus-pad-3">
+              <mat-form-field
+                [class.errors]="
+                  (validation.regionId.touched || submitted) &&
+                  validation.regionId.errors?.required
+                "
+                appearance="fill"
+              >
+                <mat-label
+                  [class.error-message]="
+                    (validation.regionId.touched || submitted) &&
+                    validation.regionId.errors?.required
+                  "
+                  *ngIf="region.value == '' || region.value == null"
+                  class="float-left"
+                  >{{
+                    (validation.regionId.touched || submitted) &&
+                    validation.regionId.errors?.required
+                      ? "Required*"
+                      : "Region"
+                  }}</mat-label
+                >
+                <mat-select
+                  panelClass="options-panel"
+                  #region
+                  formControlName="regionId"
+                  (selectionChange)="changeDropdown('Department')"
+                  (openedChange)="[(filter['region'] = '')]"
+                >
+                  <mat-option *ngIf="!isLoaded.region" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.region" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.region" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    *ngIf="regionArray.length >= 10 && isLoaded.region"
+                    [(ngModel)]="filter['region']"
+                    name="searchWord"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="regionArray.length == 0 && isLoaded.region"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option value="-1" *ngIf="isLoaded.region"
+                    >All</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let region of regionArray
+                        | searchFilter: filter['region']:'country'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.region"
+                    [value]="region.country_id"
+                    >{{ region.country }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--
+                department
+              -->
+            <div class="fields-content col-1 cus-pad-3">
+              <mat-form-field
+                [class.errors]="
+                  (validation.departmentId.touched || submitted) &&
+                  validation.departmentId.errors?.required
+                "
+                appearance="fill"
+              >
+                <mat-label
+                  [class.error-message]="
+                    (validation.departmentId.touched || submitted) &&
+                    validation.departmentId.errors?.required
+                  "
+                  *ngIf="department.value == '' || department.value == null"
+                  class="float-left"
+                  >{{
+                    (validation.departmentId.touched || submitted) &&
+                    validation.departmentId.errors?.required
+                      ? "Required*"
+                      : "Department"
+                  }}</mat-label
+                >
+                <mat-select
+                  #department
+                  [disabled]="!region.value"
+                  panelClass="options-panel"
+                  formControlName="departmentId"
+                  (selectionChange)="changeDropdown('Band')"
+                  (openedChange)="[(filter['department'] = '')]"
+                >
+                  <mat-option *ngIf="!isLoaded.department" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.department" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.department" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    *ngIf="departmentArray.length >= 10 && isLoaded.department"
+                    [(ngModel)]="filter['department']"
+                    name="searchWord"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option
+                    *ngIf="departmentArray.length == 0 && isLoaded.department"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option value="-1" *ngIf="isLoaded.department"
+                    >All</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let department of departmentArray
+                        | searchFilter: filter['department']:'department_name'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.department"
+                    [value]="department.id"
+                    >{{ department.department_name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--
+                band
+              -->
+            <div class="fields-content col-1 cus-pad-3">
+              <mat-form-field
+                [class.errors]="
+                  (validation.bandId.touched || submitted) &&
+                  validation.bandId.errors?.required
+                "
+                appearance="fill"
+              >
+                <mat-label
+                  [class.error-message]="
+                    (validation.bandId.touched || submitted) &&
+                    validation.bandId.errors?.required
+                  "
+                  *ngIf="band.value == '' || band.value == null"
+                  class="float-left"
+                  >{{
+                    (validation.bandId.touched || submitted) &&
+                    validation.bandId.errors?.required
+                      ? "Required*"
+                      : "Band"
+                  }}</mat-label
+                >
+                <mat-select
+                  #band
+                  [disabled]="!department.value"
+                  panelClass="options-panel"
+                  formControlName="bandId"
+                  (selectionChange)="changeDropdown('Designation')"
+                  (openedChange)="[(filter['band'] = '')]"
+                >
+                  <mat-option *ngIf="!isLoaded.band" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.band" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option *ngIf="!isLoaded.band" class="module-style">
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    *ngIf="bandArray.length >= 10 && isLoaded.band"
+                    [(ngModel)]="filter['band']"
+                    name="searchWord"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option *ngIf="bandArray.length == 0 && isLoaded.band"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option value="-1" *ngIf="isLoaded.band">All</mat-option>
+                  <mat-option
+                    *ngFor="
+                      let band of bandArray
+                        | searchFilter: filter['band']:'band_desc'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.band"
+                    [value]="band.id"
+                    >{{ band.band_desc }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--
+                designation
+              -->
+            <div class="fields-content col-1 cus-pad-3">
+              <mat-form-field
+                [class.errors]="
+                  (validation.designationId.touched || submitted) &&
+                  validation.designationId.errors?.required
+                "
+                appearance="fill"
+              >
+                <mat-label
+                  [class.error-message]="
+                    (validation.designationId.touched || submitted) &&
+                    validation.designationId.errors?.required
+                  "
+                  *ngIf="designation.value == '' || designation.value == null"
+                  class="float-left"
+                  >{{
+                    (validation.designationId.touched || submitted) &&
+                    validation.designationId.errors?.required
+                      ? "Required*"
+                      : "Designation"
+                  }}</mat-label
+                >
+                <mat-select
+                  #designation
+                  [disabled]="!band.value"
+                  panelClass="options-panel"
+                  formControlName="designationId"
+                  (openedChange)="[(filter['designation'] = '')]"
+                >
+                  <mat-option
+                    *ngIf="!isLoaded.designation"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option
+                    *ngIf="!isLoaded.designation"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option
+                    *ngIf="!isLoaded.designation"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    *ngIf="
+                      designationArray.length >= 10 && isLoaded.designation
+                    "
+                    [(ngModel)]="filter['designation']"
+                    name="searchWord"
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option
+                    *ngIf="designationArray.length == 0 && isLoaded.designation"
+                    >No Record Found</mat-option
+                  >
+                  <mat-option value="-1" *ngIf="isLoaded.designation"
+                    >All</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let designation of designationArray
+                        | searchFilter: filter['designation']:'designation_name'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isLoaded.designation"
+                    [value]="designation.designation_id"
+                    >{{ designation.designation_name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--
+                submission type
+              -->
+            <div class="fields-content col-1 cus-pad-3 pad-r-set">
+              <mat-form-field
+                [class.errors]="
+                  (validation.submissionType.touched || submitted) &&
+                  validation.submissionType.errors?.required
+                "
+                appearance="fill"
+              >
+                <mat-label
+                  [class.error-message]="
+                    (validation.submissionType.touched || submitted) &&
+                    validation.submissionType.errors?.required
+                  "
+                  *ngIf="
+                    submissionType.value == '' || submissionType.value == null
+                  "
+                  class="float-left"
+                  >{{
+                    (validation.submissionType.touched || submitted) &&
+                    validation.submissionType.errors?.required
+                      ? "Required*"
+                      : "Submission"
+                  }}</mat-label
+                >
+                <mat-select
+                  panelClass="options-panel"
+                  formControlName="submissionType"
+                  (selectionChange)="enableSave()"
+                  #submissionType
+                >
+                  <mat-option value="manual">Manual</mat-option>
+                  <mat-option value="online">Online</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="pl-cus-10" (click)="maxMinPersonalCard()">
+            <div *ngIf="statePersonal == 'maximize'">
+              <i class="fas fa-caret-down"></i>
+            </div>
+            <div *ngIf="statePersonal == 'minimize'">
+              <i class="fas fa-caret-up"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div [@openClose]="statePersonal" class="row m-cus-10">
+          <div
+            class="col-md-4 scroll-border category-col-p"
+            [class.pl-0]="i == 0"
+            *ngFor="let categoryOf of personalFileCategories; let i = index"
+          >
+            <app-document-category
+              [category]="categoryOf"
+              [updating]="isUpdating"
+            >
+            </app-document-category>
+          </div>
+        </div>
+        <div [@openClose]="statePersonal" class="row m-cus-10">
+          <div class="col-md-8 scroll-border p-0">
+            <div class="personal-file p-0">
+              <h4>Onboarding Documents</h4>
+            </div>
+            <div class="row m-0">
+              <div
+                class="col-md-6 p-0"
+                *ngFor="let category of onboardingCategories; let i = index"
+              >
+                <app-document-category
+                  [category]="category"
+                  [updating]="isUpdating"
+                >
+                </app-document-category>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 scroll-border pr-0 pl-cus-10">
+            <div class="personal-file p-0">
+              <h4>Office Use Documents</h4>
+            </div>
+            <div class="row m-0">
+              <div
+                class="col-md-12 p-0"
+                *ngFor="let category of officeUseDocuments"
+              >
+                <app-document-category
+                  [category]="category"
+                  [updating]="isUpdating"
+                >
+                </app-document-category>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [@openClose]="statePersonal" class="form-submit emp-content row mx-0 mt-cus-20">
+          <div class="col-3 m-0 row">
+            <!--
+              is default
+            -->
+            <div class="fields-content col-6 px-cus-0">
+              <div class="check bg-checkbox">
+                <mat-checkbox
+                  class="cus-pad-top-2 px-cus-0"
+                  formControlName="isDefault"
+                  color="primary"
+                  [checked]="isDefault"
+                >
+                  Make Default
+                </mat-checkbox>
+              </div>
+            </div>
+            <!--
+              is live
+            -->
+            <div class="fields-content pad-live col-6 px-2">
+              <mat-form-field
+                [class.errors]="
+                  (validation.status.touched || submitted) &&
+                  validation.status.errors?.required
+                "
+                appearance="fill"
+              >
+                <mat-select
+                  [(value)]="status"
+                  panelClass="options-panel"
+                  formControlName="status"
+                >
+                  <mat-option value="1">Active</mat-option>
+                  <mat-option value="0">Deactive</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="justify-right btn-modal-wrapper btn-wrapper">
+            <button
+              [disabled]="!personalSetupForm.valid || disabledSave"
+              class="def-btn mr-cus-3"
+              type="submit"
+              (click)="createPersonalFile()"
+              *ngIf="!isUpdating"
+            >
+              Save Personal File
+            </button>
+            <button
+              [disabled]="!personalSetupForm.valid"
+              class="def-btn mr-cus-3"
+              type="submit"
+              (click)="updatePersonalFileSetup()"
+              *ngIf="isUpdating"
+            >
+              Update
+            </button>
+            <button type="button" (click)="reset()" class="def-btn ml-cus-3">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="my-2 row mx-0 w-100">
+      <div class="justify-bw people-title-heading set-filters col-md-12 p-0">
+        <h4>Saved Personal File Setups</h4>
+        <form
+          #filtersRefForm="ngForm"
+          class="row col-7 emp-content fields-wrapper m-0 px-2 py-0"
+          [formGroup]="personalSetupFilterForm"
+          (submit)="resetFilters()"
+        >
+          <!--
+            Region Filter
+          -->
+          <div class="fields-content col-2 cus-pad-3">
+            <mat-form-field
+              [class.errors]="
+                f_validation.regionId.touched &&
+                f_validation.regionId.errors?.required
+              "
+              appearance="fill"
+            >
+              <mat-label
+                [class.error-message]="
+                  f_validation.regionId.touched &&
+                  f_validation.regionId.errors?.required
+                "
+                *ngIf="regionFilter.value == '' || regionFilter.value == null"
+                class="float-left"
+                >{{
+                  f_validation.regionId.touched &&
+                  f_validation.regionId.errors?.required
+                    ? "Required*"
+                    : "Region"
+                }}</mat-label
+              >
+              <mat-select
+                panelClass="options-panel"
+                #regionFilter
+                formControlName="regionId"
+                (selectionChange)="
+                  [
+                    (disableInfinitScroll = false),
+                    (pageNumber = 1),
+                    changeDropdown('Department'),
+                    (disabledReset = false)
+                  ]
+                "
+                (openedChange)="[(filter['f_region'] = '')]"
+              >
+                <mat-option *ngIf="!isLoaded.region" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.region" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.region" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  *ngIf="regionArray.length >= 10 && isLoaded"
+                  [(ngModel)]="filter['f_region']"
+                  name="searchWord"
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option *ngIf="regionArray.length == 0 && isLoaded"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  (click)="
+                    getPersonalFilesDetails({
+                      regionId: regionFilter.value,
+                      departmentId: departmentFilter.value,
+                      bandId: bandFilter.value,
+                      designationId: designationFilter.value
+                    })
+                  "
+                  *ngFor="
+                    let region of regionArray
+                      | searchFilter: filter['f_region']:'country'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isLoaded"
+                  [value]="region.country_id"
+                  >{{ region.country }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--
+            Department Filter
+          -->
+          <div class="fields-content col-2 cus-pad-3">
+            <mat-form-field
+              [class.errors]="
+                f_validation.departmentId.touched &&
+                f_validation.departmentId.errors?.required
+              "
+              appearance="fill"
+            >
+              <mat-label
+                [class.error-message]="
+                  f_validation.departmentId.touched &&
+                  f_validation.departmentId.errors?.required
+                "
+                *ngIf="
+                  departmentFilter.value == '' || departmentFilter.value == null
+                "
+                class="float-left"
+                >{{
+                  f_validation.departmentId.touched &&
+                  f_validation.departmentId.errors?.required
+                    ? "Required*"
+                    : "Department"
+                }}</mat-label
+              >
+              <mat-select
+                #departmentFilter
+                [disabled]="!regionFilter.value"
+                panelClass="options-panel"
+                formControlName="departmentId"
+                (selectionChange)="
+                  [
+                    (disableInfinitScroll = false),
+                    (pageNumber = 1),
+                    changeDropdown('Band')
+                  ]
+                "
+                (openedChange)="[(filter['f_department'] = '')]"
+              >
+                <mat-option *ngIf="!isLoaded.department" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.department" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.department" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  *ngIf="departmentArray.length >= 10 && isLoaded"
+                  [(ngModel)]="filter['f_department']"
+                  name="searchWord"
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option *ngIf="departmentArray.length == 0 && isLoaded"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  (click)="
+                    getPersonalFilesDetails({
+                      regionId: regionFilter.value,
+                      departmentId: departmentFilter.value,
+                      bandId: bandFilter.value,
+                      designationId: designationFilter.value
+                    })
+                  "
+                  *ngFor="
+                    let department of departmentArray
+                      | searchFilter: filter['f_department']:'department_name'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isLoaded"
+                  [value]="department.id"
+                  >{{ department.department_name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--
+            Band Filter
+          -->
+          <div class="fields-content col-2 cus-pad-3">
+            <mat-form-field
+              [class.errors]="
+                f_validation.bandId.touched &&
+                f_validation.bandId.errors?.required
+              "
+              appearance="fill"
+            >
+              <mat-label
+                [class.error-message]="
+                  f_validation.bandId.touched &&
+                  f_validation.bandId.errors?.required
+                "
+                *ngIf="bandFilter.value == '' || bandFilter.value == null"
+                class="float-left"
+                >{{
+                  f_validation.bandId.touched &&
+                  f_validation.bandId.errors?.required
+                    ? "Required*"
+                    : "Band"
+                }}</mat-label
+              >
+              <mat-select
+                #bandFilter
+                [disabled]="!departmentFilter.value"
+                panelClass="options-panel"
+                formControlName="bandId"
+                (selectionChange)="
+                  [
+                    (disableInfinitScroll = false),
+                    (pageNumber = 1),
+                    changeDropdown('Designation')
+                  ]
+                "
+                (openedChange)="[(filter['f_band'] = '')]"
+              >
+                <mat-option *ngIf="!isLoaded.band" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.band" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.band" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  *ngIf="bandArray.length >= 10 && isLoaded"
+                  [(ngModel)]="filter['f_band']"
+                  name="searchWord"
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option *ngIf="bandArray.length == 0 && isLoaded"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  (click)="
+                    getPersonalFilesDetails({
+                      regionId: regionFilter.value,
+                      departmentId: departmentFilter.value,
+                      bandId: bandFilter.value,
+                      designationId: designationFilter.value
+                    })
+                  "
+                  *ngFor="
+                    let band of bandArray
+                      | searchFilter: filter['f_band']:'band_desc'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isLoaded"
+                  [value]="band.id"
+                  >{{ band.band_desc }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--
+            Designation Filter
+          -->
+          <div class="fields-content col-2 cus-pad-3">
+            <mat-form-field
+              [class.errors]="
+                f_validation.designationId.touched &&
+                f_validation.designationId.errors?.required
+              "
+              appearance="fill"
+            >
+              <mat-label
+                [class.error-message]="
+                  f_validation.designationId.touched &&
+                  f_validation.designationId.errors?.required
+                "
+                *ngIf="
+                  designationFilter.value == '' ||
+                  designationFilter.value == null
+                "
+                class="float-left"
+                >{{
+                  f_validation.designationId.touched &&
+                  f_validation.designationId.errors?.required
+                    ? "Required*"
+                    : "Designation"
+                }}</mat-label
+              >
+              <mat-select
+                #designationFilter
+                [disabled]="!bandFilter.value"
+                panelClass="options-panel"
+                formControlName="designationId"
+                (openedChange)="[(filter['f_designation'] = '')]"
+              >
+                <mat-option *ngIf="!isLoaded.designation" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.designation" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isLoaded.designation" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  *ngIf="designationArray.length >= 10 && isLoaded"
+                  [(ngModel)]="filter['f_designation']"
+                  name="searchWord"
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option *ngIf="designationArray.length == 0 && isLoaded"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  (click)="
+                    [
+                      (disableInfinitScroll = false),
+                      (pageNumber = 1),
+                      getPersonalFilesDetails({
+                        regionId: regionFilter.value,
+                        departmentId: departmentFilter.value,
+                        bandId: bandFilter.value,
+                        designationId: designationFilter.value
+                      })
+                    ]
+                  "
+                  *ngFor="
+                    let designation of designationArray
+                      | searchFilter: filter['f_designation']:'designation_name'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isLoaded"
+                  [value]="designation.designation_id"
+                  >{{ designation.designation_name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="fields-content p-1">
+            <button [disabled]="disabledReset" class="def-btn" type="submit">
+              Reset
+            </button>
+          </div>
+          <div (click)="maxMinSavedPersonalCard()" class="px-cus-10 fields-content">
+            <div *ngIf="stateSavedPersonal == 'maximize'" class="float-right">
+              <i class="fas fa-caret-down"></i>
+            </div>
+            <div *ngIf="stateSavedPersonal == 'minimize'" class="float-right">
+              <i class="fas fa-caret-up"></i>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div
+        [@openClose]="stateSavedPersonal"
+        class="col-md-12 doc-content comp-card p-0"
+      >
+        <div
+          
+          class="scroll-results w-100 scroll-results h-cus"
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          [scrollWindow]="false"
+          [alwaysCallback]="true"
+          (scrolled)="
+            getDataOnScroll({
+              regionId: regionFilter.value,
+              departmentId: departmentFilter.value,
+              bandId: bandFilter.value,
+              designationId: designationFilter.value
+            })
+          "
+        >
+          <table class="doc-records">
+            <tr>
+              <th>Personal File</th>
+              <th>Region</th>
+              <th>Deparment</th>
+              <th>Band</th>
+              <th>Designation</th>
+              <th class="text-center">Type</th>
+              <th class="text-center">Status</th>
+            </tr>
+            <tr
+              (click)="editPersonalFiles(personalFile.id)"
+              *ngFor="let personalFile of personalFilesDetails; let i = index"
+            >
+              <td>{{ personalFile.personalFile }}</td>
+              <td>{{ personalFile.country }}</td>
+              <td>{{ personalFile.department }}</td>
+              <td>{{ personalFile.band }}</td>
+              <td>{{ personalFile.designation }}</td>
+              <td class="text-center">{{ personalFile.type }}</td>
+              <td class="text-center">
+                {{ personalFile.status == 1 ? "Active" : "Deactive" }}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

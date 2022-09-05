@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "roster": {
+    "people": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,21 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/roster",
+            "allowedCommonJsDependencies": [
+              "ng-sidebar",
+              "ngx-slick",
+              "rxjs",
+              "dagre",
+              "chart.js",
+              "lodash",
+              "jspdf",
+              "canvg",
+              "@babel/runtime-corejs3",
+              "raf",
+              "json-diff",
+              "pdfjs-dist"
+            ],
+            "outputPath": "people_html",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -21,13 +35,42 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/OneSignalSDKWorker.js"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "node_modules/@progress/kendo-theme-default/dist/all.css",
+              "src/assets/css/custom-theme.scss",
+              "src/assets/css/styles.css",
+              "src/assets/css/custom-bootstrap-table.css",
+              "src/assets/css/material-table.css",
+              "src/assets/css/custom-material.css",
+              "src/assets/css/header-tabs.css",
+              "node_modules/slick-carousel/slick/slick.css",
+              "src/assets/orgchart/css/jquery.orgchart.css",
+              "src/assets/orgchart/css/font-awesome.min.css",
+              "src/assets/orgchart/css/jquery.multiselect.css",
+              "src/assets/orgchart/css/style.css",
+              "src/assets/orgchart/css/styles-table.css",
+              "src/assets/orgchart/css/hide_first_node.css",
+              "src/assets/orgchart/css/department_expand_view.css",
+              "src/assets/orgchart/css/department_only_expand_view.css",
+              "src/assets/css/ag-grid-style.css",
+              "node_modules/ag-grid-community/dist/styles/ag-grid.css",
+              "src/assets/css/styles.scss",
+              "src/assets/css/stylesheet-theme.css",
+              "node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css",
+              "src/assets/css/module-style.scss",
+              "src/assets/css/ats-style.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/orgchart/js/jquery.orgchart.js",
+              "src/assets/orgchart/js/org_chart.js",
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "node_modules/mammoth/mammoth.browser.min.js",
+              "src/assets/js/carousel.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -48,13 +91,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "10mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 }
               ]
             }
@@ -63,18 +106,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "roster:build"
+            "browserTarget": "people:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "roster:build:production"
+              "browserTarget": "people:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "roster:build"
+            "browserTarget": "people:build"
           }
         },
         "test": {
@@ -84,11 +127,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
               "src/styles.css"
             ],
             "scripts": []
@@ -102,28 +145,26 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "roster:serve"
+            "devServerTarget": "people:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "roster:serve:production"
+              "devServerTarget": "people:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "roster",
+  "defaultProject": "people",
   "cli": {
-    "analytics": false
+    "analytics": "9ab5e30c-fb5d-474c-8d00-ef9e66b4dc8d"
   }
 }

@@ -1,0 +1,89 @@
+<div class="inner-section">
+  <div class="text-right links">
+    <span class="info-text">Showing {{dataNumber}} results</span> <a class="link" (click)="viewData()">{{labelData}}</a>
+  </div>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>Employee List</mat-card-title>
+      <div class="filters ms-auto btn-panel">
+        <mat-form-field>
+          <mat-label>Active/Inactive</mat-label>
+          <mat-select panelClass="myPanelClass" [(ngModel)]="activeVal" disableOptionCentering>
+            <input (keyup)="onkeypress($event.target.value)" > 
+            <mat-option>Not Set</mat-option>
+            <mat-option [value]="active.reference_key" *ngFor="let active of status">
+              {{ active.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Sort By</mat-label>
+          <mat-select panelClass="myPanelClass" [(ngModel)]="sortData" disableOptionCentering>
+            <mat-option>Not Set</mat-option>
+            <mat-option *ngFor="let empSort of sort_by" [value]="empSort.sort">
+              {{ empSort.sort }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mr-1">
+          <mat-label>Search By</mat-label>
+          <mat-select panelClass="myPanelClass" [(ngModel)]="searchData" disableOptionCentering
+            panelClass="myPanelClass">
+            <input (keyup)="onDepartmentPress($event.target.value)" > 
+            <mat-option>Not Set</mat-option>
+            <mat-option *ngFor="let empSearch of searchBy" [value]="empSearch.id">
+              {{ empSearch.department_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput [(ngModel)]="filter" #ngModel placeholder="filter" #input />
+        </mat-form-field>
+        <div class="btn-panel">
+          <button mat-button (click)="applyFilter()">Search</button>
+        </div>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content class="p-0">
+      <perfect-scrollbar class="datatable-scrollbar outer-table-height" #perfectScroll [style.height.px]="height"
+        [disabled]="isDisabled" [ngStyle]="{ 'overflow-y': overflow }" (psYReachEnd)="onTableScroll($event)">
+        <mat-table class="mat-elevation-z8 mb-0" #dtable [dataSource]="dataSource">
+          <div *ngFor="let column of columns">
+            <ng-container [cdkColumnDef]="column.columnDef">
+              <mat-header-cell *cdkHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+                (resizeEnd)="onResizeEnd($event, column)" [resizeEdges]="{
+                bottom: false,
+                right: true,
+                top: false,
+                left: true
+              }">{{ column.header }}</mat-header-cell>
+              <mat-cell *cdkCellDef="let element" [matMenuTriggerFor]="clickmenu">
+                <button mat-icon-button class="table-button">
+                  {{ column.cell(element) }}
+                  <mat-menu #clickmenu="matMenu">
+                    <ng-container *ngFor="let item of menuListItems">
+                      <button mat-menu-item (click)="navigate(item.path, element.empid)" class="grid-button">
+                        {{ item.menuLinkText }}
+                      </button>
+                    </ng-container>
+                  </mat-menu>
+                </button>
+              </mat-cell>
+            </ng-container>
+          </div>
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+          <mat-row *matRowDef="let row; columns: displayedColumns" (click)="rowClick(row)"
+            [ngClass]="{ hovered: row.hovered, highlighted: row.highlighted }"
+            (click)="row.highlighted = !row.highlighted" (mouseover)="row.hovered = true"
+            (mouseout)="row.hovered = false"></mat-row>
+        </mat-table>
+        <span class="not-found" *ngIf="!IsData">No Data Found</span>
+      </perfect-scrollbar>
+    </mat-card-content>
+
+    <mat-card-actions></mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,38 @@
+<div class="module-style notification-popup">
+  <div class="m-0 justify-bw people-title-heading py-1 px-2">
+    <h4 class="p-0">Updates & Notifications</h4>
+    <div (click)="close()" class="close pr-cus-10"><img src="assets/images/close.svg" /></div>
+  </div>
+  <div class="px-3 bg-fff">
+    <div class="popup-card row col m-0 px-0 py-2">
+      <div class="avatar mr-2">
+        <img src="assets/images/logo.PNG" alt="" />
+      </div>
+      <div class="notification-desc">
+        <div class="row m-0">
+          <div class="badge-color mr-1">
+            <div
+              class="badge m-auto"
+              [style.background]="colors[notification['role']]"
+            >
+              {{ notification["role"] == 'System' ? 'SYS' : notification["role"] }}
+            </div>
+          </div>
+          <div class="name mr-1" [style.color]="colors[notification['role']]" *ngIf="notification['role'] !='System'">
+            {{ notification["name"] }}
+          </div>
+
+          <div class="name mr-1" [style.color]="colors[notification['role']]" *ngIf="notification['role'] =='System'">
+            {{ notification["notification_subject"] }}
+          </div>
+          <div class="date">
+            {{ parseData(notification["completion_date"]) }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup-body py-2">
+      {{ notification["notification_body"] }}
+    </div>
+  </div>
+</div>

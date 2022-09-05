@@ -1,0 +1,21 @@
+<div class="module-style confirm-dialog-remove">
+  <div class="m-0 justify-bw people-title-heading px-cus-10">
+    <h4 class="px-cus-0">{{name}}</h4>
+    <div class="col-1 justify-end p-0 close" (click)="dialogRef.close()"><img src="assets/images/close.svg" /></div>
+  </div>
+  <div class="p-cus-20">
+    <div class="alert-msg">
+      Are you sure that you want to delete this document entry?
+    </div>
+  </div>
+  <div class="justify-right pr-cus-10 btn-wrapper" style="background: #d8dcdf 0% 0% no-repeat padding-box !important;">
+    <button
+      type="button"
+      (click)="removeCategoryField()"
+      class="def-btn mr-cus-3"
+    >
+      Yes
+    </button>
+    <button type="button" (click)="close()" class="def-btn ml-cus-3">No</button>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.cdk-column-empid {
+    flex: 0 0 10%;
+}
+.cdk-column-name {
+    flex: 0 0 20%;
+}
+.cdk-column-designation {
+    flex: 0 0 24%;
+}
+.cdk-column-department {
+    flex: 0 0 24%;
+}
+.cdk-column-band {
+    flex: 0 0 6%;
+}
+.cdk-column-joining_date {
+    flex: 0 0 9%;
+}
+.cdk-column-emp_status {
+    flex: 0 0 7%;
+}

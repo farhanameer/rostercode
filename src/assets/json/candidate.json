@@ -1,0 +1,45 @@
+[
+    { 
+      "id": 1,
+      "candidateName":"Affaq Ahmed Khan",
+      "candidateRefrence":"XYH45",
+      "candidateLocation":"Lahore,Pakistan",
+      "currentPosition":"Account Executive",
+      "currentCompany":"People",
+      "noticePeriod":"1 month",
+      "currentSalary":"40,000.00PKR"
+    },
+    { 
+      "id": 2,
+       "candidateName":"Hisham Talib",
+      "candidateRefrence":"PLI55",
+      "candidateLocation":"Karachi City,Sindh",
+      "currentPosition":"Admin & Logistics Officer",
+      "currentCompany":"People",
+      "noticePeriod":"1 month",
+      "currentSalary":"40,000.00PKR"
+      
+    },
+    { 
+      "id": 3,
+       "candidateName":"Waleed Ashraf",
+      "candidateRefrence":"YBB72",
+      "candidateLocation":"Islamabad City,PUnjab,Pakistan",
+      "currentPosition":"Assistant Director Finance",
+      "currentCompany":"People",
+      "noticePeriod":"1 month",
+      "currentSalary":"40,000.00PKR"
+    
+    },
+     { 
+      "id": 4,
+       "candidateName":"Abdullah Tariq",
+      "candidateRefrence":"YHTR1",
+      "candidateLocation":"Bahwalpur City,PUnjab,Pakistan",
+      "currentPosition":"Assistant Director",
+      "currentCompany":"People",
+      "noticePeriod":"1 month",
+      "currentSalary":"40,000.00PKR"
+    
+    }
+]

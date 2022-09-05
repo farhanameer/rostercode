@@ -1,0 +1,842 @@
+<div class="module-style document-report">
+  <div class="row w-100 m-0 bg-white p-cus-20">
+    <form [formGroup]="documentReportForm" class="col-md-12 p-0 mb-2 row m-0">
+      <div class="row emp-content col-md-12 filter m-0 padding-all py-1 px-2">
+        <div class="col-4 px-1"></div>
+        <!-- <div class="col-4 records-text">{{ totalRecords }} Record(s) Found</div> -->
+
+        <div class="fields-content min-height custom-pad-3">
+          <a
+            #anchor
+            class="download"
+            (click)="
+              downloadReport({
+                startDate: dateFrom.value,
+                endDate: dateTo.value,
+                marketId: market.value,
+                clusterId: cluster.value,
+                subClusterId: subCluster.value,
+                countryId: country.value,
+                stateId: state.value,
+                city: city.value,
+                branchId: branch.value,
+                departmentId: department.value,
+                designationId: employeeType.value
+              })
+            "
+          >
+            Download DSR</a
+          >
+        </div>
+      </div>
+      <div class="justify-bw people-title-heading mt-0 col-md-12 p-0">
+        <div class="row emp-content col-md-12 filter m-0 px-2">
+          <!--
+            Market
+          -->
+          <div class="fields-content col-1 custom-pad-3">
+            <mat-form-field appearance="fill">
+              <mat-label *ngIf="market.value == '' || market.value == null"
+                >Market</mat-label
+              >
+              <mat-select
+                #market
+                (selectionChange)="
+                  [
+                    checkIfClusterExists({ market_id: market.value }),
+                    resetDropDown('market'),
+                    (disableInfinitScroll = false)
+                  ]
+                "
+                (openedChange)="[(filter['market'] = '')]"
+                panelClass="options-panel"
+                formControlName="marketId"
+              >
+                <mat-option *ngIf="!isFilterLoaded.market" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isFilterLoaded.market" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isFilterLoaded.market" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  [(ngModel)]="filter['market']"
+                  name="searchWord"
+                  *ngIf="
+                    locations.market.length > 10 &&
+                    isFilterLoaded.market &&
+                    isFilterLoaded.market
+                  "
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option
+                  *ngIf="locations.market.length == 0 && isFilterLoaded.market"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  *ngFor="
+                    let item of locations.market
+                      | searchFilter: filter['market']:'label'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isFilterLoaded.market"
+                  [value]="item.id"
+                  >{{ item.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--
+            Cluster
+          -->
+          <div class="fields-content col-1 custom-pad-3">
+            <mat-form-field appearance="fill">
+              <mat-label *ngIf="cluster.value == '' || cluster.value == null"
+                >Cluster</mat-label
+              >
+              <mat-select
+                #cluster
+                [disabled]="disabledCluster"
+                (selectionChange)="
+                  [
+                    checkIfSubClusterExists({
+                      market_id: market.value,
+                      cluster_id: cluster.value
+                    }),
+                    resetDropDown('cluster'),
+                    (disableInfinitScroll = false)
+                  ]
+                "
+                (openedChange)="[(filter['cluster'] = '')]"
+                panelClass="options-panel"
+                formControlName="clusterId"
+              >
+                <mat-option
+                  *ngIf="!isFilterLoaded.cluster"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="!isFilterLoaded.cluster"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="!isFilterLoaded.cluster"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="
+                    locations.cluster.length == 0 && isFilterLoaded.cluster
+                  "
+                  >No Record Found</mat-option
+                >
+                <input
+                  [(ngModel)]="filter['cluster']"
+                  name="searchWord"
+                  *ngIf="
+                    locations.cluster.length > 10 && isFilterLoaded.cluster
+                  "
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option
+                  *ngFor="
+                    let item of locations.cluster
+                      | searchFilter: filter['cluster']:'label'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isFilterLoaded.cluster"
+                  [value]="item.id"
+                  >{{ item.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--
+            Sub-Cluster
+          -->
+          <div class="fields-content col-1 custom-pad-3">
+            <mat-form-field appearance="fill">
+              <mat-label
+                *ngIf="subCluster.value == '' || subCluster.value == null"
+                >Sub-Cluster</mat-label
+              >
+              <mat-select
+                #subCluster
+                [disabled]="disabledSubCluster"
+                (selectionChange)="
+                  [
+                    checkIfCountryExists({
+                      market_id: market.value,
+                      cluster_id: cluster.value,
+                      sub_cluster_id: subCluster.value
+                    }),
+                    resetDropDown('subCluster'),
+                    (disableInfinitScroll = false)
+                  ]
+                "
+                (openedChange)="[(filter['subCluster'] = '')]"
+                panelClass="options-panel"
+                formControlName="subClusterId"
+              >
+                <mat-option
+                  *ngIf="!isFilterLoaded.subCluster"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="!isFilterLoaded.subCluster"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="!isFilterLoaded.subCluster"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="
+                    locations.subCluster.length == 0 &&
+                    isFilterLoaded.subCluster
+                  "
+                  >No Record Found</mat-option
+                >
+                <input
+                  [(ngModel)]="filter['subCluster']"
+                  name="searchWord"
+                  *ngIf="
+                    locations.subCluster.length > 10 &&
+                    isFilterLoaded.subCluster
+                  "
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option
+                  *ngFor="
+                    let item of locations.subCluster
+                      | searchFilter: filter['subCluster']:'label'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isFilterLoaded.subCluster"
+                  [value]="item.id"
+                  >{{ item.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--
+            Country
+          -->
+          <div class="fields-content col-1 custom-pad-3">
+            <mat-form-field appearance="fill">
+              <mat-label *ngIf="country.value == '' || country.value == null"
+                >Country</mat-label
+              >
+              <mat-select
+                #country
+                [disabled]="disabledCountry"
+                panelClass="options-panel"
+                formControlName="countryId"
+                (selectionChange)="
+                  [
+                    getLocationForReport('getStatesByCountry', 'state', {
+                      country_id: country.value
+                    }),
+                    resetDropDown('country'),
+                    (disableInfinitScroll = false)
+                  ]
+                "
+                (openedChange)="[(filter['country'] = '')]"
+              >
+                <mat-option
+                  *ngIf="!isFilterLoaded.country"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="!isFilterLoaded.country"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option
+                  *ngIf="!isFilterLoaded.country"
+                  class="module-style"
+                >
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  [(ngModel)]="filter['country']"
+                  name="searchWord"
+                  *ngIf="
+                    locations.country.length > 10 &&
+                    isFilterLoaded.country &&
+                    isFilterLoaded.country
+                  "
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option
+                  *ngIf="
+                    locations.country.length == 0 && isFilterLoaded.country
+                  "
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  *ngFor="
+                    let item of locations.country
+                      | searchFilter: filter['country']:'country'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isFilterLoaded.country"
+                  [value]="item.country_id"
+                  >{{ item.country }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--
+            State
+          -->
+          <div class="fields-content col-1 custom-pad-3">
+            <mat-form-field appearance="fill">
+              <mat-label *ngIf="state.value == '' || state.value == null"
+                >State</mat-label
+              >
+              <mat-select
+                #state
+                [disabled]="!country.value"
+                panelClass="options-panel"
+                formControlName="stateId"
+                (selectionChange)="
+                  [
+                    getLocationForReport('getCityByState', 'city', {
+                      state_id: state.value
+                    }),
+                    resetDropDown('state'),
+                    (disableInfinitScroll = false)
+                  ]
+                "
+                (openedChange)="[(filter['state'] = '')]"
+              >
+                <mat-option *ngIf="!isFilterLoaded.state" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isFilterLoaded.state" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isFilterLoaded.state" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  [(ngModel)]="filter['state']"
+                  name="searchWord"
+                  *ngIf="
+                    locations.state.length > 10 &&
+                    isFilterLoaded.state &&
+                    isFilterLoaded.state
+                  "
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option
+                  *ngIf="locations.state.length == 0 && isFilterLoaded.state"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  *ngFor="
+                    let item of locations.state
+                      | searchFilter: filter['state']:'value'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isFilterLoaded.state"
+                  [value]="item.id"
+                  >{{ item.value }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--
+            City
+          -->
+          <div class="fields-content col-1 custom-pad-3">
+            <mat-form-field appearance="fill">
+              <mat-label *ngIf="city.value == '' || city.value == null"
+                >City</mat-label
+              >
+              <mat-select
+                #city
+                [disabled]="!state.value"
+                panelClass="options-panel"
+                formControlName="city"
+                (selectionChange)="
+                  [
+                    getLocationForReport('getBranch', 'branch', {}),
+                    resetDropDown('city'),
+                    (disableInfinitScroll = false)
+                  ]
+                "
+                (openedChange)="[(filter['city'] = '')]"
+              >
+                <mat-option *ngIf="!isFilterLoaded.city" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isFilterLoaded.city" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <mat-option *ngIf="!isFilterLoaded.city" class="module-style">
+                  <div class="skeleton-loader progress pulse"></div>
+                </mat-option>
+                <input
+                  [(ngModel)]="filter['city']"
+                  name="searchWord"
+                  *ngIf="
+                    locations.city.length > 10 &&
+                    isFilterLoaded.city &&
+                    isFilterLoaded.city
+                  "
+                  [ngModelOptions]="{ standalone: true }"
+                  type="text"
+                  class="search-input"
+                  placeholder="Search"
+                />
+                <mat-option
+                  *ngIf="locations.city.length == 0 && isFilterLoaded.city"
+                  >No Record Found</mat-option
+                >
+                <mat-option
+                  *ngFor="
+                    let item of locations.city
+                      | searchFilter: filter['city']:'city_name'
+                      | slice: 0:10
+                  "
+                  [hidden]="!isFilterLoaded.city"
+                  [value]="item.city_name"
+                  >{{ item.city_name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="fields-content p-0">
+            <div class="btn-wrapper pr-cus-3">
+              <button
+                class="def-btn marginy-0"
+                type="button"
+                [matMenuTriggerFor]="filters"
+              >
+                Advance Filter <img src="assets/images/filter.png" alt="" />
+              </button>
+              <button class="def-btn marginy-0" type="button" (click)="reset()">
+                Reset
+              </button>
+              <button
+                class="def-btn marginy-0"
+                type="button"
+                (click)="
+                  [
+                    (pageNumber = 1),
+                    (isSearched = true),
+                    getReportData(
+                      {
+                        startDate: dateFrom.value,
+                        endDate: dateTo.value,
+                        marketId: market.value,
+                        clusterId: cluster.value,
+                        subClusterId: subCluster.value,
+                        countryId: country.value,
+                        stateId: state.value,
+                        city: city.value,
+                        branchId: branch.value,
+                        departmentId: department.value,
+                        designationId: employeeType.value
+                      },
+                      pageSize,
+                      1
+                    )
+                  ]
+                "
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-menu
+        class="module-style document-report report-filter"
+        xPosition="before"
+        #filters="matMenu"
+      >
+        <div (click)="$event.stopPropagation()">
+          <div [formGroup]="documentReportForm" class="row emp-content col-12 filter cus-pad-10 m-0">
+            <!--
+              Branch
+            -->
+            <div
+              class="advance-filters fields-content col-eq custom-pad-3 custom-margin-3"
+            >
+              <mat-form-field appearance="fill">
+                <mat-label *ngIf="branch.value == '' || branch.value == null"
+                  >Branch</mat-label
+                >
+                <mat-select
+                  #branch
+                  [disabled]="!city.value"
+                  panelClass="options-panel"
+                  formControlName="branchId"
+                  (selectionChange)="
+                    [
+                      getLocationForReport('getDepartment', 'department', {}),
+                      resetDropDown('branch'),
+                      (disableInfinitScroll = false)
+                    ]
+                  "
+                  (openedChange)="[(filter['branch'] = '')]"
+                >
+                  <mat-option
+                    *ngIf="!isFilterLoaded.branch"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option
+                    *ngIf="!isFilterLoaded.branch"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option
+                    *ngIf="!isFilterLoaded.branch"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['branch']"
+                    name="searchWord"
+                    *ngIf="
+                      locations.branch.length > 10 &&
+                      isFilterLoaded.branch &&
+                      isFilterLoaded.branch
+                    "
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option
+                    *ngIf="
+                      locations.branch.length == 0 && isFilterLoaded.branch
+                    "
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let item of locations.branch
+                        | searchFilter: filter['branch']:'loc_desc'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isFilterLoaded.branch"
+                    [value]="item.loc_id"
+                    >{{ item.loc_desc }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--
+              Department
+            -->
+            <div
+              class="advance-filters fields-content col-eq custom-pad-3 custom-margin-3"
+            >
+              <mat-form-field appearance="fill">
+                <mat-label
+                  *ngIf="department.value == '' || department.value == null"
+                  >Department</mat-label
+                >
+                <mat-select
+                  #department
+                  [disabled]="!branch.value"
+                  panelClass="options-panel"
+                  formControlName="departmentId"
+                  (selectionChange)="
+                    [
+                      getLocationForReport(
+                        'getEmployeeType',
+                        'employeeType',
+                        {}
+                      ),
+                      resetDropDown('department'),
+                      (disableInfinitScroll = false)
+                    ]
+                  "
+                  (openedChange)="[(filter['department'] = '')]"
+                >
+                  <mat-option
+                    *ngIf="!isFilterLoaded.department"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option
+                    *ngIf="!isFilterLoaded.department"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option
+                    *ngIf="!isFilterLoaded.department"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['department']"
+                    name="searchWord"
+                    *ngIf="
+                      locations.department.length > 10 &&
+                      isFilterLoaded.department &&
+                      isFilterLoaded.department
+                    "
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option
+                    *ngIf="
+                      locations.department.length == 0 &&
+                      isFilterLoaded.department
+                    "
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let item of locations.department
+                        | searchFilter: filter['department']:'department_name'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isFilterLoaded.department"
+                    [value]="item.id"
+                    >{{ item.department_name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--
+              Employee Type
+            -->
+            <div
+              class="advance-filters fields-content col-eq custom-pad-3 custom-margin-3"
+            >
+              <mat-form-field appearance="fill">
+                <mat-label
+                  *ngIf="employeeType.value == '' || employeeType.value == null"
+                  >Employee Type</mat-label
+                >
+                <mat-select
+                  #employeeType
+                  [disabled]="!department.value"
+                  panelClass="options-panel"
+                  formControlName="employeeTypeId"
+                  (selectionChange)="[(disableInfinitScroll = false)]"
+                  (openedChange)="[(filter['employeeType'] = '')]"
+                >
+                  <mat-option
+                    *ngIf="!isFilterLoaded.employeeType"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option
+                    *ngIf="!isFilterLoaded.employeeType"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <mat-option
+                    *ngIf="!isFilterLoaded.employeeType"
+                    class="module-style"
+                  >
+                    <div class="skeleton-loader progress pulse"></div>
+                  </mat-option>
+                  <input
+                    [(ngModel)]="filter['employeeType']"
+                    name="searchWord"
+                    *ngIf="
+                      locations.employeeType.length > 10 &&
+                      isFilterLoaded.employeeType &&
+                      isFilterLoaded.employeeType
+                    "
+                    [ngModelOptions]="{ standalone: true }"
+                    type="text"
+                    class="search-input"
+                    placeholder="Search"
+                  />
+                  <mat-option
+                    *ngIf="
+                      locations.employeeType.length == 0 &&
+                      isFilterLoaded.employeeType
+                    "
+                    >No Record Found</mat-option
+                  >
+                  <mat-option
+                    *ngFor="
+                      let item of locations.employeeType
+                        | searchFilter: filter['employeeType']:'description'
+                        | slice: 0:10
+                    "
+                    [hidden]="!isFilterLoaded.employeeType"
+                    [value]="item.id"
+                    >{{ item.description }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--
+            Date From
+          -->
+            <div
+              class="advance-filters fields-content row col-eq custom-pad-3 custom-margin-3"
+            >
+              <div class="date-field toggle-date w-100 re-height">
+                <input
+                  #dateFrom
+                  class="m-0"
+                  matInput
+                  placeholder="From: "
+                  formControlName="dateFrom"
+                  [matDatepicker]="varDateFrom"
+                  (change)="[(disableInfinitScroll = false)]"
+                />
+                <mat-datepicker-toggle
+                  [for]="varDateFrom"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #varDateFrom></mat-datepicker>
+              </div>
+            </div>
+            <!--
+              Date To
+            -->
+            <div
+              class="advance-filters fields-content row col-eq custom-pad-3 custom-margin-3"
+            >
+              <div class="date-field toggle-date w-100 re-height">
+                <input
+                  #dateTo
+                  class="m-0"
+                  matInput
+                  placeholder="To: "
+                  formControlName="dateTo"
+                  [matDatepicker]="varDateTo"
+                  (change)="[(disableInfinitScroll = false)]"
+                />
+                <mat-datepicker-toggle
+                  [for]="varDateTo"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #varDateTo></mat-datepicker>
+              </div>
+            </div>
+          </div>
+          <div class="row emp-content col-12 filter cus-pad-0 m-0">
+            <div class="btn-wrapper btn-custom-wrapper">
+              <!-- <button
+                class="def-btn marginy-0"
+                type="button"
+                (click)="[reset(), closeMenu($event)]"
+              >
+                Reset
+              </button> -->
+              <button
+                class="def-btn marginy-0 mr-cus-7"
+                type="button"
+                (click)="closeMenu($event)"
+              >
+                Apply
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-menu>
+      <div
+        [style.height]="getDynamicHeight()"
+        class="scroll-results table-scroll w-100 col-md-12 doc-content comp-card p-0"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [scrollWindow]="false"
+        [alwaysCallback]="true"
+        (scrolled)="
+          getDataOnScroll({
+            startDate: dateFrom.value,
+            endDate: dateTo.value,
+            marketId: market.value,
+            clusterId: cluster.value,
+            subClusterId: subCluster.value,
+            countryId: country.value,
+            stateId: state.value,
+            city: city.value,
+            branchId: branch.value,
+            departmentId: department.value,
+            employeeTypeId: employeeType.value
+          })
+        "
+        *ngIf="isLoaded"
+      >
+        <table *ngIf="isReport" class="doc-records">
+          <tr>
+            <th
+              *ngFor="let category of savedMainCategories; let i = index"
+              [attr.colspan]="category.countColumn"
+            >
+              {{ category.name }}
+            </th>
+          </tr>
+          <tr>
+            <td>{{ savedSubCategories["empCode"] }}</td>
+            <td>{{ savedSubCategories["name"] }}</td>
+            <td>{{ savedSubCategories["designation"] }}</td>
+            <ng-container *ngFor="let subCat of savedSubCategories['sub']">
+              <td *ngFor="let field of subCat['sub']">
+                {{ field.value }}
+              </td>
+            </ng-container>
+          </tr>
+          <tr *ngFor="let document of userDocuments">
+            <td>{{ document.empCode }}</td>
+            <td>{{ document.name }}</td>
+            <td>{{ document.designation }}</td>
+            <ng-container *ngFor="let doc of document.documents">
+              <td *ngFor="let cellData of doc.sub">
+                {{ getCellData(cellData.value) }}
+              </td>
+            </ng-container>
+          </tr>
+        </table>
+        <div class="not-found" *ngIf="!isReport">Report Not Found</div>
+      </div>
+    </form>
+  </div>
+</div>

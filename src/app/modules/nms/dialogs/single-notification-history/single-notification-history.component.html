@@ -1,0 +1,91 @@
+<div class="module-style single-notification-history">
+  <div class="m-0 justify-bw people-title-heading px-cus-10 py-0">
+    <h4>Message History Detail</h4>
+    <div (click)="close()" class="close cus-close"><img src="assets/images/close.svg" /></div>
+  </div>
+  <div class="bg-fff">
+    <div class="popup-card emp-content row m-0 p-cus-20">
+      <div class="col-6 pr-cus-18">
+        <label>Category</label>
+        <input
+          readonly
+          class="emp-input"
+          type="text"
+          [value]="notification['notification_category']"
+        />
+      </div>
+      <div class="col-6 pl-cus-18">
+        <label>Message Type</label>
+        <input
+          readonly
+          class="emp-input"
+          type="text"
+          [value]="notification['notification_type']"
+        />
+      </div>
+      <div class="col-6 pr-cus-18">
+        <label>Creation Date</label>
+        <input
+          readonly
+          class="emp-input"
+          type="text"
+          [value]="notification['created_date'] ? (notification['created_date'] | formatDate) : 'Not Set'"
+        />
+      </div>
+      <div class="col-6 pl-cus-18">
+        <label>Created By</label>
+        <input
+          readonly
+          class="emp-input"
+          type="text"
+          [value]="notification['created_by']"
+        />
+      </div>
+      <div class="col-6 pr-cus-18">
+        <label>Scheduled Date</label>
+        <input
+          readonly
+          class="emp-input"
+          type="text"
+          [value]="notification['notification_date'] ? (notification['notification_date'] | formatDate) : 'Not Set'"
+        />
+      </div>
+      <div class="col-6 pl-cus-18">
+        <label>Send Status</label>
+        <input
+          readonly
+          class="emp-input"
+          type="text"
+          [value]="notification['status']"
+        />
+      </div>
+      <div class="col-6 pr-cus-18">
+        <label>Send Date</label>
+        <input
+          readonly
+          class="emp-input"
+          type="text"
+          [value]="notification['completion_date'] ? (notification['completion_date'] | formatDate) : 'Not Set'"
+        />
+      </div>
+      <div class="col-6 pl-cus-18">
+        <label>Send Count</label>
+        <input
+          readonly
+          class="emp-input"
+          type="text"
+          [value]="notification['send_count']"
+        />
+      </div>
+      <div class="notification-msg h-unset  col-12 px-cus-0">
+        <label>Message text</label>
+        <textarea readonly class="label-font-12 h-noti-msg">{{
+          notification["notification_body"]
+        }}</textarea>
+      </div>
+    </div>
+    <div class="btn-wrapper just-end">
+      <button (click)="close()" class="def-btn">Close</button>
+    </div>
+  </div>
+</div>

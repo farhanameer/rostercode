@@ -1,0 +1,127 @@
+<div class="inner-section">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Employee List</mat-card-title>
+      <div class="emp-filters ms-auto">
+        <mat-form-field>
+          <mat-label>Active/Inactive</mat-label>
+          <mat-select [(ngModel)]="activeVal" disableOptionCentering>
+            <mat-option>Not Set</mat-option>
+            <mat-option
+              [value]="active.reference_key"
+              *ngFor="let active of status"
+            >
+              {{ active.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Sort By</mat-label>
+          <mat-select [(ngModel)]="sortData" disableOptionCentering>
+            <mat-option>Not Set</mat-option>
+            <mat-option *ngFor="let empSort of sort_by" [value]="empSort.sort">
+              {{ empSort.sort }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mr-1">
+          <mat-label>Search By</mat-label>
+          <mat-select
+            [(ngModel)]="searchData"
+            disableOptionCentering
+            panelClass="myPanelClass"
+          >
+            <mat-option>Not Set</mat-option>
+            <mat-option
+              *ngFor="let empSearch of searchBy"
+              [value]="empSearch.id"
+            >
+              {{ empSearch.department_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input
+            matInput
+            [(ngModel)]="filter"
+            #ngModel
+            placeholder="filter"
+            #input
+          />
+        </mat-form-field>
+        <div class="btn-panel">
+          <button mat-button (click)="applyFilter()">Search</button>
+          <a mat-flat-button (click)="viewData()">{{ labelData }}</a>
+        </div>
+      </div>
+    </mat-card-header>
+    <perfect-scrollbar
+      class="datatable-scrollbar"
+      [style.height.px]="height"
+      [attr.disabled]="isDisabled"
+      [ngStyle]="{ 'overflow-y': overflow }"
+      (psYReachEnd)="onTableScroll($event)"
+    >
+      <mat-card-content>
+        <mat-table
+          class="custom-table mb-3 mat-elevation-z8"
+          #dtable
+          [dataSource]="dataSource"
+        >
+          <div *ngFor="let column of columns">
+            <ng-container [cdkColumnDef]="column.columnDef">
+              <mat-header-cell
+                *cdkHeaderCellDef
+                mat-sort-header
+                mwlResizable
+                [attr.enableGhostResize]="true"
+                (resizeEnd)="onResizeEnd($event, column)"
+                [attr.resizeEdges]="{
+                  bottom: false,
+                  right: true,
+                  top: false,
+                  left: true
+                }"
+                >{{ column.header }}</mat-header-cell
+              >
+              <mat-cell
+                *cdkCellDef="let element"
+                [matMenuTriggerFor]="clickmenu"
+              >
+                <button mat-icon-button class="table-button">
+                  {{ column.cell(element) }}
+                  <mat-menu #clickmenu="matMenu">
+                    <ng-container *ngFor="let item of menuListItems">
+                      <button
+                        mat-menu-item
+                        (click)="navigate(item.path, element.empid)"
+                        class="grid-button"
+                      >
+                        {{ item.menuLinkText }}
+                      </button>
+                    </ng-container>
+                  </mat-menu>
+                </button>
+              </mat-cell>
+            </ng-container>
+          </div>
+          <mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"
+          ></mat-header-row>
+          <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+          <mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            (click)="rowClick(row)"
+            [ngClass]="{ hovered: row.hovered, highlighted: row.highlighted }"
+            (click)="row.highlighted = !row.highlighted"
+            (mouseover)="row.hovered = true"
+            (mouseout)="row.hovered = false"
+          ></mat-row>
+        </mat-table>
+        <span class="not-found" *ngIf="!IsData">No Data Found</span>
+      </mat-card-content>
+    </perfect-scrollbar>
+    <mat-card-actions> </mat-card-actions>
+  </mat-card>
+</div>

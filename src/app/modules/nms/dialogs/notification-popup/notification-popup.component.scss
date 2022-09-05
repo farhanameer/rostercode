@@ -1,0 +1,60 @@
+.custom-backdrop {
+  opacity: 0.5 !important;
+	border-radius: 10px !important;
+	background: #50627D !important;
+}
+.module-style.notification-popup {
+	
+  .avatar img {
+    height: 36px !important;
+    width: 36px !important;
+    border-radius: 50% !important;
+  }
+
+  .notification-msg {
+    font: normal normal normal 12px/22px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #343434 !important;
+    line-height: 1.5 !important;
+    opacity: 1 !important;
+  }
+
+  .badge-color div {
+    font: normal normal normal 10px/13px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  .name {
+    font: normal normal normal 13px/22px Roboto !important;
+    letter-spacing: 0px !important;
+    opacity: 1 !important;
+  }
+
+  .date {
+    font: italic normal normal 10px/22px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #707070 !important;
+    opacity: 1 !important;
+  }
+
+  .notification-desc {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .popup-card {
+    border-bottom: 2px solid #ebf2f7 !important;
+    opacity: 1 !important;
+    flex-wrap: nowrap !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .popup-body {
+    font: normal normal normal 12px/22px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #343434 !important;
+    opacity: 1 !important;
+  }
+}

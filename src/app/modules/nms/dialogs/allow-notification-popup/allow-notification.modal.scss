@@ -1,0 +1,43 @@
+.module-style {
+  
+  .notification-title.allow-notification {
+    font: normal normal bold 16px/20px Roboto;
+    line-height: 2;
+  }
+  .notification-description {
+    font: normal normal normal 13px/15px Roboto;
+  }
+  .close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.5;
+  }
+
+  .justify-bw {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn-modify {
+    background: #d8dcdf 0% 0% no-repeat padding-box !important;
+  }
+
+  .padx-1 {
+    padding: 0 4px !important;
+  }
+
+  .justify-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .h-fit {
+    height: fit-content;
+  }
+}
