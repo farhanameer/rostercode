@@ -24,13 +24,7 @@ export class AttendenceCalenderComponent implements OnInit {
   year: string = '';
   year_month: string = '';
   daysList: [] = [];
-  data = [
-    { date: 10, color: '#FEC932' },
-    { date: 4, color: '#FEC932' },
-    { date: 20, color: '#8676FF' },
-    { date: 22, color: '#EBF2F7' },
-    { date: 28, color: '#FEC932' },
-  ];
+  employeeAttendance = [];
 
   mmm = {
     Jan: '01',
@@ -59,7 +53,7 @@ export class AttendenceCalenderComponent implements OnInit {
     console.log(this.daysList);
     this.daysList.forEach((e, i) => {
       (e['color'] as any) = '';
-      this.data.forEach((el) => {
+      this.employeeAttendance.forEach((el) => {
         if (el.date == e['date']) {
           (e['color'] as any) = el['color'];
         }
@@ -76,34 +70,38 @@ export class AttendenceCalenderComponent implements OnInit {
     // });
     // console.log(this.daysList);
 
-    this.weekDaysShortWord = this.weekDays.map((x) => x[0]);
+    // this.weekDaysShortWord = this.weekDays.map((x) => x[0]);
 
-    this.years[0] = moment(this.currentDate).subtract(1, 'year').format('YYYY');
-    this.years[1] = moment(this.currentDate).format('YYYY');
-    this.years[2] = moment(this.currentDate).add(1, 'year').format('YYYY');
+    // this.years[0] = moment(this.currentDate).subtract(1, 'year').format('YYYY');
+    // this.years[1] = moment(this.currentDate).format('YYYY');
+    // this.years[2] = moment(this.currentDate).add(1, 'year').format('YYYY');
 
-    this.months[0] = moment(this.currentDate)
-      .subtract(2, 'month')
-      .format('MMMM YYYY');
-    this.months[1] = moment(this.currentDate)
-      .subtract(1, 'month')
-      .format('MMMM YYYY');
-    this.months[2] = moment(this.currentDate).format('MMMM YYYY');
-    this.months[3] = moment(this.currentDate)
-      .add(1, 'month')
-      .format('MMMM YYYY');
-    this.months[4] = moment(this.currentDate)
-      .add(2, 'month')
-      .format('MMMM YYYY');
+    // this.months[0] = moment(this.currentDate)
+    //   .subtract(2, 'month')
+    //   .format('MMMM YYYY');
+    // this.months[1] = moment(this.currentDate)
+    //   .subtract(1, 'month')
+    //   .format('MMMM YYYY');
+    // this.months[2] = moment(this.currentDate).format('MMMM YYYY');
+    // this.months[3] = moment(this.currentDate)
+    //   .add(1, 'month')
+    //   .format('MMMM YYYY');
+    // this.months[4] = moment(this.currentDate)
+    //   .add(2, 'month')
+    //   .format('MMMM YYYY');
     // console.log(this.years);
     // console.log(this.months);
-    console.log(this.mmm);
     const monthIndex = this.mmm[this.month];
-    console.log(monthIndex);
-    // dataService
     this.year_month = `${this.year}-${monthIndex}`;
-    console.log(this.year_month);
-    this.dataService.getEmployeeRoster({ year_month: this.year_month });
+    this.getEmpRoster();
+  }
+
+  async getEmpRoster() {
+    const result = await this.dataService.getEmployeeRoster({
+      year_month: this.year_month,
+    });
+    this.employeeAttendance = result['data']['payload']['data'];
+    console.log(this.employeeAttendance);
   }
 
   getAllMonths(isForwardingYear = false) {
@@ -139,7 +137,7 @@ export class AttendenceCalenderComponent implements OnInit {
     );
   }
 
-  getMonthAndYear(isForwarding = false) {
+  async getMonthAndYear(isForwarding = false) {
     if (isForwarding) {
       this.currentDate = moment(this.currentDate).add(1, 'month');
     } else {
@@ -154,15 +152,31 @@ export class AttendenceCalenderComponent implements OnInit {
       moment(this.currentDate).format('MMM'),
       this.weekDays
     );
+
+    const monthIndex = this.mmm[moment(this.currentDate).format('MMM')];
+    this.year_month = `${moment(this.currentDate).format(
+      'YYYY'
+    )}-${monthIndex}`;
+    console.log(this.year_month);
+    await this.getEmpRoster();
+
+    let counter = 1;
     this.daysList.forEach((e, i) => {
+      let date = `${this.year}-${monthIndex}-${e['date']}`;
+      if (counter < 10) {
+        date = `${this.year}-${monthIndex}-0${e['date']}`;
+        counter++;
+      }
+
+      console.log(date);
       (e['color'] as any) = '';
-      this.data.forEach((el) => {
-        if (el.date == e['date']) {
+      this.employeeAttendance.forEach((el) => {
+        if (el.start == date) {
           (e['color'] as any) = el['color'];
+          console.log('done');
         }
       });
     });
-
     // hard code dates sets!
     // this.daysList.forEach((e, i) => {
     //   (e['colorStr'] as any) = '';
