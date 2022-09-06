@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
-import { CalendarService } from 'src/app/services/calander.service';
+import { CalendarService } from '../../services/calander.service';
+import { EmployeeRosterDataService } from '../../services/data/employeeAttendance.data';
 
 @Component({
   selector: 'app-attendence-calender',
@@ -8,7 +9,10 @@ import { CalendarService } from 'src/app/services/calander.service';
   styleUrls: ['./attendence-calender.component.css'],
 })
 export class AttendenceCalenderComponent implements OnInit {
-  constructor(private calender: CalendarService) {}
+  constructor(
+    private calender: CalendarService,
+    private dataService: EmployeeRosterDataService
+  ) {}
   // weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   weekDaysShortWord: any;
@@ -18,6 +22,7 @@ export class AttendenceCalenderComponent implements OnInit {
   currentDate: any;
   month: string = '';
   year: string = '';
+  year_month = '';
   daysList: [] = [];
   data = [
     { date: 10, color: '#FEC932' },
@@ -45,7 +50,7 @@ export class AttendenceCalenderComponent implements OnInit {
         }
       });
     });
-    console.log(this.daysList);
+    // console.log(this.daysList);
 
     // hard code dates set!
     // this.daysList.forEach((e, i) => {
@@ -77,6 +82,11 @@ export class AttendenceCalenderComponent implements OnInit {
       .format('MMMM YYYY');
     // console.log(this.years);
     // console.log(this.months);
+
+    // dataService
+    this.year_month = `${this.year}-${this.month}`;
+    console.log(this.year_month);
+    this.dataService.getEmployeeRoster(this.year_month);
   }
 
   getAllMonths(isForwardingYear = false) {
