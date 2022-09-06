@@ -22,7 +22,7 @@ export class AttendenceCalenderComponent implements OnInit {
   currentDate: any;
   month: string = '';
   year: string = '';
-  year_month = '';
+  year_month: string = '';
   daysList: [] = [];
   data = [
     { date: 10, color: '#FEC932' },
@@ -31,6 +31,21 @@ export class AttendenceCalenderComponent implements OnInit {
     { date: 22, color: '#EBF2F7' },
     { date: 28, color: '#FEC932' },
   ];
+
+  mmm = {
+    Jan: '01',
+    Feb: '02',
+    Mar: '03',
+    Apr: '04',
+    May: '05',
+    Jun: '06',
+    Jul: '07',
+    Aug: '08',
+    Sep: '09',
+    Oct: '10',
+    Nov: '11',
+    Dec: '12',
+  };
 
   ngOnInit(): void {
     this.currentDate = moment();
@@ -82,11 +97,13 @@ export class AttendenceCalenderComponent implements OnInit {
       .format('MMMM YYYY');
     // console.log(this.years);
     // console.log(this.months);
-
+    console.log(this.mmm);
+    const monthIndex = this.mmm[this.month];
+    console.log(monthIndex);
     // dataService
-    this.year_month = `${this.year}-${this.month}`;
+    this.year_month = `${this.year}-${monthIndex}`;
     console.log(this.year_month);
-    this.dataService.getEmployeeRoster(this.year_month);
+    this.dataService.getEmployeeRoster({ year_month: this.year_month });
   }
 
   getAllMonths(isForwardingYear = false) {
@@ -128,9 +145,9 @@ export class AttendenceCalenderComponent implements OnInit {
     } else {
       this.currentDate = moment(this.currentDate).subtract(1, 'month');
     }
-
     this.month = moment(this.currentDate).format('MMM');
     this.year = moment(this.currentDate).format('YYYY');
+    console.log(this.year, this.month);
 
     this.daysList = this.calender.getCalendar(
       moment(this.currentDate).format('YYYY'),
