@@ -8,6 +8,32 @@
     </tr>
   </thead>
   <tbody>
+    <tr *ngFor = "let object of cplEmployees">
+      <td>
+        <div class="pic-name-list">
+          <span class="user-img"
+            ><img src="assets/images/img-dummy.png" alt="" /></span
+          >{{object.name}}
+        </div>
+      </td>
+      <td><a href="#">{{object.cpl}}</a></td>
+      <td><a href="#">{{object.overtime}}</a></td>
+      <td><a href="#">{{object.approved_hours}}</a></td>
+    </tr>
+
+    <!-- <tr>
+      <td>
+        <div class="pic-name-list">
+          <span class="user-img"
+            ><img src="assets/images/img-dummy.png" alt="" /></span
+          >Natalya Neidhart
+        </div>
+      </td>
+      <td><a href="#">0</a></td>
+      <td><a href="#">0</a></td>
+      <td><a href="#">2</a></td>
+    </tr>
+
     <tr>
       <td>
         <div class="pic-name-list">
@@ -20,6 +46,7 @@
       <td><a href="#">0</a></td>
       <td><a href="#">2</a></td>
     </tr>
+
     <tr>
       <td>
         <div class="pic-name-list">
@@ -31,30 +58,7 @@
       <td><a href="#">0</a></td>
       <td><a href="#">0</a></td>
       <td><a href="#">2</a></td>
-    </tr>
-    <tr>
-      <td>
-        <div class="pic-name-list">
-          <span class="user-img"
-            ><img src="assets/images/img-dummy.png" alt="" /></span
-          >Natalya Neidhart
-        </div>
-      </td>
-      <td><a href="#">0</a></td>
-      <td><a href="#">0</a></td>
-      <td><a href="#">2</a></td>
-    </tr>
-    <tr>
-      <td>
-        <div class="pic-name-list">
-          <span class="user-img"
-            ><img src="assets/images/img-dummy.png" alt="" /></span
-          >Natalya Neidhart
-        </div>
-      </td>
-      <td><a href="#">0</a></td>
-      <td><a href="#">0</a></td>
-      <td><a href="#">2</a></td>
-    </tr>
+    </tr> -->
+
   </tbody>
 </table>
