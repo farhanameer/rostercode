@@ -32,7 +32,8 @@ import { EmployeeAttendanceForm } from '../../shared/form/employee-attendance.fo
 import { MenuPageModule } from 'src/app/shared/modules/menu-page/menu-page.module';
 import { EmployeeDocumentsModule } from '../employee-documents/employee-documents.module';
 import { NMSModule } from '../nms/nms.module';
-import { ATSModule } from '../ats/ats.module';
+import { RosterModule } from '../roster/roster.module';
+
 
 declare module "@angular/core" {
   interface ModuleWithProviders<T = any> {
@@ -69,8 +70,8 @@ declare module "@angular/core" {
     MaterialModule,
     EmployeeDocumentsModule,
     NMSModule,
-    ATSModule,
-    RosterModule
+    
+    
   ],
   providers: [
     LoaderService,

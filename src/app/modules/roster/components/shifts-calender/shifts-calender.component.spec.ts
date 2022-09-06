@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckInOutCalenderComponent } from './check-in-out-calender.component';
+import { ShiftsCalenderComponent } from './shifts-calender.component';
 
 describe('CheckInOutCalenderComponent', () => {
-  let component: CheckInOutCalenderComponent;
-  let fixture: ComponentFixture<CheckInOutCalenderComponent>;
+  let component: ShiftsCalenderComponent;
+  let fixture: ComponentFixture<ShiftsCalenderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckInOutCalenderComponent ]
+      declarations: [ ShiftsCalenderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CheckInOutCalenderComponent);
+    fixture = TestBed.createComponent(ShiftsCalenderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

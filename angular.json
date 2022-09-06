@@ -60,8 +60,7 @@
               "src/assets/css/styles.scss",
               "src/assets/css/stylesheet-theme.css",
               "node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css",
-              "src/assets/css/module-style.scss",
-              "src/assets/css/ats-style.scss"
+              "src/assets/css/module-style.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

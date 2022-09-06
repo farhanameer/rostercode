@@ -1,14 +1,43 @@
-<div>
-  <app-full-layout>
+<div class="wrapper">
+  <div class="container">
     <div>
-      <app-dialog-layout>
-        <app-overview-table></app-overview-table>
-      </app-dialog-layout>
+      <app-full-layout>
+        <div class="table-header gradient-head flex justify-content-between">
+          <div class="heading">Roaster</div>
+          <div class="btn-options flex align-content-center">
+            <select name="" id="">
+              <option value="0">All Shifts</option>
+              <option value="0">Evening Shift</option>
+            </select>
+            <select name="" id="">
+              <option value="0">All Shifts</option>
+              <option value="0">Evening Shift</option>
+            </select>
+            <select name="" id="">
+              <option value="0">All Shifts</option>
+              <option value="0">Evening Shift</option>
+            </select>
+            <select name="" id="">
+              <option value="0">All Shifts</option>
+              <option value="0">Evening Shift</option>
+            </select>
+            <select name="" id="">
+              <option value="0">All Shifts</option>
+              <option value="0">Evening Shift</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-shift-allocation">
+          <div class="user-list-shifts">
+            <app-dialog-layout style="width: 358px">
+              <div>
+                <app-overview-table></app-overview-table>
+              </div>
+            </app-dialog-layout>
+          </div>
+          <app-shifts-calender class="w-100"></app-shifts-calender>
+        </div>
+      </app-full-layout>
     </div>
-
-    <hr />
-    <div>
-      <app-job-shift-calender></app-job-shift-calender>
-    </div>
-  </app-full-layout>
+  </div>
 </div>

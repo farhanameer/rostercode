@@ -1,4 +1,22 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "ag-styles/reset";
+@import "ag-styles/variables";
+@import "ag-styles/layout";
+@import "ag-styles/job_card";
+@import "ag-styles/job-cards-column";
+@import "ag-styles/header-menu";
+@import "ag-styles/vertical-dot-menu";
+@import "ag-styles/card-column-header";
+@import "ag-styles/arrows";
+@import "ag-styles/Job-tables";
+@import "ag-styles/gradient-buttons";
+@import "ag-styles/attendance-calendar";
+@import "ag-styles/calendar";
+@import "ag-styles/colors";
+@import "ag-styles/status-dropdown";
+@import "ag-styles/user-list-shifts";
+@import "ag-styles/modal";
+
 .custom-cdk-input {
   // 3532 - 3553
   .mat-select-panel-wrap {
@@ -1236,7 +1254,7 @@
   .pb-cus-0 {
     padding-bottom: 0 !important;
   }
-  
+
   .pb-cus-5 {
     padding-bottom: 5px !important;
   }
@@ -1308,11 +1326,11 @@
   .mr-cus-3 {
     margin-right: 3px !important;
   }
-  
+
   .ml-cus-3 {
     margin-left: 3px !important;
   }
-  
+
   .not-found {
     display: flex !important;
     justify-content: center !important;
@@ -1356,7 +1374,7 @@
     justify-content: center !important;
     align-items: center !important;
   }
-  
+
   .justify-right {
     display: flex !important;
     justify-content: flex-end !important;
@@ -1367,7 +1385,7 @@
     font: normal normal normal 13px/15px Roboto;
     color: #333;
   }
-  
+
   .mat-form-field-appearance-fill .mat-select-arrow-wrapper {
     transform: translate(-4px, -17%) !important;
   }
@@ -1387,7 +1405,8 @@
   background: #d8dcdf !important;
 }
 
-.mat-select-panel .mat-option .mat-option-text, .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+.mat-select-panel .mat-option .mat-option-text,
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
   color: #343434 !important;
 }
 .options-panel .mat-option:nth-child(even) {
@@ -1412,7 +1431,7 @@
   opacity: 1 !important;
 }
 
-.search-input::placeholder{
+.search-input::placeholder {
   font-size: 11px !important;
 }
 
@@ -1459,7 +1478,6 @@
 .confirm-delete {
   box-shadow: 0px 0px 13px 2px #000000 !important;
 }
-
 
 .timepicker-dial__time > span {
   font-size: 50px;

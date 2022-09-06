@@ -1,0 +1,31 @@
+.job-cards-wrapper {
+  overflow-x: auto;
+  width: 95%;
+  padding-bottom: 15px;
+}
+.job-cards-column {
+  display: flex;
+  gap: 10px;
+  
+  >li {
+      width:280px;
+      min-height: 506px;
+      border-top: 4px;
+      border-radius: 5px;
+      padding: 0px 10px;
+      flex-shrink: 0;
+
+      border: $border;
+      border-top: 4px solid $blue-light;
+      background-color: #FBFCFC;
+
+      &.red
+      {
+        border-top-color: $red;
+      }
+      .list {
+        display: flex;
+        flex-direction: column;
+      }
+  }
+}

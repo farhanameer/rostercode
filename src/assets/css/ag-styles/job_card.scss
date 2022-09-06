@@ -1,0 +1,68 @@
+.JobCard {
+  border:$border;
+  padding:6px 10px;
+  @include square(100%, 70px, $radius: 4px);
+  @include card-shadow(0px, 6px, 12px, #D1D2D4, 30%);
+  @include flex-center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 5px 0px;
+  position: relative;
+.logo-vendor {
+  overflow: hidden;
+  display: flex;
+  @include square(40px, 40px, $radius: 100px);
+  @include card-shadow(0px, 3px, 6px, #000, 16%);
+ 
+}
+.vh-center {
+  gap: 6px;
+}
+
+.job-card-title {
+  font-weight: 500;
+ 
+  font-size: 13px;
+  line-height: 13px;
+  .card-title-vendor {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+}
+.job-card-footer {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  .contact-avatar {
+    @include square(20px, 20px, $radius: 100px);
+    @include flex-center;
+    margin-left: 6px;
+    &.avatar-color {
+      background-color: $green;
+      color: white;
+    }
+  }
+}
+
+.card-menu-item{
+  position: absolute;
+  display: flex;
+  align-self: flex-start;
+  width: 7%;
+  height: 100%;
+  right: 8px;
+  top: 0px;
+  z-index: 100;
+  .btn-view{
+    position: absolute;
+    bottom: 11px;
+    right: 1px;
+    display: block;
+  }
+}
+.content {
+  display: flex;
+}
+}
+
+@import "status-dropdown";

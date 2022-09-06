@@ -1,0 +1,52 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  .title-column{
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    gap: 5px;
+    .filter{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .arrrow {
+        margin-top: -5px;
+      }
+    }
+  }
+
+  .right-menu{
+    .label {
+      @include square(14px, 14px, $radius: 100px);
+      font-size: 11px;
+      @include flex-center;
+      background-color: $green;
+      color: white;
+      margin-right: 15px;
+    }
+    .vertical-menu {
+      position: relative;
+     top: -22px;
+    }
+  }
+
+  .search-row {
+    margin-top: 10px;
+    display: flex;
+    label {
+      @include flex-center;
+      gap: 5px;
+    }
+    input[type="text"] {
+      width: 105px;
+      border: $border;
+      height: 20px;
+      padding: 0px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+  }
+}

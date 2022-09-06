@@ -1,7 +1,16 @@
-<div>
-  <app-full-layout>
-    <div>
-      <app-check-in-out-calender></app-check-in-out-calender>
-    </div>
-  </app-full-layout>
+<div class="wrapper">
+  <div class="container">
+    <app-full-layout>
+      <div class="table-header gradient-head flex justify-content-between">
+        <div class="heading">LM Services</div>
+        <div class="btn-options flex align-content-center">
+          <select name="" id="">
+            <option value="0">All Shifts</option>
+            <option value="0">Evening Shift</option>
+          </select>
+        </div>
+      </div>
+      <app-shifts-calender></app-shifts-calender>
+    </app-full-layout>
+  </div>
 </div>
