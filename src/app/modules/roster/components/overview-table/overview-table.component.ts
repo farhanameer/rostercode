@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RosterCPLDataService } from '../../services/data/rosterCPL.data.service';
 
 @Component({
   selector: 'app-overview-table',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OverviewTableComponent implements OnInit {
 
-  constructor() { }
+  cplEmployees: [];
+
+  constructor(private dataService : RosterCPLDataService) { }
 
   ngOnInit(): void {
+    this.getListCplAndOvertime();
+  }
+
+
+  async getListCplAndOvertime(){
+    const data = await this.dataService.ListCplAndOvertime();
+    this.cplEmployees = data["data"]["payload"]
+    console.log('data from backend', this.cplEmployees);
   }
 
 }

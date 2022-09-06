@@ -1,7 +1,6 @@
-import { CalendarService } from './../../../../services/calander.service';
 import  moment  from 'moment';
 import { Component, OnInit } from '@angular/core';
-
+import { CalendarService } from '../../services/calander.service';
 
 @Component({
   selector: 'app-shifts-calender',
@@ -32,7 +31,6 @@ export class ShiftsCalenderComponent implements OnInit {
 
       this.currentMonthDates = this.arrayOfArrays(this.currentMonthDates);
       console.log(this.months);
-      //debugger;
       console.log(this.currentMonthDates);
   }
 
