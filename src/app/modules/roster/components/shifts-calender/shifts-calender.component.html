@@ -1,25 +1,28 @@
 <div class="calendar-wrapper">
   <div class="calendar-navigation">
-    <a href="#"><img src="assets/icons/ico-left-arrow.svg" alt="" /></a>
-    <ul class="years-list">
-      <li><a href="#">April 2022</a></li>
+    <a><img src="assets/icons/ico-left-arrow.svg" alt="" (click) = "getMonthAndYear()"/></a>
+    <ul class="years-list" >
+      
+      <li *ngFor="let month of months">{{month}}</li>
+      <!-- <li><a href="#">April 2022</a></li>
       <li><a href="">May 2022</a></li>
       <li><a href="">June 2022</a></li>
       <li><a href="">July 2022</a></li>
-      <li><a href="">August 2022</a></li>
+      <li><a href="">August 2022</a></li> -->
     </ul>
-    <a href="#"><img src="assets/icons/ico-right-arrow.svg" alt="" /></a>
+    <a><img src="assets/icons/ico-right-arrow.svg" alt="" (click) = "getMonthAndYear(true)"/></a>
   </div>
   <table class="table calendar-table-custom">
     <thead>
       <tr>
-        <th scope="col">MON</th>
+        <th scope="col" *ngFor="let weekday of weekDays">{{weekday}}</th>
+        <!-- <th scope="col">MON</th>
         <th scope="col">TUE</th>
         <th scope="col">WED</th>
         <th scope="col">THU</th>
         <th scope="col">FRI</th>
         <th scope="col">SAT</th>
-        <th scope="col">SUN</th>
+        <th scope="col">SUN</th> -->
       </tr>
     </thead>
     <tbody>
