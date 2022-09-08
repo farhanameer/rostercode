@@ -17,7 +17,7 @@
     </thead>
     <tbody>
 
-      <tr *ngFor="let nestedArray of currentMonthDates">
+      <tr *ngFor="let nestedArray of reshapedData">
         <td  *ngFor="let days of nestedArray">
 
           <table class="cal-cell" >
@@ -28,7 +28,17 @@
               </td>
               <td>&nbsp;</td>
             </tr>
-            <tr class="yellow">
+
+            <ng-container *ngFor="let shift of days.shifts; let i = index" >
+              <tr *ngIf="(i+1)<=1">
+                <td [ngStyle]="{'color': shift.color}">{{shift.name}}</td>
+                <td [ngStyle]="{'color': shift.color}">{{shift.shift_employees}}</td>
+              </tr>
+            </ng-container>
+            
+
+
+            <!-- <tr class="yellow">
               <td>Morning</td>
               <td width="10">10</td>
             </tr>
@@ -41,11 +51,11 @@
             <tr class="purple-light">
               <td>Night</td>
               <td>12</td>
-            </tr>
+            </tr> -->
 
-            <tr>
+            <tr *ngIf="days.shifts.length>1">
               <td>
-                <a href="#">More +2</a>
+                <a href="#">More +{{days.shifts.length - 1}}</a>
               </td>
               <td>&nbsp;</td>
             </tr>

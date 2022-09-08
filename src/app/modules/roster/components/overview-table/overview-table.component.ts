@@ -19,7 +19,9 @@ export class OverviewTableComponent implements OnInit {
 
   async getListCplAndOvertime(){
     const data = await this.dataService.ListCplAndOvertime();
-    this.cplEmployees = data["data"]["payload"]
+    this.cplEmployees = data["data"]["payload"];
+
+    
     console.log('data from backend', this.cplEmployees);
   }
 
