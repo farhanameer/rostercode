@@ -9,9 +9,9 @@
 
       <div class="month-calendar">
         <div class="month-calendar-header flex space-between">
-          <div (click)="getMonthAndYear()"><img src="assets/icons/Left.svg" alt="" /></div>
+          <div class="btn-pointer" (click)="getMonthAndYear()"><img src="assets/icons/Left.svg" alt="" /></div>
           <div>{{month}} {{year}}</div>
-          <div (click)="getMonthAndYear(true)"><img src="assets/icons/Right.svg" alt="" /></div>
+          <div class="btn-pointer" (click)="getMonthAndYear(true)"><img src="assets/icons/Right.svg" alt="" /></div>
         </div>
 
         <div class="month-body">
@@ -39,7 +39,7 @@
             </ul>
           </div>
         </div>
-        <div class="footer-count">CPL Count <span>4</span></div>
+        <div class="footer-count">CPL Count <span>{{cplCount}}</span></div>
       </div>
     </div>
   </div>
