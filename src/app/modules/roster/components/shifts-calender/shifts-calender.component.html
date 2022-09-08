@@ -18,7 +18,13 @@
     <tbody>
 
       <tr *ngFor="let nestedArray of reshapedData">
-        <td  *ngFor="let days of nestedArray">
+        <td  *ngFor="let days of nestedArray"
+        [ngStyle]="checkIfOK(days.date)?{'background-color': 'red'} : {'background-color': 'white'}"
+         style="-webkit-user-select:none;"
+        (mousedown)="onDragStart(days.date)"
+        (mouseover)="onDrag(days.date)" 
+        (mouseup)="onDragOver(days.date)" 
+        >
 
           <table class="cal-cell" >
 

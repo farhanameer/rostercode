@@ -139,4 +139,47 @@ export class ShiftsCalenderComponent implements OnInit {
     this.getLMRosterView(this.year_month);
   }
 
+  mouseDown:boolean = false;
+  mouseStart : any ;
+  mouseEnd :any ;
+  obj={
+    start : 0 , 
+    end : 0
+  }
+  checkIfOK(date){
+    if(date && (date >= this.obj.start && date<= this.obj.end)){
+      return true;
+    }
+    return false;
+  }
+  onDragStart(event){
+    this.mouseStart = event;
+    this.mouseDown = true;
+    this.obj.start = this.mouseStart;
+  }
+  onDrag(event){
+
+    if(!this.mouseDown) return;
+    this.obj.end = event;
+  }
+  onDragOver(event){
+    if(!this.mouseDown) return;
+    this.mouseDown = false;
+    this.mouseEnd = event;
+    this.obj.end = this.mouseEnd;
+    
+    for(let i = this.mouseStart; i<=this.mouseEnd; i++){
+      console.log('dates' , `${this.year_month}-${i}`);
+    }
+
+  }
+  onDragDrop(event){
+    console.log('on drag drop')
+  }
+  onDragEnd(event){
+    console.log('on drage end')
+  }
+
+
+
 }
