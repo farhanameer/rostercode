@@ -77,7 +77,6 @@ import { ShiftsCalenderComponent } from './components/shifts-calender/shifts-cal
     OvertimeAdjustmentDialog,
     SingleShiftDetailDialog,
     DisclaimerDialog,
-    ShiftsCalenderComponent,
     ShiftManagmentDialog,
     RadioButtonComponent,
     SortByDateComponent,
@@ -94,13 +93,14 @@ import { ShiftsCalenderComponent } from './components/shifts-calender/shifts-cal
     NightJobShiftDialog,
     ShiftRequestCardComponent,
     FullLayoutComponent,
-    DialogLayoutComponent
+    DialogLayoutComponent,
+    ShiftsCalenderComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RosterRoutingModule,
+    RosterRoutingModule
   ],
   providers: [],
 })

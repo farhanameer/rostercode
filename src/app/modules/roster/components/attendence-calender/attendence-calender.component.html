@@ -9,65 +9,21 @@
 
       <div class="month-calendar">
         <div class="month-calendar-header flex space-between">
-          <div><img src="assets/icons/Left.svg" alt="" /></div>
-          <div>May 2019</div>
-          <div><img src="assets/icons/Right.svg" alt="" /></div>
+          <div class="btn-pointer" (click)="getMonthAndYear()"><img src="assets/icons/Left.svg" alt="" /></div>
+          <div>{{month}} {{year}}</div>
+          <div class="btn-pointer" (click)="getMonthAndYear(true)"><img src="assets/icons/Right.svg" alt="" /></div>
         </div>
 
         <div class="month-body">
           <div class="list-weekday">
             <ul>
-              <li>M</li>
-              <li>T</li>
-              <li>W</li>
-              <li>T</li>
-              <li>F</li>
-              <li>S</li>
-              <li>S</li>
+              <li *ngFor="let preSet of weekDaysShortWord">{{preSet}}</li>
             </ul>
           </div>
 
           <div class="list-day">
             <ul>
-              <li>30</li>
-              <li>01</li>
-              <li>02</li>
-              <li>03</li>
-              <li>04</li>
-              <li class="late-arrival">05</li>
-              <li>06</li>
-
-              <li>30</li>
-              <li>01</li>
-              <li>02</li>
-              <li>03</li>
-              <li>04</li>
-              <li>05</li>
-              <li>06</li>
-
-              <li>30</li>
-              <li>01</li>
-              <li>02</li>
-              <li>03</li>
-              <li>04</li>
-              <li>05</li>
-              <li>06</li>
-
-              <li>30</li>
-              <li>01</li>
-              <li>02</li>
-              <li>03</li>
-              <li>04</li>
-              <li>05</li>
-              <li>06</li>
-
-              <li>30</li>
-              <li>01</li>
-              <li>02</li>
-              <li>03</li>
-              <li>04</li>
-              <li>05</li>
-              <li>06</li>
+              <li *ngFor="let date of daysList" [ngStyle]="{'background-color': date.color}">{{date.date}}</li>
             </ul>
           </div>
 
@@ -83,7 +39,7 @@
             </ul>
           </div>
         </div>
-        <div class="footer-count">CPL Count <span>4</span></div>
+        <div class="footer-count">CPL Count <span>{{cplCount}}</span></div>
       </div>
     </div>
   </div>

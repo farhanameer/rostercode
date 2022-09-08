@@ -1,5 +1,5 @@
 {
-  "nodeApiUrl": "https://api.appgenii.people.com.pk/api2/3.0/",
+  "nodeApiUrl": "http://sandbox.peopleitest.com:3085/api2/3.0/",
   "phpApiHeader_300_23": "https://api.appgenii.people.com.pk/api2/3.0/",
   "phpApiHeader_300": "https://api.appgenii.people.com.pk/api2/3.0/",
   "phpApiHeader": "https://api.appgenii.people.com.pk/api2/3.0/",
