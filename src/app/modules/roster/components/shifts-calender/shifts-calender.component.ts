@@ -35,17 +35,10 @@ export class ShiftsCalenderComponent implements OnInit {
       this.months[3] = moment(this.currentDate).add(1,'month').format('MMMM YYYY');
       this.months[4] = moment(this.currentDate).add(2,'month').format('MMMM YYYY');
 
-      
-      // console.log(this.months);
-      // console.log(this.currentMonthDates);
-
       this.getLMRosterView(this.year_month);
-
-
   }
 
   lmRosterViewArray : [] = [];
-
 
   getRosterShiftsByDate(date){
     let foundData = [];
@@ -61,11 +54,9 @@ export class ShiftsCalenderComponent implements OnInit {
 
     return foundData;
   }
+
   async getLMRosterView(year_month){
     const data = await this.dataService.getLMRosterView(year_month);
-
-    //this.cplEmployees = data["data"]["payload"];
-
     
     this.lmRosterViewArray = data["data"]["payload"];
 
@@ -73,10 +64,7 @@ export class ShiftsCalenderComponent implements OnInit {
       this.lmRosterViewArray = [];
     }
     this.reshapedData = this.reshapData(this.currentMonthDates);
-    //debugger;
   }
-
-
 
   calendarArray : any = [];
 
@@ -111,7 +99,6 @@ export class ShiftsCalenderComponent implements OnInit {
   }
 
   getMonthAndYear(isForwarding = false){
-
     if(isForwarding) {
       this.currentDate = moment(this.currentDate).add(1,'month');
       for(let i = 0; i < 5; i++){

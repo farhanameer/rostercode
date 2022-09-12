@@ -15,4 +15,8 @@ export class RosterViewHttpService {
   getLMRosterView(params = {}) {
     return this.http.get(`${this.roster}/GetLmRoster`, { params });
   }
+
+  ListCplAndOvertime(body = {}) {
+    return this.http.post(`${this.roster}/CplAndOvertime`, body);
+  }
 }

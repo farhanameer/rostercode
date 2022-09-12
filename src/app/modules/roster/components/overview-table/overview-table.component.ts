@@ -1,5 +1,8 @@
+import { RosterService } from './../../services/data/rosterView.data.service';
+import { CplAndOvertime } from './../../models/CplAndOvertime';
 import { Component, OnInit } from '@angular/core';
-import { RosterCPLDataService } from '../../services/data/rosterCPL.data.service';
+import { PromiseAble } from '../../models/PromiseAble';
+import { APIType } from '../../models/APIType';
 
 @Component({
   selector: 'app-overview-table',
@@ -8,9 +11,9 @@ import { RosterCPLDataService } from '../../services/data/rosterCPL.data.service
 })
 export class OverviewTableComponent implements OnInit {
 
-  cplEmployees: [];
+  cplEmployees: CplAndOvertime[];
 
-  constructor(private dataService : RosterCPLDataService) { }
+  constructor(private dataService : RosterService) { }
 
   ngOnInit(): void {
     this.getListCplAndOvertime();
@@ -18,11 +21,10 @@ export class OverviewTableComponent implements OnInit {
 
 
   async getListCplAndOvertime(){
-    const data = await this.dataService.ListCplAndOvertime();
-    this.cplEmployees = data["data"]["payload"];
-
-    
-    console.log('data from backend', this.cplEmployees);
+    const data = await (this.dataService.ListCplAndOvertime() as Promise<PromiseAble<APIType<CplAndOvertime>>>);
+    if(Array.isArray(data.data.payload)){
+      this.cplEmployees = data.data.payload;
+    }
   }
 
 }
