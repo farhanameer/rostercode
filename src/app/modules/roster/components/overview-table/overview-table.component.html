@@ -8,17 +8,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor = "let object of cplEmployees">
+    <tr *ngFor="let object of cplEmployees">
       <td>
-        <div class="pic-name-list">
+        <div class="pic-name-list" (click)="open()">
           <span class="user-img"
             ><img src="assets/images/img-dummy.png" alt="" /></span
-          >{{object.name}}
+          >{{ object.name }}
         </div>
       </td>
-      <td><a href="#">{{object.cpl}}</a></td>
-      <td><a href="#">{{object.overtime}}</a></td>
-      <td><a href="#">{{object.approved_hours}}</a></td>
+      <td>
+        <a href="#">{{ object.cpl }}</a>
+      </td>
+      <td>
+        <a href="#">{{ object.overtime }}</a>
+      </td>
+      <td>
+        <a href="#">{{ object.approved_hours }}</a>
+      </td>
     </tr>
 
     <!-- <tr>
@@ -59,6 +65,5 @@
       <td><a href="#">0</a></td>
       <td><a href="#">2</a></td>
     </tr> -->
-
   </tbody>
 </table>

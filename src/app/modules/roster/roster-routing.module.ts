@@ -64,16 +64,18 @@ const routes: Routes = [
   {
     path:'shiftmanagement',
     component:ShiftManagmentDialog,
-    children: [
+    children:[
       {
         path:'sortbydate',
-         component:SortByDateComponent
+        component:SortByDateComponent
       },
       {
         path:'sortbyemployee',
-         component: SortByEmployeeComponent
+        component:SortByEmployeeComponent
+        
       }
     ]
+    
   },
   {
     path:'morningshift',

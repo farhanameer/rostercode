@@ -47,9 +47,12 @@ import { ShiftListComponent } from './components/shift-list/shift-list.component
 import { ShiftRequestDetailComponent } from './components/shift-request-detail/shift-request-detail.component';
 import { ShiftRequestCardComponent } from './components/shift-request-card/shift-request-card.component';
 import { FullLayoutComponent } from './layout/full-layout/full-layout.component';
-import { DialogLayoutComponent } from './layout/dialog-layout/dialog-layout.component';
 import { RosterComponent2 } from './roster.component';
 import { ShiftsCalenderComponent } from './components/shifts-calender/shifts-calender.component';
+import { SubLayoutComponent } from './layout/sub-layout/sub-layout.component';
+import { DialogLayoutComponent } from './layout/dialog-layout/dialog-layout.component';
+import { NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalService } from './services/modal/modal.service';
 
 
 @NgModule({
@@ -93,15 +96,17 @@ import { ShiftsCalenderComponent } from './components/shifts-calender/shifts-cal
     NightJobShiftDialog,
     ShiftRequestCardComponent,
     FullLayoutComponent,
-    DialogLayoutComponent,
-    ShiftsCalenderComponent
+    SubLayoutComponent,
+    ShiftsCalenderComponent,
+    DialogLayoutComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RosterRoutingModule
+    RosterRoutingModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [ModalService,NgbActiveModal,NgbModal],
 })
 export class RosterModule { }

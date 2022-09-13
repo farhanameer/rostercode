@@ -1,17 +1,60 @@
-<div>
-  <p>overtime-adjustment Dialog Here</p>
-  <div>
-    <app-full-layout>
-      <h1>TEXT HEREs</h1>
-      <div>
-        <app-date-box></app-date-box>
+<div class="wrapper">
+  <div class="container">
+    <div class="header-menu"></div>
+
+    <div class="modal-custom">
+      <div class="gradient-head flex justify-content-between">
+        <div class="heading">Ovetime Hours Adjustment</div>
+        <div class="btn-options flex align-content-center">
+          <a href="#"><img src="assets/icons/ico-close.svg" alt="" /></a>
+        </div>
       </div>
-      <div>
-        <app-select-box></app-select-box>
+      <!-- Body -->
+      <div class="modal-custom-body">
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" placeholder="Overtime (hrs)" />
+          </div>
+          <div class="col-md-6">
+            <input type="text" placeholder="Till Date" />
+          </div>
+        </div>
+        <div>
+          <span>Adjust Overtime in</span>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="radio" />
+
+            <span>Add CPL</span>
+          </div>
+          <div class="col-md-6">
+            <input type="radio" />
+            <span>Payment For Overtime</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" />
+          </div>
+          <div class="col-md-6">
+            <input type="text" placeholder="Pay for Hours" />
+          </div>
+        </div>
       </div>
-      <div>
-        <app-button></app-button>
+
+      <!-- footer -->
+
+      <div class="modal-custom-footer">
+        <div class="clues"></div>
+
+        <div class="modal-footer-button flex">
+          <input type="button" class="btn-input" value="Submit" />
+          <input type="button" class="btn-input" value="Cancel" />
+        </div>
       </div>
-    </app-full-layout>
+    </div>
+
+    <!-- Modal list -->
   </div>
 </div>

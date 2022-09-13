@@ -1,0 +1,253 @@
+.modal-custom {
+  width: 525px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  .modal-custom-body {
+    padding: 20px;
+  }
+  .modal-custom-footer {
+    height: 28px;
+    background-color: #d8dcdf;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+    .clues {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      span {
+        display: flex;
+        align-items: center;
+        line-height: 11px;
+        gap: 6px;
+      }
+    }
+    .modal-footer-button {
+      display: flex;
+      gap: 8px;
+    }
+  }
+  // add from new pop css
+  &.modal-lg {
+    width: 800px;
+  }
+}
+
+.btn-input {
+  width: auto;
+  padding: 0px 6px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $blue;
+
+  border-radius: 3px;
+  background: linear-gradient(180deg, #ededed 0%, #fafafa 100%) 0% 0% no-repeat !important;
+  border: 1px solid #fff;
+}
+
+.table-custom-header {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
+  padding: 0px 10px;
+  width: 100%;
+  > div {
+    width: 50%;
+  }
+  span {
+    font-weight: 700;
+    color: $blue;
+  }
+}
+
+.table-modal {
+  width: 100%;
+  margin-bottom: 0px;
+  thead {
+    tr {
+      background-color: #fafafb;
+
+      border-right: 1px solid #dee2e6;
+      border-left: 1px solid #dee2e6;
+    }
+    th {
+      font-weight: 700;
+      padding: 0px;
+      height: 28px;
+      vertical-align: middle;
+      border-bottom: none;
+      padding-left: 10px;
+    }
+  }
+  tbody {
+    tr {
+      border-right: 1px solid #dee2e6;
+      border-left: 1px solid #dee2e6;
+      border-bottom: 1px solid #dee2e6;
+      td {
+        padding: 0px;
+        padding-left: 10px;
+        height: 28px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.user-list-employee {
+  padding: 20px;
+  ul {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    li {
+      width: calc(100% / 2 - 3px);
+      height: 50px;
+      border: 1px solid rgba($color: #d8dcdf, $alpha: 0.5);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+
+      gap: 10px;
+
+      .user-img {
+        box-shadow: 0px 3px 6px rgba($color: #000000, $alpha: 0.1);
+        display: block;
+        @include square(30px, 30px, 100px);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          display: block;
+        }
+      }
+
+      .employee-detail {
+        .heading-lg {
+          font-size: 13px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  // add from updated pop up scss
+  .overtime-header {
+    li {
+      border: none;
+      padding-left: 0px;
+      .employee-detail {
+        .heading-sm {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+.overtime-form {
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 36px;
+    row-gap: 16px;
+    li {
+      width: 100%;
+      border: none;
+    }
+  }
+}
+
+.header-checkbox {
+  display: flex;
+  padding: 10px 0px;
+  justify-content: space-between;
+}
+
+.shift-management-wrapper {
+  padding: 20px;
+  .header {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    .search-row {
+      .left-col {
+        display: flex;
+        label {
+          margin-right: 35px;
+        }
+      }
+    }
+  }
+
+  .shift-management-list {
+    display: flex;
+    gap: 10px;
+    overflow-y: auto;
+
+    &.date-wise {
+      li {
+        background-color: white;
+        border: 1px solid #d8dcdf;
+        .user-img {
+          span {
+            display: flex;
+            @include square(10px, 10px, 2px);
+            background: $barberry;
+          }
+        }
+      }
+    }
+    ul {
+      width: 260px;
+      border: 1px solid #d8dcdf;
+      background: rgba($color: #d8dcdf, $alpha: 0.1);
+      padding: 10px;
+      border-radius: 5px;
+      height: 360px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-shrink: 0;
+      li {
+        @include square(100%, 28px, 2px);
+
+        border: 1px solid #ffba69;
+        background-color: #fff7ef;
+        display: flex;
+        align-items: center;
+        padding: 4px 9px;
+        gap: 5px;
+        &.purple {
+          border: 1px solid #b883c4;
+          background-color: #f7f2f8;
+        }
+        .employee-detail {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+        }
+        &.heading-date {
+          font-size: 13px;
+          font-weight: 600;
+          border: none;
+          height: auto;
+          background-color: transparent;
+          gap: 7px;
+          padding-left: 0px;
+          .user-img {
+            margin: 0px;
+          }
+        }
+      }
+    }
+  }
+}

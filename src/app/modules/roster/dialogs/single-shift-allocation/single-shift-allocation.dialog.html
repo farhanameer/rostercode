@@ -1,12 +1,61 @@
-<div>
-  <p>Single Shift Dialog</p>
-  <app-full-layout>
-    <h1>TEXT HEREs</h1>
-    <div>
-      <app-select-box></app-select-box>
-    </div>
-    <div>
-      <app-button></app-button>
-    </div>
-  </app-full-layout>
+<div class="container">
+  <div class="header-menu"></div>
+
+  <div class="modal-custom">
+    <app-dialog-layout>
+      <!-- Body -->
+      <div class="modal-custom-body">
+        <div class="table-custom-header">
+          <div><span>Name:</span> Hisham Talib Qureshi</div>
+
+          <div><span>Employee ID:</span>190615</div>
+        </div>
+        <table class="table table-modal">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Already Allocated Shift</th>
+              <th>Allocate Shift</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <app-date-box></app-date-box>
+              </td>
+              <td>Morning</td>
+              <td>
+                <app-select-box></app-select-box>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- footer -->
+
+      <div class="modal-custom-footer">
+        <div class="clues">
+          <span>
+            <i><img src="assets/icons/icon-cpl.svg" alt="" /></i> CPL Due</span
+          >
+          <span>
+            <i><img src="assets/icons/icon-minus.svg" alt="" /> Absents</i>
+          </span>
+        </div>
+
+        <div class="modal-footer-button flex">
+          <input type="button" class="btn-input" value="Submit" />
+          <input
+            type="button"
+            class="btn-input"
+            value="Cancel"
+            (click)="activeModal.close('Close click')"
+          />
+        </div>
+      </div>
+    </app-dialog-layout>
+  </div>
+
+  <!-- Modal list -->
 </div>
