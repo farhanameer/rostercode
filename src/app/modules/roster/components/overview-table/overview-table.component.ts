@@ -1,7 +1,10 @@
+import { RosterService } from './../../services/data/rosterView.data.service';
+import { CplAndOvertime } from './../../models/CplAndOvertime';
 import { Component, OnInit } from '@angular/core';
 import { SingleShiftDetailDialog } from '../../dialogs/single-shift-detail/single-shift-detail.dialog';
-import { RosterCPLDataService } from '../../services/data/rosterCPL.data.service';
 import { ModalService } from '../../services/modal/modal.service';
+import { PromiseAble } from '../../models/PromiseAble';
+import { APIType } from '../../models/APIType';
 
 @Component({
   selector: 'app-overview-table',
@@ -10,9 +13,9 @@ import { ModalService } from '../../services/modal/modal.service';
 })
 export class OverviewTableComponent implements OnInit {
 
-  cplEmployees: [];
+  cplEmployees: CplAndOvertime[];
 
-  constructor(private dataService : RosterCPLDataService,private customModal: ModalService) { }
+  constructor(private dataService : RosterService,private customModal: ModalService) { }
 
   ngOnInit(): void {
     this.getListCplAndOvertime();
@@ -23,11 +26,10 @@ export class OverviewTableComponent implements OnInit {
 
 
   async getListCplAndOvertime(){
-    const data = await this.dataService.ListCplAndOvertime();
-    this.cplEmployees = data["data"]["payload"];
-
-    
-    console.log('data from backend', this.cplEmployees);
+    const data = await (this.dataService.ListCplAndOvertime() as Promise<PromiseAble<APIType<CplAndOvertime>>>);
+    if(Array.isArray(data.data.payload)){
+      this.cplEmployees = data.data.payload;
+    }
   }
 
 }

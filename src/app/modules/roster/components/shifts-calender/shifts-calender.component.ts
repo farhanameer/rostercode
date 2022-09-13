@@ -35,17 +35,10 @@ export class ShiftsCalenderComponent implements OnInit {
       this.months[3] = moment(this.currentDate).add(1,'month').format('MMMM YYYY');
       this.months[4] = moment(this.currentDate).add(2,'month').format('MMMM YYYY');
 
-      
-      // console.log(this.months);
-      // console.log(this.currentMonthDates);
-
       this.getLMRosterView(this.year_month);
-
-
   }
 
   lmRosterViewArray : [] = [];
-
 
   getRosterShiftsByDate(date){
     let foundData = [];
@@ -61,11 +54,9 @@ export class ShiftsCalenderComponent implements OnInit {
 
     return foundData;
   }
+
   async getLMRosterView(year_month){
     const data = await this.dataService.getLMRosterView(year_month);
-
-    //this.cplEmployees = data["data"]["payload"];
-
     
     this.lmRosterViewArray = data["data"]["payload"];
 
@@ -73,10 +64,7 @@ export class ShiftsCalenderComponent implements OnInit {
       this.lmRosterViewArray = [];
     }
     this.reshapedData = this.reshapData(this.currentMonthDates);
-    //debugger;
   }
-
-
 
   calendarArray : any = [];
 
@@ -111,7 +99,6 @@ export class ShiftsCalenderComponent implements OnInit {
   }
 
   getMonthAndYear(isForwarding = false){
-
     if(isForwarding) {
       this.currentDate = moment(this.currentDate).add(1,'month');
       for(let i = 0; i < 5; i++){
@@ -138,5 +125,48 @@ export class ShiftsCalenderComponent implements OnInit {
     this.currentMonthDates = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), moment(this.currentDate).format('MMM'), this.weekDays);
     this.getLMRosterView(this.year_month);
   }
+
+  mouseDown:boolean = false;
+  mouseStart : any ;
+  mouseEnd :any ;
+  obj={
+    start : 0 , 
+    end : 0
+  }
+  checkIfOK(date){
+    if(date && (date >= this.obj.start && date<= this.obj.end)){
+      return true;
+    }
+    return false;
+  }
+  onDragStart(event){
+    this.mouseStart = event;
+    this.mouseDown = true;
+    this.obj.start = this.mouseStart;
+  }
+  onDrag(event){
+
+    if(!this.mouseDown) return;
+    this.obj.end = event;
+  }
+  onDragOver(event){
+    if(!this.mouseDown) return;
+    this.mouseDown = false;
+    this.mouseEnd = event;
+    this.obj.end = this.mouseEnd;
+    
+    for(let i = this.mouseStart; i<=this.mouseEnd; i++){
+      console.log('dates' , `${this.year_month}-${i}`);
+    }
+
+  }
+  onDragDrop(event){
+    console.log('on drag drop')
+  }
+  onDragEnd(event){
+    console.log('on drage end')
+  }
+
+
 
 }
