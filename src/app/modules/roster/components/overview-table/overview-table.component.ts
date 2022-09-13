@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SingleShiftDetailDialog } from '../../dialogs/single-shift-detail/single-shift-detail.dialog';
 import { RosterCPLDataService } from '../../services/data/rosterCPL.data.service';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-overview-table',
@@ -10,10 +12,13 @@ export class OverviewTableComponent implements OnInit {
 
   cplEmployees: [];
 
-  constructor(private dataService : RosterCPLDataService) { }
+  constructor(private dataService : RosterCPLDataService,private customModal: ModalService) { }
 
   ngOnInit(): void {
     this.getListCplAndOvertime();
+  }
+  open(){
+    this.customModal.showFeaturedDialog(SingleShiftDetailDialog, "Red");
   }
 
 

@@ -1,10 +1,50 @@
-<div>
-  <p>Single Shift Details</p>
+<div class="header-menu"></div>
+<div class="modal-custom bg-white">
+  <app-dialog-layout>
+    <!-- Body -->
+    <div class="modal-custom-body">
+      <div class="table-custom-header">
+        <div><span>Name:</span> Hisham Talib Qureshi</div>
 
-  <app-full-layout>
-    <h1>TEXT HEREs</h1>
-    <div>
-      <app-button></app-button>
+        <div><span>Employee ID:</span>190615</div>
+      </div>
+      <table class="table table-modal">
+        <thead>
+          <tr>
+            <th>CPL Due</th>
+            <th>Employee Absents</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>00</td>
+            <td>00</td>
+            <td>00</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </app-full-layout>
+
+    <!-- footer -->
+
+    <div class="modal-custom-footer">
+      <div class="clues"></div>
+
+      <div class="modal-footer-button flex">
+        <input
+          type="button"
+          class="btn-input"
+          value="Allocate Shift"
+          (click)="open()"
+        />
+        <input
+          type="button"
+          class="btn-input"
+          value="Cancel"
+          (click)="activeModal.close('Close click')"
+        />
+      </div>
+    </div>
+  </app-dialog-layout>
 </div>

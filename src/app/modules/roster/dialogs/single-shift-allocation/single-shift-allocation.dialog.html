@@ -1,20 +1,14 @@
-<div class="wrapper">
-  <div class="container">
-    <div class="header-menu"></div>
+<div class="container">
+  <div class="header-menu"></div>
 
-    <div class="modal-custom">
-      <div class="gradient-head flex justify-content-between">
-        <div class="heading">All Modal Titles</div>
-        <div class="btn-options flex align-content-center">
-          <a href="#"><img src="icons/ico-close.svg" alt="" /></a>
-        </div>
-      </div>
+  <div class="modal-custom">
+    <app-dialog-layout>
       <!-- Body -->
       <div class="modal-custom-body">
         <div class="table-custom-header">
           <div><span>Name:</span> Hisham Talib Qureshi</div>
 
-          <div><span>Name:</span> Hisham Talib Qureshi</div>
+          <div><span>Employee ID:</span>190615</div>
         </div>
         <table class="table table-modal">
           <thead>
@@ -26,9 +20,13 @@
           </thead>
           <tbody>
             <tr>
-              <td><select name="" id=""></select></td>
+              <td>
+                <app-date-box></app-date-box>
+              </td>
               <td>Morning</td>
-              <td><select name="" id=""></select></td>
+              <td>
+                <app-select-box></app-select-box>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -39,20 +37,25 @@
       <div class="modal-custom-footer">
         <div class="clues">
           <span>
-            <i><img src="icons/icon-cpl.svg" alt="" /></i> CPL Due</span
+            <i><img src="assets/icons/icon-cpl.svg" alt="" /></i> CPL Due</span
           >
           <span>
-            <i><img src="icons/icon-minus.svg" alt="" /> Absents</i>
+            <i><img src="assets/icons/icon-minus.svg" alt="" /> Absents</i>
           </span>
         </div>
 
         <div class="modal-footer-button flex">
           <input type="button" class="btn-input" value="Submit" />
-          <input type="button" class="btn-input" value="Cancel" />
+          <input
+            type="button"
+            class="btn-input"
+            value="Cancel"
+            (click)="activeModal.close('Close click')"
+          />
         </div>
       </div>
-    </div>
-
-    <!-- Modal list -->
+    </app-dialog-layout>
   </div>
+
+  <!-- Modal list -->
 </div>
