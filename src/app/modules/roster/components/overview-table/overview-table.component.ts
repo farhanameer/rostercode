@@ -6,38 +6,43 @@ import { ModalService } from '../../services/modal/modal.service';
 import { PromiseAble } from '../../models/PromiseAble';
 import { APIType } from '../../models/APIType';
 import { OvertimeAdjustmentDialog } from '../../dialogs/overtime-adjustment/overtime-adjustment.dialog';
-import { ShiftManagmentDialog } from '../../dialogs/shift-managment/shift-managment.dialog';
+import { OvertimeHoursAdjusmentDialog } from '../../dialogs/overtime-hours-adjusment/overtime-hours-adjusment.dialog';
+import { EmployeeShiftDataService } from '../../services/data/dropdown.data';
 
 @Component({
   selector: 'app-overview-table',
   templateUrl: './overview-table.component.html',
-  styleUrls: ['./overview-table.component.css']
+  styleUrls: ['./overview-table.component.css'],
 })
 export class OverviewTableComponent implements OnInit {
   
-  @Input() employee;
-
   cplEmployees: CplAndOvertime[];
-
-  constructor(private dataService : RosterService,private customModal: ModalService) { }
+  employeeShift = [];
+  constructor(
+    private dataService: RosterService,
+    private customModal: ModalService
+  ) {}
 
   ngOnInit(): void {
     this.getListCplAndOvertime();
+    // debugger;
   }
   open(employee:any){
     this.customModal.showFeaturedDialog(SingleShiftDetailDialog, employee);
   }
-  openOverView(){
-    this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, "Red");
+  openOverView() {
+    this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, '');
   }
-  
+  openHours() {
+    this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog, '');
+  }
 
-
-  async getListCplAndOvertime(){
-    const data = await (this.dataService.ListCplAndOvertime() as Promise<PromiseAble<APIType<CplAndOvertime>>>);
-    if(Array.isArray(data.data.payload)){
+  async getListCplAndOvertime() {
+    const data = await (this.dataService.ListCplAndOvertime() as Promise<
+      PromiseAble<APIType<CplAndOvertime>>
+    >);
+    if (Array.isArray(data.data.payload)) {
       this.cplEmployees = data.data.payload;
     }
   }
-
 }

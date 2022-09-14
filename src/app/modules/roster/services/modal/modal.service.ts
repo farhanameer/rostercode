@@ -8,12 +8,12 @@ export class ModalService {
   constructor(private ngbModal: NgbModal,
     private componentFactoryResolver: ComponentFactoryResolver
     ) { }
-    showDefaultModalComponent(theComponent: any, name: any) {
+    showDefaultModalComponent(theComponent: any) {
       const componenetFactory = this.componentFactoryResolver.resolveComponentFactory(
         theComponent
       );
       const modalRef = this.ngbModal.open(theComponent);
-      modalRef.componentInstance.name = name;
+      
       return modalRef;
     }
   
