@@ -70,8 +70,8 @@ declare module "@angular/core" {
     MaterialModule,
     EmployeeDocumentsModule,
     NMSModule,
-    
-    
+    // ATSModule,
+    RosterModule
   ],
   providers: [
     LoaderService,
