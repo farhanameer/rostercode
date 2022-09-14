@@ -53,6 +53,7 @@ import { SubLayoutComponent } from './layout/sub-layout/sub-layout.component';
 import { DialogLayoutComponent } from './layout/dialog-layout/dialog-layout.component';
 import { NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './services/modal/modal.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -105,7 +106,8 @@ import { ModalService } from './services/modal/modal.service';
     FormsModule,
     ReactiveFormsModule,
     RosterRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [ModalService,NgbActiveModal,NgbModal],
 })

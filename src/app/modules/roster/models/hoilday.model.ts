@@ -1,7 +1,7 @@
-export class Hoilday{
+export class HoildayModel{
     holiday_id:Number;
-    start_date:Number;
-    end_date:Number;
+    start_date:Date;
+    end_date:Date;
     color:string;
     year:Number;
     hdesc:string;

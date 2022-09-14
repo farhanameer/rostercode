@@ -1,8 +1,8 @@
-export class Response{
+export class ResponseModel<T>{
     status:string;
     statusCode:Number;
     message:string;
-    payload?:Array<any>;
+    payload?:Array<T> | any;
     error?:string;
 
 }

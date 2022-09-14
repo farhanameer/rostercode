@@ -1,4 +1,4 @@
-export class ShiftByDep{
+export class ShiftByDepModel{
     id:Number;
     name:string;
     time_in:Date;
@@ -9,5 +9,5 @@ export class ShiftByDep{
     dep_name:string;
     department_manager_id:Number;
     line_manager:string;
-    
+
 }
