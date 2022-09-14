@@ -2,7 +2,12 @@
   <div class="gradient-head flex justify-content-between">
     <div class="heading">Shift Management (01-11-2021 - 01-12-2021)</div>
     <div class="btn-options flex align-content-center">
-      <a href="#"><img src="assets/icons/ico-close.svg" alt="" /></a>
+      <a
+        ><img
+          src="assets/icons/ico-close.svg"
+          alt=""
+          (click)="activeModal.close('Close click')"
+      /></a>
     </div>
   </div>
   <!-- Body -->
@@ -38,7 +43,12 @@
 
     <div class="modal-footer-button flex">
       <input type="button" class="btn-input" value="Submit" />
-      <input type="button" class="btn-input" value="Cancel" />
+      <input
+        type="button"
+        class="btn-input"
+        value="Cancel"
+        (click)="activeModal.close('Close click')"
+      />
     </div>
   </div>
 </div>
