@@ -1,16 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
-
-
 import { RosterComponent } from './pages/roster/roster.component';
 import { ShiftAllocationComponent } from './pages/shift-allocation/shift-allocation.component';
-import {SingleShiftAllocationDialog } from './dialogs/single-shift-allocation/single-shift-allocation.dialog';
+import { SingleShiftAllocationDialog } from './dialogs/single-shift-allocation/single-shift-allocation.dialog';
 import { OvertimeAdjustmentDialog } from './dialogs/overtime-adjustment/overtime-adjustment.dialog';
-import {  SingleShiftDetailDialog } from './dialogs/single-shift-detail/single-shift-detail.dialog';
-import {DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
-import {  AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
+import { SingleShiftDetailDialog } from './dialogs/single-shift-detail/single-shift-detail.dialog';
+import { DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
+import { AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
 import { ShiftManagmentDialog } from './dialogs/shift-managment/shift-managment.dialog';
 import { ShiftRequestComponent } from './pages/shift-request/shift-request.component';
 import { EmployeeShiftManagementDialog } from './dialogs/employee-shift-management/employee-shift-management.dialog';
@@ -51,10 +48,13 @@ import { RosterComponent2 } from './roster.component';
 import { ShiftsCalenderComponent } from './components/shifts-calender/shifts-calender.component';
 import { SubLayoutComponent } from './layout/sub-layout/sub-layout.component';
 import { DialogLayoutComponent } from './layout/dialog-layout/dialog-layout.component';
-import { NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbActiveModal,
+  NgbModal,
+  NgbModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './services/modal/modal.service';
 import { DateCardComponent } from './components/date-card/date-card.component';
-
 
 @NgModule({
   declarations: [
@@ -100,15 +100,15 @@ import { DateCardComponent } from './components/date-card/date-card.component';
     SubLayoutComponent,
     ShiftsCalenderComponent,
     DialogLayoutComponent,
-    DateCardComponent
+    DateCardComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RosterRoutingModule,
-    NgbModule
+    NgbModule,
   ],
-  providers: [ModalService,NgbActiveModal,NgbModal],
+  providers: [ModalService, NgbActiveModal, NgbModal],
 })
-export class RosterModule { }
+export class RosterModule {}

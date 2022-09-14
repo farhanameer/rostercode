@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
 import { CalendarService } from '../../services/calander.service';
+import { EmployeeShiftDataService } from '../../services/data/dropdown.data';
 import { EmployeeRosterDataService } from '../../services/data/employeeAttendance.data';
 
 @Component({
@@ -11,7 +12,8 @@ import { EmployeeRosterDataService } from '../../services/data/employeeAttendanc
 export class AttendenceCalenderComponent implements OnInit {
   constructor(
     private calender: CalendarService,
-    private dataService: EmployeeRosterDataService
+    private dataService: EmployeeRosterDataService,
+    private dataShiftService: EmployeeShiftDataService
   ) {}
   // weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -26,6 +28,7 @@ export class AttendenceCalenderComponent implements OnInit {
   daysList: [] = [];
   employeeAttendance = [];
 
+  employeeShift = [];
   cplCount: any;
   mmm = {
     Jan: '01',
@@ -99,6 +102,14 @@ export class AttendenceCalenderComponent implements OnInit {
     // this.year_month = `${this.year}-${monthIndex}`;
     // this.getEmpRoster();
   }
+  async getEmpShift() {
+    const result = await this.dataShiftService.getEmployeeShift({});
+    // debugger;
+    console.log(result);
+    this.employeeShift = result['data']['payload']['data'];
+    console.log(`Shift Service Data :${this.employeeShift}`);
+    // this.cplCount = result['data']['payload'].cplCount;
+  }
 
   async getEmpRoster() {
     const result = await this.dataService.getEmployeeRoster({
@@ -109,6 +120,7 @@ export class AttendenceCalenderComponent implements OnInit {
     // console.log(this.employeeAttendance);
     this.cplCount = result['data']['payload'].cplCount;
   }
+
   getAllMonths(isForwardingYear = false) {
     if (isForwardingYear) {
       this.currentDate = moment(this.currentDate).add(1, 'year');
