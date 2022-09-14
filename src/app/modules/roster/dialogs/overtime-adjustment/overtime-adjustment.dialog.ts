@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalService } from '../../services/modal/modal.service';
+import { OvertimeHoursAdjusmentDialog } from '../overtime-hours-adjusment/overtime-hours-adjusment.dialog';
 
 @Component({
   selector: 'app-overtime-adjustment',
@@ -8,8 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class OvertimeAdjustmentDialog implements OnInit {
 
-  constructor(private fb:FormBuilder) { }
-
+  constructor(private fb:FormBuilder,public activeModal: NgbActiveModal,
+    private customModal: ModalService) { }
+  
   ngOnInit(): void {
   }
 
@@ -23,7 +27,11 @@ export class OvertimeAdjustmentDialog implements OnInit {
       payForHours:["",Validators.required]
     })
   })
-
+  open(){
+    {
+      this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog, "Red");
+    }
+  }
 
   submit(){
     console.warn(this.overTimeForm.value)
