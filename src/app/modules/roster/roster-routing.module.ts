@@ -66,6 +66,10 @@ const routes: Routes = [
     component:ShiftManagmentDialog,
     children:[
       {
+        path:'',
+        component:SortByDateComponent
+      },
+      {
         path:'sortbydate',
         component:SortByDateComponent
       },

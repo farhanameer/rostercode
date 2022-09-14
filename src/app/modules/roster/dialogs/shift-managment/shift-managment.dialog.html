@@ -1,54 +1,54 @@
-<div class="wrapper">
-  <div class="container">
-    <div class="header-menu"></div>
-    <div class="modal-custom modal-lg">
-      <div class="gradient-head flex justify-content-between">
-        <div class="heading">Shift Management (01-11-2021 - 01-12-2021)</div>
-        <div class="btn-options flex align-content-center">
-          <a href="#"><img src="icons/ico-close.svg" alt="" /></a>
-        </div>
-      </div>
-      <!-- Body -->
-      <div class="shift-management-wrapper pt-0">
-        <div class="header">
-          <div class="search-row">
-            <form action="" class="flex space-between w-100">
-              <div class="left-col">
-                <label for="radio1">
-                  <a routerLink="sortbydate">
-                    <input type="radio" />Sort by Date
-                  </a>
-                </label>
-                <label for="radio1">
-                  <a routerLink="sortbyemployee">
-                    <input type="radio" />Sort by Employee
-                  </a>
-                </label>
-              </div>
-
-              <input type="text" />
-            </form>
+<div class="modal-custom modal-lg bg-white">
+  <div class="gradient-head flex justify-content-between">
+    <div class="heading">Shift Management (01-11-2021 - 01-12-2021)</div>
+    <div class="btn-options flex align-content-center">
+      <a
+        ><img
+          src="assets/icons/ico-close.svg"
+          alt=""
+          (click)="activeModal.close('Close click')"
+      /></a>
+    </div>
+  </div>
+  <!-- Body -->
+  <div class="shift-management-wrapper pt-0">
+    <div class="header">
+      <div class="search-row">
+        <form action="" class="flex space-between w-100">
+          <div class="left-col">
+            <label for="radio1" (click)="display=true">
+              <a> <input type="radio" />Sort by Date </a>
+            </label>
+            <label for="radio1" (click)="display=false">
+              <a> <input type="radio" />Sort by Employee </a>
+            </label>
           </div>
-        </div>
-      </div>
-      <!-- footer -->
-      <router-outlet></router-outlet>
-      <div class="modal-custom-footer">
-        <ul class="shift-hints">
-          <li><span></span> Morning Shift (07:00 - 14:00)</li>
-          <li>
-            <span class="evening-shift"></span> Evening Shift (14:00 - 00:00)
-          </li>
-          <li><span class="night-shift"></span> Night Shift (20:00 - 05:00)</li>
-        </ul>
 
-        <div class="modal-footer-button flex">
-          <input type="button" class="btn-input" value="Submit" />
-          <input type="button" class="btn-input" value="Cancel" />
-        </div>
+          <input type="text" />
+        </form>
       </div>
     </div>
+  </div>
+  <!-- footer -->
+  <div>
+    <app-sort-by-date *ngIf="display"></app-sort-by-date>
+    <app-sort-by-employee *ngIf="!display"></app-sort-by-employee>
+  </div>
+  <div class="modal-custom-footer">
+    <ul class="shift-hints">
+      <li><span></span> Morning Shift (07:00 - 14:00)</li>
+      <li><span class="evening-shift"></span> Evening Shift (14:00 - 00:00)</li>
+      <li><span class="night-shift"></span> Night Shift (20:00 - 05:00)</li>
+    </ul>
 
-    <!-- Modal list -->
+    <div class="modal-footer-button flex">
+      <input type="button" class="btn-input" value="Submit" />
+      <input
+        type="button"
+        class="btn-input"
+        value="Cancel"
+        (click)="activeModal.close('Close click')"
+      />
+    </div>
   </div>
 </div>

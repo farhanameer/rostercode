@@ -53,7 +53,7 @@ import { SubLayoutComponent } from './layout/sub-layout/sub-layout.component';
 import { DialogLayoutComponent } from './layout/dialog-layout/dialog-layout.component';
 import { NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './services/modal/modal.service';
-import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -99,7 +99,7 @@ import { HttpClientModule } from '@angular/common/http';
     FullLayoutComponent,
     SubLayoutComponent,
     ShiftsCalenderComponent,
-    DialogLayoutComponent
+    DialogLayoutComponent,
   ],
   imports: [
     CommonModule,
@@ -107,7 +107,6 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     RosterRoutingModule,
     NgbModule,
-    HttpClientModule
   ],
   providers: [ModalService,NgbActiveModal,NgbModal],
 })

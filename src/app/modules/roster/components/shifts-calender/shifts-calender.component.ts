@@ -2,6 +2,8 @@ import { RosterService } from './../../services/data/rosterView.data.service';
 import  moment  from 'moment';
 import { Component, Input, OnInit } from '@angular/core';
 import { CalendarService } from '../../services/calander.service';
+import { ModalService } from '../../services/modal/modal.service';
+import { ShiftManagmentDialog } from '../../dialogs/shift-managment/shift-managment.dialog';
 
 @Component({
   selector: 'app-shifts-calender',
@@ -17,7 +19,8 @@ export class ShiftsCalenderComponent implements OnInit {
   year_month = '';
   weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-  constructor(private calendar: CalendarService, private dataService: RosterService) { }
+  constructor(private calendar: CalendarService, private dataService: RosterService,
+    private customModal: ModalService) { }
 
   ngOnInit(): void {
       this.currentDate = moment();
@@ -168,5 +171,9 @@ export class ShiftsCalenderComponent implements OnInit {
   }
 
 
-
+  // dialog open function below:
+  openManagement(){
+    this.customModal.showFeaturedDialog(ShiftManagmentDialog, "Red");
+  }
+  
 }

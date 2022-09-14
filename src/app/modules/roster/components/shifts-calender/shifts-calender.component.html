@@ -1,48 +1,59 @@
 <div class="calendar-wrapper">
-  
   <div class="calendar-navigation">
-    <a><img src="assets/icons/ico-left-arrow.svg" alt="" (click) = "getMonthAndYear()"/></a>
-    <ul class="years-list" >
-      
-      <li *ngFor="let month of months">{{month}}</li>
+    <a
+      ><img
+        src="assets/icons/ico-left-arrow.svg"
+        alt=""
+        (click)="getMonthAndYear()"
+    /></a>
+    <ul class="years-list">
+      <li *ngFor="let month of months">{{ month }}</li>
     </ul>
-    <a><img src="assets/icons/ico-right-arrow.svg" alt="" (click) = "getMonthAndYear(true)"/></a>
+    <a
+      ><img
+        src="assets/icons/ico-right-arrow.svg"
+        alt=""
+        (click)="getMonthAndYear(true)"
+    /></a>
   </div>
 
   <table class="table calendar-table-custom">
     <thead>
       <tr>
-        <th scope="col" *ngFor="let weekday of weekDays">{{weekday}}</th>
+        <th scope="col" *ngFor="let weekday of weekDays">{{ weekday }}</th>
       </tr>
     </thead>
     <tbody>
-
       <tr *ngFor="let nestedArray of reshapedData">
-        <td  *ngFor="let days of nestedArray"
-        [ngStyle]="checkIfOK(days.date)?{'background-color': 'red'} : {'background-color': 'white'}"
-         style="-webkit-user-select:none;"
-        (mousedown)="onDragStart(days.date)"
-        (mouseover)="onDrag(days.date)" 
-        (mouseup)="onDragOver(days.date)" 
+        <td
+          *ngFor="let days of nestedArray"
+          [ngStyle]="
+            checkIfOK(days.date)
+              ? { 'background-color': 'red' }
+              : { 'background-color': 'white' }
+          "
+          style="-webkit-user-select: none"
+          (mousedown)="onDragStart(days.date)"
+          (mouseover)="onDrag(days.date)"
+          (mouseup)="onDragOver(days.date)"
+          (click)="openManagement()"
         >
-
-          <table class="cal-cell" >
-
+          <table class="cal-cell">
             <tr>
               <td>
-                <span class="cal-day">{{days.date}}</span>
+                <span class="cal-day">{{ days.date }}</span>
               </td>
               <td>&nbsp;</td>
             </tr>
 
-            <ng-container *ngFor="let shift of days.shifts; let i = index" >
-              <tr *ngIf="(i+1)<=1">
-                <td [ngStyle]="{'color': shift.color}">{{shift.name}}</td>
-                <td [ngStyle]="{'color': shift.color}">{{shift.shift_employees}}</td>
+            <ng-container *ngFor="let shift of days.shifts; let i = index">
+              <tr *ngIf="i + 1 <= 1">
+                <td [ngStyle]="{ color: shift.color }">{{ shift.name }}</td>
+                <td [ngStyle]="{ color: shift.color }">
+                  {{ shift.shift_employees }}
+                </td>
               </tr>
             </ng-container>
-            
-
 
             <!-- <tr class="yellow">
               <td>Morning</td>
@@ -59,17 +70,14 @@
               <td>12</td>
             </tr> -->
 
-            <tr *ngIf="days.shifts.length>1">
+            <tr *ngIf="days.shifts.length > 1">
               <td>
-                <a href="#">More +{{days.shifts.length - 1}}</a>
+                <a href="#">More +{{ days.shifts.length - 1 }}</a>
               </td>
               <td>&nbsp;</td>
             </tr>
           </table>
         </td>
-
-        
-
 
         <!-- <td class="sat-cell">
           <table class="cal-cell">
@@ -93,10 +101,6 @@
           </table>
         </td> -->
       </tr>
-
-     
-
-
     </tbody>
   </table>
 </div>

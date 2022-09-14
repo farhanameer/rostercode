@@ -3,6 +3,15 @@
 
   <div class="modal-custom">
     <app-dialog-layout>
+      <div class="gradient-head flex justify-content-between">
+        <div class="heading">Single Shift Allocation</div>
+        <div
+          class="btn-options flex align-content-center"
+          (click)="activeModal.close('Close click')"
+        >
+          <a><img src="assets/icons/ico-close.svg" alt="" /></a>
+        </div>
+      </div>
       <!-- Body -->
       <div class="modal-custom-body">
         <div class="table-custom-header">

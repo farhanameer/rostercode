@@ -5,6 +5,8 @@ import { SingleShiftDetailDialog } from '../../dialogs/single-shift-detail/singl
 import { ModalService } from '../../services/modal/modal.service';
 import { PromiseAble } from '../../models/PromiseAble';
 import { APIType } from '../../models/APIType';
+import { OvertimeAdjustmentDialog } from '../../dialogs/overtime-adjustment/overtime-adjustment.dialog';
+import { ShiftManagmentDialog } from '../../dialogs/shift-managment/shift-managment.dialog';
 
 @Component({
   selector: 'app-overview-table',
@@ -23,6 +25,10 @@ export class OverviewTableComponent implements OnInit {
   open(){
     this.customModal.showFeaturedDialog(SingleShiftDetailDialog, "Red");
   }
+  openOverView(){
+    this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, "Red");
+  }
+  
 
 
   async getListCplAndOvertime(){
