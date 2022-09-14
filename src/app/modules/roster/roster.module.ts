@@ -100,6 +100,7 @@ import { DateCardComponent } from './components/date-card/date-card.component';
     SubLayoutComponent,
     ShiftsCalenderComponent,
     DialogLayoutComponent,
+
     DateCardComponent,
   ],
   imports: [

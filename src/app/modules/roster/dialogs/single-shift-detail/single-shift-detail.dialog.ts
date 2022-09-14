@@ -18,6 +18,6 @@ export class SingleShiftDetailDialog implements OnInit {
   }
 
   open(){
-    this.customModal.showFeaturedDialog(SingleShiftAllocationDialog, "Red");
+    this.customModal.showFeaturedDialog(SingleShiftAllocationDialog);
   }
 }
