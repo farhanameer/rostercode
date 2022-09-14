@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-select-box',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectBoxComponent implements OnInit {
 
+  @Input() data;
   constructor() { }
 
   ngOnInit(): void {

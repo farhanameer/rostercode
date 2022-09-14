@@ -20,7 +20,7 @@ export class EmployeeShiftDataService {
 
         this.httpService.getEmployeeShift(params).subscribe(
           (data) => {
-            response.data = data;
+            response.data = data['payload'];
             response.message = 'success';
             response.status = true;
             resolve(response);
