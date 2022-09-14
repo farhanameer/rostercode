@@ -7,6 +7,7 @@ import { PromiseAble } from '../../models/PromiseAble';
 import { APIType } from '../../models/APIType';
 import { OvertimeAdjustmentDialog } from '../../dialogs/overtime-adjustment/overtime-adjustment.dialog';
 import { ShiftManagmentDialog } from '../../dialogs/shift-managment/shift-managment.dialog';
+import { OvertimeHoursAdjusmentDialog } from '../../dialogs/overtime-hours-adjusment/overtime-hours-adjusment.dialog';
 
 @Component({
   selector: 'app-overview-table',
@@ -27,6 +28,9 @@ export class OverviewTableComponent implements OnInit {
   }
   openOverView(){
     this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, "Red");
+  }
+  openHours(){
+    this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog, "Red");
   }
   
 

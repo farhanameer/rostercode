@@ -11,8 +11,7 @@ import { OvertimeHoursAdjusmentDialog } from '../overtime-hours-adjusment/overti
 })
 export class OvertimeAdjustmentDialog implements OnInit {
 
-  constructor(private fb:FormBuilder,public activeModal: NgbActiveModal,
-    private customModal: ModalService) { }
+  constructor(private fb:FormBuilder,public activeModal: NgbActiveModal) { }
   
   ngOnInit(): void {
   }
@@ -27,11 +26,7 @@ export class OvertimeAdjustmentDialog implements OnInit {
       payForHours:["",Validators.required]
     })
   })
-  open(){
-    {
-      this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog, "Red");
-    }
-  }
+  
 
   submit(){
     console.warn(this.overTimeForm.value)
