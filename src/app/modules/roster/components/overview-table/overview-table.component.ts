@@ -24,13 +24,13 @@ export class OverviewTableComponent implements OnInit {
     this.getListCplAndOvertime();
   }
   open(){
-    this.customModal.showFeaturedDialog(SingleShiftDetailDialog, "Red");
+    this.customModal.showFeaturedDialog(SingleShiftDetailDialog);
   }
   openOverView(){
-    this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, "Red");
+    this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog);
   }
   openHours(){
-    this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog, "Red");
+    this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog);
   }
   
 
