@@ -27,8 +27,6 @@ export class AttendenceCalenderComponent implements OnInit {
   year_month: string = '';
   daysList: [] = [];
   employeeAttendance = [];
-
-  employeeShift = [];
   cplCount: any;
   mmm = {
     Jan: '01',
@@ -49,7 +47,6 @@ export class AttendenceCalenderComponent implements OnInit {
     this.currentDate = moment();
     this.month = moment(this.currentDate).format('MMM');
     this.year = moment(this.currentDate).format('YYYY');
-
     this.getMonthAndYear(false, true);
 
     // this.daysList = this.calender.getCalendar(
@@ -101,14 +98,6 @@ export class AttendenceCalenderComponent implements OnInit {
     // const monthIndex = this.mmm[this.month];
     // this.year_month = `${this.year}-${monthIndex}`;
     // this.getEmpRoster();
-  }
-  async getEmpShift() {
-    const result = await this.dataShiftService.getEmployeeShift({});
-    // debugger;
-    console.log(result);
-    this.employeeShift = result['data']['payload']['data'];
-    console.log(`Shift Service Data :${this.employeeShift}`);
-    // this.cplCount = result['data']['payload'].cplCount;
   }
 
   async getEmpRoster() {

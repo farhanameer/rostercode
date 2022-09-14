@@ -9,7 +9,7 @@ import { APIs } from 'src/environments/environment';
 export class HttpEmployeeShift {
   roster: string = '';
   constructor(private http: HttpClient) {
-    this.roster = APIs['rosterUrl'];
+    this.roster = APIs['workCalendarUrl'];
   }
 
   getEmployeeShift(params = {}) {

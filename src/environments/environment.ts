@@ -154,6 +154,8 @@ export const APIs = {
   notificationUrl: environment.nodeApiUrl + 'Notification',
   // Roster Module Api
   rosterUrl: environment.nodeApiUrl + 'roster',
+
+  workCalendarUrl: environment.nodeApiUrl + 'WorkCalendar',
 };
 
 /*
