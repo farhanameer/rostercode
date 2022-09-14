@@ -8,22 +8,22 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let object of cplEmployees">
+    <tr *ngFor="let employee of cplEmployees">
       <td>
-        <div class="pic-name-list" (click)="open()">
+        <div class="pic-name-list" (click)="open(employee)">
           <span class="user-img"
             ><img src="assets/images/img-dummy.png" alt="" /></span
-          >{{ object.name }}
+          >{{ employee.name }}
         </div>
       </td>
       <td>
-        <a href="#">{{ object.cpl }}</a>
+        <a href="#">{{ employee.cpl }}</a>
       </td>
       <td (click)="openOverView()">
-        <a>{{ object.overtime }}</a>
+        <a>{{ employee.overtime }}</a>
       </td>
       <td>
-        <a>{{ object.approved_hours }}</a>
+        <a>{{ employee.approved_hours }}</a>
       </td>
     </tr>
 

@@ -17,13 +17,13 @@ export class ModalService {
       return modalRef;
     }
   
-    showFeaturedDialog(theComponent: any, name: any) {
+    showFeaturedDialog(theComponent: any, employee: any) {
       const componenetFactory = this.componentFactoryResolver.resolveComponentFactory(
         theComponent
       );
   
       const modalRef = this.ngbModal.open(theComponent, {modalDialogClass: 'ag-modal'});
-      modalRef.componentInstance.name = name;
+      modalRef.componentInstance.data = employee;
       return modalRef;
     }
 }

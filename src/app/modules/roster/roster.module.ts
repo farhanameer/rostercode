@@ -53,6 +53,7 @@ import { SubLayoutComponent } from './layout/sub-layout/sub-layout.component';
 import { DialogLayoutComponent } from './layout/dialog-layout/dialog-layout.component';
 import { NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './services/modal/modal.service';
+import { DateCardComponent } from './components/date-card/date-card.component';
 
 
 
@@ -100,6 +101,7 @@ import { ModalService } from './services/modal/modal.service';
     SubLayoutComponent,
     ShiftsCalenderComponent,
     DialogLayoutComponent,
+    DateCardComponent
   ],
   imports: [
     CommonModule,
@@ -107,6 +109,7 @@ import { ModalService } from './services/modal/modal.service';
     ReactiveFormsModule,
     RosterRoutingModule,
     NgbModule,
+
   ],
   providers: [ModalService,NgbActiveModal,NgbModal],
 })

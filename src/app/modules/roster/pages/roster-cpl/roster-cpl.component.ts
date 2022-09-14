@@ -8,7 +8,6 @@ import { Component, Input, OnInit } from '@angular/core';
 export class RosterCplComponent implements OnInit {
 
   @Input() shifts = {};
-
   constructor() { }
 
   ngOnInit(): void {

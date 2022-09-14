@@ -1,6 +1,6 @@
 import { RosterService } from './../../services/data/rosterView.data.service';
 import { CplAndOvertime } from './../../models/CplAndOvertime';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SingleShiftDetailDialog } from '../../dialogs/single-shift-detail/single-shift-detail.dialog';
 import { ModalService } from '../../services/modal/modal.service';
 import { PromiseAble } from '../../models/PromiseAble';
@@ -14,6 +14,8 @@ import { ShiftManagmentDialog } from '../../dialogs/shift-managment/shift-managm
   styleUrls: ['./overview-table.component.css']
 })
 export class OverviewTableComponent implements OnInit {
+  
+  @Input() employee;
 
   cplEmployees: CplAndOvertime[];
 
@@ -22,8 +24,8 @@ export class OverviewTableComponent implements OnInit {
   ngOnInit(): void {
     this.getListCplAndOvertime();
   }
-  open(){
-    this.customModal.showFeaturedDialog(SingleShiftDetailDialog, "Red");
+  open(employee:any){
+    this.customModal.showFeaturedDialog(SingleShiftDetailDialog, employee);
   }
   openOverView(){
     this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, "Red");
