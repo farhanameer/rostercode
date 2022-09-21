@@ -9,7 +9,7 @@ import { EmployeeShiftDataService } from '../../services/data/dropdown.data';
 })
 export class SingleShiftAllocationDialog implements OnInit {
 
-  @Input() data:any;
+  @Input() data;
 
   shiftAllocate = [];
   constructor(
