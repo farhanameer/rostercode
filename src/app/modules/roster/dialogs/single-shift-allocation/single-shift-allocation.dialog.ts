@@ -11,9 +11,9 @@ export class SingleShiftAllocationDialog implements OnInit {
 
   @Input() data:any;
 
-  shiftAllocate = [];
+  shiftAllocate :any;
   constructor(
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private employeeShiftDataService: EmployeeShiftDataService
   ) { }
 
