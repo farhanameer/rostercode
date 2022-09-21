@@ -11,6 +11,7 @@ import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employ
 export class ShiftManagmentDialog implements OnInit {
 display:boolean;
 
+
   constructor(public activeModal: NgbActiveModal,
     private customModel:ModalService) { }
 

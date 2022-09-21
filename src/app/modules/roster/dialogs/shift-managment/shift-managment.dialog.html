@@ -1,5 +1,5 @@
 <app-dialog-layout>
-  <div class="modal-custom modal-lg bg-white">
+  <div class="modal-custom modal-lg bg-white modal-center">
     <div class="gradient-head flex justify-content-between">
       <div class="heading">Shift Management (01-11-2021 - 01-12-2021)</div>
       <div class="btn-options flex align-content-center">
@@ -17,14 +17,15 @@
         <div class="search-row">
           <form action="" class="flex space-between w-100">
             <div class="left-col">
-              <label for="radio1" (click)="display=true">
-                <a> <input type="radio" />Sort by Date </a>
-              </label>
-              <label for="radio1" (click)="display=false">
-                <a> <input type="radio" />Sort by Employee </a>
-              </label>
+              <label for="radio1">
+                <input type="radio" id="date" (click)="display=true" />Sort by
+                Date</label
+              >
+              <label for="radio1">
+                <input type="radio" id="employee" (click)="display=false" />Sort
+                by Employee</label
+              >
             </div>
-
             <input type="text" />
           </form>
         </div>

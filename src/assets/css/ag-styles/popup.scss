@@ -318,3 +318,35 @@
   color: $blue;
   font-weight: 500;
 }
+.modal-lg-01 {
+  width: 932px;
+}
+
+.form-col {
+  display: flex;
+  gap: 36px;
+  padding-bottom: 10px;
+  .col-item {
+    border: 1px solid red;
+    width: 260px;
+  }
+}
+
+.shift-card-wrapper {
+  .shift-header {
+    width: 100%;
+    background: #ededed;
+    border-bottom: 1px solid #eeeeee;
+    height: 28px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .shift-card {
+    border: 1px solid #eeeeee;
+    width: 100%;
+    padding: 11px 20px 0px;
+  }
+}

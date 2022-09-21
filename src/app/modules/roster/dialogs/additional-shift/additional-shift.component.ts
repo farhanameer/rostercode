@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from '../../services/modal/modal.service';
-import { AdditionalShiftComponent } from '../additional-shift/additional-shift.component';
 import { ChangeShiftComponent } from '../change-shift/change-shift.component';
+import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employee-shift-managment.dialog';
 
 @Component({
-  selector: 'app-employee-shift-managment',
-  templateUrl: './employee-shift-managment.dialog.html',
-  styleUrls: ['./employee-shift-managment.dialog.css']
+  selector: 'app-additional-shift',
+  templateUrl: './additional-shift.component.html',
+  styleUrls: ['./additional-shift.component.css']
 })
-export class EmployeeShiftManagmentDialog implements OnInit {
+export class AdditionalShiftComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal ,private customModal:ModalService ) { }
 

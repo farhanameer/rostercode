@@ -55,6 +55,9 @@ import {
 import { ModalService } from './services/modal/modal.service';
 import { DateCardComponent } from './components/date-card/date-card.component';
 import { EmployeeShiftManagmentDialog } from './dialogs/employee-shift-managment/employee-shift-managment.dialog';
+import { ChangeShiftComponent } from './dialogs/change-shift/change-shift.component';
+import { AdditionalShiftComponent } from './dialogs/additional-shift/additional-shift.component';
+import { MarkWeekendComponent } from './components/mark-weekend/mark-weekend.component';
 
 
 
@@ -104,6 +107,9 @@ import { EmployeeShiftManagmentDialog } from './dialogs/employee-shift-managment
     DialogLayoutComponent,
     DateCardComponent,
     EmployeeShiftManagmentDialog,
+    ChangeShiftComponent,
+    AdditionalShiftComponent,
+    MarkWeekendComponent,
    
   ],
   imports: [
