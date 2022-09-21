@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SelectBoxComponent implements OnInit {
 
-  @Input() data;
+  @Input() data:any;
   constructor() { }
 
   ngOnInit(): void {

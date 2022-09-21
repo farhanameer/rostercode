@@ -10,7 +10,6 @@ import { DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
 import { AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
 import { ShiftManagmentDialog } from './dialogs/shift-managment/shift-managment.dialog';
 import { ShiftRequestComponent } from './pages/shift-request/shift-request.component';
-import { EmployeeShiftManagementDialog } from './dialogs/employee-shift-management/employee-shift-management.dialog';
 import { OvertimeHoursAdjusmentDialog } from './dialogs/overtime-hours-adjusment/overtime-hours-adjusment.dialog';
 import { MorningJobShiftDialog } from './dialogs/morning-job-shift/morning-job-shift.dialog';
 import { NightJobShiftDialog } from './dialogs/night-job-shift/night-job-shift.dialog';
@@ -55,6 +54,8 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from './services/modal/modal.service';
 import { DateCardComponent } from './components/date-card/date-card.component';
+import { EmployeeShiftManagmentDialog } from './dialogs/employee-shift-managment/employee-shift-managment.dialog';
+
 
 
 
@@ -92,7 +93,6 @@ import { DateCardComponent } from './components/date-card/date-card.component';
     JobshiftDialog,
     ShiftRequestComponent,
     ShiftListComponent,
-    EmployeeShiftManagementDialog,
     OvertimeHoursAdjusmentDialog,
     ShiftRequestDetailComponent,
     MorningJobShiftDialog,
@@ -102,7 +102,9 @@ import { DateCardComponent } from './components/date-card/date-card.component';
     SubLayoutComponent,
     ShiftsCalenderComponent,
     DialogLayoutComponent,
-    DateCardComponent
+    DateCardComponent,
+    EmployeeShiftManagmentDialog,
+   
   ],
   imports: [
     CommonModule,

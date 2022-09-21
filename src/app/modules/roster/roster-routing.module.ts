@@ -5,7 +5,6 @@ import { SortByDateComponent } from './components/sort-by-date/sort-by-date.comp
 import { SortByEmployeeComponent } from './components/sort-by-employee/sort-by-employee.component';
 import { AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
 import { DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
-import {  EmployeeShiftManagementDialog } from './dialogs/employee-shift-management/employee-shift-management.dialog';
 import {JobshiftDialog } from './dialogs/jobshift/jobshift.dialog';
 import { MorningJobShiftDialog } from './dialogs/morning-job-shift/morning-job-shift.dialog';
 import { NightJobShiftDialog } from './dialogs/night-job-shift/night-job-shift.dialog';
@@ -93,10 +92,7 @@ const routes: Routes = [
     path:'shiftrequest',
     component:ShiftRequestComponent
   },
-  {
-    path:'employeeshift',
-    component:EmployeeShiftManagementDialog
-  },
+  
   {
     path:'overtimehours',
     component:OvertimeHoursAdjusmentDialog

@@ -5433,6 +5433,7 @@ button.close {
 .modal.show .modal-dialog {
   -webkit-transform: translate(0, 0);
   transform: translate(0, 0);
+
 }
 
 .modal-dialog-centered {

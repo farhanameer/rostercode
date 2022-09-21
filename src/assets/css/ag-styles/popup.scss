@@ -249,5 +249,72 @@
         }
       }
     }
+    &.with-checboxes {
+      overflow-y: auto;
+      overflow-x: auto;
+      height: 360px;
+      ul {
+        border: none;
+        padding: 0px;
+        background-color: transparent;
+        border-radius: 0px;
+        gap: 10px;
+        height: auto;
+        overflow: initial;
+
+        li {
+          border: 1px solid #d8dcdf;
+          background: rgba(216, 220, 223, 0.1);
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          height: auto;
+          border-radius: 5px;
+          .heading-date {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+          .list-checkbox {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-top: 5px;
+            &:has(input) {
+              padding-left: 10px;
+            }
+          }
+          .list-white {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            height: 28px;
+            padding: 0px 10px;
+            border: 1px solid #d8dcdf;
+            border-radius: 2px;
+          }
+        }
+      }
+    }
   }
+}
+
+.mark-sheet {
+  background-color: #ededed;
+  height: 24px;
+
+  padding: 0px 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.blue-label {
+  color: $blue;
+  font-weight: 500;
 }
