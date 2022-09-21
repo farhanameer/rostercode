@@ -5,27 +5,11 @@
         <div class="table-header gradient-head flex justify-content-between">
           <div class="heading">Roaster</div>
           <div class="btn-options flex align-content-center">
-            <select name="shift_1" id="1" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="Evening Shift">Evening Shift</option>
-              <option value="Morning Shift">Morning Shift</option>
-            </select>
-            <select name="shift_2" id="2" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="0">Evening Shift</option>
-            </select>
-            <select name="shift_3" id="3" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="0">Evening Shift</option>
-            </select>
-            <select name="shift_4" id="4" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="0">Evening Shift</option>
-            </select>
-            <select name="shift_5" id="5" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="0">Evening Shift</option>
-            </select>
+            <app-select-box> </app-select-box>
+            <app-select-box> </app-select-box>
+            <app-select-box> </app-select-box>
+            <app-select-box> </app-select-box>
+            <app-select-box> </app-select-box>
           </div>
         </div>
         <div class="col-shift-allocation">
