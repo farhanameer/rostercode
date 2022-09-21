@@ -1,181 +1,6 @@
 <div class="wrapper">
   <div class="container">
-    <div class="header-menu"></div>
-
-    <div class="modal-custom">
-      <div class="gradient-head flex justify-content-between">
-        <div class="heading">All Modal Titles</div>
-        <div class="btn-options flex align-content-center">
-          <a href="#"><img src="icons/ico-close.svg" alt="" /></a>
-        </div>
-      </div>
-      <!-- Body -->
-      <div class="modal-custom-body">
-        <div class="table-custom-header">
-          <div><span>Name:</span> Hisham Talib Qureshi</div>
-
-          <div><span>Name:</span> Hisham Talib Qureshi</div>
-        </div>
-        <table class="table table-modal">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Already Allocated Shift</th>
-              <th>Allocate Shift</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><select name="" id=""></select></td>
-              <td>Morning</td>
-              <td><select name="" id=""></select></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- footer -->
-
-      <div class="modal-custom-footer">
-        <div class="clues">
-          <span>
-            <i><img src="icons/icon-cpl.svg" alt="" /></i> CPL Due</span
-          >
-          <span>
-            <i><img src="icons/icon-minus.svg" alt="" /> Absents</i>
-          </span>
-        </div>
-
-        <div class="modal-footer-button flex">
-          <input type="button" class="btn-input" value="Submit" />
-          <input type="button" class="btn-input" value="Cancel" />
-        </div>
-      </div>
-    </div>
-
     <!-- Modal list -->
-
-    <div class="modal-custom">
-      <div class="gradient-head flex justify-content-between">
-        <div class="heading">Wednesday, October 6</div>
-        <div class="btn-options flex align-content-center">
-          <a href="#"><img src="icons/ico-close.svg" alt="" /></a>
-        </div>
-      </div>
-      <!-- Body -->
-
-      <div class="user-list-employee">
-        <ul>
-          <li>
-            <div class="user-img">
-              <img src="images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: Bryan Danielson</div>
-              <div class="heading-sm">Employee Code: 98752</div>
-            </div>
-          </li>
-          <li>
-            <div class="user-img">
-              <img src="images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: Bryan Danielson</div>
-              <div class="heading-sm">Employee Code: 98752</div>
-            </div>
-          </li>
-          <li>
-            <div class="user-img">
-              <img src="images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: Bryan Danielson</div>
-              <div class="heading-sm">Employee Code: 98752</div>
-            </div>
-          </li>
-          <li>
-            <div class="user-img">
-              <img src="images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: Bryan Danielson</div>
-              <div class="heading-sm">Employee Code: 98752</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- footer -->
-
-      <div class="modal-custom-footer">
-        <div class="clues">
-          <span>
-            <i><img src="icons/icon-cpl.svg" alt="" /></i> CPL Due</span
-          >
-          <span>
-            <i><img src="icons/icon-minus.svg" alt="" /> Absents</i>
-          </span>
-        </div>
-
-        <div class="modal-footer-button flex">
-          <input type="button" class="btn-input" value="Submit" />
-          <input type="button" class="btn-input" value="Cancel" />
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal list -->
-
-    <div class="modal-custom">
-      <div class="gradient-head flex justify-content-between">
-        <div class="heading">Overtime Hours Adjustment</div>
-        <div class="btn-options flex align-content-center">
-          <a href="#"><img src="icons/ico-close.svg" alt="" /></a>
-        </div>
-      </div>
-      <!-- Body -->
-
-      <div class="user-list-employee pt-0">
-        <ul class="overtime-header">
-          <li>
-            <div class="user-img">
-              <img src="images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: Bryan Danielson</div>
-              <div class="heading-sm">Employee Code: 98752</div>
-            </div>
-          </li>
-        </ul>
-
-        <div class="overtime-form">
-          <ul>
-            <li>overtime (hrs)</li>
-            <li>overtime (hrs)</li>
-            <li>overtime (hrs)</li>
-            <li>overtime (hrs)</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- footer -->
-
-      <div class="modal-custom-footer">
-        <div class="clues">
-          <span>
-            <i><img src="icons/icon-cpl.svg" alt="" /></i> CPL Due</span
-          >
-          <span>
-            <i><img src="icons/icon-minus.svg" alt="" /> Absents</i>
-          </span>
-        </div>
-
-        <div class="modal-footer-button flex">
-          <input type="button" class="btn-input" value="Submit" />
-          <input type="button" class="btn-input" value="Cancel" />
-        </div>
-      </div>
-    </div>
 
     <!-- Modal list -->
 
@@ -189,338 +14,87 @@
       <!-- Body -->
 
       <div class="shift-management-wrapper pt-0">
-        <div class="shift-management-list">
+        <div class="header">
+          <div class="search-row">
+            <form action="" class="flex space-between w-100">
+              <div class="left-col">
+                <label for="radio1"> <input type="radio" />Sort by Date</label>
+                <label for="radio1">
+                  <input type="radio" checked />Sort by Employee</label
+                >
+              </div>
+
+              <input type="text" />
+            </form>
+          </div>
+        </div>
+
+        <div class="shift-management-list date-wise with-checboxes">
           <ul>
-            <li class="heading-date">01 Nov 2021</li>
             <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
+              <div class="heading-date">
+                <div class="user-img">
+                  <img src="images/img-dummy.png" alt="" />
+                </div>
+                Natalya Neidhart
               </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-          </ul>
-
-          <ul>
-            <li class="heading-date">01 Nov 2021</li>
-            <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
+              <div class="list-checkbox">
+                <div class="list-white">
+                  <div class="user-img">
+                    <span></span>
+                  </div>
+                  <div class="employee-detail">
+                    <div class="heading-lg">01-11-2020</div>
+                    <img src="icons/ico-present-02.svg" alt="" />
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
           <ul>
-            <li class="heading-date">01 Nov 2021</li>
             <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
+              <div class="heading-date">
+                <div class="user-img">
+                  <img src="images/img-dummy.png" alt="" />
+                </div>
+                Natalya Neidhart
               </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
+              <div class="list-checkbox">
+                <div class="list-white">
+                  <div class="user-img">
+                    <span></span>
+                  </div>
+                  <div class="employee-detail">
+                    <div class="heading-lg">01-11-2020</div>
+                    <img src="icons/ico-present-02.svg" alt="" />
+                  </div>
+                </div>
               </div>
             </li>
+          </ul>
+          <ul>
             <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
+              <div class="heading-date">
+                <div class="user-img">
+                  <img src="images/img-dummy.png" alt="" />
+                </div>
+                Natalya Neidhart
               </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-            <li>
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li class="purple">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">Natalya Neidhart</div>
-                <img src="icons/ico-present-02.svg" alt="" />
+              <div class="list-checkbox">
+                <div class="list-white">
+                  <div class="user-img">
+                    <span></span>
+                  </div>
+                  <div class="employee-detail">
+                    <div class="heading-lg">01-11-2020</div>
+                    <img src="icons/ico-present-02.svg" alt="" />
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
         </div>
       </div>
-
       <!-- footer -->
 
       <div class="modal-custom-footer">
@@ -553,95 +127,18 @@
       <div class="shift-management-wrapper pt-0">
         <div class="header">
           <div class="search-row">
-            <form action="" class="flex space-between w-100">
+            <div class="mark-sheet">
               <div class="left-col">
-                <label for="radio1"> <input type="radio" />Sort by Date</label>
-                <label for="radio1"> <input type="radio" />Sort by Date</label>
+                <label for="radio1"> <input type="radio" />Mark Weekends</label>
+                <label for="radio1"> <input type="radio" />Change Shift</label>
+                <label for="radio1">
+                  <input type="radio" />Assign Additional Shift</label
+                >
               </div>
-
-              <input type="text" />
-            </form>
+            </div>
           </div>
         </div>
-
-        <div class="shift-management-list date-wise">
-          <ul>
-            <li class="heading-date">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
-            </li>
-
-            <li>
-              <div class="user-img">
-                <span></span>
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">01-11-2020</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-          </ul>
-
-          <ul>
-            <li class="heading-date">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
-            </li>
-            <li>
-              <div class="user-img">
-                <span></span>
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">01-11-2020</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li>
-              <div class="user-img">
-                <span></span>
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">01-11-2020</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-          </ul>
-
-          <ul>
-            <li class="heading-date">
-              <div class="user-img">
-                <img src="images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
-            </li>
-            <li>
-              <div class="user-img">
-                <span></span>
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">01-11-2020</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-
-            <li>
-              <div class="user-img">
-                <span></span>
-              </div>
-              <div class="employee-detail">
-                <div class="heading-lg">01-11-2020</div>
-                <img src="icons/ico-present-02.svg" alt="" />
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
-
       <!-- footer -->
 
       <div class="modal-custom-footer">

@@ -1485,4 +1485,6 @@
 .ag-modal .modal-content {
   background-color: transparent;
   border: none;
+  max-width: fit-content !important;
+  align-items: center;
 }
