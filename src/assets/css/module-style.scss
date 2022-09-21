@@ -15,6 +15,7 @@
 @import "ag-styles/colors";
 @import "ag-styles/status-dropdown";
 @import "ag-styles/user-list-shifts";
+@import "ag-styles/calendar-mini.scss";
 @import "ag-styles/popup.scss";
 
 .custom-cdk-input {
@@ -1485,4 +1486,6 @@
 .ag-modal .modal-content {
   background-color: transparent;
   border: none;
+  max-width: fit-content !important;
+  align-items: center;
 }

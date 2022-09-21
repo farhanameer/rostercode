@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ShiftAllocationComponent } from '../../pages/shift-allocation/shift-allocation.component';
 import { ModalService } from '../../services/modal/modal.service';
 import { SingleShiftAllocationDialog } from '../single-shift-allocation/single-shift-allocation.dialog';
 
@@ -24,6 +25,6 @@ export class SingleShiftDetailDialog implements OnInit, OnChanges {
 
   open(){
     this.customModal.showFeaturedDialog(SingleShiftAllocationDialog, this.data);
-
+this.activeModal.close(ShiftAllocationComponent)
   }
 }
