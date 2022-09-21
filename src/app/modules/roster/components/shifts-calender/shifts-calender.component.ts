@@ -173,7 +173,7 @@ export class ShiftsCalenderComponent implements OnInit {
 
   // dialog open function below:
   openManagement(){
-    this.customModal.showFeaturedDialog(ShiftManagmentDialog,'');
+    this.customModal.showFeaturedDialog(ShiftManagmentDialog,"");
   }
   
 }
