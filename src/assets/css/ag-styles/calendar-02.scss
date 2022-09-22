@@ -1,0 +1,175 @@
+
+.calendar-wrapper {
+  padding: 15px;
+  padding-top: 0px;
+  width: 100%;
+}
+
+.calendar-roaster {
+  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 0px;
+  width: 100%;
+  input[type="checkbox"]{
+    margin-right: 15px;
+    margin-top: 2px;
+    
+  }
+  thead {
+    border-collapse: collapse;
+    >tr{
+      th{
+        font-size: 10px;
+        font-weight: 700;
+        color: $blue;
+        padding: 0.45rem;
+        text-align: center;
+        border-bottom: transparent;
+        border-right: 1px solid #dee2e6;
+        border-left: 1px solid #dee2e6;
+        width: calc(100% / 7);
+      }
+    }
+  }
+  >tbody{
+    font-size: 11px;
+    color: $black;
+      >tr{
+        >td {
+          padding: 9px 8px 8px;
+          border-right: 1px solid #dee2e6;
+          a{
+            color: $blue;
+          }
+          &.morning-shift {
+            background: transparent linear-gradient(180deg, #FFF1CE 0%, rgba(255, 241, 206, 0) 34%) 0% 0% no-repeat padding-box;
+          }
+          &.evening-shift {
+            background: transparent linear-gradient(180deg, rgba(255, 194, 194, 0.775) 0%, rgba(255, 194, 194, 0) 34%) 0% 0% no-repeat padding-box;
+          }
+          &.night-shift {
+            background: transparent linear-gradient(180deg, rgba(245, 209, 254, 0.775) 0%, rgba(245, 209, 254, 0) 34%) 0% 0% no-repeat padding-box;
+          }
+        }
+      }
+  }
+
+  .cal-cell {
+    width: 100%;
+    td {
+      @include reset-list;
+      border: none;
+      padding-top:1px;
+
+      .cal-day {
+        font-size: 20px;
+        font-weight: 100;
+        color: $black;
+        padding-bottom: 1px;
+        display: flex;
+      }
+      span {
+        color: #A8A8A8;
+        margin-right: 4px;
+        &.dash {
+          margin: 0px 6px;
+        }
+      }
+
+    }
+
+  }
+}
+
+.disable  tr td, .disable  tr td a, .disable  tr td span  {
+  color: $disable !important;
+  pointer-events:none !important;
+}
+
+.sat-cell{
+  pointer-events:none !important;
+  background-color: #F8F8F8;
+}
+.sunday-cell {
+  pointer-events:none !important;
+  background-color:   #FFF3F3
+
+}
+
+.calendar-footer {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  background-color: #D8DCDF;
+  padding: 0px 15px;
+  justify-content: space-between;
+
+
+  ul.shift-tags {
+    display: flex;
+    gap: 20px;
+    li{
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+  }
+}
+
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+  justify-content: space-between;
+  gap: 98px;
+  ul.years-list{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    
+    li {
+      a {
+        white-space: nowrap;
+      }
+    }
+
+  }
+  
+}
+
+.table-header {
+  select {
+    border: 1px solid #D8DCDF;
+    font-size: 11px;
+    border-radius: 4px;
+    padding: 0px 1px;
+    min-width: 105px;
+  }
+  .btn-options {
+    gap: 6px;
+  }
+}
+
+ul.shift-hints{
+  display: flex;
+  gap: 20px;
+  li { 
+    gap: 5px;
+    display:flex;
+    @include flex-center;
+    span {
+      display: flex;
+      @include square (7,7,100px);
+      background-color: $orange;
+      border:1px solid white;
+      &.evening-shift {
+        background-color: $red-medium;
+      }
+      &.night-shift {
+        background-color: $purple-light;
+      }
+    }
+  }
+
+}
