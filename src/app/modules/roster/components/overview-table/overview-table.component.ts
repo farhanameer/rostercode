@@ -1,3 +1,4 @@
+import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
 import { RosterService } from './../../services/data/rosterView.data.service';
 import { CplAndOvertime } from './../../models/CplAndOvertime';
 import { Component, Input, OnInit } from '@angular/core';
@@ -20,7 +21,8 @@ export class OverviewTableComponent implements OnInit {
   employeeShift = [];
   constructor(
     private dataService: RosterService,
-    private customModal: ModalService
+    private customModal: ModalService,
+    private appLocalStorage: AppLocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +40,11 @@ export class OverviewTableComponent implements OnInit {
   }
 
   async getListCplAndOvertime() {
-    const data = await (this.dataService.ListCplAndOvertime() as Promise<
+    const data = await (this.dataService.listCplAndOvertime({
+      "client_id" :this.appLocalStorage.getClientId(), 
+       "linemanager_id" : this.appLocalStorage.getUserId(),
+      "is_roster_emp" : 1   
+  }) as Promise<
       PromiseAble<APIType<CplAndOvertime>>
     >);
     if (Array.isArray(data.data.payload)) {

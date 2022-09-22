@@ -33,7 +33,7 @@ import { OverviewTableComponent } from './components/overview-table/overview-tab
 import { JobShiftCalenderComponent } from './components/job-shift-calender/job-shift-calender.component';
 import { JobShiftDetailComponent } from './components/job-shift-detail/job-shift-detail.component';
 
-import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+
 import { SortByDateComponent } from './components/sort-by-date/sort-by-date.component';
 import { SortByEmployeeComponent } from './components/sort-by-employee/sort-by-employee.component';
 import { MainCardComponent } from './components/main-card/main-card.component';
@@ -55,6 +55,16 @@ import {
 import { ModalService } from './services/modal/modal.service';
 import { DateCardComponent } from './components/date-card/date-card.component';
 import { EmployeeShiftManagmentDialog } from './dialogs/employee-shift-managment/employee-shift-managment.dialog';
+import { ChangeShiftComponent } from './dialogs/change-shift/change-shift.component';
+import { AdditionalShiftComponent } from './dialogs/additional-shift/additional-shift.component';
+import { MarkWeekendComponent } from './components/mark-weekend/mark-weekend.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { InputBoxComponent } from './components/input-box/input-box.component';
+import { TimeBoxComponent } from './components/time-box/time-box.component';
+import { CheckBoxComponent } from './components/check-box/check-box.component';
+import { CheckInOutCalendarComponent } from './components/check-in-out-calendar/check-in-out-calendar.component';
 
 
 
@@ -85,7 +95,6 @@ import { EmployeeShiftManagmentDialog } from './dialogs/employee-shift-managment
     SingleShiftDetailDialog,
     DisclaimerDialog,
     ShiftManagmentDialog,
-    RadioButtonComponent,
     SortByDateComponent,
     SortByEmployeeComponent,
     MainCardComponent,
@@ -104,9 +113,19 @@ import { EmployeeShiftManagmentDialog } from './dialogs/employee-shift-managment
     DialogLayoutComponent,
     DateCardComponent,
     EmployeeShiftManagmentDialog,
+    ChangeShiftComponent,
+    AdditionalShiftComponent,
+    MarkWeekendComponent,
+    InputBoxComponent,
+    TimeBoxComponent,
+    CheckBoxComponent,
+    CheckInOutCalendarComponent,
    
   ],
   imports: [
+    MatSelectModule,
+    MatFormFieldModule,
+    MatOptionModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

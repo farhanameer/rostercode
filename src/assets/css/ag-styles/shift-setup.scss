@@ -1,0 +1,35 @@
+.shift-setup {
+  .shadow {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .table{
+      margin-bottom: 0px;
+    }
+  }
+  .shift-card-wrapper {
+    .shift-card{
+      padding: 20px 20px 12px;
+      .form-col {
+        flex-wrap: wrap ;
+        row-gap: 15px;
+        column-gap: 36px;
+      }
+    }
+  }
+}
+
+.shift-setup-footer{
+  background: #D8DCDF;
+  height: 28px;
+  width: 100%;
+}
+
+.pt-10 {
+  margin-top: 10px;
+}
+.no-pad {
+  padding: 0px !important;
+}

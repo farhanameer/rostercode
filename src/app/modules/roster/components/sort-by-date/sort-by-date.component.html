@@ -1,40 +1,19 @@
 <div class="shift-management-wrapper pt-0">
   <div class="shift-management-list">
-    <app-main-card>
+    <app-main-card *ngFor="let date of data">
       <ul>
-        <li class="heading-date">01 Nov 2021</li>
-        <app-employee-card>
+        <li class="heading-date">{{date.date}}</li>
+        <app-employee-card *ngFor="let employee of date.employees">
           <li>
             <div class="user-img">
               <img src="images/img-dummy.png" alt="" />
             </div>
             <div class="employee-detail">
-              <div class="heading-lg">Natalya Neidhart</div>
+              <div class="heading-lg">{{employee.emp_name}}</div>
               <img src="icons/ico-present-02.svg" alt="" />
             </div>
           </li>
         </app-employee-card>
-        <app-employee-card>
-          <li>
-            <div class="user-img">
-              <img src="images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Natalya Neidhart</div>
-              <img src="icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-employee-card>
-      </ul>
-    </app-main-card>
-    <app-main-card>
-      <ul>
-        <li class="heading-date">01 Nov 2021</li>
-        <app-employee-card></app-employee-card>
-        <app-employee-card></app-employee-card>
-        <app-employee-card></app-employee-card>
-        <app-employee-card></app-employee-card>
-        <app-employee-card></app-employee-card>
       </ul>
     </app-main-card>
   </div>

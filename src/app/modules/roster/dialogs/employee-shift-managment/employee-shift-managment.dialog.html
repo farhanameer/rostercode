@@ -19,8 +19,10 @@
           <div class="mark-sheet">
             <div class="left-col">
               <label for="radio1"> <input type="radio" />Mark Weekends</label>
-              <label for="radio1"> <input type="radio" />Change Shift</label>
-              <label for="radio1">
+              <label for="radio1" (click)="openChangeShift()">
+                <input type="radio" />Change Shift</label
+              >
+              <label for="radio1" (click)="openAdditionalShift()">
                 <input type="radio" />Assign Additional Shift</label
               >
             </div>
@@ -32,7 +34,7 @@
             <div class="left-col">
               <label for="radio1"> <input type="radio" />Sort by Date</label>
               <label for="radio1">
-                <input type="radio" checked />Sort by Employee</label
+                <input type="radio" />Sort by Employee</label
               >
               <label for="" class="blue-label"
                 >*Uncheck to mark day-off/weekends</label

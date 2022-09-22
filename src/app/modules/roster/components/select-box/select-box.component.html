@@ -1,3 +1,31 @@
-<select name="" id="">
-  <option *ngFor="let shift of data" [value]="shift.id">{{shift.name}}</option>
-</select>
+<div class="module-style">
+  <mat-form-field class="cus-m-0" appearance="fill">
+    <mat-label>label</mat-label>
+    <mat-select panelClass="options-panel">
+      <!-- <mat-option *ngIf="!isLoaded" class="module-style">
+        <div class="skeleton-loader progress pulse"></div>
+      </mat-option>
+      <mat-option *ngIf="!isLoaded" class="module-style">
+        <div class="skeleton-loader progress pulse"></div>
+      </mat-option>
+      <mat-option *ngIf="!isLoaded" class="module-style">
+        <div class="skeleton-loader progress pulse"></div>
+      </mat-option> -->
+      <!-- <input
+        [(ngModel)]="locData['name']"
+        name="searchWord"
+        *ngIf="data.length > 10 && isLoaded"
+        [ngModelOptions]="{ standalone: true }"
+        type="text"
+        class="search-input"
+        placeholder="Search"
+      /> -->
+      <!-- <mat-option *ngIf="data.length == 0 && isLoaded"
+        >No Record Found</mat-option
+      > -->
+      <mat-option *ngFor="let item of data" [value]="item.id">{{
+        item.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

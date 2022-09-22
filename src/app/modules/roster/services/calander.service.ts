@@ -87,19 +87,23 @@ export class CalendarService {
   getAllMonths(year: any, month: any, preset: any) {
     let monthAndDays = [];
     let calendarArray = [];
+
+    
     for (let i = 0; i <= 11; i++) {
-      calendarArray.push(this.getCalendar(year, this.months[i], preset));
+      //calendarArray.push(this.getCalendar(year, this.months[i], preset));
+      
       let objResult = {
         monthName: this.months[i],
-        totalDaysInMonth: calendarArray[i],
+        totalDaysInMonth: this.getCalendar(year, this.months[i], preset),
       };
       monthAndDays.push(objResult);
     }
     return monthAndDays;
   }
   getCalendar(year: any, month: any, preset: any) {
+    console.log('month' , month , preset);
     if (month == null) {
-      let monthAndDays = ([] = this.getAllMonths(year, month, preset));
+      let monthAndDays =  this.getAllMonths(year, month, preset);
       return monthAndDays;
     }
     if (preset != null) {
