@@ -3,10 +3,7 @@
     <div class="table-header gradient-head flex justify-content-between">
       <div class="heading">LM Services</div>
       <div class="btn-options flex align-content-center">
-        <select name="" id="">
-          <option value="0">All Shifts</option>
-          <option value="0">Evening Shift</option>
-        </select>
+        <app-select-box></app-select-box>
       </div>
     </div>
 
@@ -17,13 +14,20 @@
             alt="" 
             (click)="getMonthAndYear()"
             /></a>
+
+          <a href="#"><img src="assets/icons/ico-left-arrow.svg" alt="" /></a>
+
           <ul class="years-list">
             <li *ngFor="let year of years">{{ year }}</li>
           </ul>
+
           <a><img src="assets/icons/ico-right-arrow.svg" 
             alt="" 
             (click)="getMonthAndYear(true)"
             /></a>
+
+          <a href="#"><img src="assets/icons/ico-right-arrow.svg" alt="" /></a>
+
         </div>
 
         <div class="calendar-mini">

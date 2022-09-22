@@ -1,12 +1,113 @@
-<div>
-  <p>shift-request Page</p>
-  <app-full-layout>
-    <h1>shift Request Details</h1>
-    <div>
-      <app-shift-request-detail></app-shift-request-detail>
-    </div>
-  </app-full-layout>
-</div>
-<div>
-  <app-shift-list></app-shift-list>
+<div class="wrapper">
+  <div class="container">
+    <div class="header-menu"></div>
+    <app-full-layout>
+      <div>
+        <div class="table-header gradient-head flex justify-content-between">
+          <div class="heading">Shift Setup</div>
+          <div class="btn-options flex align-content-center">
+            <a href="#" class="btn-custom"
+              >Advance Filter <i><img src="icons/filter.svg" alt="" /></i>
+            </a>
+          </div>
+        </div>
+        <div class="shift-setup">
+          <div class="shadow">
+            <app-sub-layout>
+              <div class="shift-card-wrapper">
+                <div class="shift-header">Shift Type & Mid Break</div>
+                <div class="shift-card">
+                  <div class="form-col">
+                    <div>
+                      <app-input-box></app-input-box>
+                    </div>
+                    <div>
+                      <app-input-box></app-input-box>
+                    </div>
+                    <div>
+                      <app-time-box></app-time-box>
+                    </div>
+                    <div>
+                      <app-time-box></app-time-box>
+                    </div>
+                  </div>
+                  <div class="form-col">
+                    <div>
+                      <app-input-box></app-input-box>
+                    </div>
+                    <div>
+                      <app-date-box></app-date-box>
+                    </div>
+                    <div>
+                      <app-date-box></app-date-box>
+                    </div>
+                    <div>
+                      <app-time-box></app-time-box>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </app-sub-layout>
+
+            <app-sub-layout>
+              <div class="shift-card-wrapper">
+                <div class="shift-header">Extended Mid Break</div>
+                <div class="shift-card">
+                  <div class="form-col">
+                    <div class="col-item">asdasdasdasdasdasdsd</div>
+                    <div class="col-item">asdfdsf</div>
+                    <div class="col-item">asdfdsf</div>
+                    <div class="col-item">asdfdsf</div>
+                  </div>
+                </div>
+              </div>
+            </app-sub-layout>
+
+            <app-sub-layout>
+              <div class="shift-card-wrapper">
+                <div class="shift-header">Quarter Break</div>
+                <div class="shift-card">
+                  <div class="form-col">
+                    <div class="col-item">asdasdasdasdasdasdsd</div>
+                    <div class="col-item">asdfdsf</div>
+                    <div class="col-item">asdfdsf</div>
+                    <div class="col-item">asdfdsf</div>
+                  </div>
+                </div>
+              </div>
+            </app-sub-layout>
+
+            <app-sub-layout>
+              <div class="shift-card-wrapper">
+                <div class="shift-header">Approval Details</div>
+                <div class="shift-card">
+                  <div class="form-col">
+                    <div class="col-item">asdasdasdasdasdasdsd</div>
+                    <div class="col-item">asdfdsf</div>
+                    <div class="col-item">asdfdsf</div>
+                    <div class="col-item">asdfdsf</div>
+                  </div>
+                </div>
+              </div>
+            </app-sub-layout>
+          </div>
+          <div class="shift-setup-footer"></div>
+        </div>
+      </div>
+    </app-full-layout>
+    <app-full-layout>
+      <div class="pt-10">
+        <div class="table-header gradient-head flex justify-content-between">
+          <div class="heading">Shift list</div>
+          <div class="btn-options flex align-content-center"></div>
+        </div>
+        <div class="shift-setup">
+          <div class="shadow no-pad">
+            <app-shift-list></app-shift-list>
+          </div>
+          <div class="shift-setup-footer"></div>
+        </div>
+      </div>
+    </app-full-layout>
+  </div>
 </div>

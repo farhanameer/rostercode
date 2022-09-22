@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AttendenceCalenderComponent } from './components/attendence-calender/attendence-calender.component';
+import { CheckInOutCalendarComponent } from './components/check-in-out-calendar/check-in-out-calendar.component';
 import { JobShiftCalenderComponent } from './components/job-shift-calender/job-shift-calender.component';
 import { ShiftsCalenderComponent } from './components/shifts-calender/shifts-calender.component';
 import { SortByDateComponent } from './components/sort-by-date/sort-by-date.component';
@@ -103,6 +104,12 @@ const routes: Routes = [
     path:'shiftcalender',
     component:JobShiftCalenderComponent
   },
+  {
+    path:'checkInOut',
+    component:CheckInOutCalendarComponent
+  },
+
+  
  
 
 ];
