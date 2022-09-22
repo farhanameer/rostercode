@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CalendarService } from '../../services/calander.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { ShiftManagmentDialog } from '../../dialogs/shift-managment/shift-managment.dialog';
+import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 
 @Component({
   selector: 'app-shifts-calender',
@@ -20,7 +21,7 @@ export class ShiftsCalenderComponent implements OnInit {
   weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   constructor(private calendar: CalendarService, private dataService: RosterService,
-    private customModal: ModalService) { }
+    private customModal: ModalService, private appLocalStorage: AppLocalStorageService) { }
 
   ngOnInit(): void {
       this.currentDate = moment();
@@ -44,7 +45,12 @@ export class ShiftsCalenderComponent implements OnInit {
         
       
       
-      this.getLMRosterView(this.year_month);
+      this.getLMRosterView({
+        "client_id" :this.appLocalStorage.getClientId(),
+        "year_month" : '2022-Jul',
+        "is_roster_employees" : 1 , 
+        "reporting_to_id" : this.appLocalStorage.getUserId()
+    });
   }
 
   lmRosterViewArray : [] = [];
@@ -64,10 +70,8 @@ export class ShiftsCalenderComponent implements OnInit {
     return foundData;
   }
 
-  async getLMRosterView(year_month){
-    const data = await this.dataService.getLMRosterView({
-      'year_month' : year_month
-    });
+  async getLMRosterView(params){
+    const data = await this.dataService.getLMRosterView(params);
     
     this.lmRosterViewArray = data["data"]["payload"];
 
