@@ -20,6 +20,7 @@ import { RosterCplComponent } from './pages/roster-cpl/roster-cpl.component';
 import { RosterComponent } from './pages/roster/roster.component';
 import { ShiftAllocationComponent } from './pages/shift-allocation/shift-allocation.component';
 import { ShiftRequestComponent } from './pages/shift-request/shift-request.component';
+import { ShiftSetupComponent } from './pages/shift-setup/shift-setup.component';
 import { RosterComponent2 } from './roster.component';
 
 const routes: Routes = [
@@ -94,6 +95,10 @@ const routes: Routes = [
   {
     path:'shiftrequest',
     component:ShiftRequestComponent
+  },
+   {
+    path:'shiftsetup',
+    component:ShiftSetupComponent
   },
   
   {

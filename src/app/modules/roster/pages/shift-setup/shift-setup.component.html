@@ -4,7 +4,7 @@
     <app-full-layout>
       <div>
         <div class="table-header gradient-head flex justify-content-between">
-          <div class="heading">Shift Request</div>
+          <div class="heading">Shift Setup</div>
           <div class="btn-options flex align-content-center">
             <a href="#" class="btn-custom"
               >Advance Filter
@@ -23,7 +23,7 @@
                       <app-select-box></app-select-box>
                     </div>
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-select-box></app-select-box>
                     </div>
                     <div>
                       <app-time-box></app-time-box>
@@ -70,7 +70,7 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-select-box></app-select-box>
                     </div>
                     <div>
                       <app-time-box></app-time-box>
@@ -82,6 +82,17 @@
                       <app-check-box>
                         <label>Specific Period</label>
                       </app-check-box>
+                    </div>
+                  </div>
+                  <div class="form-col">
+                    <div>
+                      <app-date-box></app-date-box>
+                    </div>
+                    <div>
+                      <app-date-box></app-date-box>
+                    </div>
+                    <div>
+                      <app-select-box></app-select-box>
                     </div>
                   </div>
                 </div>
@@ -104,18 +115,10 @@
                     </div>
                     <div>
                       <app-check-box>
-                        <label>Tolerance</label>
+                        <label>+</label>
                       </app-check-box>
                     </div>
                   </div>
-                </div>
-              </div>
-            </app-sub-layout>
-
-            <app-sub-layout>
-              <div class="shift-card-wrapper">
-                <div class="shift-header">Approval Details</div>
-                <div class="shift-card">
                   <div class="form-col">
                     <div>
                       <app-input-box></app-input-box>

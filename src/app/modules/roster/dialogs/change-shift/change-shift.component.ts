@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MarkWeekendComponent } from '../../components/mark-weekend/mark-weekend.component';
 import { ModalService } from '../../services/modal/modal.service';
 import { AdditionalShiftComponent } from '../additional-shift/additional-shift.component';
 import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employee-shift-managment.dialog';
@@ -15,12 +16,5 @@ export class ChangeShiftComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  openChangeShift() {
-    this.customModal.showFeaturedDialog(ChangeShiftComponent, "");
-this.activeModal.close(EmployeeShiftManagmentDialog)
-  }
-  openAdditionalShift(){
-    this.customModal.showFeaturedDialog(AdditionalShiftComponent, "");
-this.activeModal.close(EmployeeShiftManagmentDialog)
-  }
+  
 }
