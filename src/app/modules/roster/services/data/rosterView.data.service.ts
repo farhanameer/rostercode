@@ -14,16 +14,17 @@ export class RosterService {
     private appLocalStorage: AppLocalStorageService,
   ) {}
 
-  getLMRosterView(year_month) {
+  getLMRosterView(params) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const params = {
-            "client_id" :this.appLocalStorage.getClientId(),
-            "year_month" : year_month,
-            "is_roster_employees" : 1 , 
-            "reporting_to_id" : this.appLocalStorage.getUserId()
-        }
+
+        params["client_id"] = this.appLocalStorage.getClientId();
+        params["is_roster_employees"] = 1;
+
+        params["reporting_to_id"] = this.appLocalStorage.getUserId();
+        
+        
 
         this.httpService.getLMRosterView(params).subscribe(
           (data) => {

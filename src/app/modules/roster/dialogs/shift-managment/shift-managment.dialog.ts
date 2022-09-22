@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from '../../services/modal/modal.service';
 import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employee-shift-managment.dialog';
@@ -9,12 +9,17 @@ import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employ
   styleUrls: ['./shift-managment.dialog.css']
 })
 export class ShiftManagmentDialog implements OnInit {
-display:boolean;
+
+  @Input() dates: any;
+
+  display:boolean;
+
 
   constructor(public activeModal: NgbActiveModal,
     private customModel:ModalService) { }
 
   ngOnInit(): void {
+    console.log('data was first got' , this.dates);
   }
   open(){
     this.customModel.showFeaturedDialog(EmployeeShiftManagmentDialog, "");
