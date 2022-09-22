@@ -32,12 +32,18 @@ export class ShiftsCalenderComponent implements OnInit {
         moment(this.currentDate).format('MMM'), 
         this.weekDays
         );
+
+
+        console.log('calendar from moment',this.currentMonthDates);
+        
       this.months[0] = moment(this.currentDate).subtract(2,'month').format('MMMM YYYY');
       this.months[1] = moment(this.currentDate).subtract(1,'month').format('MMMM YYYY');
       this.months[2] = moment(this.currentDate).format('MMMM YYYY');
       this.months[3] = moment(this.currentDate).add(1,'month').format('MMMM YYYY');
       this.months[4] = moment(this.currentDate).add(2,'month').format('MMMM YYYY');
-
+        
+      
+      
       this.getLMRosterView(this.year_month);
   }
 
@@ -59,19 +65,21 @@ export class ShiftsCalenderComponent implements OnInit {
   }
 
   async getLMRosterView(year_month){
-    const data = await this.dataService.getLMRosterView(year_month);
+    const data = await this.dataService.getLMRosterView({
+      'year_month' : year_month
+    });
     
     this.lmRosterViewArray = data["data"]["payload"];
 
     if(!Array.isArray(this.lmRosterViewArray)){
       this.lmRosterViewArray = [];
     }
-    this.reshapedData = this.reshapData(this.currentMonthDates);
+    this.reshapedData = this.reshapeData(this.currentMonthDates);
   }
 
   calendarArray : any = [];
 
-  reshapData(array){
+  reshapeData(array){
     let resultingArray = [];
     const responseArray = [];
     const numberOfIterations = array.length / 7;
@@ -136,31 +144,84 @@ export class ShiftsCalenderComponent implements OnInit {
     start : 0 , 
     end : 0
   }
+  resetColor : boolean = false;
   checkIfOK(date){
+    if(this.resetColor) return false;
+    if(this.obj.start < this.obj.end) {
+
+    
     if(date && (date >= this.obj.start && date<= this.obj.end)){
       return true;
     }
     return false;
+    }
+    else if(this.obj.start > this.obj.end) {
+
+    
+      if(date && (date <= this.obj.start && date>= this.obj.end)){
+        return true;
+      }
+      return false;
+      }
   }
   onDragStart(event){
     this.mouseStart = event;
     this.mouseDown = true;
     this.obj.start = this.mouseStart;
+    this.resetColor = false;
+    
   }
   onDrag(event){
 
     if(!this.mouseDown) return;
-    this.obj.end = event;
+    
+    this.obj.end = event ? event : this.obj.end;
   }
+  
   onDragOver(event){
     if(!this.mouseDown) return;
     this.mouseDown = false;
     this.mouseEnd = event;
-    this.obj.end = this.mouseEnd;
-    
-    for(let i = this.mouseStart; i<=this.mouseEnd; i++){
-      console.log('dates' , `${this.year_month}-${i}`);
+    this.obj.end = event ? event : this.obj.end;
+
+    if(this.mouseStart <='9') {
+      this.mouseStart = `0${this.mouseStart}`
     }
+    if(this.obj.end as any <='9') {
+      this.obj.end  = `0${this.obj.end}` as any;
+    }
+
+    let start = `${this.year_month}-${this.mouseStart}`;
+    let end = `${this.year_month}-${this.obj.end}`;
+
+    console.log('mouseStart',`${this.year_month}-${this.mouseStart}`);
+    console.log('mouseEnd' , `${this.year_month}-${this.obj.end}`);
+
+
+    
+    if(!(start < end)){
+      const date = end;
+      end = start;
+      start = date;
+    }
+
+
+    console.log('mouseStart after',start);
+    console.log('mouseEnd after' , end);
+
+    
+    this.resetColor = true;
+    this.openManagement({
+      start : start , 
+      end : end
+    });
+
+
+
+
+    // for(let i = this.mouseStart; i<=this.mouseEnd; i++){
+    //   console.log('dates' , `${this.year_month}-${i}`);
+    // }
 
   }
   onDragDrop(event){
@@ -172,8 +233,9 @@ export class ShiftsCalenderComponent implements OnInit {
 
 
   // dialog open function below:
-  openManagement(){
-    this.customModal.showFeaturedDialog(ShiftManagmentDialog,"");
+  openManagement(dateRange){
+    
+    this.customModal.showFeaturedDialog(ShiftManagmentDialog,"" , dateRange);
   }
   
 }
