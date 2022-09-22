@@ -72,12 +72,12 @@ export class ShiftsCalenderComponent implements OnInit {
     if(!Array.isArray(this.lmRosterViewArray)){
       this.lmRosterViewArray = [];
     }
-    this.reshapedData = this.reshapData(this.currentMonthDates);
+    this.reshapedData = this.reshapeData(this.currentMonthDates);
   }
 
   calendarArray : any = [];
 
-  reshapData(array){
+  reshapeData(array){
     let resultingArray = [];
     const responseArray = [];
     const numberOfIterations = array.length / 7;

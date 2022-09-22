@@ -11,33 +11,21 @@
       <div class="shadow">
         <div class="calendar-wrapper">
           <div class="calendar-navigation">
-            <a href="#"><img src="assets/icons/ico-left-arrow.svg" alt="" /></a>
-            <ul class="years-list">
-              <li><a href="#">April 2022</a></li>
-              <li><a href="">May 2022</a></li>
-              <li><a href="">June 2022</a></li>
-              <li><a href="">July 2022</a></li>
-              <li><a href="">August 2022</a></li>
+            <a><img src="assets/icons/ico-left-arrow.svg" alt="" (click)="getMonthAndYear()"/></a>
+            <ul class="years-list" >
+              <li *ngFor="let month of months"><a href="#">{{month}}</a></li>
             </ul>
-            <a href="#"
-              ><img src="assets/icons/ico-right-arrow.svg" alt=""
-            /></a>
+            <a><img src="assets/icons/ico-right-arrow.svg" alt="" (click)="getMonthAndYear(true)"/></a>
           </div>
           <table class="table calendar-roaster">
             <thead>
               <tr>
-                <th scope="col">MON</th>
-                <th scope="col">TUE</th>
-                <th scope="col">WED</th>
-                <th scope="col">THU</th>
-                <th scope="col">FRI</th>
-                <th scope="col">SAT</th>
-                <th scope="col">SUN</th>
+                <th scope="col" *ngFor="let weekday of weekDays">{{weekday}}</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="disable">
+              <tr *ngFor="let nestedArray of reshapedData">
+                <td *ngFor="let days of nestedArray">
                   <table class="cal-cell">
                     <tr>
                       <td>&nbsp;</td>
@@ -47,7 +35,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <span class="cal-day">30</span>
+                        <span class="cal-day">{{days.date}}</span>
                       </td>
                       <td>&nbsp;</td>
                     </tr>
@@ -65,7 +53,7 @@
                   </table>
                 </td>
 
-                <td class="disable">
+                <!-- <td class="disable">
                   <table class="cal-cell">
                     <tr>
                       <td>&nbsp;</td>
@@ -223,7 +211,7 @@
                       <td>&nbsp;</td>
                     </tr>
                   </table>
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>

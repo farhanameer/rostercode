@@ -15,7 +15,7 @@ export class JobShiftCalenderComponent implements OnInit {
   year_month = '';
   weekDays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
-  weekDaysPreset = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];;
+  weekDaysPreset = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   
   monthsNames = ['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 

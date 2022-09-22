@@ -15,8 +15,6 @@
             (click)="getMonthAndYear()"
             /></a>
 
-          <a href="#"><img src="assets/icons/ico-left-arrow.svg" alt="" /></a>
-
           <ul class="years-list">
             <li *ngFor="let year of years">{{ year }}</li>
           </ul>
@@ -26,8 +24,6 @@
             (click)="getMonthAndYear(true)"
             /></a>
 
-          <a href="#"><img src="assets/icons/ico-right-arrow.svg" alt="" /></a>
-
         </div>
 
         <div class="calendar-mini">
@@ -35,9 +31,6 @@
             <div class="month">{{date.monthName}}</div>
             <ol class="calendar">
               <li class="day-name" *ngFor="let weekday of weekDays">{{ weekday }}</li>
-
-              
-
               <li  *ngFor="let singleDate of date.totalDaysInMonth">{{singleDate.date}}</li>
 <!-- 
               <li>2</li>
