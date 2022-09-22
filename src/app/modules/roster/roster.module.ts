@@ -65,6 +65,10 @@ import { InputBoxComponent } from './components/input-box/input-box.component';
 import { TimeBoxComponent } from './components/time-box/time-box.component';
 import { CheckBoxComponent } from './components/check-box/check-box.component';
 import { CheckInOutCalendarComponent } from './components/check-in-out-calendar/check-in-out-calendar.component';
+import { ShiftSetupComponent } from './pages/shift-setup/shift-setup.component';
+import { DefaultViewComponent } from './components/default-view/default-view.component';
+import { EmployeeCheckBoxComponent } from './components/employee-check-box/employee-check-box.component';
+import { DateCheckBoxComponent } from './components/date-check-box/date-check-box.component';
 
 
 
@@ -120,6 +124,10 @@ import { CheckInOutCalendarComponent } from './components/check-in-out-calendar/
     TimeBoxComponent,
     CheckBoxComponent,
     CheckInOutCalendarComponent,
+    ShiftSetupComponent,
+    DefaultViewComponent,
+    EmployeeCheckBoxComponent,
+    DateCheckBoxComponent,
    
   ],
   imports: [

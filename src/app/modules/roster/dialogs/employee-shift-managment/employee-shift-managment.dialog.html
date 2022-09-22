@@ -18,139 +18,23 @@
         <div class="search-row">
           <div class="mark-sheet">
             <div class="left-col">
-              <label for="radio1"> <input type="radio" />Mark Weekends</label>
-              <label for="radio1" (click)="openChangeShift()">
+              <label for="radio1">
+                <input type="radio" (click)="view='weekend'" />Mark
+                Weekends</label
+              >
+              <label for="radio1" (click)="view='change'">
                 <input type="radio" />Change Shift</label
               >
-              <label for="radio1" (click)="openAdditionalShift()">
+              <label for="radio1" (click)="view='additional'">
                 <input type="radio" />Assign Additional Shift</label
               >
             </div>
           </div>
         </div>
-
-        <div class="search-row">
-          <form action="" class="flex space-between w-100">
-            <div class="left-col">
-              <label for="radio1"> <input type="radio" />Sort by Date</label>
-              <label for="radio1">
-                <input type="radio" />Sort by Employee</label
-              >
-              <label for="" class="blue-label"
-                >*Uncheck to mark day-off/weekends</label
-              >
-            </div>
-
-            <input type="text" />
-          </form>
-        </div>
       </div>
-      <div class="shift-management-list date-wise with-checboxes">
-        <app-main-card>
-          <ul>
-            <app-employee-card>
-              <li>
-                <div class="heading-date">
-                  <input type="checkbox" />
-                  <div class="user-img">
-                    <img src="assets/images/img-dummy.png" alt="" />
-                  </div>
-                  Natalya Neidhart
-                </div>
-                <div class="list-checkbox">
-                  <input type="checkbox" />
-                  <app-date-card style="width: -webkit-fill-available">
-                    <div class="list-white">
-                      <div class="user-img">
-                        <span></span>
-                      </div>
-                      <div class="employee-detail">
-                        <div class="heading-lg">01-11-2020</div>
-                        <img src="assets/ico-present-02.svg" alt="" />
-                      </div>
-                    </div>
-                  </app-date-card>
-                </div>
-              </li>
-            </app-employee-card>
-            <app-employee-card>
-              <li>
-                <div class="heading-date">
-                  <input type="checkbox" />
-                  <div class="user-img">
-                    <img src="assets/images/img-dummy.png" alt="" />
-                  </div>
-                  Natalya Neidhart
-                </div>
-                <div class="list-checkbox">
-                  <input type="checkbox" />
-                  <div class="list-white">
-                    <div class="user-img">
-                      <span></span>
-                    </div>
-                    <div class="employee-detail">
-                      <div class="heading-lg">01-11-2020</div>
-                      <img src="assets/ico-present-02.svg" alt="" />
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </app-employee-card>
-          </ul>
-        </app-main-card>
-        <app-main-card>
-          <ul>
-            <app-employee-card>
-              <li>
-                <div class="heading-date">
-                  <input type="checkbox" />
-                  <div class="user-img">
-                    <img src="assets/images/img-dummy.png" alt="" />
-                  </div>
-                  Natalya Neidhart
-                </div>
-                <div class="list-checkbox">
-                  <input type="checkbox" />
-                  <app-date-card style="width: -webkit-fill-available">
-                    <div class="list-white">
-                      <div class="user-img">
-                        <span></span>
-                      </div>
-                      <div class="employee-detail">
-                        <div class="heading-lg">01-11-2020</div>
-                        <img src="assets/ico-present-02.svg" alt="" />
-                      </div>
-                    </div>
-                  </app-date-card>
-                </div>
-              </li>
-            </app-employee-card>
-            <app-employee-card>
-              <li>
-                <div class="heading-date">
-                  <input type="checkbox" />
-                  <div class="user-img">
-                    <img src="assets/images/img-dummy.png" alt="" />
-                  </div>
-                  Natalya Neidhart
-                </div>
-                <div class="list-checkbox">
-                  <input type="checkbox" />
-                  <div class="list-white">
-                    <div class="user-img">
-                      <span></span>
-                    </div>
-                    <div class="employee-detail">
-                      <div class="heading-lg">01-11-2020</div>
-                      <img src="assets/ico-present-02.svg" alt="" />
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </app-employee-card>
-          </ul>
-        </app-main-card>
-      </div>
+      <app-mark-weekend *ngIf="view=='weekend'"></app-mark-weekend>
+      <app-change-shift *ngIf="view=='change'"></app-change-shift>
+      <app-additional-shift *ngIf="view=='additional'"></app-additional-shift>
     </div>
 
     <!-- footer -->

@@ -2,14 +2,14 @@
   <div class="shift-management-list">
     <app-main-card *ngFor="let date of data">
       <ul>
-        <li class="heading-date">{{date.date}}</li>
+        <li class="heading-date">{{ date.date }}</li>
         <app-employee-card *ngFor="let employee of date.employees">
           <li>
             <div class="user-img">
-              <img src="images/img-dummy.png" alt="" />
+              <img src="assets/images/img-dummy.png" alt="" />
             </div>
             <div class="employee-detail">
-              <div class="heading-lg">{{employee.emp_name}}</div>
+              <div class="heading-lg">{{ employee.emp_name }}</div>
               <img src="icons/ico-present-02.svg" alt="" />
             </div>
           </li>
