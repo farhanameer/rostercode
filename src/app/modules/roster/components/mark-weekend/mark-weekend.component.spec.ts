@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectBoxComponent } from './select-box.component';
+import { MarkWeekendComponent } from './mark-weekend.component';
 
-describe('SelectBoxComponent', () => {
-  let component: SelectBoxComponent;
-  let fixture: ComponentFixture<SelectBoxComponent>;
+describe('MarkWeekendComponent', () => {
+  let component: MarkWeekendComponent;
+  let fixture: ComponentFixture<MarkWeekendComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectBoxComponent ]
+      declarations: [ MarkWeekendComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectBoxComponent);
+    fixture = TestBed.createComponent(MarkWeekendComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

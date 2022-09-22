@@ -5,38 +5,57 @@
         <div class="table-header gradient-head flex justify-content-between">
           <div class="heading">Roaster</div>
           <div class="btn-options flex align-content-center">
-            <select name="shift_1" id="1" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="Evening Shift">Evening Shift</option>
-              <option value="Morning Shift">Morning Shift</option>
-            </select>
-            <select name="shift_2" id="2" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="0">Evening Shift</option>
-            </select>
-            <select name="shift_3" id="3" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="0">Evening Shift</option>
-            </select>
-            <select name="shift_4" id="4" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="0">Evening Shift</option>
-            </select>
-            <select name="shift_5" id="5" (click)="onClick(v)" #v>
-              <option value="0">All Shifts</option>
-              <option value="0">Evening Shift</option>
-            </select>
+            <app-select-box> </app-select-box>
+            <app-select-box> </app-select-box>
+            <app-select-box> </app-select-box>
+            <app-select-box> </app-select-box>
+            <app-select-box> </app-select-box>
           </div>
         </div>
         <div class="col-shift-allocation">
           <div class="user-list-shifts">
             <app-sub-layout style="width: 358px">
+              <div class="header-gray">
+                <div class="heading">CPL/Overtime</div>
+                <input type="text" />
+              </div>
               <div>
                 <app-overview-table></app-overview-table>
               </div>
             </app-sub-layout>
           </div>
           <app-shifts-calender class="w-100"></app-shifts-calender>
+        </div>
+        <div class="calendar-footer">
+          <ul class="shift-hints">
+            <li><span></span> Morning Shift (07:00 - 14:00)</li>
+            <li>
+              <span class="evening-shift"></span> Evening Shift (14:00 - 00:00)
+            </li>
+            <li>
+              <span class="night-shift"></span> Night Shift (20:00 - 05:00)
+            </li>
+          </ul>
+
+          <ul class="shift-tags">
+            <li>
+              <i><img src="assets/icons/ico-present.svg" alt="" /></i>Present
+            </li>
+            <li>
+              <i><img src="assets/icons/ico-absent.svg" alt="" /></i>Absent
+            </li>
+            <li>
+              <i><img src="assets/icons/ico-leave-approved.svg" alt="" /></i
+              >Leave Approved
+            </li>
+            <li>
+              <i><img src="assets/icons/ico-present-02.svg" alt="" /></i>Present
+            </li>
+            <li>
+              <i><img src="assets/icons/ico-not-scheduled.svg" alt="" /></i>Not
+              Scheduled, but Present
+            </li>
+          </ul>
         </div>
       </app-full-layout>
     </div>

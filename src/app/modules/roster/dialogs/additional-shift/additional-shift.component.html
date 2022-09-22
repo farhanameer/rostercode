@@ -1,0 +1,70 @@
+<app-dialog-layout>
+  <div class="modal-custom modal-lg-01 bg-white">
+    <div class="gradient-head flex justify-content-between">
+      <div class="heading">Shift Management (01-11-2021 - 01-12-2021)</div>
+      <div class="btn-options flex align-content-center">
+        <a (click)="activeModal.close('Close click')"
+          ><img src="assets/icons/ico-close.svg" alt=""
+        /></a>
+      </div>
+    </div>
+    <!-- Body -->
+
+    <div class="shift-management-wrapper pt-0">
+      <div class="header">
+        <div class="search-row">
+          <div class="mark-sheet">
+            <div class="left-col">
+              <label for="radio1"> <input type="radio" />Mark Weekends</label>
+              <label for="radio1" (click)="openChangeShift()">
+                <input type="radio" />Change Shift</label
+              >
+              <label for="radio1" (click)="openAdditionalShift()">
+                <input type="radio" />Assign Additional Shift</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="form-col">
+        <div class="col-item">asdasdasdasdasdasdsd</div>
+        <div class="col-item">asdfdsf</div>
+        >
+      </div>
+
+      <app-sub-layout>
+        <div class="shift-card-wrapper">
+          <div class="shift-header">Additional Shifts</div>
+          <div class="shift-card">
+            <div class="form-col">
+              <div class="col-item">asdasdasdasdasdasdsd</div>
+            </div>
+          </div>
+        </div>
+      </app-sub-layout>
+    </div>
+    <!-- footer -->
+    <div class="modal-custom-footer">
+      <ul class="shift-hints" style="display: flex; gap: 20px">
+        <li><span></span> Morning Shift (07:00 - 14:00)</li>
+        <li>
+          <span class="evening-shift"></span> Evening Shift (14:00 - 00:00)
+        </li>
+        <li><span class="night-shift"></span> Night Shift (20:00 - 05:00)</li>
+      </ul>
+
+      <div class="modal-footer-button flex">
+        <input type="button" class="btn-input" value="Submit" />
+        <input
+          type="button"
+          class="btn-input"
+          value="Cancel"
+          (click)="activeModal.close('Close click')"
+        />
+      </div>
+    </div>
+    <!-- END footer -->
+  </div>
+</app-dialog-layout>
