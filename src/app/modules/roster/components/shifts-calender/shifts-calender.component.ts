@@ -32,13 +32,19 @@ export class ShiftsCalenderComponent implements OnInit {
         moment(this.currentDate).format('MMM'), 
         this.weekDays
         );
+
+
+        console.log('calendar from moment',this.currentMonthDates);
+        
       this.months[0] = moment(this.currentDate).subtract(2,'month').format('MMMM YYYY');
       this.months[1] = moment(this.currentDate).subtract(1,'month').format('MMMM YYYY');
       this.months[2] = moment(this.currentDate).format('MMMM YYYY');
       this.months[3] = moment(this.currentDate).add(1,'month').format('MMMM YYYY');
       this.months[4] = moment(this.currentDate).add(2,'month').format('MMMM YYYY');
-
-      this.getLMRosterView(this.year_month);
+        
+      
+      
+      console.log(this.getLMRosterView(this.year_month));
   }
 
   lmRosterViewArray : [] = [];

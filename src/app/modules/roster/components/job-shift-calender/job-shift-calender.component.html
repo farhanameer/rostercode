@@ -13,18 +13,70 @@
     <div class="shadow">
       <div class="calendar-wrapper">
         <div class="calendar-navigation">
-          <a href="#"><img src="icons/ico-left-arrow.svg" alt="" /></a>
+          <a><img src="assets/icons/ico-left-arrow.svg" 
+            alt="" 
+            (click)="getMonthAndYear()"
+            /></a>
           <ul class="years-list">
-            <li><a href="#">April 2022</a></li>
-            <li><a href="">May 2022</a></li>
-            <li><a href="">June 2022</a></li>
-            <li><a href="">July 2022</a></li>
-            <li><a href="">August 2022</a></li>
+            <li *ngFor="let year of years">{{ year }}</li>
           </ul>
-          <a href="#"><img src="icons/ico-right-arrow.svg" alt="" /></a>
+          <a><img src="assets/icons/ico-right-arrow.svg" 
+            alt="" 
+            (click)="getMonthAndYear(true)"
+            /></a>
         </div>
+
         <div class="calendar-mini">
-          <div class="calendar-mini-wrapper">
+          <div class="calendar-mini-wrapper" *ngFor="let date of currentYearData">
+            <div class="month">{{date.monthName}}</div>
+            <ol class="calendar">
+              <li class="day-name" *ngFor="let weekday of weekDays">{{ weekday }}</li>
+
+              
+
+              <li  *ngFor="let singleDate of date.totalDaysInMonth">{{singleDate.date}}</li>
+<!-- 
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+              <li>7</li>
+              <li>8</li>
+              <li class="selected public-holiday">9</li>
+              <li>10</li>
+              <li class="selected off">11</li>
+              <li>12</li>
+              <li>13</li>
+              <li>14</li>
+              <li>15</li>
+              <li>16</li>
+              <li>17</li>
+              <li>18</li>
+              <li>19</li>
+              <li>20</li>
+              <li>21</li>
+              <li>22</li>
+              <li>23</li>
+              <li>24</li>
+              <li>25</li>
+              <li>26</li>
+              <li>27</li>
+              <li>28</li>
+              <li>29</li>
+              <li>30</li>
+              <li>31</li>
+
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li> -->
+            </ol>
+          </div>
+
+          <!-- <div class="calendar-mini-wrapper">
             <div class="month">December 2020</div>
             <ol class="calendar">
               <li class="day-name">M</li>
@@ -201,182 +253,6 @@
             </ol>
           </div>
 
-          <div class="calendar-mini-wrapper">
-            <div class="month">December 2020</div>
-            <ol class="calendar">
-              <li class="day-name">M</li>
-              <li class="day-name">T</li>
-              <li class="day-name">W</li>
-              <li class="day-name">T</li>
-              <li class="day-name">F</li>
-              <li class="day-name">S</li>
-              <li class="day-name">S</li>
-
-              <li class="disabled">27</li>
-              <li class="disabled">28</li>
-              <li class="disabled">29</li>
-              <li class="disabled">30</li>
-              <li class="disabled">31</li>
-
-              <li class="first-day">1</li>
-
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>6</li>
-              <li>7</li>
-              <li>8</li>
-              <li class="selected public-holiday">9</li>
-              <li>10</li>
-              <li class="selected off">11</li>
-              <li>12</li>
-              <li>13</li>
-              <li>14</li>
-              <li>15</li>
-              <li>16</li>
-              <li>17</li>
-              <li>18</li>
-              <li>19</li>
-              <li>20</li>
-              <li>21</li>
-              <li>22</li>
-              <li>23</li>
-              <li>24</li>
-              <li>25</li>
-              <li>26</li>
-              <li>27</li>
-              <li>28</li>
-              <li>29</li>
-              <li>30</li>
-              <li>31</li>
-
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>6</li>
-            </ol>
-          </div>
-
-          <div class="calendar-mini-wrapper">
-            <div class="month">December 2020</div>
-            <ol class="calendar">
-              <li class="day-name">M</li>
-              <li class="day-name">T</li>
-              <li class="day-name">W</li>
-              <li class="day-name">T</li>
-              <li class="day-name">F</li>
-              <li class="day-name">S</li>
-              <li class="day-name">S</li>
-
-              <li class="disabled">27</li>
-              <li class="disabled">28</li>
-              <li class="disabled">29</li>
-              <li class="disabled">30</li>
-              <li class="disabled">31</li>
-
-              <li class="first-day">1</li>
-
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>6</li>
-              <li>7</li>
-              <li>8</li>
-              <li class="selected public-holiday">9</li>
-              <li>10</li>
-              <li class="selected off">11</li>
-              <li>12</li>
-              <li>13</li>
-              <li>14</li>
-              <li>15</li>
-              <li>16</li>
-              <li>17</li>
-              <li>18</li>
-              <li>19</li>
-              <li>20</li>
-              <li>21</li>
-              <li>22</li>
-              <li>23</li>
-              <li>24</li>
-              <li>25</li>
-              <li>26</li>
-              <li>27</li>
-              <li>28</li>
-              <li>29</li>
-              <li>30</li>
-              <li>31</li>
-
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>6</li>
-            </ol>
-          </div>
-
-          <div class="calendar-mini-wrapper">
-            <div class="month">December 2020</div>
-            <ol class="calendar">
-              <li class="day-name">M</li>
-              <li class="day-name">T</li>
-              <li class="day-name">W</li>
-              <li class="day-name">T</li>
-              <li class="day-name">F</li>
-              <li class="day-name">S</li>
-              <li class="day-name">S</li>
-
-              <li class="disabled">27</li>
-              <li class="disabled">28</li>
-              <li class="disabled">29</li>
-              <li class="disabled">30</li>
-              <li class="disabled">31</li>
-
-              <li class="first-day">1</li>
-
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>6</li>
-              <li>7</li>
-              <li>8</li>
-              <li class="selected public-holiday">9</li>
-              <li>10</li>
-              <li class="selected off">11</li>
-              <li>12</li>
-              <li>13</li>
-              <li>14</li>
-              <li>15</li>
-              <li>16</li>
-              <li>17</li>
-              <li>18</li>
-              <li>19</li>
-              <li>20</li>
-              <li>21</li>
-              <li>22</li>
-              <li>23</li>
-              <li>24</li>
-              <li>25</li>
-              <li>26</li>
-              <li>27</li>
-              <li>28</li>
-              <li>29</li>
-              <li>30</li>
-              <li>31</li>
-
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>6</li>
-            </ol>
-          </div>
           <div class="calendar-mini-wrapper">
             <div class="month">December 2020</div>
             <ol class="calendar">
@@ -728,6 +604,123 @@
               <li>6</li>
             </ol>
           </div>
+          <div class="calendar-mini-wrapper">
+            <div class="month">December 2020</div>
+            <ol class="calendar">
+              <li class="day-name">M</li>
+              <li class="day-name">T</li>
+              <li class="day-name">W</li>
+              <li class="day-name">T</li>
+              <li class="day-name">F</li>
+              <li class="day-name">S</li>
+              <li class="day-name">S</li>
+
+              <li class="disabled">27</li>
+              <li class="disabled">28</li>
+              <li class="disabled">29</li>
+              <li class="disabled">30</li>
+              <li class="disabled">31</li>
+
+              <li class="first-day">1</li>
+
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+              <li>7</li>
+              <li>8</li>
+              <li class="selected public-holiday">9</li>
+              <li>10</li>
+              <li class="selected off">11</li>
+              <li>12</li>
+              <li>13</li>
+              <li>14</li>
+              <li>15</li>
+              <li>16</li>
+              <li>17</li>
+              <li>18</li>
+              <li>19</li>
+              <li>20</li>
+              <li>21</li>
+              <li>22</li>
+              <li>23</li>
+              <li>24</li>
+              <li>25</li>
+              <li>26</li>
+              <li>27</li>
+              <li>28</li>
+              <li>29</li>
+              <li>30</li>
+              <li>31</li>
+
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+            </ol>
+          </div>
+
+          <div class="calendar-mini-wrapper">
+            <div class="month">December 2020</div>
+            <ol class="calendar">
+              <li class="day-name">M</li>
+              <li class="day-name">T</li>
+              <li class="day-name">W</li>
+              <li class="day-name">T</li>
+              <li class="day-name">F</li>
+              <li class="day-name">S</li>
+              <li class="day-name">S</li>
+
+              <li class="disabled">27</li>
+              <li class="disabled">28</li>
+              <li class="disabled">29</li>
+              <li class="disabled">30</li>
+              <li class="disabled">31</li>
+
+              <li class="first-day">1</li>
+
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+              <li>7</li>
+              <li>8</li>
+              <li class="selected public-holiday">9</li>
+              <li>10</li>
+              <li class="selected off">11</li>
+              <li>12</li>
+              <li>13</li>
+              <li>14</li>
+              <li>15</li>
+              <li>16</li>
+              <li>17</li>
+              <li>18</li>
+              <li>19</li>
+              <li>20</li>
+              <li>21</li>
+              <li>22</li>
+              <li>23</li>
+              <li>24</li>
+              <li>25</li>
+              <li>26</li>
+              <li>27</li>
+              <li>28</li>
+              <li>29</li>
+              <li>30</li>
+              <li>31</li>
+
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+            </ol>
+          </div> -->
         </div>
       </div>
 
