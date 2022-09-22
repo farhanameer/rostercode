@@ -1,3 +1,4 @@
+import { RosterService } from './../../services/data/rosterView.data.service';
 import { CalendarService } from './../../services/calander.service';
 import { Component, OnInit } from '@angular/core';
 import  moment  from 'moment';
@@ -16,7 +17,7 @@ export class CheckInOutCalendarComponent implements OnInit {
   year_month = '';
   reshapedData : any;
 
-  constructor(private calendar: CalendarService) { }
+  constructor(private calendar: CalendarService, private dataService: RosterService) { }
 
   ngOnInit(): void {
     this.currentDate = moment();
@@ -36,9 +37,21 @@ export class CheckInOutCalendarComponent implements OnInit {
       this.months[4] = moment(this.currentDate).add(2,'month').format('MMMM YYYY');
 
       this.reshapedData = this.reshapeData(this.currentMonthDates);
-      console.log(this.currentMonthDates);
+      
+      // this.getLMRosterView(this.year_month);
   }
 
+  // async getLMRosterView(year_month){
+    // const data = await this.dataService.getLMRosterView(year_month);
+    // const data = await this.dataService.getDefaultList();
+    // debugger;
+    // this.lmRosterViewArray = data["data"]["payload"];
+
+    // if(!Array.isArray(this.lmRosterViewArray)){
+    //   this.lmRosterViewArray = [];
+    // }
+    // this.reshapedData = this.reshapeData(this.currentMonthDates);
+  // }
 
   reshapeData(array){
     // debugger;
@@ -84,6 +97,8 @@ export class CheckInOutCalendarComponent implements OnInit {
     this.year_month = moment(this.currentDate).format('YYYY')+'-'+moment(this.currentDate).format('MM');
     this.currentMonthDates = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), moment(this.currentDate).format('MMM'), this.weekDays);
     this.reshapedData = this.reshapeData(this.currentMonthDates);
+
+    // this.getLMRosterView(this.year_month);
   }
 
 }

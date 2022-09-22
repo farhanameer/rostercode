@@ -44,7 +44,7 @@ export class ShiftsCalenderComponent implements OnInit {
         
       
       
-      console.log(this.getLMRosterView(this.year_month));
+      this.getLMRosterView(this.year_month);
   }
 
   lmRosterViewArray : [] = [];

@@ -49,9 +49,7 @@
             <ng-container *ngFor="let shift of days.shifts; let i = index">
               <tr *ngIf="i + 1 <= 1">
                 <td [ngStyle]="{ color: shift.color }">{{ shift.name }}</td>
-                <td [ngStyle]="{ color: shift.color }">
-                  {{ shift.shift_employees }}
-                </td>
+                <td [ngStyle]="{ color: shift.color }">{{ shift.shift_employees }} </td>
               </tr>
             </ng-container>
 
