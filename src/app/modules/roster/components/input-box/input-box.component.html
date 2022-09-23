@@ -1,3 +1,4 @@
 <div>
-  <input type="text" style="width: 222px" />
+  {{label}}
+  <input type="text" style="width: 222px" [formControl]="form.get(control)" />
 </div>
