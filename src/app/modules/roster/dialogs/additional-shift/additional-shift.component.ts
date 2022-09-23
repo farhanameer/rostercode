@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MarkWeekendComponent } from '../../components/mark-weekend/mark-weekend.component';
 import { ModalService } from '../../services/modal/modal.service';
@@ -12,10 +13,15 @@ import { ShiftManagmentDialog } from '../shift-managment/shift-managment.dialog'
   styleUrls: ['./additional-shift.component.css']
 })
 export class AdditionalShiftComponent implements OnInit {
-
-  constructor(public activeModal: NgbActiveModal ,private customModal:ModalService ) { }
+  additionalShiftForm:FormGroup
+  constructor(public activeModal: NgbActiveModal ,private customModal:ModalService,private fb:FormBuilder ) { }
 
   ngOnInit(): void {
+
+    this.additionalShiftForm=this.fb.group({
+      additionalShift:['']
+    })
   }
+  
  
 }
