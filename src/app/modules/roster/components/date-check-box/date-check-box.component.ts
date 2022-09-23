@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { WeekendTypeComponent } from '../../dialogs/weekend-type/weekend-type.component';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-date-check-box',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DateCheckBoxComponent implements OnInit {
 
-  constructor() { }
+  constructor( 
+    public activeModal: NgbActiveModal,
+       private customModal: ModalService
+   ) { }
 
   ngOnInit(): void {
   }
+open(){
+    this.customModal.showFeaturedDialog(WeekendTypeComponent, "");
 
+  }
 }
