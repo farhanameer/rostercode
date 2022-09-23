@@ -16,45 +16,93 @@ export class CheckInOutCalendarComponent implements OnInit {
   currentMonthDates: any;
   year_month = '';
   reshapedData : any;
+  empRosterArray = [];
 
   constructor(private calendar: CalendarService, private dataService: RosterService) { }
-
+  
   ngOnInit(): void {
     this.currentDate = moment();
 
+    
       this.year_month = moment(this.currentDate).format('YYYY')+'-'+moment(this.currentDate).format('MM');
       
       this.currentMonthDates = this.calendar.getCalendar(
         moment(this.currentDate).format('YYYY'), 
         moment(this.currentDate).format('MMM'), 
         this.weekDays
-        );
+      );
         
       this.months[0] = moment(this.currentDate).subtract(2,'month').format('MMMM YYYY');
       this.months[1] = moment(this.currentDate).subtract(1,'month').format('MMMM YYYY');
       this.months[2] = moment(this.currentDate).format('MMMM YYYY');
       this.months[3] = moment(this.currentDate).add(1,'month').format('MMMM YYYY');
       this.months[4] = moment(this.currentDate).add(2,'month').format('MMMM YYYY');
+      this.getEmpRosterView(this.year_month);
+  } 
 
-      this.reshapedData = this.reshapeData(this.currentMonthDates);
-      
-      // this.getLMRosterView(this.year_month);
+
+
+  getCheckingColor(shift) {
+    
+    let str = `transparent linear-gradient(180deg, $color 0%, rgba(255, 241, 206, 0) 34%) 0% 0% no-repeat padding-box`
+    if(shift.shift_color) {
+      str.replace('$color' , shift.shift_color);
+      return `transparent linear-gradient(180deg, ${shift.shift_color} 0%, rgba(255, 241, 206, 0) 34%) 0% 0% no-repeat padding-box`
+    }
+    return 'white'
   }
 
-  // async getLMRosterView(year_month){
-    // const data = await this.dataService.getLMRosterView(year_month);
-    // const data = await this.dataService.getDefaultList();
-    // debugger;
-    // this.lmRosterViewArray = data["data"]["payload"];
+  async getEmpRosterView(year_month){
+    
 
-    // if(!Array.isArray(this.lmRosterViewArray)){
-    //   this.lmRosterViewArray = [];
-    // }
-    // this.reshapedData = this.reshapeData(this.currentMonthDates);
-  // }
+    const params = {
+      "year_month" : year_month
+    };
 
+    const data = await this.dataService.getCheckInOutView(params);
+    
+    this.empRosterArray = data["data"]["payload"]["data"];
+
+    console.log('employee Roster',this.empRosterArray);
+
+    if(!Array.isArray(this.empRosterArray)){
+      this.empRosterArray = [];
+    }
+
+    this.reshapedData = this.reshapeData(this.currentMonthDates);
+  }
+  
+
+  getShiftTiming(date){
+    if(!date) return null;
+    if(date <= 9){
+      date = `0${date}`;
+    }
+    const matchingDate = `${this.year_month}-${date}`;
+    
+    let shiftTiming = null;
+    
+
+    this.empRosterArray.every(empRoster =>{
+      if(empRoster.start == matchingDate) {
+        const obj = {
+          'actual_shift_time_in' : empRoster.actual_shift_time_in,
+          'actual_shift_time_out' : empRoster.actual_shift_time_out , 
+          'shift_color' : empRoster.shift_color ,
+          'shift_name' : empRoster.shift_name
+        }
+
+        shiftTiming = obj;
+        console.log('foundin matching' , shiftTiming);
+        return false;
+      }
+      return true;
+    });
+
+    return shiftTiming;
+  }
   reshapeData(array){
-    // debugger;
+    // // debugger;
     let resultingArray = [];
     const responseArray = [];
     const numberOfIterations = array.length / 7;
@@ -62,8 +110,16 @@ export class CheckInOutCalendarComponent implements OnInit {
     for(let i=1; i<= numberOfIterations; i++){
       resultingArray = [];
       for(let j=1; j<=7; j++){
-        resultingArray.push(array[counter]);
+        const shiftTiming = this.getShiftTiming(array[counter].date);
+        if(shiftTiming) {
+          const obj = {...array[counter] , ...shiftTiming};
+          resultingArray.push(obj);
+          counter = counter + 1;
+        }
+        else {
+          resultingArray.push(array[counter]);
         counter = counter + 1;
+        }
       }
       responseArray.push([...resultingArray]);
     }
@@ -98,7 +154,9 @@ export class CheckInOutCalendarComponent implements OnInit {
     this.currentMonthDates = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), moment(this.currentDate).format('MMM'), this.weekDays);
     this.reshapedData = this.reshapeData(this.currentMonthDates);
 
-    // this.getLMRosterView(this.year_month);
+    this.getEmpRosterView(this.year_month);
   }
+  
+  
 
 }

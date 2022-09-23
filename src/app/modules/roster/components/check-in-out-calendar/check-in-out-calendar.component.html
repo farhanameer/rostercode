@@ -25,9 +25,14 @@
             </thead>
             <tbody>
               <tr *ngFor="let nestedArray of reshapedData">
-                <td *ngFor="let days of nestedArray">
+                <td *ngFor="let days of nestedArray" [ngStyle]="{ background:  getCheckingColor(days)}"
+                >
                   <table class="cal-cell">
-                    <tr>
+                    <tr *ngIf="days.shift_name">
+                      <td>{{days.shift_name}}</td>
+                    </tr>
+                    
+                    <tr *ngIf="!days.shift_name">
                       <td>&nbsp;</td>
                     </tr>
                     <tr>
@@ -44,9 +49,9 @@
                     </tr>
 
                     <tr>
-                      <td>
-                        <span>In</span>08:46 AM<span class="dash">-</span
-                        ><span>Out</span> 03:05 PM
+                      <td *ngIf="days.actual_shift_time_in">
+                        <span>In</span>{{days.days.actual_shift_time_in}}<span class="dash">-</span
+                        ><span>Out</span> {{days.actual_shift_time_out}}
                       </td>
                       <td>&nbsp;</td>
                     </tr>

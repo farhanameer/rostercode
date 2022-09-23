@@ -187,15 +187,14 @@ export class RosterService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const paramss = {
-            "client_id" :this.appLocalStorage.getClientId(),
-            "screen_role" : "emp",
-            "year_month" : '2022-Jul',
-            "employee_id" : 17278
-        }
 
-        this.httpService.getLMRosterView(params).subscribe(
+
+        params["client_id"] = this.appLocalStorage.getClientId();
+        params["screen_role"] = "emp";
+        params["employee_id"] = this.appLocalStorage.getUserId();
+        this.httpService.getCheckInOutView(params).subscribe(
           (data) => {
+
             response.data = data;
             response.message = 'success';
             response.status = true;
