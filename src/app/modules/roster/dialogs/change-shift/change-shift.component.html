@@ -12,7 +12,7 @@
   <div class="shift-card-wrapper">
     <div class="shift-header">Swap Shift</div>
     <div class="shift-card">
-      <div class="form-col">
+      <div class="form-col" [formGroupName]="swipeShiftForm">
         <div>
           <app-date-box [form]="swipeShiftForm" [control]="'selectDate'" [label]="'Select Date'"></app-date-box>
         </div>

@@ -29,7 +29,7 @@ export class SelectBoxComponent implements OnInit {
   }
 
   ngOnChanges(change: SimpleChange) {
-    console.log(this.data);
+    console.log(this.form);
   }
 
   get validation() {
