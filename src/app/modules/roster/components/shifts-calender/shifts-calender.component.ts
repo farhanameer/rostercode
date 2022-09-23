@@ -47,7 +47,7 @@ export class ShiftsCalenderComponent implements OnInit {
       
       this.getLMRosterView({
         "client_id" :this.appLocalStorage.getClientId(),
-        "year_month" : '2022-Jul',
+        "year_month" : this.year_month,
         "is_roster_employees" : 1 , 
         "reporting_to_id" : this.appLocalStorage.getUserId()
     });
@@ -138,7 +138,12 @@ export class ShiftsCalenderComponent implements OnInit {
 
     this.year_month = moment(this.currentDate).format('YYYY')+'-'+moment(this.currentDate).format('MM');
     this.currentMonthDates = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), moment(this.currentDate).format('MMM'), this.weekDays);
-    this.getLMRosterView(this.year_month);
+    this.getLMRosterView({
+      "client_id" :this.appLocalStorage.getClientId(),
+      "year_month" : this.year_month,
+      "is_roster_employees" : 1 , 
+      "reporting_to_id" : this.appLocalStorage.getUserId()
+  });
   }
 
   mouseDown:boolean = false;

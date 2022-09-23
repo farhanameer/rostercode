@@ -13,8 +13,9 @@ import { ShiftManagmentDialog } from '../shift-managment/shift-managment.dialog'
   styleUrls: ['./additional-shift.component.css']
 })
 export class AdditionalShiftComponent implements OnInit {
+  view:string="shift";
   additionalShiftForm:FormGroup
-  constructor(public activeModal: NgbActiveModal ,private customModal:ModalService,private fb:FormBuilder ) { }
+  constructor(public activeModal: NgbActiveModal ,private customModal:ModalService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
 
