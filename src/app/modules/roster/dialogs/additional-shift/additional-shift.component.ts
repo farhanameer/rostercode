@@ -12,7 +12,9 @@ import { ShiftManagmentDialog } from '../shift-managment/shift-managment.dialog'
   styleUrls: ['./additional-shift.component.css']
 })
 export class AdditionalShiftComponent implements OnInit {
-
+  view:string="shift";
+  shift:string;
+  hours:string;
   constructor(public activeModal: NgbActiveModal ,private customModal:ModalService ) { }
 
   ngOnInit(): void {
