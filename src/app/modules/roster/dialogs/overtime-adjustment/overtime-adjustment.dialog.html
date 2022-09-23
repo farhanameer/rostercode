@@ -68,7 +68,12 @@
       </div>
 
       <div class="modal-footer-button flex">
-        <input type="button" class="btn-input" value="Submit" />
+        <input
+          type="button"
+          class="btn-input"
+          value="Submit"
+          (click)="activeModal.close('Close click')"
+        />
         <input
           type="button"
           class="btn-input"
