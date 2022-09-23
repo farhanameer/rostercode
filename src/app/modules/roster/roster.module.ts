@@ -69,6 +69,7 @@ import { ShiftSetupComponent } from './pages/shift-setup/shift-setup.component';
 import { DefaultViewComponent } from './components/default-view/default-view.component';
 import { EmployeeCheckBoxComponent } from './components/employee-check-box/employee-check-box.component';
 import { DateCheckBoxComponent } from './components/date-check-box/date-check-box.component';
+import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.component';
 
 
 
@@ -128,6 +129,7 @@ import { DateCheckBoxComponent } from './components/date-check-box/date-check-bo
     DefaultViewComponent,
     EmployeeCheckBoxComponent,
     DateCheckBoxComponent,
+    WeekendTypeComponent,
    
   ],
   imports: [
