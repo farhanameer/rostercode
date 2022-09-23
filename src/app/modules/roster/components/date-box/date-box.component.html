@@ -1,3 +1,6 @@
 <div>
-  <input type="date" style="width: 200px" />
+  <label for="">{{label}}</label>
+  <input type="date" style="width: 260px" [formControl]="form.get(control)" />
 </div>
+
+
