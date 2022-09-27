@@ -24,7 +24,8 @@ export class SortByDateComponent implements OnInit {
     console.log('in popup', this.dates);
     this.getLMRosterView({
       client_id: this.appLocalStorage.getClientId(),
-      year_month: '2022-07',
+      start_date : this.dates.start , 
+      end_date : this.dates.end,
       is_roster_employees: 1,
       reporting_to_id: this.appLocalStorage.getUserId(),
     });
@@ -34,7 +35,6 @@ export class SortByDateComponent implements OnInit {
     const data = await this.dataService.getLMRosterView(params);
 
     if (!data['data']['status']) {
-      console.log('error a gya');
       return;
     }
 
