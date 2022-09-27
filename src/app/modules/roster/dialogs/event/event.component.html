@@ -1,7 +1,7 @@
 <div class="modal-custom bg-white">
   <app-dialog-layout>
     <div class="gradient-head flex justify-content-between">
-      <div class="heading">what Kind of Weekend is It?</div>
+      <div class="heading">Event</div>
       <div class="btn-options flex align-content-center">
         <a (click)="activeModal.close('Close click')"
           ><img src="assets/icons/ico-close.svg" alt=""
@@ -9,9 +9,23 @@
       </div>
     </div>
     <!-- Body -->
+
+    <div class="user-list-employee pt-0"></div>
+
     <div class="overtime-form">
-      <div style="padding: 50px">
-        <app-select-box></app-select-box>
+      <div class="row" style="margin-left: 20px">
+        <div class="col">
+          <app-select-box></app-select-box>
+        </div>
+      </div>
+      <br />
+      <div class="row" style="margin-left: 20px">
+        <div class="col">
+          <app-date-box></app-date-box>
+        </div>
+        <div class="col">
+          <app-date-box></app-date-box>
+        </div>
       </div>
     </div>
 
