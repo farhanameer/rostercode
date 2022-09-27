@@ -70,6 +70,8 @@ import { DefaultViewComponent } from './components/default-view/default-view.com
 import { EmployeeCheckBoxComponent } from './components/employee-check-box/employee-check-box.component';
 import { DateCheckBoxComponent } from './components/date-check-box/date-check-box.component';
 import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -130,7 +132,6 @@ import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.compon
     EmployeeCheckBoxComponent,
     DateCheckBoxComponent,
     WeekendTypeComponent,
-   
   ],
   imports: [
     MatSelectModule,
@@ -141,7 +142,8 @@ import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.compon
     ReactiveFormsModule,
     RosterRoutingModule,
     NgbModule,
-
+    MatInputModule,
+    MatDatepickerModule
   ],
   providers: [ModalService, NgbActiveModal, NgbModal],
 })

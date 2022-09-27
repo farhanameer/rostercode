@@ -1,6 +1,24 @@
-<div>
+<!-- <div>
   <label for="">{{label}}</label>
   <input type="date" style="width: 260px" />
 </div>
-
-
+ -->
+<div class="agt-module">
+  <div class="date-wrapper">
+    <div class="comp-wrapper date-field toggle-date">
+      <input
+        matInput
+        readonly
+        placeholder=" "
+        [matDatepicker]="varIssueDate"
+        #inputRef
+      />
+      <p class="label" [class.agt-float-label]="inputRef?.value != ''"> label </p>
+      <mat-datepicker-toggle
+        [disableRipple]="true"
+        [for]="varIssueDate"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #varIssueDate></mat-datepicker>
+    </div>
+  </div>
+</div>

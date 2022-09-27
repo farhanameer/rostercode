@@ -1,0 +1,51 @@
+.agt-module {
+  .comp-wrapper {
+    position: relative;
+    .label {
+      text-align: left;
+      font: normal normal normal 11px/13px Roboto;
+      letter-spacing: 0px;
+      color: #3080EA;
+      opacity: 1;
+      position: absolute;
+      left: 3px;
+      // top: 6.5px;
+      transform-origin: 0 0;
+      transform: translateY(-19px);
+      padding-left: 7px;
+      padding-right: 7px;
+      background: #fff;
+      transition: .25s;
+    }
+    .input-box {
+      width: 260px;
+      height: 26px;
+      border: 1px solid #D8DCDF;
+      border-radius: 4px;
+      padding-left: 10px;
+      &::placeholder {
+        color: transparent !important;
+        user-select: none !important;
+      }
+    }
+    .input-box:focus + .label,
+    .input-box:not(:placeholder-shown) + .label {
+      transform: translateY(-34px);
+    }
+    mat-select label {
+      color: #3080ea !important;
+    }
+    .emp-content div select,
+    .emp-content div input,
+    .emp-content div textarea,
+    .emp-content .attachment label {
+      font: normal normal normal 11px/13px Roboto !important;
+      letter-spacing: 0px !important;
+      color: #343434 !important;
+      background: #ffffff 0% 0% no-repeat padding-box !important;
+      border: 1px solid #d8dcdf !important;
+      border-radius: 4px !important;
+      padding-left: 10px !important;
+    }
+  }
+}
