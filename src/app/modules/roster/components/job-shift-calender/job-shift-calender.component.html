@@ -1,38 +1,49 @@
 <div class="wrapper">
   <div class="container">
-    <div class="table-header gradient-head flex justify-content-between">
-      <div class="heading">LM Services</div>
-      <div class="btn-options flex align-content-center">
-        <app-select-box></app-select-box>
-      </div>
+    <div>
+      <app-location-and-designation-filter
+        ><div class="heading">
+          Calendar
+        </div></app-location-and-designation-filter
+      >
     </div>
 
     <div class="shadow">
       <div class="calendar-wrapper">
         <div class="calendar-navigation">
-          <a><img src="assets/icons/ico-left-arrow.svg" 
-            alt="" 
-            (click)="getMonthAndYear()"
-            /></a>
+          <a
+            ><img
+              src="assets/icons/ico-left-arrow.svg"
+              alt=""
+              (click)="getMonthAndYear()"
+          /></a>
 
           <ul class="years-list">
             <li *ngFor="let year of years">{{ year }}</li>
           </ul>
 
-          <a><img src="assets/icons/ico-right-arrow.svg" 
-            alt="" 
-            (click)="getMonthAndYear(true)"
-            /></a>
-
+          <a
+            ><img
+              src="assets/icons/ico-right-arrow.svg"
+              alt=""
+              (click)="getMonthAndYear(true)"
+          /></a>
         </div>
 
         <div class="calendar-mini">
-          <div class="calendar-mini-wrapper" *ngFor="let date of currentYearData">
-            <div class="month">{{date.monthName}}</div>
+          <div
+            class="calendar-mini-wrapper"
+            *ngFor="let date of currentYearData"
+          >
+            <div class="month">{{ date.monthName }}</div>
             <ol class="calendar">
-              <li class="day-name" *ngFor="let weekday of weekDays">{{ weekday }}</li>
-              <li  *ngFor="let singleDate of date.totalDaysInMonth">{{singleDate.date}}</li>
-<!-- 
+              <li class="day-name" *ngFor="let weekday of weekDays">
+                {{ weekday }}
+              </li>
+              <li *ngFor="let singleDate of date.totalDaysInMonth">
+                {{ singleDate.date }}
+              </li>
+              <!-- 
               <li>2</li>
               <li>3</li>
               <li>4</li>

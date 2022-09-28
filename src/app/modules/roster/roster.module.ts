@@ -72,6 +72,10 @@ import { DateCheckBoxComponent } from './components/date-check-box/date-check-bo
 import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { LocationAndDesignationFilterComponent } from './components/location-and-designation-filter/location-and-designation-filter.component';
+import { CalenderSetupComponent } from './dialogs/calender-setup/calender-setup.component';
+import { EventComponent } from './dialogs/event/event.component';
+import { EmployeeShiftListComponent } from './dialogs/employee-shift-list/employee-shift-list.component';
 
 
 
@@ -132,6 +136,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     EmployeeCheckBoxComponent,
     DateCheckBoxComponent,
     WeekendTypeComponent,
+    LocationAndDesignationFilterComponent,
+    CalenderSetupComponent,
+    EventComponent,
+    EmployeeShiftListComponent
   ],
   imports: [
     MatSelectModule,
