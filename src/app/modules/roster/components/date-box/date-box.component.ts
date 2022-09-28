@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-date-box',
   templateUrl: './date-box.component.html',
-  styleUrls: ['./date-box.component.css']
+  styleUrls: ['./date-box.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DateBoxComponent implements OnInit {
 
@@ -16,5 +17,4 @@ export class DateBoxComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

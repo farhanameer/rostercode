@@ -1,59 +1,26 @@
 <div class="shift-management-wrapper pt-0">
   <div class="shift-management-list date-wise">
-    <app-main-card>
+    <app-main-card *ngFor="let employee of data">
       <ul>
         <li class="heading-date">
           <div class="user-img">
             <img src="assets/images/img-dummy.png" alt="" />
           </div>
-          Natalya Neidhart
+          {{employee.name}}
         </li>
-        <app-date-card
-          ><li>
+        <app-date-card *ngFor="let shift of employee.shifts">
+          <li>
             <div class="user-img">
               <span></span>
             </div>
             <div class="employee-detail">
-              <div class="heading-lg">01-11-2020</div>
+              <div class="heading-lg">{{shift.start}}</div>
               <img src="assets/assets/icons/ico-present-02.svg" alt="" />
             </div></li
         ></app-date-card>
-        <app-date-card>
-          <li>
-            <div class="user-img">
-              <span></span>
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">01-11-2020</div>
-              <img src="assets/icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-date-card>
-        <app-date-card>
-          <li>
-            <div class="user-img">
-              <span></span>
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">01-11-2020</div>
-              <img src="assets/icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-date-card>
-        <app-date-card>
-          <li>
-            <div class="user-img">
-              <span></span>
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">01-11-2020</div>
-              <img src="assets/icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-date-card>
       </ul>
     </app-main-card>
-    <app-main-card>
+    <!-- <app-main-card>
       <ul>
         <li class="heading-date">
           <div class="user-img">
@@ -82,6 +49,6 @@
             </div></li
         ></app-date-card>
       </ul>
-    </app-main-card>
+    </app-main-card> -->
   </div>
 </div>

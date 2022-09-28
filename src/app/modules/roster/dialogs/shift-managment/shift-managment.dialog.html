@@ -36,7 +36,11 @@
       <app-sort-by-date *ngIf="display"
       [dates]=dates
       ></app-sort-by-date>
-      <app-sort-by-employee *ngIf="!display"></app-sort-by-employee>
+      <app-sort-by-employee *ngIf="!display"
+      [dates]=dates
+      >
+
+      </app-sort-by-employee>
     </div>
     <div class="modal-custom-footer">
       <ul class="shift-hints" style="display: flex; gap: 20px" git>
