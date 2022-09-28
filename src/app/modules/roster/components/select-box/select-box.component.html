@@ -1,32 +1,23 @@
 <div class="agt-module">
   <div class="comp-wrapper">
-    <div class="select-wrapper w-cus-260 col px-cus-0">
-      <mat-form-field class="cus-m-0" appearance="fill">
-      <mat-label>{{ label }}</mat-label>
-      <mat-select panelClass="options-panel">
-        <!-- <mat-option *ngIf="!isLoaded" class="module-style">
-          <div class="skeleton-loader progress pulse"></div>
-        </mat-option>
-        <mat-option *ngIf="!isLoaded" class="module-style">
-          <div class="skeleton-loader progress pulse"></div>
-        </mat-option>
-        <mat-option *ngIf="!isLoaded" class="module-style">
-          <div class="skeleton-loader progress pulse"></div>
-        </mat-option> -->
-        <input
-          name="searchWord"
-          type="text"
-          class="search-input"
-          placeholder="Search"
-        />
-        <!-- <mat-option *ngIf="data.length == 0 && isLoaded"
-          >No Record Found</mat-option
-        > -->
-        <mat-option *ngFor="let item of data" [value]="item.id">{{
-          item.name
-        }}</mat-option>
-      </mat-select>
-      </mat-form-field>
+    <div class="select-wrapper" #selectWrapper>
+      <input type="text">
+      <select>
+        <option value="0">Select car:</option>
+        <option value="1">Audi</option>
+        <option value="2">BMW</option>
+        <option value="3">Citroen</option>
+        <option value="4">Ford</option>
+        <option value="5">Honda</option>
+        <option value="6">Jaguar</option>
+        <option value="7">Land Rover</option>
+        <option value="8">Mercedes</option>
+        <option value="9">Mini</option>
+        <option value="10">Nissan</option>
+        <option value="11">Toyota</option>
+        <option value="12">Volvo</option>
+      </select>
     </div>
+    <p class="label">label</p>
   </div>
 </div>
