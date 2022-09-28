@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { APIs } from 'src/environments/environment';
 
 @Injectable({
@@ -44,7 +43,5 @@ export class RosterViewHttpService {
     return this.http.get(`${this.shiftAllocation}/EmployeeList`, {params});
   }
 
-  getDefaultList(params = {}) {
-    return this.http.get(`${this.ShiftRequestAndSetup}/DefaultShift`, {params});
-  }
+  
 }
