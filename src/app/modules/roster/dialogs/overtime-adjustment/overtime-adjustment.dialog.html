@@ -22,35 +22,34 @@
           </div>
         </li>
       </ul>
-      <div class="row">
-        <div class="col">
-          <app-input-box></app-input-box>
+      <div class="row m-0">
+        <div class="col-6">
+          <app-input-box [label]="'Overtime (hrs)'"></app-input-box>
         </div>
-        <div class="col">
-          <app-date-box></app-date-box>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <p>Adjust Overtime In</p>
+        <div class="col-6">
+          <app-date-box [label]="'Till Date'"></app-date-box>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <input type="radio" /> &nbsp;
-          <label>Add CPL</label>
+      <div class="row m-0">
+        <div class="col-6">
+          <p class="mt-2">Adjust Overtime In</p>
         </div>
-        <div class="col">
-          <input type="radio" /> &nbsp;
-          <label>Payment for Overtime</label>
+        <div class="col-6"></div>
+      </div>
+      <div class="row m-0">
+        <div class="col-6">
+          <input type="radio" />
+        </div>
+        <div class="col-6">
+          <input type="radio" />
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <app-select-box></app-select-box>
+      <div class="row m-0 mt-2">
+        <div class="col-6">
+          <app-select-box [label]="'CPL'" [width]="'212px'"></app-select-box>
         </div>
-        <div class="col">
-          <app-input-box></app-input-box>
+        <div class="col-6">
+          <app-input-box [label]="'Pay For Hours'"></app-input-box>
         </div>
       </div>
     </div>
