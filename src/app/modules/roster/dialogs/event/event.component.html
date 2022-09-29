@@ -15,16 +15,16 @@
     <div class="overtime-form p-20 px-0">
       <div class="row m-0">
         <div class="col">
-          <app-input-box [form]="eventForm" [control]="'name'"  [label]="'Name'" [width]="'100%'"></app-input-box>
+          <app-input-box [form]="eventForm" [control]="'hdesc'"  [label]="'Name'" [width]="'100%'"></app-input-box>
         </div>
       </div>
       <br />
       <div class="row m-0">
         <div class="col-6">
-          <app-date-box  [form]="eventForm" [control]="'fromDate'" [label]="'From Date'"></app-date-box>
+          <app-date-box  [form]="eventForm" [control]="'start_date'" [label]="'From Date'"></app-date-box>
         </div>
         <div class="col-6">
-          <app-date-box  [form]="eventForm" [control]="'toDate'" [label]="'To Date'"></app-date-box>
+          <app-date-box  [form]="eventForm" [control]="'end_date'" [label]="'To Date'"></app-date-box>
         </div>
       </div>
     </div>
