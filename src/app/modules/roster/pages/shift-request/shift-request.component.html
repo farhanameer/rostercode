@@ -31,20 +31,21 @@
 
                   <div class="form-col">
                     <div>
-                      <app-select-box [label]="'Shift Color'" [form]="shiftRequestForm" [control]="'shiftType'"></app-select-box>
+                      <app-select-box
+                        [label]="'Shift Color'"
+                        [form]="shiftRequestForm"
+                        [control]="'shiftType'"
+                      ></app-select-box>
                     </div>
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'Mid Break From'"></app-date-box>
                     </div>
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'Mid Break To'"></app-date-box>
                     </div>
                     <div class="row" style="width: 272px">
                       <div class="col">
-                        <app-check-box
-                        [label]="'Roster'"
-                        >
-                        </app-check-box>
+                        <app-check-box [label]="'Roster'"> </app-check-box>
                       </div>
                       <div class="col">
                         <app-check-box>
@@ -68,7 +69,7 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'Select Day'"></app-date-box>
                     </div>
                     <div>
                       <app-time-box></app-time-box>
@@ -92,7 +93,7 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'Title'"></app-input-box>
                     </div>
                     <div>
                       <app-time-box></app-time-box>
@@ -116,13 +117,13 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'BL Status'"></app-input-box>
                     </div>
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'BL comments'"></app-input-box>
                     </div>
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'Dated'"></app-input-box>
                     </div>
                   </div>
                 </div>
