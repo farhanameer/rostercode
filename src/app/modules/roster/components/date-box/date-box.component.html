@@ -11,6 +11,7 @@
         readonly
         placeholder=" "
         [matDatepicker]="varIssueDate"
+        [formControl]="form?.get(control)"
         #inputRef
       />
       <p class="label" [class.agt-float-label]="inputRef?.value != ''">label</p>
@@ -21,4 +22,5 @@
       <mat-datepicker #varIssueDate></mat-datepicker>
     </div>
   </div>
+  <span *ngIf="form?.get(control).errors?.required && form?.get(control).touched">required</span>
 </div>
