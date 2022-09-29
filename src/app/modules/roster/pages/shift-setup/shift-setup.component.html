@@ -20,7 +20,10 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-select-box [label]="'Shift Type'" [data]="shiftTypeArray"></app-select-box>
+                      <app-select-box
+                        [label]="'Shift Type'"
+                        [data]="shiftTypeArray"
+                      ></app-select-box>
                     </div>
                     <div>
                       <app-input-box [label]="'Shift Name'"></app-input-box>
@@ -31,43 +34,38 @@
                     <div>
                       <app-time-box [label]="'To'"></app-time-box>
                     </div>
-                  </div>
-                  <div class="form-col">
-<<<<<<< HEAD
-                    <div class="w-100">
-                      <app-input-box
-                        [label]="'Comments'"
-                        [width]="'100%'"
-                      ></app-input-box>
-=======
-                    <div>
-                      <app-input-box [label]="'BL Status'"></app-input-box>
->>>>>>> 6f48bede1f2b84d968acb786af11f6a774357175
-                    </div>
-                  </div>
-                  <div class="form-col">
-                    <div>
-<<<<<<< HEAD
-                      <app-select-box [label]="'Shift Color'"></app-select-box>
-=======
-                      <app-select-box [label]="'Shift Color'" [data] = "shiftColorArray"></app-select-box>
->>>>>>> 6f48bede1f2b84d968acb786af11f6a774357175
-                    </div>
-                    <div>
-                      <app-date-box [label]="'Mid Break From'"></app-date-box>
-                    </div>
-                    <div>
-                      <app-date-box [label]="'Mid Break To'"></app-date-box>
-                    </div>
-                    <div class="row align-content-center" style="width: 272px">
-                      <div class="col">
-                        <app-check-box [label]="'Period'"> </app-check-box>
+
+                    <div class="form-col">
+                      <div>
+                        <app-input-box [label]="'BL Status'"></app-input-box>
                       </div>
-                      <div class="col">
-                        <app-check-box [label]="'Period'"> </app-check-box>
+                    </div>
+                    <div class="form-col">
+                      <div>
+                        <app-select-box
+                          [label]="'Shift Color'"
+                          [data]="shiftColorArray"
+                        ></app-select-box>
                       </div>
-                      <div class="col">
-                        <app-check-box [label]="'Period'"> </app-check-box>
+                      <div>
+                        <app-date-box [label]="'Mid Break From'"></app-date-box>
+                      </div>
+                      <div>
+                        <app-date-box [label]="'Mid Break To'"></app-date-box>
+                      </div>
+                      <div
+                        class="row align-content-center"
+                        style="width: 272px"
+                      >
+                        <div class="col">
+                          <app-check-box [label]="'Period'"> </app-check-box>
+                        </div>
+                        <div class="col">
+                          <app-check-box [label]="'Period'"> </app-check-box>
+                        </div>
+                        <div class="col">
+                          <app-check-box [label]="'Period'"> </app-check-box>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -81,11 +79,10 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-<<<<<<< HEAD
-                      <app-select-box [label]="'Shift Type'"></app-select-box>
-=======
-                      <app-select-box [label]="'Shift Type'" [data]="shiftTypeArray"></app-select-box>
->>>>>>> 6f48bede1f2b84d968acb786af11f6a774357175
+                      <app-select-box
+                        [label]="'Shift Type'"
+                        [data]="shiftTypeArray"
+                      ></app-select-box>
                     </div>
                     <div>
                       <app-time-box [label]="'From'"></app-time-box>
@@ -96,16 +93,16 @@
                     <div class="d-flex align-items-center">
                       <app-check-box [label]="'Period'"> </app-check-box>
                     </div>
-                  </div>
-                  <div class="form-col">
-                    <div>
-                      <app-date-box [label]="'Period From'"></app-date-box>
-                    </div>
-                    <div>
-                      <app-date-box [label]="'Period To'"></app-date-box>
-                    </div>
-                    <div>
-                      <app-select-box [label]="'Revert To'"></app-select-box>
+                    <div class="form-col">
+                      <div>
+                        <app-date-box [label]="'Period From'"></app-date-box>
+                      </div>
+                      <div>
+                        <app-date-box [label]="'Period To'"></app-date-box>
+                      </div>
+                      <div>
+                        <app-select-box [label]="'Revert To'"></app-select-box>
+                      </div>
                     </div>
                   </div>
                 </div>
