@@ -34,6 +34,11 @@
                   </div>
                   <div class="form-col">
                     <div>
+                      <app-input-box></app-input-box>
+                    </div>
+                  </div>
+                  <div class="form-col">
+                    <div>
                       <app-select-box></app-select-box>
                     </div>
                     <div>
@@ -134,7 +139,17 @@
               </div>
             </app-sub-layout>
           </div>
-          <div class="shift-setup-footer"></div>
+          <!-- <div class="shift-setup-footer"></div> -->
+          <div class="calendar-footer justify-content-end">
+            <div class="modal-footer-button flex">
+              <div>
+                <app-check-box>
+                  <label>Active</label>
+                </app-check-box>
+              </div>
+              <input type="button" class="btn-input" value="Submit" />
+            </div>
+          </div>
         </div>
       </div>
     </app-full-layout>

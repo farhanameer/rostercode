@@ -76,6 +76,7 @@ import { LocationAndDesignationFilterComponent } from './components/location-and
 import { CalenderSetupComponent } from './dialogs/calender-setup/calender-setup.component';
 import { EventComponent } from './dialogs/event/event.component';
 import { EmployeeShiftListComponent } from './dialogs/employee-shift-list/employee-shift-list.component';
+import { ShiftRequestByLmComponent } from './pages/shift-request-by-lm/shift-request-by-lm.component';
 
 
 
@@ -139,7 +140,8 @@ import { EmployeeShiftListComponent } from './dialogs/employee-shift-list/employ
     LocationAndDesignationFilterComponent,
     CalenderSetupComponent,
     EventComponent,
-    EmployeeShiftListComponent
+    EmployeeShiftListComponent,
+    ShiftRequestByLmComponent
   ],
   imports: [
     MatSelectModule,

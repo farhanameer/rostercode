@@ -19,6 +19,7 @@ import { SingleShiftDetailDialog } from './dialogs/single-shift-detail/single-sh
 import { RosterCplComponent } from './pages/roster-cpl/roster-cpl.component';
 import { RosterComponent } from './pages/roster/roster.component';
 import { ShiftAllocationComponent } from './pages/shift-allocation/shift-allocation.component';
+import { ShiftRequestByLmComponent } from './pages/shift-request-by-lm/shift-request-by-lm.component';
 import { ShiftRequestComponent } from './pages/shift-request/shift-request.component';
 import { ShiftSetupComponent } from './pages/shift-setup/shift-setup.component';
 import { RosterComponent2 } from './roster.component';
@@ -113,9 +114,13 @@ const routes: Routes = [
     path:'checkInOut',
     component:CheckInOutCalendarComponent
   },
+  {
+    path:'RequestLM',
+    component:ShiftRequestByLmComponent
+  },
 
   
- 
+  
 
 ];
 
