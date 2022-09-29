@@ -4,7 +4,7 @@
       <!-- <input type="text"> -->
       
       <select class="d-none" [formControl]="form?.get(control)">
-        <option *ngFor="let option of sampleData" [value]="option.id" [selected]="hash[option.id]">{{option.name}}</option>
+        <option *ngFor="let option of data" [value]="option.id" [selected]="hash[option.id]">{{option.name}}</option>
       </select>
       
     <p class="label" [class.label_up]="isClicked || selectedValue !=''" [class.agt-disabled]="disabled">{{label}}</p>
@@ -12,7 +12,7 @@
     <div  class="select-selected light-border" [class.agt-disabled-select-selected]="disabled" (click)="toggleDropdown()">{{selectedValue}}</div>
     <!-- <app-error-msg [form]="form" [control]="control"></app-error-msg> -->
     <div class="select-items select-hide" id="custom-select" #dropdownList>
-    <div *ngFor="let option of sampleData" [class.same-as-selected]="hash[option.id]" (click)="optionSelected(option)">{{option.name}}</div>
+    <div *ngFor="let option of data" [class.same-as-selected]="hash[option.id]" (click)="optionSelected(option)">{{option.name}}</div>
 
 
       <!-- <div>BMW</div>
