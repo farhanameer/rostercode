@@ -35,22 +35,19 @@ export class HolidayDataService {
       }
     });
   }
-  addHoliday() {
+  addHoliday(params) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
         const body = {
           year: 2021,
-          start_date: '2022-06-01',
-          end_date: '2022-06-01',
-          hdesc: '11/25/2021',
           country_id: 154,
           state_id: -1,
           city_id: -1,
           loc_id: -1,
           department_id: -1,
           client_id: 48,
-          line_manager_id: 2335,
+          line_manager_id: this.appLocalStorage.getUserId(),
         };
         this.httpService.addHoliday(body).subscribe(
           (data) => {

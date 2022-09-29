@@ -24,7 +24,7 @@ export class HolidayHttpService {
   deleteHoliday(params = {}) {
     return this.http.delete(`${this.roster}/Holiday`, { params });
   }
-  punlicHoliday(params = {}) {
+  publicHoliday(params = {}) {
     return this.http.post(`${this.roster}/Holiday`, params);
   }
 }
