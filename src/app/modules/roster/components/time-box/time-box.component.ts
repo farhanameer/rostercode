@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-time-box',
@@ -8,7 +9,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TimeBoxComponent implements OnInit {
 
   @Input() label : any;
-
+  @Input() form:FormGroup;
+  @Input() control:string;
   constructor() { }
 
   ngOnInit(): void {
