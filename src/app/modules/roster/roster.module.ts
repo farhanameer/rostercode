@@ -77,6 +77,7 @@ import { LocationAndDesignationFilterComponent } from './components/location-and
 import { ShiftRequestByLmComponent } from './pages/shift-request-by-lm/shift-request-by-lm.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 
@@ -157,8 +158,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     RosterRoutingModule,
     NgbModule,
     MatInputModule,
-    MatDatepickerModule
-
+    MatDatepickerModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [ModalService, NgbActiveModal, NgbModal],
 })
