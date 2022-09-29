@@ -20,10 +20,10 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-select-box></app-select-box>
+                      <app-select-box [label]="'Shift Type'"></app-select-box>
                     </div>
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'Shift Name'"></app-input-box>
                     </div>
                     <div>
                       <app-time-box></app-time-box>
@@ -34,7 +34,7 @@
                   </div>
                   <div class="form-col">
                     <div>
-                      <app-select-box></app-select-box>
+                      <app-select-box [label]="'Shift Color'" [form]="shiftRequestForm" [control]="'shiftType'"></app-select-box>
                     </div>
                     <div>
                       <app-date-box></app-date-box>
@@ -44,8 +44,9 @@
                     </div>
                     <div class="row" style="width: 272px">
                       <div class="col">
-                        <app-check-box>
-                          <label>Roster</label>
+                        <app-check-box
+                        [label]="'Roster'"
+                        >
                         </app-check-box>
                       </div>
                       <div class="col">

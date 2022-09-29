@@ -72,6 +72,7 @@ import { DateCheckBoxComponent } from './components/date-check-box/date-check-bo
 import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
 
 
 
@@ -132,6 +133,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     EmployeeCheckBoxComponent,
     DateCheckBoxComponent,
     WeekendTypeComponent,
+    ErrorMsgComponent
   ],
   imports: [
     MatSelectModule,
