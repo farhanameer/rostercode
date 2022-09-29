@@ -24,7 +24,7 @@ export class ShiftManagmentDialog implements OnInit {
   }
   open(){
     this.customModel.showFeaturedDialog(EmployeeShiftManagmentDialog, "");
-this.activeModal.close(ShiftManagmentDialog);
+    this.activeModal.close(ShiftManagmentDialog);
   }
 
 }

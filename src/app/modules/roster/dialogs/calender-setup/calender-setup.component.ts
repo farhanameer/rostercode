@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-calender-setup',
@@ -6,10 +7,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calender-setup.component.css']
 })
 export class CalenderSetupComponent implements OnInit {
-
-  constructor() { }
+  workCalenderSetupForm:FormGroup
+  constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
+    this.workCalenderSetupForm=this.fb.group({
+      periodStartYear:["",Validators.required],
+      periodEndYear:["",Validators.required],
+      weekend:["",Validators.required],
+      halfDay:["",Validators.required],
+      from:["",Validators.required],
+      to:["",Validators.required]
+
+
+    })
+  }
+
+  get validateAForm(): any {
+    return this.workCalenderSetupForm.controls
+  }
+
+  submit(){
+    console.warn(this.workCalenderSetupForm.value)
   }
 
 }
