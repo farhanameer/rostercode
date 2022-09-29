@@ -1,3 +1,4 @@
+import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { RosterService } from './../../services/data/rosterView.data.service';
 import { CalendarService } from './../../services/calander.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +19,7 @@ export class CheckInOutCalendarComponent implements OnInit {
   reshapedData : any;
   empRosterArray = [];
 
-  constructor(private calendar: CalendarService, private dataService: RosterService) { }
+  constructor(private calendar: CalendarService, private dataService: RosterService, private shiftDataService: ShiftRequestDataService) { }
   
   ngOnInit(): void {
     this.currentDate = moment();
@@ -58,7 +59,7 @@ export class CheckInOutCalendarComponent implements OnInit {
     const params = {
       "year_month" : year_month
     };
-
+    
     const data = await this.dataService.getCheckInOutView(params);
     
     this.empRosterArray = data["data"]["payload"]["data"];

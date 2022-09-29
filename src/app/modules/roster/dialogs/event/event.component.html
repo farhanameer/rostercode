@@ -1,7 +1,7 @@
 <div class="modal-custom bg-white">
   <app-dialog-layout>
     <div class="gradient-head flex justify-content-between">
-      <div class="heading">Overtime Hours Adjustment</div>
+      <div class="heading">Event</div>
       <div class="btn-options flex align-content-center">
         <a (click)="activeModal.close('Close click')"
           ><img src="assets/icons/ico-close.svg" alt=""
@@ -10,33 +10,21 @@
     </div>
     <!-- Body -->
 
-    <div class="user-list-employee pt-0">
-      <ul class="overtime-header">
-        <li>
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Name: Bryan Danielson</div>
-            <div class="heading-sm">Employee Code: 98752</div>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <div class="user-list-employee pt-0"></div>
 
     <div class="overtime-form">
-      <div class="row" style="margin-left: 20px">
-        <div class="col">
-          <app-input-box></app-input-box>
-        </div>
+      <div class="row">
         <div class="col">
           <app-select-box></app-select-box>
         </div>
       </div>
       <br />
-      <div class="row" style="margin-left: 20px">
+      <div class="row">
         <div class="col">
-          <app-input-box></app-input-box>
+          <app-date-box></app-date-box>
+        </div>
+        <div class="col">
+          <app-date-box></app-date-box>
         </div>
       </div>
     </div>
