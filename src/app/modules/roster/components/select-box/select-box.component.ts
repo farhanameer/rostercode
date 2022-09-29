@@ -38,6 +38,8 @@ export class SelectBoxComponent implements OnInit {
   @Input() control: string;
   @Input() disabled: boolean;
   @Input() isLoaded: boolean;
+  @Input() width : string;
+  @Input() height : string;
   
 
   @Output() onResetDropDown = new EventEmitter();

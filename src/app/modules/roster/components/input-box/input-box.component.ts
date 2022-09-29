@@ -11,6 +11,7 @@ export class InputBoxComponent implements OnInit {
   @Input() form:FormGroup;
   @Input() control:string;
   @Input() label:string;
+  @Input() width:string;
 
   constructor() { }
 

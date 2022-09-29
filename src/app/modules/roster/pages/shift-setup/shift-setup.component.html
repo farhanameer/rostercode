@@ -23,7 +23,7 @@
                       <app-select-box [label]="'Shift Type'" [data]="shiftTypeArray"></app-select-box>
                     </div>
                     <div>
-                      <app-select-box [label]="'Shift Name'"></app-select-box>
+                      <app-input-box [label]="'Shift Name'" ></app-input-box>
                     </div>
                     <div>
                       <app-time-box [label]="'From'"></app-time-box>
@@ -33,8 +33,8 @@
                     </div>
                   </div>
                   <div class="form-col">
-                    <div>
-                      <app-input-box [label]="'BL Status'"></app-input-box>
+                    <div class="w-100">
+                      <app-input-box [label]="'BL Status'" [width]="'100%'"></app-input-box>
                     </div>
                   </div>
                   <div class="form-col">
