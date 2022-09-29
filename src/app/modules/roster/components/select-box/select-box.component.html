@@ -1,23 +1,32 @@
 <div class="agt-module">
-  <div class="comp-wrapper">
-    <div class="select-wrapper" #selectWrapper>
-      <input type="text">
-      <select>
-        <option value="0">Select car:</option>
-        <option value="1">Audi</option>
-        <option value="2">BMW</option>
-        <option value="3">Citroen</option>
-        <option value="4">Ford</option>
-        <option value="5">Honda</option>
-        <option value="6">Jaguar</option>
-        <option value="7">Land Rover</option>
-        <option value="8">Mercedes</option>
-        <option value="9">Mini</option>
-        <option value="10">Nissan</option>
-        <option value="11">Toyota</option>
-        <option value="12">Volvo</option>
+  <div class="comp-wrapper w-260">
+    
+      <!-- <input type="text"> -->
+      
+      <select class="d-none" [formControl]="form?.get(control)">
+        <option *ngFor="let option of sampleData" [value]="option.id" [selected]="hash[option.id]">{{option.name}}</option>
       </select>
+      
+    <p class="label" [class.label_up]="isClicked || selectedValue !=''" [class.agt-disabled]="disabled">{{label}}</p>
+
+    <div  class="select-selected light-border" [class.agt-disabled-select-selected]="disabled" (click)="toggleDropdown()">{{selectedValue}}</div>
+    <!-- <app-error-msg [form]="form" [control]="control"></app-error-msg> -->
+    <div class="select-items select-hide" id="custom-select" #dropdownList>
+    <div *ngFor="let option of sampleData" [class.same-as-selected]="hash[option.id]" (click)="optionSelected(option)">{{option.name}}</div>
+
+
+      <!-- <div>BMW</div>
+      <div class="same-as-selected">Citroen</div>
+      <div>Ford</div>
+      <div>Honda</div>
+      <div>Jaguar</div>
+      <div>Land Rover</div>
+      <div>Mercedes</div>
+      <div>Mini</div>
+      <div>Nissan</div>
+      <div>Toyota</div>
+      <div>Volvo</div> -->
     </div>
-    <p class="label">label</p>
   </div>
+  <span *ngIf="form?.get(control).errors?.required && form?.get(control).touched">required</span>
 </div>

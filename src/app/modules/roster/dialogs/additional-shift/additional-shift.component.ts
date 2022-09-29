@@ -1,3 +1,4 @@
+import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,7 +20,7 @@ export class AdditionalShiftComponent implements OnInit {
 
   additionalShiftForm:FormGroup
   additionalHoursForm:FormGroup
-  constructor(public activeModal: NgbActiveModal ,private customModal:ModalService, private fb: FormBuilder, private rosterService: RosterService) { }
+  constructor(public activeModal: NgbActiveModal ,private customModal:ModalService, private fb: FormBuilder, private shiftRequestDataService: ShiftRequestDataService) { }
 
   ngOnInit(): void {
 
@@ -48,7 +49,7 @@ export class AdditionalShiftComponent implements OnInit {
   }
 
   async getDefaultList(params) {
-    const res = await this.rosterService.getDefaultList(params);
+    const res = await this.shiftRequestDataService.getDefaultList(params);
     this.shifts = res['data'].payload;
   }
   

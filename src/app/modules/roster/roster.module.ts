@@ -70,12 +70,15 @@ import { DefaultViewComponent } from './components/default-view/default-view.com
 import { EmployeeCheckBoxComponent } from './components/employee-check-box/employee-check-box.component';
 import { DateCheckBoxComponent } from './components/date-check-box/date-check-box.component';
 import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.component';
+import { EmployeeShiftListComponent } from './dialogs/employee-shift-list/employee-shift-list.component';
+import { EventComponent } from './dialogs/event/event.component';
+import { CalenderSetupComponent } from './dialogs/calender-setup/calender-setup.component';
+import { LocationAndDesignationFilterComponent } from './components/location-and-designation-filter/location-and-designation-filter.component';
+import { ShiftRequestByLmComponent } from './pages/shift-request-by-lm/shift-request-by-lm.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { LocationAndDesignationFilterComponent } from './components/location-and-designation-filter/location-and-designation-filter.component';
-import { CalenderSetupComponent } from './dialogs/calender-setup/calender-setup.component';
-import { EventComponent } from './dialogs/event/event.component';
-import { EmployeeShiftListComponent } from './dialogs/employee-shift-list/employee-shift-list.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+
 
 
 
@@ -136,10 +139,14 @@ import { EmployeeShiftListComponent } from './dialogs/employee-shift-list/employ
     EmployeeCheckBoxComponent,
     DateCheckBoxComponent,
     WeekendTypeComponent,
-    LocationAndDesignationFilterComponent,
-    CalenderSetupComponent,
+    EmployeeShiftListComponent,
     EventComponent,
-    EmployeeShiftListComponent
+    CalenderSetupComponent,
+    LocationAndDesignationFilterComponent,
+    ShiftRequestByLmComponent,
+    
+
+   
   ],
   imports: [
     MatSelectModule,
@@ -151,7 +158,8 @@ import { EmployeeShiftListComponent } from './dialogs/employee-shift-list/employ
     RosterRoutingModule,
     NgbModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [ModalService, NgbActiveModal, NgbModal],
 })

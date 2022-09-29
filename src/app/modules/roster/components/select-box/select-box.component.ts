@@ -1,6 +1,8 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnInit,
   Output,
@@ -17,6 +19,9 @@ import { FormGroup } from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectBoxComponent implements OnInit {
+  selectedValue: string = '';
+  isClicked: boolean = false;
+  @ViewChild('dropdownList') dropdownList:ElementRef; 
   x;
   i;
   j;
@@ -33,6 +38,7 @@ export class SelectBoxComponent implements OnInit {
   @Input() control: string;
   @Input() disabled: boolean;
   @Input() isLoaded: boolean;
+  
 
   @Output() onResetDropDown = new EventEmitter();
   @Output() selectionChange = new EventEmitter();
@@ -44,11 +50,105 @@ export class SelectBoxComponent implements OnInit {
   searchedFilter: string = '';
 
   constructor() {}
+  sampleData = [
+    {
+      id : 1 , 
+      name : 'Audi'
+    },
+    {
+      id : 2 , 
+      name : 'BMW'
+    } , 
+    {
+      id : 3 , 
+      name : 'Nisan'
+    } , 
+    {
+      id : 4 , 
+      name : 'Toyota'
+    }
+  ];
 
+  hash = {};
+  optionSelected(option){
+    console.log(option);
+    this.isClicked =!this.isClicked;
+    this.selectedValue = option.name;
+    this.hash = {};
+    this.hash[option.id] = true;
+    this.toggleView();
+
+    // this.form.get(this.control).setValue(option.id);
+
+  }
+  private wasInside = false;
+
+  //@HostListener('click')
+  clickInside() {
+    console.log('clicked inside');
+    this.wasInside = true;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event: PointerEvent) {
+    var paths = event['path'] as Array<any>;
+
+    var inComponent = false;
+    paths.forEach((path) => {
+      if (path.tagName != undefined) {
+        var tagName = path.tagName.toString().toLowerCase();
+        if (tagName == 'app-select-box') inComponent = true;
+      }
+    });
+
+    if (inComponent) {
+      console.log('clicked inside');
+      
+    } else {
+      console.log('clicked outside');
+      if(this.disabled) return;
+      this.isClicked = false;
+      this.toggleView();
+      this.form?.get(this.control).markAsTouched();
+    }
+  }
+
+  toggleDropdown(){
+    if(this.disabled) return;
+    this.isClicked =!this.isClicked;
+    this.toggleView(this.isClicked);
+
+  }
+
+
+  toggleView(show = false){
+
+    
+
+    
+    const div = this.dropdownList.nativeElement;
+
+    if(show){
+      div.classList.remove('select-hide');
+      return;
+    }
+    div.classList.add('select-hide');
+     
+  }
+
+  //@HostListener('document:click')
+  // clickout() {
+  //   // if (!this.wasInside) {
+  //   //   console.log('clicked outside');
+  //   // }
+  //   // this.wasInside = false;
+  //   console.log('click outside');
+  // }
   ngOnInit(): void {
+      console.log('dsabled value' , this.disabled);
     // this.form.get(this.control).setValue(-1);
   }
-  
+
   ngOnChanges(change: SimpleChange) {
     console.log(this.form);
   }
@@ -75,7 +175,11 @@ export class SelectBoxComponent implements OnInit {
     this.onClick.emit();
   }
 
-  
+  clicked() {
+    console.log('clicking');
+    this.isClicked = true;
+  }
+
   initSelect() {
     /*look for any elements with the class "select-wrapper":*/
     this.x = document.getElementsByClassName('select-wrapper');
@@ -133,31 +237,34 @@ export class SelectBoxComponent implements OnInit {
       // });
     }
   }
-  closeAllSelect(elmnt) {
-    /*a function that will close all select boxes in the document,
-    except the current select box:*/
-    let x,
-      y,
-      i,
-      xl,
-      yl,
-      arrNo = [];
-    x = document.getElementsByClassName('select-items');
-    y = document.getElementsByClassName('select-selected');
-    xl = x.length;
-    yl = y.length;
-    for (i = 0; i < yl; i++) {
-      if (elmnt == y[i]) {
-        arrNo.push(i);
-      } else {
-        y[i].classList.remove('select-arrow-active');
-      }
-    }
-    for (i = 0; i < xl; i++) {
-      if (arrNo.indexOf(i)) {
-        x[i].classList.add('select-hide');
-      }
-    }
-  }
+  closeAllSelect() {
+    const div = document.getElementById('custom-select');
+    console.log(div);
+    div.classList.add('select-hide');
 
+    // /*a function that will close all select boxes in the document,
+    // except the current select box:*/
+    // let x,
+    //   y,
+    //   i,
+    //   xl,
+    //   yl,
+    //   arrNo = [];
+    // x = document.getElementsByClassName('select-items');
+    // y = document.getElementsByClassName('select-selected');
+    // xl = x.length;
+    // yl = y.length;
+    // for (i = 0; i < yl; i++) {
+    //   if (elmnt == y[i]) {
+    //     arrNo.push(i);
+    //   } else {
+    //     y[i].classList.remove('select-arrow-active');
+    //   }
+    // }
+    // for (i = 0; i < xl; i++) {
+    //   if (arrNo.indexOf(i)) {
+    //     x[i].classList.add('select-hide');
+    //   }
+    // }
+  }
 }
