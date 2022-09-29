@@ -14,43 +14,6 @@ export class RosterService {
     private appLocalStorage: AppLocalStorageService,
   ) {}
 
-  getDefaultList(params = {}) {
-    return new Promise((resolve, reject) => {
-      const response = { data: null, status: false, message: null };
-      try {
-        const paramss = {
-          client_id:48,
-          screen_role:'lm',
-          glob_mkt_id:-1,
-          region_id:-1,
-          sub_region_id:-1,
-          country_id:154,
-          state_id:2723,
-          city_id:-1,
-          branch_id:-1,
-          department_id:16,
-          desg_id:-1,
-          emp_id:-1,
-        }
-
-        this.httpService.getDefaultList(params).subscribe(
-          (data) => {
-            response.data = data;
-            response.message = 'success';
-            response.status = true;
-            resolve(response);
-          },
-          (err) => {
-            response.message = err;
-            resolve(response);
-          }
-        );
-      } catch (error) {
-        response.message = error;
-        resolve(response);
-      }
-    });
-  }
 
   getEmployeeList(params = {}) {
     return new Promise((resolve, reject) => {
