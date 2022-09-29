@@ -1,12 +1,36 @@
 <div class="agt-module">
-  <div class="comp-wrapper">
-    <div class="select-wrapper" #selectWrapper>
-      <input type="text">
-      <select>
-        <option *ngFor="let option of data" [value]="option.id">{{option.name}}</option>
-        
+  <div class="comp-wrapper w-260">
+    
+      <!-- <input type="text"> -->
+      
+      <select class="d-none" [formControl]="form?.get(control)">
+        <option *ngFor="let option of sampleData" [value]="option.id" [selected]="hash[option.id]">{{option.name}}</option>
       </select>
+      
+    <p class="label" [class.label_up]="isClicked || selectedValue !=''" [class.agt-disabled]="disabled">{{label}}</p>
+
+    <div  class="select-selected light-border" [class.agt-disabled-select-selected]="disabled" (click)="toggleDropdown()">{{selectedValue}}</div>
+    <!-- <app-error-msg [form]="form" [control]="control"></app-error-msg> -->
+    <div class="select-items select-hide" id="custom-select" #dropdownList>
+    <div *ngFor="let option of sampleData" [class.same-as-selected]="hash[option.id]" (click)="optionSelected(option)">{{option.name}}</div>
+
+
+      <!-- <div>BMW</div>
+      <div class="same-as-selected">Citroen</div>
+      <div>Ford</div>
+      <div>Honda</div>
+      <div>Jaguar</div>
+      <div>Land Rover</div>
+      <div>Mercedes</div>
+      <div>Mini</div>
+      <div>Nissan</div>
+      <div>Toyota</div>
+      <div>Volvo</div> -->
     </div>
+<<<<<<< HEAD
     <p class="label">{{label}}</p>
+=======
+>>>>>>> 901d7e95ae38c242201ed87997c9f6ee57481d6d
   </div>
+  <span *ngIf="form?.get(control).errors?.required && form?.get(control).touched">required</span>
 </div>

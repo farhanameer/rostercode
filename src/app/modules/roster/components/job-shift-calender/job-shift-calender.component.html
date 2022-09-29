@@ -40,7 +40,10 @@
               <li class="day-name" *ngFor="let weekday of weekDays">
                 {{ weekday }}
               </li>
-              <li *ngFor="let singleDate of date.totalDaysInMonth">
+              <li
+                *ngFor="let singleDate of date.totalDaysInMonth"
+                (click)="open()"
+              >
                 {{ singleDate.date }}
               </li>
               <!-- 
