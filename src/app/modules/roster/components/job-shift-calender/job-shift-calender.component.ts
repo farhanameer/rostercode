@@ -1,6 +1,9 @@
 import { CalendarService } from './../../services/calander.service';
 import { Component, OnInit } from '@angular/core';
 import  moment  from 'moment';
+import { EventComponent } from '../../dialogs/event/event.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-job-shift-calender',
@@ -19,7 +22,8 @@ export class JobShiftCalenderComponent implements OnInit {
   
   monthsNames = ['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-  constructor(private calendar: CalendarService) { }
+  constructor(private calendar: CalendarService,public activeModal: NgbActiveModal,
+    private customModal: ModalService) { }
 
   ngOnInit(): void {
 
@@ -60,5 +64,10 @@ export class JobShiftCalenderComponent implements OnInit {
     this.currentYearData = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), null, this.weekDaysPreset);
   }
   
+  
+    open(){
+      this.customModal.showFeaturedDialog(EventComponent,"");
 
-}
+    }
+  }
+

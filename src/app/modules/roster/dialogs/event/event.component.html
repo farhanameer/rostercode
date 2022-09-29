@@ -10,21 +10,21 @@
     </div>
     <!-- Body -->
 
-    <div class="user-list-employee pt-0"></div>
+    
 
-    <div class="overtime-form">
-      <div class="row">
+    <div class="overtime-form p-20 px-0">
+      <div class="row m-0">
         <div class="col">
-          <app-select-box></app-select-box>
+          <app-input-box [form]="eventForm" [control]="'name'"  [label]="'Name'" [width]="'100%'"></app-input-box>
         </div>
       </div>
       <br />
-      <div class="row">
-        <div class="col">
-          <app-date-box></app-date-box>
+      <div class="row m-0">
+        <div class="col-6">
+          <app-date-box  [form]="eventForm" [control]="'fromDate'" [label]="'From Date'"></app-date-box>
         </div>
-        <div class="col">
-          <app-date-box></app-date-box>
+        <div class="col-6">
+          <app-date-box  [form]="eventForm" [control]="'toDate'" [label]="'To Date'"></app-date-box>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
           type="button"
           class="btn-input"
           value="Submit"
-          (click)="activeModal.close('Close click')"
+          (click)="submit()"
         />
         <input
           type="button"
