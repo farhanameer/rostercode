@@ -3,14 +3,10 @@
     <div class="header-menu"></div>
     <app-full-layout>
       <div>
-        <div class="table-header gradient-head flex justify-content-between">
-          <div class="heading">Shift Request</div>
-          <div class="btn-options flex align-content-center">
-            <a href="#" class="btn-custom"
-              >Advance Filter
-              <i><img src="assets/icons/filter.svg" alt="" /></i>
-            </a>
-          </div>
+        <div>
+          <app-location-and-designation-filter>
+            <div class="heading">Shift Request</div>
+          </app-location-and-designation-filter>
         </div>
         <div class="shift-setup">
           <div class="shadow">
@@ -20,10 +16,10 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-select-box></app-select-box>
+                      <app-select-box [label]="'Shift Type'"></app-select-box>
                     </div>
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'Shift Name'"></app-input-box>
                     </div>
                     <div>
                       <app-time-box></app-time-box>
@@ -32,21 +28,24 @@
                       <app-time-box></app-time-box>
                     </div>
                   </div>
+
                   <div class="form-col">
                     <div>
-                      <app-select-box></app-select-box>
+                      <app-select-box
+                        [label]="'Shift Color'"
+                        [form]="shiftRequestForm"
+                        [control]="'shiftType'"
+                      ></app-select-box>
                     </div>
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'Mid Break From'"></app-date-box>
                     </div>
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'Mid Break To'"></app-date-box>
                     </div>
                     <div class="row" style="width: 272px">
                       <div class="col">
-                        <app-check-box>
-                          <label>Roster</label>
-                        </app-check-box>
+                        <app-check-box [label]="'Roster'"> </app-check-box>
                       </div>
                       <div class="col">
                         <app-check-box>
@@ -70,7 +69,7 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'Select Day'"></app-date-box>
                     </div>
                     <div>
                       <app-time-box></app-time-box>
@@ -94,7 +93,7 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'Title'"></app-input-box>
                     </div>
                     <div>
                       <app-time-box></app-time-box>
@@ -118,13 +117,13 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'BL Status'"></app-input-box>
                     </div>
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'BL comments'"></app-input-box>
                     </div>
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'Dated'"></app-input-box>
                     </div>
                   </div>
                 </div>

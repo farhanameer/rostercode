@@ -3,17 +3,21 @@
   <input type="date" style="width: 260px" />
 </div>
  -->
-<div class="agt-module">
-  <div class="date-wrapper">
-    <div class="comp-wrapper date-field toggle-date">
+<div class="agt-module w-100">
+  <div class="date-wrapper w-100">
+    <div class="comp-wrapper date-field toggle-date w-100">
       <input
         matInput
         readonly
         placeholder=" "
         [matDatepicker]="varIssueDate"
+        [ngStyle]="{ 'width': width }"
+        [formControl]="form?.get(control)"
         #inputRef
       />
-      <p class="label" [class.agt-float-label]="inputRef?.value != ''"> label </p>
+      <p class="label" [class.agt-float-label]="inputRef?.value != ''">
+        {{ label }}
+      </p>
       <mat-datepicker-toggle
         [disableRipple]="true"
         [for]="varIssueDate"
@@ -21,4 +25,5 @@
       <mat-datepicker #varIssueDate></mat-datepicker>
     </div>
   </div>
+  <span *ngIf="form?.get(control).errors?.required && form?.get(control).touched">required</span>
 </div>

@@ -20,29 +20,34 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-select-box></app-select-box>
+                      <app-select-box [label]="'Shift Type'"></app-select-box>
                     </div>
                     <div>
-                      <app-select-box></app-select-box>
+                      <app-input-box [label]="'Shift Name'" ></app-input-box>
                     </div>
                     <div>
-                      <app-time-box></app-time-box>
+                      <app-time-box [label]="'From'"></app-time-box>
                     </div>
                     <div>
-                      <app-time-box></app-time-box>
+                      <app-time-box [label]="'To'"></app-time-box>
+                    </div>
+                  </div>
+                  <div class="form-col">
+                    <div class="w-100">
+                      <app-input-box [label]="'BL Status'" [width]="'100%'"></app-input-box>
                     </div>
                   </div>
                   <div class="form-col">
                     <div>
-                      <app-select-box></app-select-box>
+                      <app-select-box [label]="'BL Status'"></app-select-box>
                     </div>
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'BL Status'"></app-date-box>
                     </div>
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'BL Status'"></app-date-box>
                     </div>
-                    <div class="row" style="width: 272px">
+                    <div class="row align-content-center" style="width: 272px">
                       <div class="col">
                         <app-check-box>
                           <label>Roster</label>
@@ -70,15 +75,15 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-select-box></app-select-box>
+                      <app-select-box [label]="'BL Status'"></app-select-box>
                     </div>
                     <div>
-                      <app-time-box></app-time-box>
+                      <app-time-box [label]="'BL Status'"></app-time-box>
                     </div>
                     <div>
-                      <app-time-box></app-time-box>
+                      <app-time-box [label]="'BL Status'"></app-time-box>
                     </div>
-                    <div>
+                    <div class="d-flex align-items-center">
                       <app-check-box>
                         <label>Specific Period</label>
                       </app-check-box>
@@ -86,13 +91,13 @@
                   </div>
                   <div class="form-col">
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'BL Status'"></app-date-box>
                     </div>
                     <div>
-                      <app-date-box></app-date-box>
+                      <app-date-box [label]="'BL Status'"></app-date-box>
                     </div>
                     <div>
-                      <app-select-box></app-select-box>
+                      <app-select-box [label]="'BL Status'"></app-select-box>
                     </div>
                   </div>
                 </div>
@@ -105,13 +110,13 @@
                 <div class="shift-card">
                   <div class="form-col">
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'BL Status'"></app-input-box>
                     </div>
                     <div>
-                      <app-time-box></app-time-box>
+                      <app-time-box [label]="'BL Status'"></app-time-box>
                     </div>
                     <div>
-                      <app-time-box></app-time-box>
+                      <app-time-box [label]="'BL Status'"></app-time-box>
                     </div>
                     <div>
                       <app-check-box>
@@ -121,20 +126,30 @@
                   </div>
                   <div class="form-col">
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'BL Status'"></app-input-box>
                     </div>
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'BL Status'"></app-input-box>
                     </div>
                     <div>
-                      <app-input-box></app-input-box>
+                      <app-input-box [label]="'BL Status'"></app-input-box>
                     </div>
                   </div>
                 </div>
               </div>
             </app-sub-layout>
           </div>
-          <div class="shift-setup-footer"></div>
+          <!-- <div class="shift-setup-footer"></div> -->
+          <div class="calendar-footer justify-content-end">
+            <div class="modal-footer-button flex">
+              <div>
+                <app-check-box>
+                  <label>Active</label>
+                </app-check-box>
+              </div>
+              <input type="button" class="btn-input" value="Submit" />
+            </div>
+          </div>
         </div>
       </div>
     </app-full-layout>
