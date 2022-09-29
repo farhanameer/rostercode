@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
+import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { CalendarService } from '../../services/calander.service';
 import { EmployeeShiftDataService } from '../../services/data/dropdown.data';
 import { EmployeeRosterDataService } from '../../services/data/employeeAttendance.data';
+import { HolidayDataService } from '../../services/data/holidays.data.service';
 
 @Component({
   selector: 'app-attendence-calender',
@@ -13,7 +15,9 @@ export class AttendenceCalenderComponent implements OnInit {
   constructor(
     private calender: CalendarService,
     private dataService: EmployeeRosterDataService,
-    private dataShiftService: EmployeeShiftDataService
+    private dataShiftService: EmployeeShiftDataService,
+    private appLocalStorage: AppLocalStorageService,
+    private holidayService: HolidayDataService
   ) {}
   // weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -49,57 +53,27 @@ export class AttendenceCalenderComponent implements OnInit {
     this.year = moment(this.currentDate).format('YYYY');
     this.getMonthAndYear(false, true);
 
-    // this.daysList = this.calender.getCalendar(
-    //   this.year,
-    //   this.month,
-    //   this.weekDays
-    // );
-    // console.log(this.daysList);
-    // this.daysList.forEach((e, i) => {
-    //   (e['color'] as any) = '';
-    //   this.employeeAttendance.forEach((el) => {
-    //     if (el.date == e['date']) {
-    //       (e['color'] as any) = el['color'];
-    //     }
-    //   });
-    // });
-    // console.log(this.daysList);
-
-    // hard code dates set!
-    // this.daysList.forEach((e, i) => {
-    //   (e['color'] as any) = '';
-    //   if (e['date'] == 5 || e['date'] == 20 || e['date'] == 25) {
-    //     (e['colorStr'] as any) = '#FEC932';
-    //   }
-    // });
-    // console.log(this.daysList);
-
     this.weekDaysShortWord = this.weekDays.map((x) => x[0]);
 
-    // this.years[0] = moment(this.currentDate).subtract(1, 'year').format('YYYY');
-    // this.years[1] = moment(this.currentDate).format('YYYY');
-    // this.years[2] = moment(this.currentDate).add(1, 'year').format('YYYY');
+    this.getHoliday({
+      client_id: this.appLocalStorage.getClientId(),
+      year: 2019,
+      country_id: 154,
+    });
 
-    // this.months[0] = moment(this.currentDate)
-    //   .subtract(2, 'month')
-    //   .format('MMMM YYYY');
-    // this.months[1] = moment(this.currentDate)
-    //   .subtract(1, 'month')
-    //   .format('MMMM YYYY');
-    // this.months[2] = moment(this.currentDate).format('MMMM YYYY');
-    // this.months[3] = moment(this.currentDate)
-    //   .add(1, 'month')
-    //   .format('MMMM YYYY');
-    // this.months[4] = moment(this.currentDate)
-    //   .add(2, 'month')
-    //   .format('MMMM YYYY');
-    // console.log(this.years);
-    // console.log(this.months);
-    // const monthIndex = this.mmm[this.month];
-    // this.year_month = `${this.year}-${monthIndex}`;
-    // this.getEmpRoster();
+    this.addHoliday();
   }
 
+  async getHoliday(params) {
+    console.log('working');
+    const result = await this.holidayService.getHoliday(params);
+    console.log(`Holiday API ${result}`);
+  }
+  async addHoliday() {
+    const result = await this.holidayService.addHoliday();
+
+    console.log(result);
+  }
   async getEmpRoster() {
     const result = await this.dataService.getEmployeeRoster({
       year_month: this.year_month,
