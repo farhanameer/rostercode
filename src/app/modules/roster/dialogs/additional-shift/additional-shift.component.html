@@ -2,10 +2,10 @@
 <!-- Modal Body -->
 <div class="form-col">
   <div>
-    <app-input-box></app-input-box>
+    <app-select-box [label]="'Select Employee'"></app-select-box>
   </div>
   <div>
-    <app-input-box></app-input-box>
+    <app-select-box [label]="'Assigned Shift'"></app-select-box>
   </div>
 </div>
 
@@ -29,10 +29,19 @@
     <div class="shift-card">
       <div class="form-col">
         <div *ngIf="view == 'shift'">
-          <app-select-box [data]="shifts" [form]="additionalShiftForm" [control]="'additionalShift'" [label]="'Additional Shift'"  ></app-select-box>
+          <app-select-box
+            [data]="shifts"
+            [form]="additionalShiftForm"
+            [control]="'additionalShift'"
+            [label]="'Additional Shift'"
+          ></app-select-box>
         </div>
         <div *ngIf="view == 'hours'">
-          <app-input-box [form]="additionalHoursForm" [control]="'additionalShiftHours'" [label]="'Additional Hours Shift'" ></app-input-box>
+          <app-input-box
+            [form]="additionalHoursForm"
+            [control]="'additionalShiftHours'"
+            [label]="'Additional Hours'"
+          ></app-input-box>
         </div>
       </div>
     </div>

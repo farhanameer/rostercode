@@ -23,7 +23,6 @@ import { DateBoxComponent } from './components/date-box/date-box.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { ButtonComponent } from './components/button/button.component';
 import { EmployeeShiftAlloctionComponent } from './components/employee-shift-alloction/employee-shift-alloction.component';
-import { EmployeeShiftDetailsComponent } from './components/employee-shift-details/employee-shift-details.component';
 import { BoardCardComponent } from './components/board-card/board-card.component';
 import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
 import { EmployeeShiftCardComponent } from './components/employee-shift-card/employee-shift-card.component';
@@ -95,7 +94,6 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     ButtonComponent,
     EmployeeShiftAlloctionComponent,
     ShiftAllocationComponent,
-    EmployeeShiftDetailsComponent,
     BoardCardComponent,
     EmployeeCardComponent,
     EmployeeShiftCardComponent,
