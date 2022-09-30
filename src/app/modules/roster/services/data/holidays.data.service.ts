@@ -38,6 +38,8 @@ export class HolidayDataService {
   addHoliday(params) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
+      params.client_id = this.appLocalStorage.getClientId();
+
       try {
         const body = {
           year: 2021,
@@ -55,7 +57,7 @@ export class HolidayDataService {
             response.message = 'success';
             response.status = true;
             resolve(response);
-            console.log(response);
+            console.log('BEru', response);
           },
           (err) => {
             response.message = err;

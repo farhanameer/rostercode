@@ -61,7 +61,7 @@ export class AttendenceCalenderComponent implements OnInit {
       country_id: 154,
     });
 
-    this.addHoliday();
+    // this.addHoliday();
   }
 
   async getHoliday(params) {
@@ -69,11 +69,11 @@ export class AttendenceCalenderComponent implements OnInit {
     const result = await this.holidayService.getHoliday(params);
     console.log(`Holiday API ${result}`);
   }
-  async addHoliday() {
-    const result = await this.holidayService.addHoliday();
+  // async addHoliday() {
+  //   const result = await this.holidayService.addHoliday();
 
-    console.log(result);
-  }
+  //   console.log(result);
+  // }
   async getEmpRoster() {
     const result = await this.dataService.getEmployeeRoster({
       year_month: this.year_month,
