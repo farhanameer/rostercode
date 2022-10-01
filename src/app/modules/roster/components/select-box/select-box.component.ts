@@ -160,7 +160,7 @@ export class SelectBoxComponent implements OnInit {
   }
 
   get validation() {
-    return this.form.controls;
+    return this.form?.controls;
   }
   onRestrictSpace(event) {
     this.searchedFilter = this.locData['name'];
