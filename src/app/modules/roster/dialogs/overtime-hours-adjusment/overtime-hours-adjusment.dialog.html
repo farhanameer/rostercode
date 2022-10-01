@@ -25,18 +25,18 @@
     </div>
 
     <div class="overtime-form">
-      <div class="row" style="margin-left: 20px">
-        <div class="col">
-          <app-input-box></app-input-box>
+      <div class="row m-0">
+        <div class="col-6">
+          <app-input-box [label]="'Overtime Hours'"></app-input-box>
         </div>
-        <div class="col">
-          <app-select-box></app-select-box>
+        <div class="col-6">
+          <app-input-box [label]="'Approved Hours'"></app-input-box>
         </div>
       </div>
       <br />
-      <div class="row" style="margin-left: 20px">
-        <div class="col">
-          <app-input-box></app-input-box>
+      <div class="row m-0">
+        <div class="col mb-3">
+          <app-input-box [label]="'Comments'" [width]="'100%'"></app-input-box>
         </div>
       </div>
     </div>

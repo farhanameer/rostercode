@@ -12,26 +12,26 @@
         <div class="search-row">
           <form action="" class="flex space-between w-100">
             <div>
-              <app-select-box></app-select-box>
+              <app-select-box [label]="'Period Start Year'"></app-select-box>
             </div>
             <div>
-              <app-select-box></app-select-box>
+              <app-select-box [label]="'Period End Year'"></app-select-box>
             </div>
             <div>
-              <app-select-box></app-select-box>
+              <app-select-box [label]="'Weekend'"></app-select-box>
             </div>
           </form>
         </div>
         <div class="search-row">
           <form action="" class="flex space-between w-100">
             <div>
-              <app-select-box></app-select-box>
+              <app-select-box [label]="'Half Day'"></app-select-box>
             </div>
             <div>
-              <app-time-box></app-time-box>
+              <app-time-box [label]="'From'"></app-time-box>
             </div>
             <div>
-              <app-time-box></app-time-box>
+              <app-time-box [label]="'To'"></app-time-box>
             </div>
           </form>
         </div>
@@ -45,56 +45,36 @@
             <div class="shift-card">
               <div class="row">
                 <div class="col">
-                  <app-check-box>
-                    <label>Kashmir Day</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Kashmir Day'"> </app-check-box>
                 </div>
                 <div class="col">
-                  <app-check-box>
-                    <label>Pakistan Day</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Pakistan Day'"> </app-check-box>
                 </div>
                 <div class="col">
-                  <app-check-box>
-                    <label>Labour Day</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Labour Day'"> </app-check-box>
                 </div>
                 <div class="col">
-                  <app-check-box>
-                    <label>Eid-ul-Fitr Day</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Eid-ul-Fitr Day'"> </app-check-box>
                 </div>
                 <div class="col">
-                  <app-check-box>
-                    <label>Independence Day</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Independence Day'"> </app-check-box>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <app-check-box>
-                    <label>Eid-ul-Azha</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Eid-ul-Azha'"> </app-check-box>
                 </div>
                 <div class="col">
-                  <app-check-box>
-                    <label>Ashura</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Ashura'"> </app-check-box>
                 </div>
                 <div class="col">
-                  <app-check-box>
-                    <label>Allama Iqbal Day</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Allama Iqbal Day'"> </app-check-box>
                 </div>
                 <div class="col">
-                  <app-check-box>
-                    <label>Eid-Milad-ul-Nabi</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Eid-Milad-ul-Nabi'"> </app-check-box>
                 </div>
                 <div class="col">
-                  <app-check-box>
-                    <label>Quaid-e-Azam Day</label>
-                  </app-check-box>
+                  <app-check-box [label]="'Quaid-e-Azam Day'"> </app-check-box>
                 </div>
               </div>
             </div>
