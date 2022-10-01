@@ -3,7 +3,11 @@
     
       <!-- <input type="text"> -->
       
-      <select class="d-none" [formControl]="form?.get(control)">
+      <select *ngIf="form && control" class="d-none" [formControl]="form?.get(control)">
+        <option *ngFor="let option of data" [value]="option.id" [selected]="hash[option.id]">{{option.name}}</option>
+      </select>
+
+      <select *ngIf="!form && !control" class="d-none">
         <option *ngFor="let option of data" [value]="option.id" [selected]="hash[option.id]">{{option.name}}</option>
       </select>
       
@@ -28,5 +32,5 @@
       <div>Volvo</div> -->
     </div>
   </div>
-  <span *ngIf="form?.get(control).errors?.required && form?.get(control).touched">required</span>
+  <span *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched">required</span>
 </div>
