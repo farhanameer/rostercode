@@ -2,10 +2,10 @@
 <!-- Modal Body -->
 <div class="form-col">
   <div>
-    <app-input-box></app-input-box>
+    <app-select-box [label]="'Select Employee'"></app-select-box>
   </div>
   <div>
-    <app-input-box></app-input-box>
+    <app-select-box [label]="'Assigned Shift'"></app-select-box>
   </div>
 </div>
 <app-sub-layout>
@@ -14,13 +14,27 @@
     <div class="shift-card">
       <div class="form-col">
         <div>
-          <app-date-box [form]="swipeShiftForm" [control]="'selectDate'" [label]="'Select Date'"></app-date-box>
+          <app-date-box
+            [form]="swipeShiftForm"
+            [control]="'selectDate'"
+            [label]="'Select Date'"
+          ></app-date-box>
         </div>
         <div>
-          <app-select-box [data]="shifts" [form]="swipeShiftForm" [control]="'swipeShift'" [label]="'Swipe Shift'"></app-select-box>
+          <app-select-box
+            [data]="shifts"
+            [form]="swipeShiftForm"
+            [control]="'swipeShift'"
+            [label]="'Swipe Shift'"
+          ></app-select-box>
         </div>
         <div>
-          <app-select-box [data]="employees" [form]="swipeShiftForm" [control]="'replaceWith'" [label]="'Replace With'"></app-select-box>
+          <app-select-box
+            [data]="employees"
+            [form]="swipeShiftForm"
+            [control]="'replaceWith'"
+            [label]="'Replace With'"
+          ></app-select-box>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -7,10 +8,14 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./shift-setup.component.css']
 })
 export class ShiftSetupComponent implements OnInit {
-  shiftSetUpForm:FormGroup
-  constructor(private fb:FormBuilder) { }
+
+  constructor(private shiftRequestService: ShiftRequestDataService , private fb:FormBuilder) { }
+
+  shiftTypeArray : any;
+  shiftColorArray: any;
 
   ngOnInit(): void {
+
     this.shiftSetUpForm=this.fb.group({
       screen_role:["",Validators.required],
       client_id:["",Validators.required],
@@ -45,7 +50,54 @@ export class ShiftSetupComponent implements OnInit {
 
 
     })
+
+    // debugger;
+    this.getShiftTypes();
+    this.getShiftColors();
+    // this.getShift
   }
+
+  async getShiftTypes(){
+    const data = await this.shiftRequestService.getShiftTypes();
+    let shifts = data["data"]["payload"];
+    if(!Array.isArray(shifts)){
+      console.log('error occured');
+    }
+    const shiftsArray = [];
+    shifts.forEach(shift =>{
+      shiftsArray.push({
+        id : shift.shift_type_id , 
+        name : shift.shift_type_name
+      })
+    });
+    console.log(shiftsArray);
+    this.shiftTypeArray = shiftsArray;
+    console.log(this.shiftTypeArray);
+
+  }
+
+  async getShiftColors(){
+    const data = await this.shiftRequestService.getShiftColors();
+    let colors = data["data"]["payload"];
+    if(!Array.isArray(colors)){
+      console.log('error occured');
+    } 
+    const colorsArray = [];
+    colors.forEach(color =>{
+      let obj = {
+        id: color,
+        name: color
+      }
+      colorsArray.push(obj);
+    });
+    console.log(colorsArray);
+    this.shiftColorArray = colorsArray;
+    console.log(this.shiftColorArray);
+  }
+  shiftSetUpForm:FormGroup
+  
+
+  
 
   get qrt_break() : FormArray {
     return this.shiftSetUpForm.get("qrt_break") as FormArray
