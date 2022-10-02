@@ -1,5 +1,5 @@
 import { CalendarService } from './../../services/calander.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import  moment  from 'moment';
 import { EventComponent } from '../../dialogs/event/event.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -24,7 +24,22 @@ export class JobShiftCalenderComponent implements OnInit {
   weekDaysPreset = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   
   monthsNames = ['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  @Input() filters : any;
 
+  months = {
+    'Jan' : '01',
+    'Feb' : '02' , 
+    'Mar' : '03',
+    'Apr' : '04',
+    'May' : '05',
+    'Jun' : '06',
+    'Jul' : '07',
+    'Aug' : '08',
+    'Sep' : '09',
+    'Oct' : '10',
+    'Nov' : '11',
+    'Dec' : '12'
+  };
 
   constructor(private calendar: CalendarService,public activeModal: NgbActiveModal,
     private customModal: ModalService , private holidayService : HolidayDataService , private appLocalStorage : AppLocalStorageService) { }
@@ -81,21 +96,8 @@ export class JobShiftCalenderComponent implements OnInit {
     console.log('holidays Hash' , this.holidaysHash);
     this.currentYearData.forEach((month , monthIndex) =>{
 
-      const months = {
-        'Jan' : '01',
-        'Feb' : '02' , 
-        'Mar' : '03',
-        'Apr' : '04',
-        'May' : '05',
-        'Jun' : '06',
-        'Jul' : '07',
-        'Aug' : '08',
-        'Sep' : '09',
-        'Oct' : '10',
-        'Nov' : '11',
-        'Dec' : '12'
-      };
-      let currentMonth = months[month.monthName];
+      
+      let currentMonth = this.months[month.monthName];
       
       
       if(this.holidaysHash[currentMonth]){
@@ -163,13 +165,32 @@ export class JobShiftCalenderComponent implements OnInit {
   }
   
   
-    open(singleDate , open = false){
+    open(singleDate , yearData, open = false){
+      console.log(yearData);
+      // const key = `${year}`
+      const year = moment(this.currentDate).format('YYYY');
+      const month = this.months[yearData.monthName];
+      let day = singleDate.date;
+      if(singleDate.date <=9){
+        day = `0${day}`
+      }
+
+      const date = `${year}-${month}-${day}`;
       if(!singleDate.date) return;
       if(singleDate.start_date && !open) return;
-      this.customModal.showFeaturedDialog(EventComponent,"");
+      this.customModal.showFeaturedDialog(EventComponent,"" , {
+        holiday : {
+          start_date: date , 
+          end_date : date
+        }, 
+        filters : this.filters
+      });
     }
     edit(singleDate){
-      this.customModal.showFeaturedDialog(EventComponent,"" , singleDate);
+      this.customModal.showFeaturedDialog(EventComponent,"" , {
+        holiday : singleDate, 
+        filters : this.filters
+      });
     }
     async delete(singleDate){
       const response = await this.holidayService.deleteHoliday({
