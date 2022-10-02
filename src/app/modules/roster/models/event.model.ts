@@ -1,5 +1,5 @@
 export class EventModel{
-    name:string;
-    formDate:Date;
-    toDate:Date
+    hdesc:string;
+    start_date:Date;
+    end_date:Date
 }
