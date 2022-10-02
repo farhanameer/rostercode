@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -11,6 +12,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { updateFor } from 'typescript';
 
 @Component({
   selector: 'app-select-box',
@@ -18,19 +20,11 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./select-box.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SelectBoxComponent implements OnInit {
+export class SelectBoxComponent implements OnInit , AfterViewInit {
   selectedValue: string = '';
   isClicked: boolean = false;
   @ViewChild('dropdownList') dropdownList:ElementRef; 
-  x;
-  i;
-  j;
-  l;
-  ll;
-  selElmnt;
-  a;
-  b;
-  c;
+  
 
   @Input() form: FormGroup;
   @Input() data: Array<any> = [];
@@ -40,18 +34,28 @@ export class SelectBoxComponent implements OnInit {
   @Input() isLoaded: boolean;
   @Input() width : string;
   @Input() height : string;
+  @Input() name : string;
+  @Input() hideLabel : Boolean;
+  @Input() customClass : any;
+ 
+
   
 
   @Output() onResetDropDown = new EventEmitter();
-  @Output() selectionChange = new EventEmitter();
+  @Output() selectionChange : EventEmitter<any>  = new EventEmitter();
   @Output() onClick = new EventEmitter();
 
   @ViewChild('selectWrapper') selectWrapper: any;
+  @ViewChild('mainContainer') mainContainer: ElementRef;
+
 
   locData = {};
   searchedFilter: string = '';
 
   constructor() {}
+
+
+  
   sampleData = [
     {
       id : 1 , 
@@ -80,7 +84,12 @@ export class SelectBoxComponent implements OnInit {
     this.hash[option.id] = true;
     this.toggleView();
 
-    // this.form.get(this.control).setValue(option.id);
+    this.selectionChange.next({
+      value : option.id , 
+      controlName : this.name
+    });
+
+    this.form.get(this.control).setValue(option.id);
 
   }
   private wasInside = false;
@@ -138,24 +147,35 @@ export class SelectBoxComponent implements OnInit {
      
   }
 
-  //@HostListener('document:click')
-  // clickout() {
-  //   // if (!this.wasInside) {
-  //   //   console.log('clicked outside');
-  //   // }
-  //   // this.wasInside = false;
-  //   console.log('click outside');
-  // }
+ 
   ngOnInit(): void {
       console.log('dsabled value' , this.disabled);
+      console.log('container' , this.customClass);
+      
+      
+      
     // this.form.get(this.control).setValue(-1);
   }
 
   ngOnChanges(change: SimpleChange) {
-    console.log(this.form);
+    if(this.data.length == 0){
+      this.selectedValue = '';
+      this.hash = {};
+    } 
   }
 
   ngAfterViewInit(): void {
+    if(this.customClass) {
+      const container = this.mainContainer.nativeElement;
+      if(!Array.isArray(this.customClass)){
+        container.classList.add(this.customClass);
+        return;
+      }
+      this.customClass.forEach(customClass =>{
+        container.classList.add(customClass);
+      })
+    }
+    
     // this.initSelect()
   }
 
@@ -180,93 +200,5 @@ export class SelectBoxComponent implements OnInit {
   clicked() {
     console.log('clicking');
     this.isClicked = true;
-  }
-
-  initSelect() {
-    /*look for any elements with the class "select-wrapper":*/
-    this.x = document.getElementsByClassName('select-wrapper');
-    this.l = this.x.length;
-    for (this.i = 0; this.i < this.l; this.i++) {
-      this.selElmnt = this.x[this.i].getElementsByTagName('select')[0];
-      this.ll = this.selElmnt.length;
-      /*for each element, create a new DIV that will act as the selected item:*/
-      this.a = document.createElement('DIV');
-      this.a.setAttribute('class', 'select-selected');
-      this.a.innerHTML =
-        this.selElmnt.options[this.selElmnt.selectedIndex].innerHTML;
-      this.x[this.i].appendChild(this.a);
-      /*for each element, create a new DIV that will contain the option list:*/
-      this.b = document.createElement('DIV');
-      this.b.setAttribute('class', 'select-items select-hide');
-      for (this.j = 1; this.j < this.ll; this.j++) {
-        /*for each option in the original select element,
-      create a new DIV that will act as an option item:*/
-        this.c = document.createElement('DIV');
-        this.c.innerHTML = this.selElmnt.options[this.j].innerHTML;
-        this.c.addEventListener('click', function (e) {
-          /*when an item is clicked, update the original select box,
-          and the selected item:*/
-          var y, i, k, s, h, sl, yl;
-          s = this.parentNode.parentNode.getElementsByTagName('select')[0];
-          sl = s.length;
-          h = this.parentNode.previousSibling;
-          for (i = 0; i < sl; i++) {
-            if (s.options[i].innerHTML == this.innerHTML) {
-              s.selectedIndex = i;
-              h.innerHTML = this.innerHTML;
-              y = this.parentNode.getElementsByClassName('same-as-selected');
-              yl = y.length;
-              for (k = 0; k < yl; k++) {
-                y[k].removeAttribute('class');
-              }
-              this.setAttribute('class', 'same-as-selected');
-              break;
-            }
-          }
-          h.click();
-        });
-        this.b.appendChild(this.c);
-      }
-      this.x[this.i].appendChild(this.b);
-      // let that = this;
-      // that.a.addEventListener('click', function (e) {
-      //   /*when the select box is clicked, close any other select boxes,
-      //   and open/close the current select box:*/
-      //   that.closeAllSelect(that);
-      //   e.stopPropagation();
-      //   that['nextSibling'].classList.toggle('select-hide');
-      //   that['classList'].toggle('select-arrow-active');
-      // });
-    }
-  }
-  closeAllSelect() {
-    const div = document.getElementById('custom-select');
-    console.log(div);
-    div.classList.add('select-hide');
-
-    // /*a function that will close all select boxes in the document,
-    // except the current select box:*/
-    // let x,
-    //   y,
-    //   i,
-    //   xl,
-    //   yl,
-    //   arrNo = [];
-    // x = document.getElementsByClassName('select-items');
-    // y = document.getElementsByClassName('select-selected');
-    // xl = x.length;
-    // yl = y.length;
-    // for (i = 0; i < yl; i++) {
-    //   if (elmnt == y[i]) {
-    //     arrNo.push(i);
-    //   } else {
-    //     y[i].classList.remove('select-arrow-active');
-    //   }
-    // }
-    // for (i = 0; i < xl; i++) {
-    //   if (arrNo.indexOf(i)) {
-    //     x[i].classList.add('select-hide');
-    //   }
-    // }
   }
 }

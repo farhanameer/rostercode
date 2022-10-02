@@ -15,6 +15,7 @@ import { HolidayDataService } from '../../services/data/holidays.data.service';
 })
 export class EventComponent implements OnInit {
   eventForm: FormGroup;
+  @Input() modelData :any;
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
@@ -22,19 +23,42 @@ export class EventComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventForm = this.fb.group({
-      hdesc: ['', Validators.required],
-      start_date: ['', Validators.required],
-      end_date: ['', Validators.required],
-    });
+    const holidayData = this.modelData.holiday;
+    if(this.modelData) {
+      this.eventForm = this.fb.group({
+        hdesc: [holidayData.hdesc, Validators.required],
+        start_date: [holidayData.start_date, Validators.required],
+        end_date: [holidayData.end_date, Validators.required],
+      });
+    }else{
+      this.eventForm = this.fb.group({
+        hdesc: ['', Validators.required],
+        start_date: [holidayData.start_date, Validators.required],
+        end_date: [holidayData.end_date, Validators.required],
+      });
+    }
+    
+
+    console.log('singleDate we got' , this.modelData);
   }
 
   addEvent() {
+
+    // year: 2021,
+    //       country_id: 154,
+    //       state_id: -1,
+    //       city_id: -1,
+    //       loc_id: -1,
+    //       department_id: -1,
     this.holidayService.addHoliday({
       start_date: this.eventForm.get('start_date').value,
       end_date: this.eventForm.get('end_date').value,
       hdesc: this.eventForm.get('hdesc').value,
     });
+  }
+
+  updateEvent(){
+    
   }
 
   get validateAForm(): any {

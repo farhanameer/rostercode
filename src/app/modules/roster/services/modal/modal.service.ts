@@ -25,6 +25,7 @@ export class ModalService {
       const modalRef = this.ngbModal.open(theComponent, {modalDialogClass: 'ag-modal'});
       modalRef.componentInstance.data = employee;
       modalRef.componentInstance.dates = data;
+      modalRef.componentInstance.modelData = data;
       return modalRef;
     }
 }

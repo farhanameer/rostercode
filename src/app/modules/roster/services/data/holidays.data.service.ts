@@ -42,16 +42,11 @@ export class HolidayDataService {
 
       try {
         const body = {
-          year: 2021,
-          country_id: 154,
-          state_id: -1,
-          city_id: -1,
-          loc_id: -1,
-          department_id: -1,
           client_id: 48,
           line_manager_id: this.appLocalStorage.getUserId(),
         };
-        this.httpService.addHoliday(body).subscribe(
+        let data = {...body , ...params}
+        this.httpService.addHoliday(data).subscribe(
           (data) => {
             response.data = data['payload'];
             response.message = 'success';
@@ -74,7 +69,7 @@ export class HolidayDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        this.httpService.updateHoliday().subscribe(
+        this.httpService.updateHoliday(params).subscribe(
           (data) => {
             response.data = data['payload'];
             response.message = 'success';
@@ -93,11 +88,11 @@ export class HolidayDataService {
       }
     });
   }
-  deleteHoliday() {
+  deleteHoliday(params) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        this.httpService.deleteHoliday().subscribe(
+        this.httpService.deleteHoliday(params).subscribe(
           (data) => {
             response.data = null;
             response.message = 'success';

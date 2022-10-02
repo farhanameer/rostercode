@@ -4,6 +4,14 @@
     font-family: Arial;
   }
 
+  .label{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90px;
+    padding-right: 15px;
+  }
+
 
   .w-h-260{
     width: 260px;
@@ -15,10 +23,14 @@
 
   .select-selected {
     background-color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /*style the arrow inside the select element:*/
   .select-selected:after {
+    background-color: white;
     position: absolute;
     content: "";
     top: 12px;
@@ -122,6 +134,14 @@
 
   .agt-disabled-select-selected:after{
     border-color: #D8DCDF transparent transparent transparent !important;
+  }
+
+  .carret_position_9::after{
+    top: 9px;
+  }
+  .padding-top-3{
+    padding-top: 3.4px;
+    padding-bottom: 3.4px;
   }
 
 }
