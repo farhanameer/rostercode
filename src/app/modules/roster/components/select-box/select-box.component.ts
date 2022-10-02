@@ -89,7 +89,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
       controlName : this.name
     });
 
-    // this.form.get(this.control).setValue(option.id);
+    this.form.get(this.control).setValue(option.id);
 
   }
   private wasInside = false;
