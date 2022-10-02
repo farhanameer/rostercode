@@ -93,11 +93,11 @@ export class HolidayDataService {
       }
     });
   }
-  deleteHoliday() {
+  deleteHoliday(params) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        this.httpService.deleteHoliday().subscribe(
+        this.httpService.deleteHoliday(params).subscribe(
           (data) => {
             response.data = null;
             response.message = 'success';

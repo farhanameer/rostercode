@@ -15,6 +15,7 @@ import { HolidayDataService } from '../../services/data/holidays.data.service';
 })
 export class EventComponent implements OnInit {
   eventForm: FormGroup;
+  @Input() data :any;
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,

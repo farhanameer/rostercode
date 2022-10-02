@@ -1,0 +1,25 @@
+
+.show-hover:hover > div{
+    display: block;
+    background-color: white !important;
+    z-index: 111;
+}
+.show-hover > div{
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.show-hover{
+    position: relative;
+}
+
+
+.dropdown-menu > a {
+    display: flex;
+    /* color: black !important; */
+    font: normal normal normal 11px/13px Roboto;
+    letter-spacing: 0px;
+    color: #343434 !important;
+    padding: 8px 10px;
+}

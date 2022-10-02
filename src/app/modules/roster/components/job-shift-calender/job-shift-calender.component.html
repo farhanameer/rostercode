@@ -42,10 +42,33 @@
               </li>
               <li
                 *ngFor="let singleDate of date.totalDaysInMonth"
-                (click)="open()"
+                (click)="open(singleDate)"
+                [ngStyle]="{'background-color': singleDate.color }"
+                [class.selected]="singleDate.start_date"
+                class="show-hover"
               >
                 {{ singleDate.date }}
+
+                <div class="btn-group dropright" *ngIf="singleDate.start_date">
+                  <button type="button" class="btn btn-secondary"
+                  type="button"
+                    class="date-dd bg-white dropdown-toggle dropdown-toggle-split"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >Split dropright
+            
+                    
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="" >Add</a>
+                    <a class="" >Edit</a>
+                    <a class="" (click)="delete(singleDate)">Delete</a>
+                  </div>
+                </div>
               </li>
+
+
               <!-- 
               <li>2</li>
               <li>3</li>
