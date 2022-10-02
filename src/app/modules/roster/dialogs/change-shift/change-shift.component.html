@@ -1,11 +1,12 @@
 <!-- Body -->
 <!-- Modal Body -->
 <div class="form-col">
+  <form [formGroup]="swipeShiftForm" (submit)="submit()">
   <div>
-    <app-select-box [label]="'Select Employee'"></app-select-box>
+    <app-select-box [label]="'Select Employee'" [form]="swipeShiftForm" [control]="'employee_id'"></app-select-box>
   </div>
   <div>
-    <app-select-box [label]="'Assigned Shift'"></app-select-box>
+    <app-select-box [label]="'Assigned Shift'" [form]="swipeShiftForm" [control]="'assigned_shift'"></app-select-box>
   </div>
 </div>
 <app-sub-layout>
@@ -16,7 +17,7 @@
         <div>
           <app-date-box
             [form]="swipeShiftForm"
-            [control]="'selectDate'"
+            [control]="'assigned_roster_date'"
             [label]="'Select Date'"
           ></app-date-box>
         </div>
@@ -32,13 +33,15 @@
           <app-select-box
             [data]="employees"
             [form]="swipeShiftForm"
-            [control]="'replaceWith'"
+            [control]="'replaceWithEmployeeId'"
             [label]="'Replace With'"
           ></app-select-box>
         </div>
       </div>
     </div>
+  </form>
   </div>
+
 </app-sub-layout>
 
 <!-- footer -->

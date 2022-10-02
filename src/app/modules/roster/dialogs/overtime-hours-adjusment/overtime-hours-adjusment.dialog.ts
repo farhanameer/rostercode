@@ -14,10 +14,10 @@ export class OvertimeHoursAdjusmentDialog implements OnInit {
   ngOnInit(): void {
   }
 
-  overTimeHoursAdjustment=this.fb.group({
-    overtimeHours:["",Validators.required],
-    approvedHours:["",Validators.required],
-    comments:["",Validators.required]
+  overTimeHoursAdjustmentForm=this.fb.group({
+    hours:["",Validators.required],
+    toApproveHours:["",Validators.required],
+    note:["",Validators.required]
   })
 
   submit(form:FormGroup){
@@ -25,7 +25,7 @@ export class OvertimeHoursAdjusmentDialog implements OnInit {
   }
 
   get validateAForm(): any {
-    return this.overTimeHoursAdjustment.controls
+    return this.overTimeHoursAdjustmentForm.controls
   }
 
 }

@@ -25,7 +25,9 @@ export class AdditionalShiftComponent implements OnInit {
   ngOnInit(): void {
 
     this.additionalShiftForm=this.fb.group({
-      additionalShift:['']
+      additionalShift:[''],
+      employee_id:[''],
+      additional_shift_id:['']
     })
 
     this.getDefaultList({

@@ -18,6 +18,7 @@ export class OvertimeAdjustmentDialog implements OnInit {
 
   overTimeForm=this.fb.group({
     overTime:["",Validators.required],
+    givenHours:["",Validators.required],
     tillDate:["",Validators.required],
     adjustOvertimeIn:this.fb.group({
       addCPL:["",Validators.required],

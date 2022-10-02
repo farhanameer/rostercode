@@ -26,9 +26,11 @@ export class ChangeShiftComponent implements OnInit {
   ngOnInit(): void {
 
     this.swipeShiftForm=this.fb.group({
-      selectDate:[''],
-      swipeShift:[''],
-      replaceWith:['']
+      employee_id:[''],
+      assigned_shift:[''],
+      assigned_roster_date:[''],
+      replaceWithEmployeeId:[''],
+      swipeShift:['']
     })
     this.getDefaultList({
       client_id:48,
