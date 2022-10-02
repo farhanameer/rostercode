@@ -1,4 +1,5 @@
 <div class="wrapper">
+  <form [formGroup]="shiftSetUpForm" (submit)="submit()"> 
   <div class="container">
     <div class="header-menu"></div>
     <app-full-layout>
@@ -27,23 +28,27 @@
                     <div>
                       <app-select-box
                         [label]="'Shift Type'"
+                        [form]="shiftSetUpForm"
+                        [control]="'shift_type_id'"
                         [data]="shiftTypeArray"
                       ></app-select-box>
                     </div>
                     <div>
-                      <app-input-box [label]="'Shift Name'"></app-input-box>
+                      <app-input-box [label]="'Shift Name'" [form]="shiftSetUpForm" [control]="'name'"></app-input-box>
                     </div>
                     <div>
-                      <app-time-box [label]="'From'"></app-time-box>
+                      <app-time-box [label]="'From'" [form]="shiftSetUpForm" [control]="'time_in'"></app-time-box>
                     </div>
                     <div>
-                      <app-time-box [label]="'To'"></app-time-box>
+                      <app-time-box [label]="'To'" [form]="shiftSetUpForm" [control]="'time_out'"></app-time-box>
                     </div>
 
                     <div class="form-col">
                       <div>
                         <app-input-box
                           [label]="'Comments'"
+                          [form]="shiftSetUpForm"
+                          [control]="'hr_comment'"
                           [width]="'1149px'"
                         ></app-input-box>
                       </div>
@@ -52,14 +57,16 @@
                       <div>
                         <app-select-box
                           [label]="'Shift Color'"
+                          [form]="shiftSetUpForm"
+                          [control]="'color'"
                           [data]="shiftColorArray"
                         ></app-select-box>
                       </div>
                       <div>
-                        <app-date-box [label]="'Mid Break From'"></app-date-box>
+                        <app-date-box [label]="'Mid Break From'" [form]="shiftSetUpForm" [control]="'mid_break_time_in'"></app-date-box>
                       </div>
                       <div>
-                        <app-date-box [label]="'Mid Break To'"></app-date-box>
+                        <app-date-box [label]="'Mid Break To'" [form]="shiftSetUpForm" [control]="'mid_break_time_out'"></app-date-box>
                       </div>
                       <div class="row align-content-center">
                         <div class="col">
@@ -86,14 +93,16 @@
                     <div>
                       <app-select-box
                         [label]="'Shift Type'"
+                        [form]="shiftSetUpForm"
+                        [control]="'shift_type_id'"
                         [data]="shiftTypeArray"
                       ></app-select-box>
                     </div>
                     <div>
-                      <app-time-box [label]="'From'"></app-time-box>
+                      <app-time-box [label]="'From'" [form]="shiftSetUpForm" [control]="'ext_mid_break_time_in'"></app-time-box>
                     </div>
                     <div>
-                      <app-time-box [label]="'To'"></app-time-box>
+                      <app-time-box [label]="'To'" [form]="shiftSetUpForm" [control]="'ext_mid_break_time_out'"></app-time-box>
                     </div>
                     <div class="d-flex align-items-center">
                       <app-check-box [label]="'Specific Period'">
@@ -101,13 +110,13 @@
                     </div>
                     <div class="form-col">
                       <div>
-                        <app-date-box [label]="'Period From'"></app-date-box>
+                        <app-date-box [label]="'Period From'" [form]="shiftSetUpForm" [control]="'shift_revert_date_start'"></app-date-box>
                       </div>
                       <div>
-                        <app-date-box [label]="'Period To'"></app-date-box>
+                        <app-date-box [label]="'Period To'" [form]="shiftSetUpForm" [control]="'shift_revert_date_end'"></app-date-box>
                       </div>
                       <div>
-                        <app-select-box [label]="'Revert To'"></app-select-box>
+                        <app-select-box [label]="'Revert To'" [form]="shiftSetUpForm" [control]="'revert_shift_id'"></app-select-box>
                       </div>
                     </div>
                   </div>
@@ -123,13 +132,15 @@
                     <div>
                       <app-input-box
                         [label]="'Quarter Break Name'"
+                        [form]="shiftSetUpForm"
+                        [control]="'qrt_break_title'"
                       ></app-input-box>
                     </div>
                     <div>
-                      <app-time-box [label]="'From'"></app-time-box>
+                      <app-time-box [label]="'From'" [form]="shiftSetUpForm" [control]="'qrt_break_time_in'" ></app-time-box>
                     </div>
                     <div>
-                      <app-time-box [label]="'To'"></app-time-box>
+                      <app-time-box [label]="'To'" [form]="shiftSetUpForm" [control]="'qrt_break_time_out'"></app-time-box>
                     </div>
                     <div>
                       <app-check-box [label]="'Tolerance'"> </app-check-box>
@@ -139,16 +150,22 @@
                     <div>
                       <app-input-box
                         [label]="'Consecutive Late'"
+                        [form]="shiftSetUpForm"
+                        [control]="'consecutive_late'"
                       ></app-input-box>
                     </div>
                     <div>
                       <app-input-box
                         [label]="'Late Arrival Tolerance (min)'"
+                        [form]="shiftSetUpForm"
+                        [control]="'late_arrival_tolerance'"
                       ></app-input-box>
                     </div>
                     <div>
                       <app-input-box
                         [label]="'Attendencec Tolerance (min)'"
+                        [form]="shiftSetUpForm"
+                        [control]="'attendance_tolerance'"
                       ></app-input-box>
                     </div>
                   </div>
@@ -162,7 +179,7 @@
               <div class="d-flex align-items-center">
                 <app-check-box [label]="'Period'"> </app-check-box>
               </div>
-              <input type="button" class="btn-input" value="Submit" />
+              <input type="submit" class="btn-input" value="Submit" />
             </div>
           </div>
         </div>
@@ -183,4 +200,5 @@
       </div>
     </app-full-layout>
   </div>
+</form>
 </div>
