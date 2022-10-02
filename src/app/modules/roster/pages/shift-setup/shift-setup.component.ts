@@ -103,12 +103,15 @@ export class ShiftSetupComponent implements OnInit {
     return this.shiftSetUpForm.get("qrt_break") as FormArray
   }
 
-  newqrtbreak(): FormGroup {
-    return this.fb.group({
+  newqrtbreak() {
+    const qrtForm =  this.fb.group({
       qrt_break_title: ["",Validators.required],
       qrt_break_time_in: ["",Validators.required],
       qrt_break_time_out:["",Validators.required]
-    })
+    });
+
+    this.qrt_break.push(qrtForm);
+    
   }
 
   get validateAForm(): any {
