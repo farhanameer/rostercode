@@ -24,6 +24,13 @@ export class ShiftSetupComponent implements OnInit {
 
   shiftArray : any;
   filters : any;
+
+  dropDownDefaultValues = {
+    shiftType : {
+      id : 1 , 
+      name : "Full-Time"
+    }
+  }
   ngOnInit(): void {
     
     this.shiftSetUpForm=this.fb.group({
@@ -34,7 +41,7 @@ export class ShiftSetupComponent implements OnInit {
       time_in:[null,Validators.required],
       time_out:["",Validators.required],
       mid_break_enable:["",Validators.required],
-      mid_break_time_in:["",Validators.required],
+      mid_break_time_in:["13:00",Validators.required],
       mid_break_time_out:["",Validators.required],
       ext_mid_break_day_id:["",Validators.required],
       ext_mid_break_time_in:["",Validators.required],
@@ -187,7 +194,7 @@ export class ShiftSetupComponent implements OnInit {
     // confused Entries
     body.ext_mid_break_day_id = "5";
     body.mid_break_enable = 0;
-    body.department_id = 16;
+    body.department_id = 16; //desig_id emp_id = -1 by default
     body.emp_id = -1;
 
 
@@ -211,7 +218,7 @@ export class ShiftSetupComponent implements OnInit {
       this.shiftSetUpForm.markAsUntouched();
       this.shiftSetUpForm.reset();
       console.log(this.shiftSetUpForm.value);
-     this.resetDropDown();
+      this.resetDropDown();
   }
 
   resetDropDown(){
@@ -222,9 +229,37 @@ export class ShiftSetupComponent implements OnInit {
       this.shiftTypeArray = this.shiftTypeCopiedArray;
     }, 200);
   }
-  makeCopy(){
-    this.shiftTypeCopiedArray = [...this.shiftTypeArray];
-    this.shiftColorCopiedArray = [...this.shiftColorArray];
+
+  
+  async getSingleShift(id){
+    console.log('single Shift Id' , id);
+    const payload = {
+      client_id : this.appLocalStorage.getClientId() , 
+      shift_id : id
+    }
+    const response = await this.shiftRequestService.shiftById(payload)
+
+    // this.shiftSetUpForm.reset(this.shiftSetUpForm.value);
+    console.log('response' , response);
+    if(!response["status"]){
+      console.log('error we got');
+      console.log(response);
+      return;
+    } 
+    const shiftData = response["data"]["payload"];
+    console.log('shift data' , shiftData[0]);
+    const shift = shiftData[0];
+    // this.testform.patchValue({
+    //   "testcontrol": testdata.id,
+    //   "desc": "testdata value"
+    // });
+
+    shift.mid_break_time_in = `13:00`;
+    shift.mid_break_time_out = `16:00`;
+    
+    this.shiftSetUpForm.patchValue(shift);
+    
   }
+  
 
 }

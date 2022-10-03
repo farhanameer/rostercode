@@ -37,6 +37,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   @Input() name : string;
   @Input() hideLabel : Boolean;
   @Input() customClass : any;
+  @Input() defaultValue : any;
  
 
   
@@ -151,9 +152,6 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   ngOnInit(): void {
       console.log('dsabled value' , this.disabled);
       console.log('container' , this.customClass);
-      
-      
-      
     // this.form.get(this.control).setValue(-1);
   }
 
@@ -162,6 +160,15 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
       this.selectedValue = '';
       this.hash = {};
     } 
+
+    if(this.defaultValue && this.defaultValue.id && this.defaultValue.name && this.data){
+      this.data.forEach(value =>{
+        if(value.id == this.defaultValue.id){
+          this.hash[this.defaultValue.id] = this.defaultValue.id;
+          this.selectedValue = this.defaultValue.name;
+        }
+      })
+    }
   }
 
   ngAfterViewInit(): void {

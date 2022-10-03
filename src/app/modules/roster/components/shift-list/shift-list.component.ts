@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HolidayDataService } from '../../services/data/holidays.data.service';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 
@@ -12,5 +12,11 @@ export class ShiftListComponent implements OnInit {
   
   @Input() data : any;
 
+  @Output() singleShiftId : EventEmitter<any> = new EventEmitter();
+
   ngOnInit(): void {}
+
+  singleShift(id){
+    this.singleShiftId.emit(id);
+  }
 }
