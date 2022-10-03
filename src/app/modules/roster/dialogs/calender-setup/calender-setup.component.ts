@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-calender-setup',
@@ -8,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CalenderSetupComponent implements OnInit {
   workCalenderSetupForm:FormGroup
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.workCalenderSetupForm=this.fb.group({
