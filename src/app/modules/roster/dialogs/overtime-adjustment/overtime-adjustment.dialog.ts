@@ -16,17 +16,17 @@ export class OvertimeAdjustmentDialog implements OnInit {
   ngOnInit(): void {
     console.log('employee Data',this.modelData);
   }
-
+  
   overTimeForm=this.fb.group({
     overTime:["",Validators.required],
     givenHours:["",Validators.required],
     tillDate:["",Validators.required],
-    adjustOvertimeIn:this.fb.group({
-      addCPL:["",Validators.required],
-      paymentForOvertime:["",Validators.required],
-      cpl:["",Validators.required],
-      payForHours:["",Validators.required]
-    })
+    addCPL:["",Validators.required],
+    paymentForOvertime:["",Validators.required],
+    cpl:["",Validators.required],
+    payForHours:["",Validators.required],
+
+    
   })
   
 
