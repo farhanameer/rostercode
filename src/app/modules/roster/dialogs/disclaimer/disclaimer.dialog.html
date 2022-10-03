@@ -1,44 +1,75 @@
-<!-- calender -->
-<div class="wrapper">
-  <div class="container">
-    <!-- Drop down -->
-    <!-- END -->
-    <!-- date drop down-->
-
-    <div class="date-dd">
-      Eid-ul-adha <i><img src="assets/icons/icon-dd.svg" alt="" /></i>
-    </div>
-
-    <!-- Split dropright button -->
-    <div class="btn-group dropright">
-      <button type="button" class="btn btn-secondary">Split dropright</button>
-      <button
-        type="button"
-        class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        <span class="sr-only">Toggle Dropright</span>
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Add</a>
-        <a class="dropdown-item" href="#">Edit</a>
-        <a class="dropdown-item" href="#">Delete</a>
+<div class="modal-custom bg-white Custom-width-disclaimer">
+  <app-dialog-layout>
+    <form>
+      <div class="gradient-head flex justify-content-between">
+        <div class="heading">Disclaimer</div>
+        <div class="btn-options flex align-content-center">
+          <a><img src="assets/icons/ico-close.svg" alt="" /></a>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
+      <!-- Body -->
+      <div class="d-flex align-items-center custom-paragraph">
+        <p>
+          This disclaimer is for awareness and in best interest for the employee
+          and employees regarding labor rights.
+        </p>
+      </div>
+      <div class="overtime-form custom-p20">
+        <div class="Custom-disclaimer">
+          <div>
+            <div
+              class="table-header gradient-head flex justify-content-between"
+            >
+              <div class="heading">Information Disclaimer</div>
+              <div class="btn-options flex align-content-center"></div>
+            </div>
+          </div>
+          <div class="shift-setup">
+            <app-sub-layout>
+              <div class="shift-card">
+                <div class="form-col p-10">
+                  <div>
+                    <p class="custom-font-size">
+                      International Labour Regulations require to give their
+                      employees at least one Holiday per week. By Selecting no
+                      weekend you must accept that this has been take into
+                      considertaion and the selected employee will be
+                      compensated monetarily or with a Componsatory leave at a
+                      later stage
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </app-sub-layout>
+          </div>
+        </div>
 
-<div>
-  <app-employee-shift-list></app-employee-shift-list>
-</div>
-<div>
-  <app-event></app-event>
-</div>
+        <div class="d-flex pt">
+          <app-check-box
+            [label]="'I accept the terms & condition mentioned above'"
+          >
+          </app-check-box>
+        </div>
+      </div>
 
-<br />
+      <!-- footer -->
 
-<div>
-  <app-calender-setup></app-calender-setup>
+      <div class="modal-custom-footer">
+        <div class="clues">
+          <span>
+            <div class="d-flex align-items-center pt">
+              <app-check-box [label]="'Do not Show this again'">
+              </app-check-box>
+            </div>
+          </span>
+          <span> </span>
+        </div>
+
+        <div class="modal-footer-button flex">
+          <input type="submit" class="btn-input" value="Accept" />
+          <input type="button" class="btn-input" value="Cancel" />
+        </div>
+      </div>
+    </form>
+  </app-dialog-layout>
 </div>

@@ -28,10 +28,12 @@
     </app-full-layout>
     <div class="calendar-footer">
       <ul class="shift-hints" style="display: flex; gap: 20px">
-        <li class="text-primary">Avaliable shifts</li>
+        <li (click)="open()" class="text-primary">Avaliable shifts</li>
         <li class="text-success">WO:Weekend</li>
-        <li class="text-primary">GH:Gazetted Holiday</li>
-        <li class="text-danger">CPL:Componsatory Leave</li>
+        <li (click)="openEvent()" class="text-primary">GH:Gazetted Holiday</li>
+        <li (click)="openCalendarsetup()" class="text-danger">
+          CPL:Componsatory Leave
+        </li>
         <li class="text-success">OFF:leave</li>
       </ul>
 
