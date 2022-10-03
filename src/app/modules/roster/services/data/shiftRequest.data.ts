@@ -277,45 +277,45 @@ export class ShiftRequestDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const body2 = {
-          screen_role: 'hr',
-          client_id: 48,
-          color: '#f2ab01',
-          name: 'Salman Butt testing',
-          time_in: '09:00:00',
-          time_out: '17:30:00',
-          mid_break_enable: 0,
-          mid_break_time_in: '13:00:00',
-          mid_break_time_out: '14:00:00',
-          ext_mid_break_day_id: '5',
-          ext_mid_break_time_in: '12:00:00',
-          ext_mid_break_time_out: '14:00:00',
-          consecutive_late: 5,
-          late_arrival_tolerance: 2,
-          attendance_tolerance: 3,
-          revert_shift_id: 0,
-          shift_revert_date_start: '2022-09-01',
-          shift_revert_date_end: '2022-09-03',
-          shift_type_id: 1,
-          glob_mkt_id: 1,
-          region_id: 2,
-          sub_region_id: 4,
-          country_id: 154,
-          state_id: 2723,
-          city_id: 31276,
-          branch_id: 22,
-          department_id: 16,
-          desg_id: -1,
-          emp_id: -1,
-          qrt_break: [
-            {
-              qrt_break_title: 'Waleed Bhai',
-              qrt_break_time_in: '15:00:00',
-              qrt_break_time_out: '15:00:00',
-            },
-          ],
-        };
-        this.httpService.hrInsertShift(body2).subscribe(
+        // const body2 = {
+        //   screen_role: 'hr',
+        //   client_id: 48,
+        //   color: '#f2ab01',
+        //   name: 'Salman Butt testing',
+        //   time_in: '09:00:00',
+        //   time_out: '17:30:00',
+        //   mid_break_enable: 0,
+        //   mid_break_time_in: '13:00:00',
+        //   mid_break_time_out: '14:00:00',
+        //   ext_mid_break_day_id: '5',
+        //   ext_mid_break_time_in: '12:00:00',
+        //   ext_mid_break_time_out: '14:00:00',
+        //   consecutive_late: 5,
+        //   late_arrival_tolerance: 2,
+        //   attendance_tolerance: 3,
+        //   revert_shift_id: 0,
+        //   shift_revert_date_start: '2022-09-01',
+        //   shift_revert_date_end: '2022-09-03',
+        //   shift_type_id: 1,
+        //   glob_mkt_id: 1,
+        //   region_id: 2,
+        //   sub_region_id: 4,
+        //   country_id: 154,
+        //   state_id: 2723,
+        //   city_id: 31276,
+        //   branch_id: 22,
+        //   department_id: 16,
+        //   desg_id: -1,
+        //   emp_id: -1,
+        //   qrt_break: [
+        //     {
+        //       qrt_break_title: 'Waleed Bhai',
+        //       qrt_break_time_in: '15:00:00',
+        //       qrt_break_time_out: '15:00:00',
+        //     },
+        //   ],
+        // };
+        this.httpService.hrInsertShift(body).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';

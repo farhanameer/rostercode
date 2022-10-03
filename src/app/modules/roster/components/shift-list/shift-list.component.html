@@ -10,25 +10,19 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Morning</td>
-      <td>Full-time</td>
-      <td>Software Development</td>
-      <td>17:00</td>
-      <td>21:30</td>
-      <td>
+    <tr *ngFor="let entry of data">
+      <td>{{entry.name}}</td>
+      <td>{{entry.shift_type_name}}</td>
+      <td>{{entry.dep_name}}</td>
+      <td>{{entry.time_in}}</td>
+      <td>{{entry.time_out}}</td>
+      <td *ngIf="entry.hr_status != 0">
         <div class="label">Approved</div>
       </td>
-    </tr>
-    <tr>
-      <td>Morning</td>
-      <td>Full-time</td>
-      <td>Software Development</td>
-      <td>17:00</td>
-      <td>21:30</td>
-      <td>
-        <div class="label">Approved</div>
+      <td *ngIf="entry.hr_status == 0">
+        <div class="label">Pending</div>
       </td>
     </tr>
+    
   </tbody>
 </table>

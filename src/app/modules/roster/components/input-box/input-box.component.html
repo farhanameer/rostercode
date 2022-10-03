@@ -1,6 +1,6 @@
 <div class="agt-module w-100">
   <div class="comp-wrapper w-100">
-    <input [ngStyle]="{ 'width': width }" id="input-box" [formControl]="form?.get(control)" class="input-box" type="text" placeholder=" " />
+    <input [type]="type" [ngStyle]="{ 'width': width }" id="input-box" [formControl]="form?.get(control)" class="input-box" type="text" placeholder=" " />
     <p class="label"> {{label}} </p>
   </div>
   <span *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched">required</span>

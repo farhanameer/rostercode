@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ClusterAndSubClusterDataService } from '../../services/data/clusterAndSubCluster.data.service';
 
 @Component({
@@ -6,9 +6,13 @@ import { ClusterAndSubClusterDataService } from '../../services/data/clusterAndS
   templateUrl: './location-and-designation-filter.component.html',
   styleUrls: ['./location-and-designation-filter.component.css']
 })
-export class LocationAndDesignationFilterComponent implements OnInit {
+export class LocationAndDesignationFilterComponent implements OnInit , AfterViewInit {
 
   constructor(private dataService : ClusterAndSubClusterDataService) { }
+  
+
+  @Output() filtersChange : EventEmitter<any> = new EventEmitter();
+
   marketArray : any[] = [];
   clusterArray :any[] = [];
   subClusterArray :any [] = [];
@@ -18,6 +22,17 @@ export class LocationAndDesignationFilterComponent implements OnInit {
   branchesArray :any [] = [];
   departmentArray :any [] = [];
 
+
+  locationFilters = {
+    marketId : -1 , 
+    clusterId : -1 , 
+    subClusterId : -1,
+    countryId : -1 , 
+    stateId : -1 , 
+    cityId : -1,
+    branchId : -1,
+    departmentId : -1
+  }
   dropDowns = {
     'market' : 'getCluster' , 
     'cluster' : 'getSubCluster' , 
@@ -36,8 +51,22 @@ export class LocationAndDesignationFilterComponent implements OnInit {
     'branch' : 'departmentArray'
     
   }
+  dropDownName = { 
+    'market' : 'marketId' , 
+    'cluster' : 'clusterId' , 
+    'subCluster' : 'subClusterId',
+    'country' : 'countryId',
+    'state' : 'stateId' , 
+    'city' : 'cityId' , 
+    'branch' : 'branchId',
+    'department' : 'departmentId'
+  }
   ngOnInit(): void {
     this.getMarket();
+  }
+
+  ngAfterViewInit(): void {
+    this.filtersChange.emit(this.locationFilters);
   }
 
 
@@ -53,6 +82,7 @@ export class LocationAndDesignationFilterComponent implements OnInit {
   }
   
   resetDropDown(resetAll = false , controlName){
+    
     let foundKey = resetAll;
     for(const key in this.dropDownArrays){
       if(key == controlName){
@@ -66,10 +96,26 @@ export class LocationAndDesignationFilterComponent implements OnInit {
       }
     }
   }
+
+  resetFilterValues(resetAll = false , controlName){
+    let foundKey = resetAll;
+    for(const key in this.dropDownName){
+      if(key == controlName){
+        const arrayName = this.dropDownName[key];
+        this.locationFilters[arrayName] = -1;
+        foundKey = true;
+      }
+      if(foundKey) {
+        const arrayName = this.dropDownName[key];
+        this.locationFilters[arrayName] = -1;
+      }
+    }
+  }
   selectionChanged($event){
     
     console.log('selected value' , $event);
     this.resetDropDown(false , $event.controlName);
+    this.resetFilterValues(false, $event.controlName);
     if($event.controlName == 'subCluster'){
       console.log('in if statement');
       
@@ -78,6 +124,11 @@ export class LocationAndDesignationFilterComponent implements OnInit {
     }
     const fun = this.dropDowns[$event.controlName];
     this[fun]($event.value);
+
+    
+    const filterKey = this.dropDownName[$event.controlName];
+    this.locationFilters[filterKey] = $event.value;
+    this.filtersChange.emit(this.locationFilters);
   }
 
   async getMarket(){
