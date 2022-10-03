@@ -11,14 +11,16 @@ export class EmployeeRosterDataService {
     private appLocalStorage: AppLocalStorageService
   ) {}
 
-  getEmployeeRoster(params) {
+  getEmployeeRoster(params , replace = false) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        params.client_id = this.appLocalStorage.getClientId();
-        params.employee_id = this.appLocalStorage.getUserId();
-        params.screen_role = 'emp';
-
+        if(!replace){
+          params.client_id = this.appLocalStorage.getClientId();
+          params.employee_id = this.appLocalStorage.getUserId();
+          params.screen_role = 'emp';
+        }
+      
         this.httpService.getEmployeeRoster(params).subscribe(
           (data) => {
             response.data = data;
