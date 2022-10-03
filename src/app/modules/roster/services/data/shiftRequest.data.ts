@@ -203,12 +203,9 @@ export class ShiftRequestDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const body2 = {
-          client_id: 48,
-          shift_id: 7,
-        };
+        
 
-        this.httpService.shiftById(body2).subscribe(
+        this.httpService.shiftById(body).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';
