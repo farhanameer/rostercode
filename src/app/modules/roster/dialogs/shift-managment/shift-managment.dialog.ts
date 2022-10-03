@@ -23,7 +23,8 @@ export class ShiftManagmentDialog implements OnInit {
     console.log('data was first got' , this.dates);
   }
   open(){
-    this.customModel.showFeaturedDialog(EmployeeShiftManagmentDialog, "");
+    console.log('data range to be passed down' , this.dates);
+    this.customModel.showFeaturedDialog(EmployeeShiftManagmentDialog, "" , this.dates);
     this.activeModal.close(ShiftManagmentDialog);
   }
 

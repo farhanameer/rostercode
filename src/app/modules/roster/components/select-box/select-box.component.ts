@@ -158,7 +158,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   }
 
   ngOnChanges(change: SimpleChange) {
-    if(this.data.length == 0){
+    if(this.data && this.data.length == 0){
       this.selectedValue = '';
       this.hash = {};
     } 

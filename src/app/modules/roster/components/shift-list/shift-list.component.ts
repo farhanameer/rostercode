@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HolidayDataService } from '../../services/data/holidays.data.service';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 
@@ -9,6 +9,8 @@ import { AppLocalStorageService } from 'src/app/services/app-local-storage.servi
 })
 export class ShiftListComponent implements OnInit {
   constructor(private holidayService: HolidayDataService) {}
+  
+  @Input() data : any;
 
   ngOnInit(): void {}
 }

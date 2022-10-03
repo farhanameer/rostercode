@@ -32,11 +32,11 @@ export class OverviewTableComponent implements OnInit {
   open(employee:any){
     this.customModal.showFeaturedDialog(SingleShiftDetailDialog, employee);
   }
-  openOverView() {
-    this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, '');
+  openOverView(employee) {
+    this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, '' , employee);
   }
-  openHours() {
-    this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog, '');
+  openHours(employee) {
+    this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog, '',employee);
   }
 
   async getListCplAndOvertime() {

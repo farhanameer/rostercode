@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -13,9 +13,12 @@ date:string;
 employee:string;
 change:string;
 additional:string;
+@Input() modelData:any;
+
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+    console.log('modelData', this.modelData);
   }
 
 }

@@ -1,6 +1,8 @@
 import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-shift-setup',
@@ -9,19 +11,27 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ShiftSetupComponent implements OnInit {
 
-  constructor(private shiftRequestService: ShiftRequestDataService , private fb:FormBuilder) { }
+  constructor(private shiftRequestService: ShiftRequestDataService , private fb:FormBuilder , 
+    private appLocalStorage : AppLocalStorageService) { }
+  
 
+  
   shiftTypeArray : any;
   shiftColorArray: any;
 
-  ngOnInit(): void {
+  shiftTypeCopiedArray : any;
+  shiftColorCopiedArray : any;
 
+  shiftArray : any;
+  filters : any;
+  ngOnInit(): void {
+    
     this.shiftSetUpForm=this.fb.group({
       screen_role:["",Validators.required],
       client_id:["",Validators.required],
       color:["",Validators.required],
       name:["",Validators.required],
-      time_in:["",Validators.required],
+      time_in:[null,Validators.required],
       time_out:["",Validators.required],
       mid_break_enable:["",Validators.required],
       mid_break_time_in:["",Validators.required],
@@ -33,8 +43,8 @@ export class ShiftSetupComponent implements OnInit {
       late_arrival_tolerance:["",Validators.required],
       attendance_tolerance:["",Validators.required],
       revert_shift_id:["",Validators.required],
-      shift_revert_date_start:["",Validators.required],
-      shift_revert_date_end:["",Validators.required],
+      shift_revert_date_start:[null,Validators.required],
+      shift_revert_date_end:[null,Validators.required],
       shift_type_id:["",Validators.required],
       glob_mkt_id:["",Validators.required],
       region_id:["",Validators.required],
@@ -46,15 +56,31 @@ export class ShiftSetupComponent implements OnInit {
       department_id:["",Validators.required],
       desg_id:["",Validators.required],
       emp_id:["",Validators.required],
-      qrt_break:this.fb.array([])
+      qrt_break:this.fb.array([]),
+      hr_comment : ["",Validators.required]
+    });
 
-
-    })
+    this.newqrtbreak();
 
     // debugger;
     this.getShiftTypes();
     this.getShiftColors();
+    this.getShifts()
     // this.getShift
+  }
+
+
+  filtersChanged(filters){
+    console.log('filters Value' , filters);
+    this.filters = filters;
+  }
+
+  async getShifts(){
+    const data = await this.shiftRequestService.getShiftByDepartmentManager();
+    if(!data["status"]) return; // posibile error
+    let shifts = data["data"]["payload"];
+    this.shiftArray = shifts;
+    console.log('shift Array' , this.shiftArray)
   }
 
   async getShiftTypes(){
@@ -72,6 +98,7 @@ export class ShiftSetupComponent implements OnInit {
     });
     console.log(shiftsArray);
     this.shiftTypeArray = shiftsArray;
+    this.shiftTypeCopiedArray = [...this.shiftTypeArray];
     console.log(this.shiftTypeArray);
 
   }
@@ -92,7 +119,9 @@ export class ShiftSetupComponent implements OnInit {
     });
     console.log(colorsArray);
     this.shiftColorArray = colorsArray;
+    this.shiftColorCopiedArray = [...this.shiftColorArray]
     console.log(this.shiftColorArray);
+
   }
   shiftSetUpForm:FormGroup
   
@@ -103,20 +132,99 @@ export class ShiftSetupComponent implements OnInit {
     return this.shiftSetUpForm.get("qrt_break") as FormArray
   }
 
-  newqrtbreak(): FormGroup {
-    return this.fb.group({
+  newqrtbreak() {
+    const qrtForm =  this.fb.group({
       qrt_break_title: ["",Validators.required],
       qrt_break_time_in: ["",Validators.required],
       qrt_break_time_out:["",Validators.required]
-    })
+    });
+
+    this.qrt_break.push(qrtForm);
   }
 
   get validateAForm(): any {
     return this.shiftSetUpForm.controls
   }
 
-  submit(){
-    console.warn(this.shiftSetUpForm.value)
+  async submit(){
+    
+    const body = {
+      ...this.shiftSetUpForm.value
+    }
+    body.screen_role = 'hr';
+    body.client_id = this.appLocalStorage.getClientId();
+    body.glob_mkt_id = this.filters.marketId;
+    body.region_id = this.filters.clusterId;
+    body.sub_region_id = this.filters.subClusterId;
+    body.country_id = this.filters.countryId;
+    body.state_id = this.filters.stateId;
+    body.city_id = this.filters.cityId;
+    body.branch_id = this.filters.branchId;
+    body.desg_id = this.filters.departmentId;
+    body.ext_mid_break_time_in = `${body.ext_mid_break_time_in}:00`
+    body.ext_mid_break_time_out = `${body.ext_mid_break_time_out}:00`
+    body.time_in = `${body.time_in}:00`
+    body.time_out = `${body.time_out}:00`
+    body.qrt_break.forEach(br =>{
+      br.qrt_break_time_in = `${br.qrt_break_time_in}:00`;
+      br.qrt_break_time_out = `${br.qrt_break_time_out}:00`;
+    });
+    body.consecutive_late = Number(body.consecutive_late);
+    body.late_arrival_tolerance = Number(body.late_arrival_tolerance);
+    body.attendance_tolerance = Number(body.attendance_tolerance);
+    body.revert_shift_id = 0;
+    if(body.shift_revert_date_start){
+      body.shift_revert_date_start = moment(body.shift_revert_date_start).format('YYYY-MM-DD');
+      
+    }
+    if(body.shift_revert_date_end){
+      body.shift_revert_date_end = moment(body.shift_revert_date_end).format('YYYY-MM-DD');
+    }
+
+    body.mid_break_time_in = `${body.mid_break_time_in}:00`;
+    body.mid_break_time_out = `${body.mid_break_time_out}:00`;
+
+    // confused Entries
+    body.ext_mid_break_day_id = "5";
+    body.mid_break_enable = 0;
+    body.department_id = 16;
+    body.emp_id = -1;
+
+
+
+    const response = await this.shiftRequestService.hrInsertShift(body);
+    this.shiftSetUpForm.reset(this.shiftSetUpForm.value);
+    console.log('response' , response);
+
+  }
+
+  resetArray(array , newArray){
+    
+    array = [];
+    setTimeout(() => {
+      array = newArray;
+    }, 200);
+  }
+  resetForm(){
+      console.log('form Cleared');
+      this.shiftSetUpForm.markAsPristine();
+      this.shiftSetUpForm.markAsUntouched();
+      this.shiftSetUpForm.reset();
+      console.log(this.shiftSetUpForm.value);
+     this.resetDropDown();
+  }
+
+  resetDropDown(){
+    this.shiftColorArray = [];
+    this.shiftTypeArray = [];
+    setTimeout(() => {
+      this.shiftColorArray = this.shiftColorCopiedArray;
+      this.shiftTypeArray = this.shiftTypeCopiedArray;
+    }, 200);
+  }
+  makeCopy(){
+    this.shiftTypeCopiedArray = [...this.shiftTypeArray];
+    this.shiftColorCopiedArray = [...this.shiftColorArray];
   }
 
 }

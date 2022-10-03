@@ -1,6 +1,6 @@
 <div class="shift-management-wrapper pt-0">
   <div class="shift-management-list date-wise">
-    <app-main-card>
+    <app-main-card *ngFor="let entry of data">
       <ul>
         <div class="row">
           <div class="col" style="flex-grow: 0">
@@ -11,11 +11,11 @@
               <div class="user-img">
                 <img src="assets/images/img-dummy.png" alt="" />
               </div>
-              Natalya Neidhart
+              {{entry.name}}
             </li>
           </div>
         </div>
-        <app-date-card>
+        <app-date-card *ngFor="let shift of entry.shifts">
           <div class="row">
             <div class="col" style="flex-grow: 0">
               <input type="checkbox" (click)="open()" />
@@ -26,157 +26,16 @@
                   <span></span>
                 </div>
                 <div class="employee-detail">
-                  <div class="heading-lg">01-11-2020</div>
+                  <div class="heading-lg">{{shift.start}}</div>
                   <img src="assets/icons/ico-present-02.svg" alt="" />
                 </div>
               </li>
             </div>
           </div>
         </app-date-card>
-        <app-date-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <span></span>
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">01-11-2020</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-date-card>
-        <app-date-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <span></span>
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">01-11-2020</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-date-card>
-        <app-date-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <span></span>
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">01-11-2020</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-date-card>
+        
       </ul>
     </app-main-card>
-    <app-main-card>
-      <ul>
-        <div class="row">
-          <div class="col" style="flex-grow: 0">
-            <input type="checkbox" (click)="open()" />
-          </div>
-          <div class="col">
-            <li class="heading-date">
-              <div class="user-img">
-                <img src="assets/images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
-            </li>
-          </div>
-        </div>
-        <app-date-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <span></span>
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">01-11-2020</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-date-card>
-        <app-date-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <span></span>
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">01-11-2020</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-date-card>
-        <app-date-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <span></span>
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">01-11-2020</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-date-card>
-        <app-date-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <span></span>
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">01-11-2020</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-date-card>
-      </ul>
-    </app-main-card>
+    
   </div>
 </div>
