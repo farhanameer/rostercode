@@ -66,7 +66,7 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
 
     console.log("THESE ARE THE PARAMS",params);
     this.additionalShifts = false;
-    debugger;
+
   }
 
   async getDefaultList() {
