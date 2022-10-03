@@ -20,9 +20,11 @@ export class OvertimeHoursAdjusmentDialog implements OnInit {
     note:["",Validators.required]
   })
 
-  submit(form:FormGroup){
-    console.warn(form)
+  submit(){
+    console.warn(this.overTimeHoursAdjustmentForm.value)
   }
+
+  
 
   get validateAForm(): any {
     return this.overTimeHoursAdjustmentForm.controls
