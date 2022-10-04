@@ -11,22 +11,22 @@ import { RosterService } from '../../services/data/roster.dataService';
 })
 export class OvertimeHoursAdjusmentDialog implements OnInit {
   @Input() modelData: any;
+  overTimeHoursAdjustmentForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     public activeModal: NgbActiveModal,
     private appLocalStorage: AppLocalStorageService,
-    private overTimeAdjustment: RosterService
+    private hoursAdjustment: RosterService
   ) {}
 
   ngOnInit(): void {
     console.log(this.modelData);
+    this.overTimeHoursAdjustmentForm = this.fb.group({
+      hours: [this.modelData.overtime, Validators.required],
+      toApproveHours: ['', Validators.required],
+      note: ['', Validators.required],
+    });
   }
-
-  overTimeHoursAdjustmentForm = this.fb.group({
-    hours: ['', Validators.required],
-    toApproveHours: ['', Validators.required],
-    note: ['', Validators.required],
-  });
 
   submit() {
     // console.warn(this.overTimeHoursAdjustmentForm.value);
@@ -40,6 +40,7 @@ export class OvertimeHoursAdjusmentDialog implements OnInit {
     // console.log(obj);
     this.overTimeAdjustmentTest();
   }
+
   async overTimeAdjustmentTest() {
     let obj = {
       employee_id: this.modelData.employee_id,
@@ -48,8 +49,9 @@ export class OvertimeHoursAdjusmentDialog implements OnInit {
       client_id: this.appLocalStorage.getClientId(),
       line_manager_id: this.appLocalStorage.getUserId(),
     };
-    const result = await this.overTimeAdjustment.getOvertimeAdjustment(obj);
-    console.log('2nd Service', result);
+    const result = await this.hoursAdjustment.getHoursAdjustment(obj);
+    console.log('Approve Hours', result);
+    this.activeModal.close('Close click');
   }
 
   get validateAForm(): any {
