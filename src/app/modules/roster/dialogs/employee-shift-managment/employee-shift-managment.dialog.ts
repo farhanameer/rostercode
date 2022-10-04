@@ -37,6 +37,12 @@ submitted : boolean = false;
   openMark(){
     this.customModal.showFeaturedDialog(EmployeeShiftManagmentDialog, "");
   }
+  submit(){
+    this.submitted = true;
+    setTimeout(() => {
+      this.submitted = false;
+    }, 200);
+  }
 
   
 

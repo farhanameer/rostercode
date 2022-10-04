@@ -1,3 +1,4 @@
+import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
 import { EmployeeRosterDataService } from './../../services/data/employeeAttendance.data';
 import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
@@ -31,14 +32,15 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
     private fb: FormBuilder, 
     private shiftRequestDataService: ShiftRequestDataService,
     private rosterService: RosterService,
-    private employeeroster: EmployeeRosterDataService) { }
+    private employeeroster: EmployeeRosterDataService,
+    private appLocalStorage : AppLocalStorageService) { }
 
   ngOnInit(): void {
 
     this.additionalShiftForm=this.fb.group({
       additionalShift:[''],
       employee_id:[''],
-      additional_shift_id:['']
+      additional_shift_id:[null]
     })
 
     this.getDefaultList();
@@ -51,29 +53,46 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
     
 
     this.additionalHoursForm=this.fb.group({
-      additionalShiftHours:['']
+      additionalShiftHours:[null]
     })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('submit value change' , this.additionalShifts);
 
-    const params = {
-      "employee_id" : this.additionalShiftForm.value.employee_id,
-      "assigned_shift" : this.assignedShiftDefaultValue.name,
-      "additionalShift" : this.additionalShiftForm.value.additionalShift
+    if(this.additionalShifts==true){
+      console.log('submit value change' , this.additionalShifts);
+
+      const body = {
+        "client_id" : this.appLocalStorage.getClientId(),
+        "linemanager_id" : this.appLocalStorage.getUserId(),
+        "shift_id" : this.assignedShiftDefaultValue.id,
+        "employee_id" : this.additionalShiftForm.value.employee_id,
+        "rosterDate" : this.assignedEmployeeShift.start,
+        "additional_shift_id" : null || this.additionalShiftForm.value.additionalShift, 
+        "additionalHours" : null || this.additionalHoursForm.value.additionalShiftHours
+      }
+      
+      if(body.additional_shift_id){
+        delete body.additionalHours
+      } else if(!body.additional_shift_id){
+        delete body.additional_shift_id
+      }
+      console.log("THESE ARE THE PARAMS",body);
+      this.assignShift(body);
+
+      this.additionalShifts = false;
     }
+    
+  }
 
-    console.log("THESE ARE THE PARAMS",params);
-    this.additionalShifts = false;
-
+  async assignShift(body){
+    const res = await this.rosterService.assignAddtionalShift(body);
   }
 
   async getDefaultList() {
     const res = await this.shiftRequestDataService.getDefaultList();
     this.shifts = res['data'].payload;
   }
-  
   
   async getEmployeeList(params) {
     const res = await this.rosterService.getEmployeeList(params);
@@ -97,6 +116,7 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
     id: 0,
     name: ''
   };
+
   async getAssignedShift(params, replace){
     
     const res = await this.employeeroster.getEmployeeRoster(params, replace);

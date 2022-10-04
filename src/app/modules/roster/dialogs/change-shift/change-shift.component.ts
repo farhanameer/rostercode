@@ -10,6 +10,7 @@ import { ModalService } from '../../services/modal/modal.service';
 import { AdditionalShiftComponent } from '../additional-shift/additional-shift.component';
 import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employee-shift-managment.dialog';
 import { tick } from '@angular/core/testing';
+import moment from 'moment';
 
 @Component({
   selector: 'app-change-shift',
@@ -28,6 +29,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   replaceWith: any;
   swipeDropdownValue: any;
   selectedEmployeeId: any;
+  assignedRosterDate: any;
   constructor(public activeModal: NgbActiveModal ,
     private customModal:ModalService, 
     private fb:FormBuilder, 
@@ -39,21 +41,33 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   
   
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('submit value change' , this.submitBtn);
 
-    const params = {
-      "client_id" : this.appLocalStorage.getClientId(),
-      "linemanager_id" : this.appLocalStorage.getUserId(),
-      "shift_id" : this.swipeShiftForm.value.swipeShift,
-      "employee_id" : this.swipeShiftForm.value.employee_id,
-      "assigned_shift" : this.assignedShiftDefaultValue.name,
-      "assigned_roster_date" : this.swipeShiftForm.value.assigned_roster_date,
-      "replaceWithEmployeeId" : this.swipeShiftForm.value.replaceWithEmployeeId
+    if(this.submitBtn == true){
+      console.log('submit value change' , this.submitBtn);
+
+      this.swipeShiftForm.value.assigned_roster_date = moment(this.swipeShiftForm.value.assigned_roster_date).format('YYYY-MM-DD');
+      const body = {
+        "client_id" : this.appLocalStorage.getClientId(),
+        "linemanager_id" : this.appLocalStorage.getUserId(),
+        "shift_id" : this.swipeShiftForm.value.swipeShift,
+        "employee_id" : this.swipeShiftForm.value.employee_id,
+        "assigned_shift" : this.assignedShiftDefaultValue.id,
+        "assigned_roster_date" : this.assignedEmployeeShift.start,
+        "replaceWithEmployeeId" : null || this.swipeShiftForm.value.replaceWithEmployeeId,
+        "rosterDate": this.swipeShiftForm.value.assigned_roster_date
+      }
+          
+      this.submitBtn = false;
+      if(body.replaceWithEmployeeId){
+        delete body.shift_id
+      } else if(!body.replaceWithEmployeeId){
+        delete body.replaceWithEmployeeId
+      }
+      console.log(body); 
+
+      this.swapShift(body);
     }
-
-    console.log(params);
     
-    this.submitBtn = false;
   }
 
   ngOnInit(): void {
@@ -62,7 +76,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
       employee_id:[''],
       assigned_shift:[''],
       assigned_roster_date:[''],
-      replaceWithEmployeeId:[''],
+      replaceWithEmployeeId:[null],
       swipeShift:['']
     })
     this.getDefaultList();
@@ -72,6 +86,11 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
       "dept_id" : 343,
       "department_id" : 16
   })
+  }
+
+  async swapShift(body){
+    const res = await this.rosterService.swapShift(body);
+    
   }
 
   async getDefaultList() {
@@ -123,6 +142,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     
     const res = await this.employeeroster.getEmployeeRoster(params, replace);
     this.assignedEmployeeShift = res['data']['payload']['data'][0];
+
     this.employeesName.push({
       id : this.assignedEmployeeShift.id , 
       name : `${this.assignedEmployeeShift.shift_name} (${this.assignedEmployeeShift.actual_shift_time_in}-${this.assignedEmployeeShift.actual_shift_time_out})`
@@ -145,15 +165,5 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
       "custom_date" : "2022-07-18"
     }
     this.getAssignedShift(params , true);
-  }
-
-  replaceWithSelection($event){
-    console.log($event.value)
-    this.replaceWith = $event.value;
-
-  }
-
-  onSelectionSwipeDropdown($event){
-    this.swipeDropdownValue = $event.value;
   }
 }

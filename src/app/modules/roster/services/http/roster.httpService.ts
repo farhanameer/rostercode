@@ -13,9 +13,9 @@ export class HttpHoursAdjustment {
   }
 
   getHoursAdjustment(body) {
-    return this.http.post(`${this.roster}/ApprovedHoursToCpl&Payment`, body);
+    return this.http.post(`${this.roster}/ApproveHours`, body);
   }
   getOverTimeAdjustment(body) {
-    return this.http.post(`${this.roster}/ApproveHours`, body);
+    return this.http.post(`${this.roster}/ApprovedHoursToCpl&Payment`, body);
   }
 }
