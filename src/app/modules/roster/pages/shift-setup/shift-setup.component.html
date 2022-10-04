@@ -64,6 +64,7 @@
                           [form]="shiftSetUpForm"
                           [control]="'color'"
                           [data]="shiftColorArray"
+                          [defaultValue]="dropDownDefaultValues.shiftColor"
                         ></app-select-box>
                       </div>
                       <div>
@@ -96,10 +97,10 @@
                   <div class="form-col">
                     <div>
                       <app-select-box
-                        [label]="'Shift Type'"
+                        [label]="'Select Day'"
                         [form]="shiftSetUpForm"
-                        [control]="'shift_type_id'"
-                        [data]="shiftTypeArray"
+                        [control]="'ext_mid_break_day_id'"
+                        [data]="weekDaysArray"
                       ></app-select-box>
                     </div>
                     <div>
@@ -188,7 +189,11 @@
               <div class="d-flex align-items-center">
                 <app-check-box [label]="'Period'"> </app-check-box>
               </div>
-              <input type="submit" class="btn-input" value="Submit" />
+              <input *ngIf="!isUpdating" type="submit" class="btn-input" value="Submit" />
+              <!-- <input *ngIf="isUpdating" type="submit" class="btn-input" value="Update" /> -->
+              <input *ngIf="isUpdating" type="submit" class="btn-input" value="Approve" (click)="approve()" />
+              <input *ngIf="isUpdating" type="submit" class="btn-input" value="Disapprove" (click)="disApprove()" />
+              <input *ngIf="isUpdating" type="submit" class="btn-input" value="Cancel" (click)="cancel()" />
             </div>
           </div>
         </div>

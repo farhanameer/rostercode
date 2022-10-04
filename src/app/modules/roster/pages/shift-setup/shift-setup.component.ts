@@ -24,12 +24,40 @@ export class ShiftSetupComponent implements OnInit {
 
   shiftArray : any;
   filters : any;
+  weekDaysArray = [
+    {
+      id : 0 , 
+      name : 'Sunday'
+    } , 
+    {
+      id : 1 , 
+      name : 'Monday'
+    } ,
+    {
+      id : 2 , 
+      name : 'Tuesday'
+    } ,
+    {
+      id : 3 , 
+      name : 'Wednesday'
+    } ,
+    {
+      id : 4 , 
+      name : 'Thursday'
+    } ,
+    {
+      id : 5 , 
+      name : 'Friday'
+    } ,
+    {
+      id : 6 , 
+      name : 'Saturday'
+    } ,
+  ]
 
   dropDownDefaultValues = {
-    shiftType : {
-      id : 1 , 
-      name : "Full-Time"
-    }
+    shiftType : {} , 
+    shiftColor : {}
   }
   ngOnInit(): void {
     
@@ -41,7 +69,7 @@ export class ShiftSetupComponent implements OnInit {
       time_in:[null,Validators.required],
       time_out:["",Validators.required],
       mid_break_enable:["",Validators.required],
-      mid_break_time_in:["13:00",Validators.required],
+      mid_break_time_in:["",Validators.required],
       mid_break_time_out:["",Validators.required],
       ext_mid_break_day_id:["",Validators.required],
       ext_mid_break_time_in:["",Validators.required],
@@ -155,6 +183,11 @@ export class ShiftSetupComponent implements OnInit {
 
   async submit(){
     
+
+    if(this.isUpdating){
+      console.log(this.shiftSetUpForm.value);
+      return;
+    }
     const body = {
       ...this.shiftSetUpForm.value
     }
@@ -192,7 +225,7 @@ export class ShiftSetupComponent implements OnInit {
     body.mid_break_time_out = `${body.mid_break_time_out}:00`;
 
     // confused Entries
-    body.ext_mid_break_day_id = "5";
+    //body.ext_mid_break_day_id = "5";
     body.mid_break_enable = 0;
     body.department_id = 16; //desig_id emp_id = -1 by default
     body.emp_id = -1;
@@ -219,18 +252,22 @@ export class ShiftSetupComponent implements OnInit {
       this.shiftSetUpForm.reset();
       console.log(this.shiftSetUpForm.value);
       this.resetDropDown();
+      this.isUpdating = false;
   }
 
   resetDropDown(){
     this.shiftColorArray = [];
     this.shiftTypeArray = [];
+    this.dropDownDefaultValues.shiftColor = {};
+    this.dropDownDefaultValues.shiftType = {};
     setTimeout(() => {
       this.shiftColorArray = this.shiftColorCopiedArray;
       this.shiftTypeArray = this.shiftTypeCopiedArray;
     }, 200);
   }
 
-  
+  isUpdating : boolean = false;
+  updateAbleShiftId : any;
   async getSingleShift(id){
     console.log('single Shift Id' , id);
     const payload = {
@@ -254,12 +291,100 @@ export class ShiftSetupComponent implements OnInit {
     //   "desc": "testdata value"
     // });
 
-    shift.mid_break_time_in = `13:00`;
-    shift.mid_break_time_out = `16:00`;
+    if(shift.ext_mid_break_time_in && shift.ext_mid_break_time_out){
+      shift.ext_mid_break_time_in = this.changeTimeFormate(shift.ext_mid_break_time_in);
+      shift.ext_mid_break_time_out = this.changeTimeFormate(shift.ext_mid_break_time_out);
+    }
+    if(shift.mid_break_time_in && shift.mid_break_time_out){
+      shift.mid_break_time_in = this.changeTimeFormate(shift.mid_break_time_in);
+      shift.mid_break_time_out = this.changeTimeFormate(shift.mid_break_time_out);
+    }
+    if(shift.time_in && shift.time_out){
+      shift.time_in = this.changeTimeFormate(shift.time_in);
+      shift.time_out = this.changeTimeFormate(shift.time_out);
+    }
+    if(shift.qrt_break){
+      shift.qrt_break.forEach(qrt =>{
+        qrt.qrt_break_time_in = this.changeTimeFormate(qrt.qrt_break_time_in);
+        qrt.qrt_break_time_out = this.changeTimeFormate(qrt.qrt_break_time_out);
+      });
+    }
+    this.populateDefaultDropDownValues(shift);
     
     this.shiftSetUpForm.patchValue(shift);
-    
+    this.isUpdating = true;
+    this.updateAbleShiftId = id;
+  }
+
+  update(){
+    console.log(this.shiftSetUpForm.value);
+
+  }
+  searchInArray(array , key = null , value){
+    let foundValue = null;
+    array.every(entry =>{
+      if(key && entry[key] == value){
+        foundValue = entry;
+        return false;
+      }
+      if(entry == value){
+        foundValue = {
+          id : entry , 
+          name : entry
+        };
+        return false;
+      }
+      return true;
+    });
+    return foundValue;
+  }
+  populateDefaultDropDownValues(shift){
+    if(shift.shift_type_id){
+      this.dropDownDefaultValues.shiftType = this.searchInArray(this.shiftTypeCopiedArray , 'id' , shift.shift_type_id);
+    }
+    if(shift.color){
+      this.dropDownDefaultValues.shiftColor = this.searchInArray(this.shiftColorCopiedArray , 'id' , shift.color)
+    }
+    console.log('default values set',this.dropDownDefaultValues.shiftColor);
   }
   
+
+  changeTimeFormate(value){
+    if(value){
+      const array = value.split(':');
+      return `${array[0]}:${array[1]}`;
+    }
+    return null;
+  }
+
+
+  async approve(){
+    const params = {
+      screen_role : 'hr' , 
+      client_id : this.appLocalStorage.getClientId(),
+      shift_id : this.updateAbleShiftId,
+      action : 'approve'
+    }
+    const response = await this.shiftRequestService.putDeleteDisapprovedById(params);
+    console.log(response);
+    this.resetForm();
+    
+  }
+  async disApprove(){
+    const params = {
+      screen_role : 'hr' , 
+      client_id : this.appLocalStorage.getClientId(),
+      shift_id : this.updateAbleShiftId,
+      action : 'disapprove'
+    }
+    const response = await this.shiftRequestService.putDeleteDisapprovedById(params);
+    console.log(response);
+    this.resetForm();
+  }
+  cancel(){
+    this.resetForm();
+  }
+
+
 
 }
