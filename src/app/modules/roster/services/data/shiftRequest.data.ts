@@ -170,12 +170,12 @@ export class ShiftRequestDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const paramss = {
-          client_id: 48,
-          line_manager_id: 343,
-        };
+        // const paramss = {
+        //   client_id: 48,
+        //   line_manager_id: 343,
+        // };
 
-        this.httpService.getShiftByDepartmentManager(paramss).subscribe(
+        this.httpService.getShiftByDepartmentManager(params).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';

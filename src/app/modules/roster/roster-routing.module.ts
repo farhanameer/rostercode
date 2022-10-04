@@ -6,6 +6,7 @@ import { JobShiftCalenderComponent } from './components/job-shift-calender/job-s
 import { ShiftsCalenderComponent } from './components/shifts-calender/shifts-calender.component';
 import { SortByDateComponent } from './components/sort-by-date/sort-by-date.component';
 import { SortByEmployeeComponent } from './components/sort-by-employee/sort-by-employee.component';
+import { UploadFilesBoxComponent } from './components/upload-files-box/upload-files-box.component';
 import { AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
 import { DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
 import {JobshiftDialog } from './dialogs/jobshift/jobshift.dialog';
@@ -117,6 +118,10 @@ const routes: Routes = [
   {
     path:'RequestLM',
     component:ShiftRequestByLmComponent
+  },
+  {
+    path:'TestingDialogs',
+    component:UploadFilesBoxComponent
   },
 
   

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CalenderSetupComponent } from '../../dialogs/calender-setup/calender-setup.component';
+import { DisclaimerDialog } from '../../dialogs/disclaimer/disclaimer.dialog';
+import { EmployeeShiftListComponent } from '../../dialogs/employee-shift-list/employee-shift-list.component';
+import { EventComponent } from '../../dialogs/event/event.component';
+import { ModalService } from '../../services/modal/modal.service';
+import { ShiftListComponent } from '../shift-list/shift-list.component';
 
 @Component({
   selector: 'app-file-upload',
@@ -7,9 +14,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileUploadComponent implements OnInit {
 
-  constructor() { }
+  constructor(public activeModal: NgbActiveModal,
+    private customModal: ModalService){}
 
   ngOnInit(): void {
   }
-
+  open(){
+    this.customModal.showFeaturedDialog(DisclaimerDialog, "");
+  }
+  
+  openEvent(){
+    this.customModal.showFeaturedDialog(EventComponent, "");
+  }
+  openCalendarsetup(){
+    this.customModal.showFeaturedDialog(CalenderSetupComponent, "");
+  }
+ 
 }
