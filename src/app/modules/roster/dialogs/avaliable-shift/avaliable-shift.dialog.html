@@ -2,55 +2,36 @@
   <div class="container">
     <div class="header-menu"></div>
 
-    <div class="modal-custom">
+    <div class="modal-custom custom-avaliable-width">
       <div class="gradient-head flex justify-content-between">
-        <div class="heading">All Modal Titles</div>
+        <div class="heading">Avaliable Shifts</div>
         <div class="btn-options flex align-content-center">
-          <a href="#"><img src="icons/ico-close.svg" alt="" /></a>
+          <a href="#"><img src="assets/icons/ico-close.svg" alt="" /></a>
         </div>
       </div>
       <!-- Body -->
-      <div class="modal-custom-body">
-        <div class="table-custom-header">
-          <div><span>Name:</span> Hisham Talib Qureshi</div>
+      <div class="modal-custom-body p-0">
+        <div class="row m-0 custom-pd">
+          <div class="Custom-color-orange"></div>
+          <p>Morning Shift</p>
 
-          <div><span>Name:</span> Hisham Talib Qureshi</div>
+          <div class="col">09:00-17:00</div>
         </div>
-        <table class="table table-modal">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Already Allocated Shift</th>
-              <th>Allocate Shift</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><app-select-box></app-select-box></td>
-              <td>Morning</td>
-              <td><app-select-box></app-select-box></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="row m-0 custom-pd custom-b">
+          <div class="Custom-color-pink"></div>
+          <p>Evening Shift</p>
 
+          <div class="col">14:00-00.00</div>
+        </div>
+        <div class="row m-0 custom-pd">
+          <div class="Custom-color-purple"></div>
+          <p>Night Shift</p>
+          <div class="col">21:00-05:00</div>
+        </div>
+      </div>
       <!-- footer -->
 
-      <div class="modal-custom-footer">
-        <div class="clues">
-          <span>
-            <i><img src="icons/icon-cpl.svg" alt="" /></i> CPL Due</span
-          >
-          <span>
-            <i><img src="icons/icon-minus.svg" alt="" /> Absents</i>
-          </span>
-        </div>
-
-        <div class="modal-footer-button flex">
-          <input type="button" class="btn-input" value="Submit" />
-          <input type="button" class="btn-input" value="Cancel" />
-        </div>
-      </div>
+      <div class="modal-custom-footer"></div>
     </div>
 
     <!-- Modal list -->

@@ -34,6 +34,7 @@
                         [form]="shiftSetUpForm"
                         [control]="'shift_type_id'"
                         [data]="shiftTypeArray"
+                        [defaultValue]="dropDownDefaultValues.shiftType"
                       ></app-select-box>
                     </div>
                     <div>
@@ -203,6 +204,7 @@
           <div class="shadow no-pad">
             <app-shift-list
             [data]="shiftArray"
+            (singleShiftId)="getSingleShift($event)"
             ></app-shift-list>
           </div>
           <div class="shift-setup-footer"></div>

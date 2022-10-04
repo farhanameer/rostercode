@@ -3,10 +3,22 @@
 <div class="form-col">
 
   <div>
-    <app-select-box [label]="'Select Employee'" [form]="swipeShiftForm" [control]="'employee_id'"></app-select-box>
+    <app-select-box 
+      [label]="'Select Employee'" 
+      [form]="swipeShiftForm" 
+      [control]="'employee_id'" 
+      [data]="employeesDropdown"
+      (selectionChange)="selectionChanged($event)"
+      ></app-select-box>
   </div>
   <div>
-    <app-select-box [label]="'Assigned Shift'" [form]="swipeShiftForm" [control]="'assigned_shift'"></app-select-box>
+    <app-select-box 
+      [label]="'Assigned Shift'" 
+      [form]="swipeShiftForm" 
+      [control]="'assigned_shift'" 
+      [data]="employeesName"
+      [defaultValue]="assignedShiftDefaultValue"
+    ></app-select-box>
   </div>
 </div>
 <app-sub-layout>
@@ -23,7 +35,7 @@
         </div>
         <div>
           <app-select-box
-            [data]="shifts"
+            [data]="swipeDropdown"
             [form]="swipeShiftForm"
             [control]="'swipeShift'"
             [label]="'Swipe Shift'"
@@ -31,7 +43,7 @@
         </div>
         <div>
           <app-select-box
-            [data]="employees"
+            [data]="employeesDropdown"
             [form]="swipeShiftForm"
             [control]="'replaceWithEmployeeId'"
             [label]="'Replace With'"

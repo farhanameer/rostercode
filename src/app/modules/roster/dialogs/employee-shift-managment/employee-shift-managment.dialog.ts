@@ -18,6 +18,8 @@ view:string="weekend";
 change:string;
 additional:string;
 weekend:string;
+submitted : boolean = false;
+
   constructor(public activeModal: NgbActiveModal ,private customModal:ModalService ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,14 @@ weekend:string;
   openMark(){
     this.customModal.showFeaturedDialog(EmployeeShiftManagmentDialog, "");
   }
+  submit(){
+    this.submitted = true;
+    setTimeout(() => {
+      this.submitted = false;
+    }, 200);
+  }
+
+  
 
 
 }

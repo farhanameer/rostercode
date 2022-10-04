@@ -1,11 +1,39 @@
-<h1>Employee Shift Allocation</h1>
-<h2>Select Boxes</h2>
-<app-select-box></app-select-box>
-<app-select-box></app-select-box>
-<app-select-box></app-select-box>
-<app-select-box></app-select-box>
-<app-select-box></app-select-box>
+<div class="wrapper h-25">
+  <div class="container">
+    <app-full-layout>
+      <div>
+        <div>
+          <app-location-and-designation-filter>
+            <div class="heading">Shift Allocation</div>
+          </app-location-and-designation-filter>
+        </div>
+        <div class="shift-setup">
+          <app-sub-layout>
+            <div class="shift-card">
+              <div class="form-col p-20">
+                <div>
+                  <app-select-box [label]="'Shift Name'"></app-select-box>
+                </div>
+                <div>
+                  <app-date-box
+                    [label]="'Shift Period Start Date'"
+                  ></app-date-box>
+                </div>
+                <div>
+                  <app-date-box
+                    [label]="'Shift Period End Date'"
+                  ></app-date-box>
+                </div>
+                <div class="row align-content-center">
+                  <app-check-box [label]="'Set as Default'"></app-check-box>
+                </div>
+              </div>
+            </div>
+          </app-sub-layout>
 
-<h2>Date Box</h2>
-<app-date-box></app-date-box>
-<app-date-box></app-date-box>
+          <!-- <div class="shift-setup-footer"></div> -->
+        </div>
+      </div>
+    </app-full-layout>
+  </div>
+</div>

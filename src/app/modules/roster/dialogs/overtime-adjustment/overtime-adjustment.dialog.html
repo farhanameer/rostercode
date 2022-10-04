@@ -1,6 +1,5 @@
 <div class="modal-custom bg-white">
   <app-dialog-layout>
-    
     <div class="gradient-head flex justify-content-between">
       <div class="heading">Overtime Hours Adjustment</div>
       <div class="btn-options flex align-content-center">
@@ -25,10 +24,19 @@
       </ul>
       <div class="row m-0">
         <div class="col-6">
-          <app-input-box [label]="'Overtime (hrs)'" [form]="overTimeForm" [control]="'givenHours'"></app-input-box>
+          <app-input-box
+            [label]="'Overtime (hrs)'"
+            [form]="overTimeForm"
+            [control]="'overTime'"
+            overTimeForm
+          ></app-input-box>
         </div>
         <div class="col-6">
-          <app-date-box [label]="'Till Date'" [form]="overTimeForm" [control]="'tillDate'"></app-date-box>
+          <app-date-box
+            [label]="'Till Date'"
+            [form]="overTimeForm"
+            [control]="'tillDate'"
+          ></app-date-box>
         </div>
       </div>
       <div class="row m-0">
@@ -39,21 +47,42 @@
       </div>
       <div class="row m-2">
         <div class="col-6 d-flex">
-          <input type="radio" />
+          <input
+            type="radio"
+            [checked]="type=='cpl'"
+            (click)="overtimeType('cpl')"
+          />
           <label>ADD CPL</label>
         </div>
 
         <div class="col-6 d-flex">
-          <input type="radio" />
+          <input
+            type="radio"
+            [checked]="type=='payment'"
+            (click)="overtimeType('payment')"
+          />
           <label>Payment For Overtime</label>
         </div>
       </div>
       <div class="row m-0 mt-2">
         <div class="col-6">
-          <app-select-box [label]="'CPL'" [width]="'212px'"></app-select-box>
+          <app-input-box
+            [label]="'CPL'"
+            [width]="'212px'"
+            [isdisabled]="type=='payment'"
+            [form]="overTimeForm"
+            [control]="'cpl'"
+          ></app-input-box>
         </div>
         <div class="col-6">
-          <app-input-box [label]="'Pay For Hours'"></app-input-box>
+          <app-input-box
+            [form]="overTimeForm"
+            [control]="'payForHours'"
+            [label]="'Pay For Hours'"
+            [isdisabled]="type=='cpl'"
+            [form]="overTimeForm"
+            [control]="'givenHours'"
+          ></app-input-box>
         </div>
       </div>
     </div>
@@ -81,7 +110,6 @@
         />
       </div>
     </div>
-  
   </app-dialog-layout>
 </div>
 
