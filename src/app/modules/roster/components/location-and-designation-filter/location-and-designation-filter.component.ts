@@ -120,9 +120,19 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
       console.log('in if statement');
       
       this.getCountries('sub_cluster_id',$event.value);
+      this.locationFilters.subClusterId = $event.value;
+      this.filtersChange.emit(this.locationFilters);
       return;
     }
+
+
+
     const fun = this.dropDowns[$event.controlName];
+    if(!fun){
+      this.locationFilters.departmentId = $event.value;
+      this.filtersChange.emit(this.locationFilters);
+      return;
+    }
     this[fun]($event.value);
 
     
