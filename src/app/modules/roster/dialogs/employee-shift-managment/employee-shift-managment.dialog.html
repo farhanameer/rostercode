@@ -32,9 +32,18 @@
           </div>
         </div>
       </div>
-      <app-mark-weekend *ngIf="view=='weekend'" [modelData]="modelData"></app-mark-weekend>
-      <app-change-shift *ngIf="view=='change'" [submitBtn] = "submitted"></app-change-shift>
-      <app-additional-shift *ngIf="view=='additional'" [additionalShifts] = "submitted"></app-additional-shift>
+      <app-mark-weekend
+        *ngIf="view=='weekend'"
+        [modelData]="modelData"
+      ></app-mark-weekend>
+      <app-change-shift
+        *ngIf="view=='change'"
+        [submitBtn]="submitted"
+      ></app-change-shift>
+      <app-additional-shift
+        *ngIf="view=='additional'"
+        [additionalShifts]="submitted"
+      ></app-additional-shift>
     </div>
 
     <!-- footer -->

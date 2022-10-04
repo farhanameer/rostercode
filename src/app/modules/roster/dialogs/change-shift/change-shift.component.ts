@@ -46,7 +46,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
       "linemanager_id" : this.appLocalStorage.getUserId(),
       "shift_id" : this.swipeShiftForm.value.swipeShift,
       "employee_id" : this.swipeShiftForm.value.employee_id,
-      "assigned_shift" : this.assignedShiftDefaultValue.name,
+      "assigned_shift" : this.assignedShiftDefaultValue.id,
       "assigned_roster_date" : this.swipeShiftForm.value.assigned_roster_date,
       "replaceWithEmployeeId" : this.swipeShiftForm.value.replaceWithEmployeeId
     }
