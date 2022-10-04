@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { RosterService } from '../../services/data/roster.dataService';
-import { ModalService } from '../../services/modal/modal.service';
-import { OvertimeHoursAdjusmentDialog } from '../overtime-hours-adjusment/overtime-hours-adjusment.dialog';
 
 @Component({
   selector: 'app-overtime-adjustment',
@@ -16,7 +14,7 @@ export class OvertimeAdjustmentDialog implements OnInit {
     private fb: FormBuilder,
     public activeModal: NgbActiveModal,
     private appLocalStorage: AppLocalStorageService,
-    private hoursAdjustment: RosterService
+    private overTimeAdjustment: RosterService
   ) {}
   @Input() modelData: any;
   overTimeForm: FormGroup;
@@ -61,8 +59,9 @@ export class OvertimeAdjustmentDialog implements OnInit {
       line_manager_id: this.appLocalStorage.getUserId(),
     };
     // console.log('my obj', obj);
-    const result = await this.hoursAdjustment.getHoursAdjustment(obj);
-    console.log('1st service', result);
+    const result = await this.overTimeAdjustment.getOvertimeAdjustment(obj);
+    console.log('Overtime', result);
+    this.activeModal.close('Close click');
   }
 
   get validateAForm(): any {

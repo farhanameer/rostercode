@@ -2,20 +2,22 @@
 <!-- Modal Body -->
 <div class="form-col">
   <div>
-    <app-select-box 
-      [label]="'Select Employee'" 
-      [form]="additionalShiftForm" 
+    <app-select-box
+      [label]="'Select Employee'"
+      [form]="additionalShiftForm"
       [control]="'employee_id'"
-      [data] = "employeesDropdown"
-      (selectionChange)="selectionChanged($event)"></app-select-box>
+      [data]="employeesDropdown"
+      (selectionChange)="selectionChanged($event)"
+    ></app-select-box>
   </div>
   <div>
-    <app-select-box 
-      [label]="'Assigned Shift'" 
-      [form]="additionalShiftForm" 
+    <app-select-box
+      [label]="'Assigned Shift'"
+      [form]="additionalShiftForm"
       [control]="'additional_shift_id'"
       [data]="employeesName"
-      [defaultValue]="assignedShiftDefaultValue"></app-select-box>
+      [defaultValue]="assignedShiftDefaultValue"
+    ></app-select-box>
   </div>
 </div>
 
