@@ -60,20 +60,18 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
 
     const params = {
       "employee_id" : this.additionalShiftForm.value.employee_id,
-      "assigned_shift" : this.assignedShiftDefaultValue.name,
+      "assigned_shift" : this.assignedShiftDefaultValue.id,
       "additionalShift" : this.additionalShiftForm.value.additionalShift
     }
 
     console.log("THESE ARE THE PARAMS",params);
     this.additionalShifts = false;
-
   }
 
   async getDefaultList() {
     const res = await this.shiftRequestDataService.getDefaultList();
     this.shifts = res['data'].payload;
   }
-  
   
   async getEmployeeList(params) {
     const res = await this.rosterService.getEmployeeList(params);
@@ -97,6 +95,7 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
     id: 0,
     name: ''
   };
+
   async getAssignedShift(params, replace){
     
     const res = await this.employeeroster.getEmployeeRoster(params, replace);
