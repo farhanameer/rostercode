@@ -31,11 +31,11 @@
           <tbody>
             <tr>
               <td>
-                <app-select-box [width]="'105px'" [height]="'20px'"></app-select-box>
+                <app-date-box [label]="'Date'" [form]="singleShiftForm" [control]="'date'"></app-date-box>
               </td>
               <td>Morning</td>
               <td>
-                <app-select-box [data]="shiftAllocate.data" [width]="'105px'" [height]="'20px'"></app-select-box>
+                <app-select-box [data]="shiftAllocate.data" [width]="'105px'" [height]="'20px'" [label]="'Shift Allocate'" [form]="singleShiftForm"  [control]="'allocateShift'"></app-select-box>
               </td>
             </tr>
           </tbody>
