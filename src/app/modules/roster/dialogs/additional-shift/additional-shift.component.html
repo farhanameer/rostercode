@@ -6,6 +6,8 @@
       [label]="'Select Employee'"
       [form]="additionalShiftForm"
       [control]="'employee_id'"
+      [data]="employeesDropdown"
+      (selectionChange)="selectionChanged($event)"
     ></app-select-box>
   </div>
   <div>
@@ -13,6 +15,8 @@
       [label]="'Assigned Shift'"
       [form]="additionalShiftForm"
       [control]="'additional_shift_id'"
+      [data]="employeesName"
+      [defaultValue]="assignedShiftDefaultValue"
     ></app-select-box>
   </div>
 </div>

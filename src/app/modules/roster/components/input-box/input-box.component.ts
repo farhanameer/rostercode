@@ -4,19 +4,17 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-input-box',
   templateUrl: './input-box.component.html',
-  styleUrls: ['./input-box.component.scss']
+  styleUrls: ['./input-box.component.scss'],
 })
 export class InputBoxComponent implements OnInit {
+  @Input() isdisabled: boolean;
+  @Input() form: FormGroup;
+  @Input() control: string;
+  @Input() label: string;
+  @Input() width: string;
+  @Input() type: string;
 
-  @Input() form:FormGroup;
-  @Input() control:string;
-  @Input() label:string;
-  @Input() width:string;
-  @Input() type : string;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
