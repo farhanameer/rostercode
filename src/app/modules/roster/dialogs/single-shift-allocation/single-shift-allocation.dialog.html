@@ -31,10 +31,11 @@
           <tbody>
             <tr>
               <td>
-                <app-select-box
-                  [width]="'105px'"
-                  [height]="'20px'"
-                ></app-select-box>
+                <app-date-box
+                  [label]="'Date'"
+                  [form]="singleShiftForm"
+                  [control]="'date'"
+                ></app-date-box>
               </td>
               <td>Morning</td>
               <td>
@@ -42,6 +43,9 @@
                   [data]="shiftAllocate.data"
                   [width]="'105px'"
                   [height]="'20px'"
+                  [label]="'Shift Allocate'"
+                  [form]="singleShiftForm"
+                  [control]="'allocateShift'"
                 ></app-select-box>
               </td>
             </tr>
@@ -66,7 +70,7 @@
             type="button"
             class="btn-input"
             value="Submit"
-            (click)="activeModal.close('Close click')"
+            (click)="submit()"
           />
           <input
             type="button"
