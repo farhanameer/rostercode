@@ -62,12 +62,7 @@ export class OvertimeAdjustmentDialog implements OnInit {
 
 
   
-  resetFormField(control){
-    
-      this.overTimeForm.get(control).markAsUntouched();
-      this.overTimeForm.get(control).setErrors(null);
-    
-  }
+  
   valueType : string  = 'cpl';
   overtimeType(val: string) {
     this.valueType = val;

@@ -5,11 +5,36 @@
         <div class="table-header gradient-head flex justify-content-between">
           <div class="heading">Roaster</div>
           <div class="btn-options flex align-content-center">
-            <app-select-box> </app-select-box>
-            <app-select-box> </app-select-box>
-            <app-select-box> </app-select-box>
-            <app-select-box> </app-select-box>
-            <app-select-box> </app-select-box>
+            <app-select-box
+            [label]="'Employee Type'" [width]="'105px'" [height]="'20px'"
+            [name]="'employeeType'"
+            [hideLabel]="true"
+            [customClass]="['padding-top-3','carret_position_9']"
+            > </app-select-box>
+            <app-select-box
+            [label]="'Reporting Level'" [width]="'105px'" [height]="'20px'"
+            [name]="'reportingLevel'"
+            [hideLabel]="true"
+            [customClass]="['padding-top-3','carret_position_9']"
+            > </app-select-box>
+            <app-select-box
+            [label]="'Department'" [width]="'105px'" [height]="'20px'"
+            [name]="'department'"
+            [hideLabel]="true"
+            [customClass]="['padding-top-3','carret_position_9']"
+            > </app-select-box>
+            <app-select-box
+            [label]="'Employees'" [width]="'105px'" [height]="'20px'"
+            [name]="'employees'"
+            [hideLabel]="true"
+            [customClass]="['padding-top-3','carret_position_9']"
+            > </app-select-box>
+            <app-select-box
+            [label]="'Shifts'" [width]="'105px'" [height]="'20px'"
+            [name]="'shifts'"
+            [hideLabel]="true"
+            [customClass]="['padding-top-3','carret_position_9']"
+            > </app-select-box>
           </div>
         </div>
         <div class="col-shift-allocation">
