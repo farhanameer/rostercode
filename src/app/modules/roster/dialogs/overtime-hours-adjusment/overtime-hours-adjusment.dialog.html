@@ -1,6 +1,5 @@
 <div class="modal-custom bg-white">
   <app-dialog-layout>
-    <form [formGroup]="overTimeHoursAdjustmentForm" (ngSubmit)="submit()">
       <div class="gradient-head flex justify-content-between">
         <div class="heading">Overtime Hours Adjustment</div>
         <div class="btn-options flex align-content-center">
@@ -62,7 +61,7 @@
           <span> </span>
           <span> </span>
         </div>
-
+      </div>
       <div class="modal-footer-button flex">
         
         <input
@@ -78,6 +77,5 @@
           (click)="activeModal.close('Close click')"
         />
       </div>
-    </form>
   </app-dialog-layout>
 </div>
