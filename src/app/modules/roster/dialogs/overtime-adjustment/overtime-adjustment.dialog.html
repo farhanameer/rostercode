@@ -22,6 +22,7 @@
           </div>
         </li>
       </ul>
+      <form [formGroup]="overTimeForm">
       <div class="row m-0">
         <div class="col-6">
           <app-input-box
@@ -49,7 +50,9 @@
         <div class="col-6 d-flex">
           <input
             type="radio"
-            [checked]="type=='cpl'"
+            value="cpl"
+            formControlName="type"
+            [checked]="valueType == 'cpl'"
             (click)="overtimeType('cpl')"
           />
           <label>ADD CPL</label>
@@ -57,9 +60,10 @@
 
         <div class="col-6 d-flex">
           <input
+          [checked]="valueType == 'payment'"
             type="radio"
-            [checked]="type=='payment'"
-            (click)="overtimeType('payment')"
+            value="payment"
+            formControlName="type" 
           />
           <label>Payment For Overtime</label>
         </div>
@@ -69,7 +73,7 @@
           <app-input-box
             [label]="'CPL'"
             [width]="'212px'"
-            [isdisabled]="type=='payment'"
+            [isdisabled]="valueType=='payment'"
             [form]="overTimeForm"
             [control]="'cpl'"
           ></app-input-box>
@@ -79,12 +83,13 @@
             [form]="overTimeForm"
             [control]="'payForHours'"
             [label]="'Pay For Hours'"
-            [isdisabled]="type=='cpl'"
+            [isdisabled]="valueType=='cpl'"
             [form]="overTimeForm"
             [control]="'givenHours'"
           ></app-input-box>
         </div>
       </div>
+    </form>
     </div>
 
     <!-- footer -->
@@ -96,10 +101,13 @@
       </div>
 
       <div class="modal-footer-button flex">
+
+       
         <input
           type="button"
           class="btn-input"
           value="Submit"
+          [disabled]="!overTimeForm.valid"
           (click)="submit()"
         />
         <input
