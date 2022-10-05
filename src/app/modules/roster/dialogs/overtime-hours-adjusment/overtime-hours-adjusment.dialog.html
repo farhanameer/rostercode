@@ -1,5 +1,6 @@
 <div class="modal-custom bg-white">
   <app-dialog-layout>
+     <form [formGroup]="overTimeHoursAdjustmentForm">
       <div class="gradient-head flex justify-content-between">
         <div class="heading">Overtime Hours Adjustment</div>
         <div class="btn-options flex align-content-center">
@@ -67,6 +68,7 @@
         <input
           type="button"
           class="btn-input"
+          [disabled]="!this.overTimeHoursAdjustmentForm.valid"
           value="Submit"
           (click)="submit()"
         />
@@ -77,5 +79,6 @@
           (click)="activeModal.close('Close click')"
         />
       </div>
+   </form>
   </app-dialog-layout>
 </div>

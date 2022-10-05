@@ -1,7 +1,6 @@
 <!-- Body -->
 <!-- Modal Body -->
 <div class="form-col">
-
   <div>
     <app-select-box 
       [label]="'Select Employee'" 
@@ -22,6 +21,7 @@
   </div>
 </div>
 <app-sub-layout>
+<form [formGroup]="swipeShiftForm">
   <div class="shift-card-wrapper">
     <div class="shift-header">Swap Shift</div>
     <div class="shift-card">
@@ -52,6 +52,7 @@
       </div>
     </div>
   </div>
+</form>
 </app-sub-layout>
 
 <!-- footer -->
