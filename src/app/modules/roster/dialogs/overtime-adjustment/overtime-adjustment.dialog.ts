@@ -61,8 +61,6 @@ export class OvertimeAdjustmentDialog implements OnInit {
   }
 
 
-  
-  
   valueType : string  = 'cpl';
   overtimeType(val: string) {
     this.valueType = val;
