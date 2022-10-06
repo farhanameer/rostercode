@@ -43,7 +43,7 @@ export class HolidayDataService {
       try {
         const body = {
           client_id: 48,
-          line_manager_id: this.appLocalStorage.getUserId(),
+          created_by: this.appLocalStorage.getUserId(),
         };
         let data = {...body , ...params}
         this.httpService.addHoliday(data).subscribe(
@@ -67,9 +67,15 @@ export class HolidayDataService {
   }
   updateHoliday(params) {
     return new Promise((resolve, reject) => {
+
       const response = { data: null, status: false, message: null };
       try {
-        this.httpService.updateHoliday(params).subscribe(
+        const body = {
+          client_id: 48,
+          created_by: this.appLocalStorage.getUserId(),
+        };
+        let data = {...body , ...params}
+        this.httpService.updateHoliday(data).subscribe(
           (data) => {
             response.data = data['payload'];
             response.message = 'success';

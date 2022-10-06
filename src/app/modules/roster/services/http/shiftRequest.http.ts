@@ -52,10 +52,19 @@ export class ShiftRequestHttpService {
   }
 
   putDeleteDisapprovedById(params = {}){
-    return this.http.put(`${this.ShiftRequestAndSetup}/Shift`, {params});
+    let uri = 'Shift?'
+    let index = 0;
+    for (const key in params) {
+      if(index !=0){
+        uri = uri + '&';
+      }
+      uri = uri+`${key}=${params[key]}`;
+      index= index+1;
+    }
+    return this.http.put(`${this.ShiftRequestAndSetup}/${uri}`, {params});
   }
 
   putUpdateShift(params = {}){
-    return this.http.put(`${this.ShiftRequestAndSetup}/Shift`, {params});
+    return this.http.put(`${this.ShiftRequestAndSetup}/UpdateShift`, {params});
   }
 }

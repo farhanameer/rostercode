@@ -1,216 +1,301 @@
 <div class="wrapper">
-  <form [formGroup]="shiftSetUpForm" (submit)="submit()"> 
-  <div class="container">
-    <div class="header-menu"></div>
-    <app-full-layout>
-      <div>
-        <div class="table-header gradient-head flex justify-content-between">
-          
+  <form [formGroup]="shiftSetUpForm" (submit)="submit()">
+    <div class="container">
+      <div class="header-menu"></div>
+      <app-full-layout>
+        <div>
+          <div class="table-header gradient-head flex justify-content-between">
             <div class="heading">Shift Setup</div>
             <app-location-and-designation-filter
-            (filtersChange)="filtersChanged($event)"
+              (filtersChange)="filtersChanged($event)"
             >
-              
             </app-location-and-designation-filter>
-          
 
-          <!-- <div class="btn-options flex align-content-center">
+            <!-- <div class="btn-options flex align-content-center">
             <a href="#" class="btn-custom"
               >Advance Filter
               <i><img src="assets/icons/filter.svg" alt="" /></i>
             </a>
           </div> -->
-        </div>
-        <div class="shift-setup">
-          <div class="shadow">
-            <app-sub-layout>
-              <div class="shift-card-wrapper">
-                <div class="shift-header">Shift Type & Mid Break</div>
-                <div class="shift-card">
-                  <div class="form-col">
-                    <div>
-                      <app-select-box
-                        [label]="'Shift Type'"
-                        [form]="shiftSetUpForm"
-                        [control]="'shift_type_id'"
-                        [data]="shiftTypeArray"
-                        [defaultValue]="dropDownDefaultValues.shiftType"
-                      ></app-select-box>
-                    </div>
-                    <div>
-                      <app-input-box [label]="'Shift Name'" [form]="shiftSetUpForm" [control]="'name'"></app-input-box>
-                    </div>
-                    <div>
-                      <app-time-box [label]="'From'" [form]="shiftSetUpForm" [control]="'time_in'"></app-time-box>
-                    </div>
-                    <div>
-                      <app-time-box [label]="'To'" [form]="shiftSetUpForm" [control]="'time_out'"></app-time-box>
-                    </div>
-
-                    <div class="form-col">
-                      <div>
-                        <app-input-box
-                          [label]="'Comments'"
-                          [form]="shiftSetUpForm"
-                          [control]="'hr_comment'"
-                          [width]="'1149px'"
-                        ></app-input-box>
-                      </div>
-                    </div>
+          </div>
+          <div class="shift-setup">
+            <div class="shadow">
+              <app-sub-layout>
+                <div class="shift-card-wrapper">
+                  <div class="shift-header">Shift Type & Mid Break</div>
+                  <div class="shift-card">
                     <div class="form-col">
                       <div>
                         <app-select-box
-                          [label]="'Shift Color'"
+                          [label]="'Shift Type'"
                           [form]="shiftSetUpForm"
-                          [control]="'color'"
-                          [data]="shiftColorArray"
+                          [control]="'shift_type_id'"
+                          [data]="shiftTypeArray"
+                          [defaultValue]="dropDownDefaultValues.shiftType"
                         ></app-select-box>
                       </div>
                       <div>
-                        <app-time-box [label]="'Mid Break From'" [form]="shiftSetUpForm" [control]="'mid_break_time_in'"></app-time-box>
+                        <app-input-box
+                          [label]="'Shift Name'"
+                          [form]="shiftSetUpForm"
+                          [control]="'name'"
+                        ></app-input-box>
                       </div>
                       <div>
-                        <app-time-box [label]="'Mid Break To'" [form]="shiftSetUpForm" [control]="'mid_break_time_out'"></app-time-box>
+                        <app-time-box
+                          [label]="'From'"
+                          [form]="shiftSetUpForm"
+                          [control]="'time_in'"
+                        ></app-time-box>
                       </div>
-                      <div class="row align-content-center">
-                        <div class="col">
-                          <app-check-box [label]="'Roster'"> </app-check-box>
+                      <div>
+                        <app-time-box
+                          [label]="'To'"
+                          [form]="shiftSetUpForm"
+                          [control]="'time_out'"
+                        ></app-time-box>
+                      </div>
+
+                      <div class="form-col">
+                        <div>
+                          <app-input-box
+                            [label]="'Comments'"
+                            [form]="shiftSetUpForm"
+                            [control]="'hr_comment'"
+                            [width]="'1149px'"
+                          ></app-input-box>
                         </div>
-                        <div class="col">
-                          <app-check-box [label]="'General'"> </app-check-box>
+                      </div>
+                      <div class="form-col">
+                        <div>
+                          <app-select-box
+                            [label]="'Shift Color'"
+                            [form]="shiftSetUpForm"
+                            [control]="'color'"
+                            [data]="shiftColorArray"
+                            [defaultValue]="dropDownDefaultValues.shiftColor"
+                          ></app-select-box>
                         </div>
-                        <div class="col">
-                          <app-check-box [label]="'Default'"> </app-check-box>
+                        <div>
+                          <app-time-box
+                            [label]="'Mid Break From'"
+                            [form]="shiftSetUpForm"
+                            [control]="'mid_break_time_in'"
+                          ></app-time-box>
+                        </div>
+                        <div>
+                          <app-time-box
+                            [label]="'Mid Break To'"
+                            [form]="shiftSetUpForm"
+                            [control]="'mid_break_time_out'"
+                          ></app-time-box>
+                        </div>
+                        <div class="row align-content-center">
+                          <div class="col">
+                            <app-check-box [color]="'blue'" [label]="'Roster'">
+                            </app-check-box>
+                          </div>
+                          <div class="col">
+                            <app-check-box [color]="'blue'" [label]="'General'">
+                            </app-check-box>
+                          </div>
+                          <div class="col">
+                            <app-check-box [color]="'blue'" [label]="'Default'">
+                            </app-check-box>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </app-sub-layout>
+              </app-sub-layout>
 
-            <app-sub-layout>
-              <div class="shift-card-wrapper">
-                <div class="shift-header">Extended Mid Break</div>
-                <div class="shift-card">
-                  <div class="form-col">
-                    <div>
-                      <app-select-box
-                        [label]="'Shift Type'"
-                        [form]="shiftSetUpForm"
-                        [control]="'shift_type_id'"
-                        [data]="shiftTypeArray"
-                      ></app-select-box>
+              <app-sub-layout>
+                <div class="shift-card-wrapper">
+                  <div class="shift-header">Extended Mid Break</div>
+                  <div class="shift-card">
+                    <div class="form-col">
+                      <div>
+                        <app-select-box
+                          [label]="'Select Day'"
+                          [form]="shiftSetUpForm"
+                          [control]="'ext_mid_break_day_id'"
+                          [data]="weekDaysArray"
+                        ></app-select-box>
+                      </div>
+                      <div>
+                        <app-time-box
+                          [label]="'From'"
+                          [form]="shiftSetUpForm"
+                          [control]="'ext_mid_break_time_in'"
+                        ></app-time-box>
+                      </div>
+                      <div>
+                        <app-time-box
+                          [label]="'To'"
+                          [form]="shiftSetUpForm"
+                          [control]="'ext_mid_break_time_out'"
+                        ></app-time-box>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <app-check-box
+                          [color]="'blue'"
+                          [label]="'Specific Period'"
+                        >
+                        </app-check-box>
+                      </div>
+                      <div class="form-col">
+                        <div>
+                          <app-date-box
+                            [label]="'Period From'"
+                            [form]="shiftSetUpForm"
+                            [control]="'shift_revert_date_start'"
+                          ></app-date-box>
+                        </div>
+                        <div>
+                          <app-date-box
+                            [label]="'Period To'"
+                            [form]="shiftSetUpForm"
+                            [control]="'shift_revert_date_end'"
+                          ></app-date-box>
+                        </div>
+                        <div>
+                          <app-select-box
+                            [label]="'Revert To'"
+                            [form]="shiftSetUpForm"
+                            [control]="'revert_shift_id'"
+                          ></app-select-box>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <app-time-box [label]="'From'" [form]="shiftSetUpForm" [control]="'ext_mid_break_time_in'"></app-time-box>
-                    </div>
-                    <div>
-                      <app-time-box [label]="'To'" [form]="shiftSetUpForm" [control]="'ext_mid_break_time_out'"></app-time-box>
-                    </div>
-                    <div class="d-flex align-items-center">
-                      <app-check-box [label]="'Specific Period'">
-                      </app-check-box>
+                  </div>
+                </div>
+              </app-sub-layout>
+
+              <app-sub-layout>
+                <div class="shift-card-wrapper">
+                  <div class="shift-header">Quarter Break</div>
+                  <div class="shift-card">
+                    <div
+                      formArrayName="qrt_break"
+                      class="form-col"
+                      *ngFor="let qrt of qrt_break.controls; let i = index"
+                    >
+                      <div [formGroup]="qrt" class="form-col">
+                        <div>
+                          <app-input-box
+                            [label]="'Quarter Break Name'"
+                            [form]="qrt"
+                            [control]="'qrt_break_title'"
+                          ></app-input-box>
+                        </div>
+                        <div>
+                          <app-time-box
+                            [label]="'From'"
+                            [form]="qrt"
+                            [control]="'qrt_break_time_in'"
+                          ></app-time-box>
+                        </div>
+                        <div>
+                          <app-time-box
+                            [label]="'To'"
+                            [form]="qrt"
+                            [control]="'qrt_break_time_out'"
+                          ></app-time-box>
+                        </div>
+                        <div>
+                          <app-check-box [color]="'blue'" [label]="'Tolerance'">
+                          </app-check-box>
+                        </div>
+                      </div>
                     </div>
                     <div class="form-col">
                       <div>
-                        <app-date-box [label]="'Period From'" [form]="shiftSetUpForm" [control]="'shift_revert_date_start'"></app-date-box>
+                        <app-input-box
+                          [label]="'Consecutive Late'"
+                          [form]="shiftSetUpForm"
+                          [control]="'consecutive_late'"
+                          [type]="'number'"
+                        ></app-input-box>
                       </div>
                       <div>
-                        <app-date-box [label]="'Period To'" [form]="shiftSetUpForm" [control]="'shift_revert_date_end'"></app-date-box>
+                        <app-input-box
+                          [label]="'Late Arrival Tolerance (min)'"
+                          [form]="shiftSetUpForm"
+                          [control]="'late_arrival_tolerance'"
+                          [type]="'number'"
+                        ></app-input-box>
                       </div>
                       <div>
-                        <app-select-box [label]="'Revert To'" [form]="shiftSetUpForm" [control]="'revert_shift_id'"></app-select-box>
+                        <app-input-box
+                          [label]="'Attendencec Tolerance (min)'"
+                          [form]="shiftSetUpForm"
+                          [control]="'attendance_tolerance'"
+                          [type]="'number'"
+                        ></app-input-box>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </app-sub-layout>
-
-            <app-sub-layout>
-              <div class="shift-card-wrapper">
-                <div class="shift-header">Quarter Break</div>
-                <div class="shift-card">
-                  <div formArrayName="qrt_break" class="form-col" *ngFor="let qrt of qrt_break.controls; let i=index;">
-                    <div [formGroup]="qrt" class="form-col">
-                    <div>
-                      <app-input-box
-                        [label]="'Quarter Break Name'"
-                        [form]="qrt"
-                        [control]="'qrt_break_title'"
-                      ></app-input-box>
-                    </div>
-                    <div>
-                      <app-time-box [label]="'From'" [form]="qrt" [control]="'qrt_break_time_in'" ></app-time-box>
-                    </div>
-                    <div>
-                      <app-time-box [label]="'To'" [form]="qrt" [control]="'qrt_break_time_out'"></app-time-box>
-                    </div>
-                    <div>
-                      <app-check-box [label]="'Tolerance'"> </app-check-box>
-                    </div>
-                  </div>
-                  </div>
-                  <div class="form-col">
-                    <div>
-                      <app-input-box
-                        [label]="'Consecutive Late'"
-                        [form]="shiftSetUpForm"
-                        [control]="'consecutive_late'"
-                        [type]="'number'"
-                      ></app-input-box>
-                    </div>
-                    <div>
-                      <app-input-box
-                        [label]="'Late Arrival Tolerance (min)'"
-                        [form]="shiftSetUpForm"
-                        [control]="'late_arrival_tolerance'"
-                        [type]="'number'"
-                      ></app-input-box>
-                    </div>
-                    <div>
-                      <app-input-box
-                        [label]="'Attendencec Tolerance (min)'"
-                        [form]="shiftSetUpForm"
-                        [control]="'attendance_tolerance'"
-                        [type]="'number'"
-                      ></app-input-box>
-                    </div>
-                  </div>
+              </app-sub-layout>
+            </div>
+            <!-- <div class="shift-setup-footer"></div> -->
+            <div class="calendar-footer justify-content-end">
+              <div class="modal-footer-button flex">
+                <div class="d-flex align-items-center">
+                  <app-check-box [color]="'black'" [label]="'Period'">
+                  </app-check-box>
                 </div>
+                <input
+                  *ngIf="!isUpdating"
+                  type="submit"
+                  class="btn-input"
+                  value="Submit"
+                />
+                <!-- <input *ngIf="isUpdating" type="submit" class="btn-input" value="Update" /> -->
+                <input
+                  *ngIf="isUpdating"
+                  type="submit"
+                  class="btn-input"
+                  value="Approve"
+                  (click)="approve()"
+                />
+                <input
+                  *ngIf="isUpdating"
+                  type="submit"
+                  class="btn-input"
+                  value="Disapprove"
+                  (click)="disApprove()"
+                />
+                <input
+                  *ngIf="isUpdating"
+                  type="submit"
+                  class="btn-input"
+                  value="Cancel"
+                  (click)="cancel()"
+                />
               </div>
-            </app-sub-layout>
-          </div>
-          <!-- <div class="shift-setup-footer"></div> -->
-          <div class="calendar-footer justify-content-end">
-            <div class="modal-footer-button flex">
-              <div class="d-flex align-items-center">
-                <app-check-box [label]="'Period'"> </app-check-box>
-              </div>
-              <input type="submit" class="btn-input" value="Submit" />
             </div>
           </div>
         </div>
-      </div>
-    </app-full-layout>
-    <app-full-layout>
-      <div class="pt-10">
-        <div class="table-header gradient-head flex justify-content-between">
-          <div class="heading">Shift list</div>
-          <div class="btn-options flex align-content-center"></div>
-        </div>
-        <div class="shift-setup">
-          <div class="shadow no-pad">
-            <app-shift-list
-            [data]="shiftArray"
-            (singleShiftId)="getSingleShift($event)"
-            ></app-shift-list>
+      </app-full-layout>
+      <app-full-layout>
+        <div class="pt-10">
+          <div class="table-header gradient-head flex justify-content-between">
+            <div class="heading">Shift list</div>
+            <div class="btn-options flex align-content-center"></div>
           </div>
-          <div class="shift-setup-footer"></div>
+          <div class="shift-setup">
+            <div class="shadow no-pad">
+              <app-shift-list
+                [data]="shiftArray"
+                (singleShiftId)="getSingleShift($event)"
+              ></app-shift-list>
+            </div>
+            <div class="shift-setup-footer"></div>
+          </div>
         </div>
-      </div>
-    </app-full-layout>
-  </div>
-</form>
+      </app-full-layout>
+    </div>
+  </form>
 </div>

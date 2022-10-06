@@ -4,7 +4,13 @@
       <div class="table-header gradient-head flex justify-content-between">
         <div class="heading">Roster</div>
         <div class="btn-options flex align-content-center">
-          <app-select-box></app-select-box>
+          <app-select-box
+          [label]="'Shifts'" [width]="'105px'" [height]="'20px'"
+            [name]="'employees'"
+            [hideLabel]="true"
+            [customClass]="['padding-top-3','carret_position_9']"
+          ></app-select-box>
+          
         </div>
       </div>
 
@@ -24,7 +30,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let nestedArray of reshapedData">
+              <tr *ngFor="let nestedArray of reshapedData; index">
                 <td *ngFor="let days of nestedArray" [ngStyle]="{ background:  getCheckingColor(days)}"
                 >
                   <table class="cal-cell">
@@ -50,8 +56,8 @@
 
                     <tr>
                       <td *ngIf="days.actual_shift_time_in">
-                        <span>In</span>{{days.days.actual_shift_time_in}}<span class="dash">-</span
-                        ><span>Out</span> {{days.actual_shift_time_out}}
+                        <span>In</span>{{days?.actual_shift_time_in}}<span class="dash">-</span
+                        ><span>Out</span> {{days?.actual_shift_time_out}}
                       </td>
                       <td>&nbsp;</td>
                     </tr>

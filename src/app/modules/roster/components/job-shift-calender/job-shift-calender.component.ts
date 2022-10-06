@@ -24,7 +24,8 @@ export class JobShiftCalenderComponent implements OnInit {
   weekDaysPreset = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   
   monthsNames = ['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  @Input() filters : any;
+  filters : any;
+  currentYearMonthsData : any;
 
   months = {
     'Jan' : '01',
@@ -44,6 +45,12 @@ export class JobShiftCalenderComponent implements OnInit {
   constructor(private calendar: CalendarService,public activeModal: NgbActiveModal,
     private customModal: ModalService , private holidayService : HolidayDataService , private appLocalStorage : AppLocalStorageService) { }
 
+  filterChange($event){
+    console.log('in job shift calendar',$event);
+    this.filters = $event;
+    const year = moment(this.currentDate).format('YYYY');
+    this.getHolidays(year);
+  }
   ngOnInit(): void {
 
       this.currentDate = moment();
@@ -58,20 +65,27 @@ export class JobShiftCalenderComponent implements OnInit {
       // this.currentYearData = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), null, this.weekDaysPreset);
       this.getCalendar(moment(this.currentDate).format('YYYY'))
       console.log(this.currentYearData);
-      
-    }
+  }
 
   
   holidaysHash = {};
   getCalendar(year){
     this.currentYearData = this.calendar.getCalendar(year, null, this.weekDaysPreset);
+    this.currentYearMonthsData = [...this.currentYearData];
     this.getHolidays(year);
   }
   async getHolidays(year){
     const params = {
       'client_id' : this.appLocalStorage.getClientId(),
-      'country_id' : 154 , 
-      'year' : year
+      'year' : year , 
+      "glob_mkt_id": this.filters.marketId,
+      "region_id": this.filters.clusterId,
+      "sub_region_id": this.filters.subClusterId,
+      "country_id": this.filters.countryId,
+      "state_id": this.filters.stateId,
+      "city_id": this.filters.cityId,
+      "loc_id": this.filters.branchId,
+      "department_id": this.filters.departmentId
     }
     const holidays = await this.holidayService.getHoliday(params);
     console.log('holidays' , holidays);
@@ -80,6 +94,7 @@ export class JobShiftCalenderComponent implements OnInit {
 
     this.holidaysArray = holidays["data"];
     this.holidaysHash = {};
+
     this.holidaysArray.forEach(holiday =>{
       const month = moment(holiday["start_date"]).format('MM');
       if(!this.holidaysHash[month]){
@@ -94,8 +109,11 @@ export class JobShiftCalenderComponent implements OnInit {
       
     });
     console.log('holidays Hash' , this.holidaysHash);
+    this.currentYearData = this.calendar.getCalendar(year, null, this.weekDaysPreset);
     this.currentYearData.forEach((month , monthIndex) =>{
 
+
+      
       
       let currentMonth = this.months[month.monthName];
       
@@ -103,7 +121,9 @@ export class JobShiftCalenderComponent implements OnInit {
       if(this.holidaysHash[currentMonth]){
         
         const monthHash = this.holidaysHash[currentMonth];
+        
         month.totalDaysInMonth.forEach((day , dayIndex) =>{
+          
           let key = '';
           if(day.date && day.date<=9){
             key = `${year}-${currentMonth}-0${day.date}`;
@@ -112,11 +132,18 @@ export class JobShiftCalenderComponent implements OnInit {
           }
           if(monthHash[key]){
             day = {...day , ...monthHash[key]}
+            
             this.currentYearData[monthIndex].totalDaysInMonth[dayIndex] = {...day , ...monthHash[key]};
+          }else{
+            day = {day : day.day , date : day.date};
+            
+            this.currentYearData[monthIndex].totalDaysInMonth[dayIndex] = {day : day.day , date : day.date};
           }
         });
+        
       }
     });
+    
 
     console.log('year Data' , this.currentYearData);
   }

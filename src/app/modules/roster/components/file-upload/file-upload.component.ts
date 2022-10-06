@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AvaliableShiftDialog } from '../../dialogs/avaliable-shift/avaliable-shift.dialog';
 import { CalenderSetupComponent } from '../../dialogs/calender-setup/calender-setup.component';
 import { DisclaimerDialog } from '../../dialogs/disclaimer/disclaimer.dialog';
 import { EmployeeShiftListComponent } from '../../dialogs/employee-shift-list/employee-shift-list.component';
@@ -29,5 +30,10 @@ export class FileUploadComponent implements OnInit {
   openCalendarsetup(){
     this.customModal.showFeaturedDialog(CalenderSetupComponent, "");
   }
- 
+  openAvaliable(){
+    this.customModal.showFeaturedDialog(AvaliableShiftDialog, "");
+  }
+  openlist(){
+    this.customModal.showFeaturedDialog(EmployeeShiftListComponent,"");
+  }
 }

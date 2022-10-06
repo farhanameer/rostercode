@@ -11,7 +11,7 @@
         readonly
         placeholder=" "
         [matDatepicker]="varIssueDate"
-        [ngStyle]="{ 'width': width }"
+        [ngStyle]="{ width: width }"
         [formControl]="form?.get(control)"
         #inputRef
       />
@@ -25,5 +25,8 @@
       <mat-datepicker #varIssueDate></mat-datepicker>
     </div>
   </div>
-  <span *ngIf="form?.get(control).errors?.required && form?.get(control).touched">required</span>
+  <span
+    *ngIf="form?.get(control).errors?.required && form?.get(control).touched"
+    >required</span
+  >
 </div>

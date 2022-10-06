@@ -44,14 +44,9 @@ export class ShiftRequestDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const paramss = {
-          screen_role: 'hr',
-          client_id: 48,
-          shift_id: 7,
-          action: 'approve',
-        };
+        
 
-        this.httpService.putDeleteDisapprovedById(paramss).subscribe(
+        this.httpService.putDeleteDisapprovedById(params).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';

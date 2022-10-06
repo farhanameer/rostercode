@@ -2,7 +2,7 @@
   <div class="comp-wrapper w-100">
     <input
       [type]="type"
-      [disabled]="isdisabled"
+      [attr.disabled]="isdisabled? true : null"
       [ngStyle]="{ width: width }"
       id="input-box"
       [formControl]="form?.get(control)"

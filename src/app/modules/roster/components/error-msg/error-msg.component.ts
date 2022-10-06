@@ -14,7 +14,6 @@ export class ErrorMsgComponent implements OnInit, OnChanges {
     console.log(this.form)
   }
 
-
   get controlErrors(){
     return this.form?.get(this.control).errors;
   }
