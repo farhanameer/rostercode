@@ -1,78 +1,82 @@
 <div class="modal-custom bg-white">
   <app-dialog-layout>
-      <div class="gradient-head flex justify-content-between">
-        <div class="heading">Overtime Hours Adjustment</div>
-        <div class="btn-options flex align-content-center">
-          <a (click)="activeModal.close('Close click')"
-            ><img src="assets/icons/ico-close.svg" alt=""
-          /></a>
-        </div>
+    <div class="gradient-head flex justify-content-between">
+      <div class="heading">Overtime Hours Adjustment</div>
+      <div class="btn-options flex align-content-center">
+        <a (click)="activeModal.close('Close click')"
+          ><img src="assets/icons/ico-close.svg" alt=""
+        /></a>
       </div>
-      <!-- Body -->
+    </div>
+    <!-- Body -->
 
-      <div class="user-list-employee pt-0">
-        <ul class="overtime-header">
-          <li>
-            <div class="user-img">
-              <img src="assets/images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: {{modelData.name}}</div>
-              <div class="heading-sm">Employee Code: {{modelData.empcode}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="overtime-form">
-        <div class="row m-0">
-          <div class="col-6">
-            <app-input-box
-              [label]="'Overtime Hours'"
-              [form]="overTimeHoursAdjustmentForm"
-              [control]="'hours'"
-            ></app-input-box>
+    <div class="user-list-employee pt-0">
+      <ul class="overtime-header">
+        <li>
+          <div class="user-img">
+            <img src="assets/images/img-dummy.png" alt="" />
           </div>
-          <div class="col-6">
-            <app-input-box
-              [label]="'Approved Hours'"
-              [form]="overTimeHoursAdjustmentForm"
-              [control]="'toApproveHours'"
-            ></app-input-box>
+          <div class="employee-detail">
+            <div class="heading-lg">Name: {{modelData.name}}</div>
+            <div class="heading-sm">Employee Code: {{modelData.empcode}}</div>
           </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="overtime-form">
+      <div class="row m-0">
+        <div class="col-6">
+          <app-input-box
+            [label]="'Overtime Hours'"
+            [form]="overTimeHoursAdjustmentForm"
+            [control]="'hours'"
+          ></app-input-box>
         </div>
-        <br />
-        <div class="row m-0">
-          <div class="col mb-3">
-            <app-input-box
-              [label]="'Comments'"
-              [form]="overTimeHoursAdjustmentForm"
-              [control]="'note'"
-              [width]="'100%'"
-            ></app-input-box>
-          </div>
+        <div class="col-6">
+          <app-input-box
+            [label]="'Approved Hours'"
+            [form]="overTimeHoursAdjustmentForm"
+            [control]="'toApproveHours'"
+          ></app-input-box>
         </div>
       </div>
-
-      <!-- footer -->
-
-      <div class="modal-custom-footer">
-        <div class="modal-footer-button flex">
-        
-          <input
-            type="button"
-            class="btn-input"
-            value="Submit"
-            (click)="submit()"
-          />
-          <input
-            type="button"
-            class="btn-input"
-            value="Cancel"
-            (click)="activeModal.close('Close click')"
-          />
+      <br />
+      <div class="row m-0">
+        <div class="col mb-3">
+          <app-input-box
+            [label]="'Comments'"
+            [form]="overTimeHoursAdjustmentForm"
+            [control]="'note'"
+            [width]="'100%'"
+          ></app-input-box>
         </div>
       </div>
-      
+    </div>
+
+    <!-- footer -->
+
+    <div class="modal-custom-footer">
+      <div class="clues">
+        <span> </span>
+        <span> </span>
+      </div>
+
+      <div class="modal-footer-button flex">
+        <input
+          type="button"
+          class="btn-input"
+          [disabled]="!this.overTimeHoursAdjustmentForm.valid"
+          value="Submit"
+          (click)="submit()"
+        />
+        <input
+          type="button"
+          class="btn-input"
+          value="Cancel"
+          (click)="activeModal.close('Close click')"
+        />
+      </div>
+    </div>
   </app-dialog-layout>
 </div>

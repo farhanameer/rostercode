@@ -23,73 +23,73 @@
         </li>
       </ul>
       <form [formGroup]="overTimeForm">
-      <div class="row m-0">
-        <div class="col-6">
-          <app-input-box
-            [label]="'Overtime (hrs)'"
-            [form]="overTimeForm"
-            [control]="'overTime'"
-            overTimeForm
-          ></app-input-box>
+        <div class="row m-0">
+          <div class="col-6">
+            <app-input-box
+              [label]="'Overtime (hrs)'"
+              [form]="overTimeForm"
+              [control]="'overTime'"
+              overTimeForm
+            ></app-input-box>
+          </div>
+          <div class="col-6">
+            <app-date-box
+              [label]="'Till Date'"
+              [form]="overTimeForm"
+              [control]="'tillDate'"
+            ></app-date-box>
+          </div>
         </div>
-        <div class="col-6">
-          <app-date-box
-            [label]="'Till Date'"
-            [form]="overTimeForm"
-            [control]="'tillDate'"
-          ></app-date-box>
+        <div class="row m-0">
+          <div class="col-6">
+            <p class="mt-2 font-weight-bold">Adjust Overtime In</p>
+          </div>
+          <div class="col-6"></div>
         </div>
-      </div>
-      <div class="row m-0">
-        <div class="col-6">
-          <p class="mt-2 font-weight-bold">Adjust Overtime In</p>
-        </div>
-        <div class="col-6"></div>
-      </div>
-      <div class="row m-2">
-        <div class="col-6 d-flex">
-          <input
-            type="radio"
-            value="cpl"
-            formControlName="type"
-            [checked]="valueType == 'cpl'"
-            (click)="overtimeType('cpl')"
-          />
-          <label>ADD CPL</label>
-        </div>
+        <div class="row m-2">
+          <div class="col-6 d-flex">
+            <input
+              type="radio"
+              value="cpl"
+              formControlName="type"
+              [checked]="valueType == 'cpl'"
+              (click)="overtimeType('cpl')"
+            />
+            <label class="ml-2">ADD CPL</label>
+          </div>
 
-        <div class="col-6 d-flex">
-          <input
-          [checked]="valueType == 'payment'"
-            type="radio"
-            value="payment"
-            formControlName="type" 
-          />
-          <label>Payment For Overtime</label>
+          <div class="col-6 d-flex">
+            <input
+              [checked]="valueType == 'payment'"
+              type="radio"
+              value="payment"
+              formControlName="type"
+            />
+            <label class="ml-2">Payment For Overtime</label>
+          </div>
         </div>
-      </div>
-      <div class="row m-0 mt-2">
-        <div class="col-6">
-          <app-input-box
-            [label]="'CPL'"
-            [width]="'212px'"
-            [isdisabled]="valueType=='payment'"
-            [form]="overTimeForm"
-            [control]="'cpl'"
-          ></app-input-box>
+        <div class="row m-0 mt-2">
+          <div class="col-6">
+            <app-input-box
+              [label]="'CPL'"
+              [width]="'212px'"
+              [isdisabled]="valueType=='payment'"
+              [form]="overTimeForm"
+              [control]="'cpl'"
+            ></app-input-box>
+          </div>
+          <div class="col-6">
+            <app-input-box
+              [form]="overTimeForm"
+              [control]="'payForHours'"
+              [label]="'Pay For Hours'"
+              [isdisabled]="valueType=='cpl'"
+              [form]="overTimeForm"
+              [control]="'givenHours'"
+            ></app-input-box>
+          </div>
         </div>
-        <div class="col-6">
-          <app-input-box
-            [form]="overTimeForm"
-            [control]="'payForHours'"
-            [label]="'Pay For Hours'"
-            [isdisabled]="valueType=='cpl'"
-            [form]="overTimeForm"
-            [control]="'givenHours'"
-          ></app-input-box>
-        </div>
-      </div>
-    </form>
+      </form>
     </div>
 
     <!-- footer -->
@@ -101,8 +101,6 @@
       </div>
 
       <div class="modal-footer-button flex">
-
-       
         <input
           type="button"
           class="btn-input"
