@@ -38,9 +38,10 @@ export class ShiftRequestComponent implements OnInit {
   }
 
   shiftRequestForm=this.fb.group({
-    shiftType:["",Validators.required],
+    shift_id:["",Validators.required],
     shiftName:["",Validators.required],
-    from:["",Validators.required],
+    start_date:["",Validators.required],
+    end_date:["",Validators.required],
     comments:["",Validators.required]
   })
 
