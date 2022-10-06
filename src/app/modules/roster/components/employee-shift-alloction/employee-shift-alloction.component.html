@@ -12,20 +12,24 @@
             <div class="shift-card">
               <div class="form-col p-20">
                 <div>
-                  <app-select-box [label]="'Shift Name'" [form]="form" [control]="''"></app-select-box>
+                  <app-select-box [label]="'Shift Name'" [form]="form" [control]="'shift_id'"></app-select-box>
                 </div>
                 <div>
                   <app-date-box
                     [label]="'Shift Period Start Date'"
+                    [form]="form"
+                    [control]="'start_date'"
                   ></app-date-box>
                 </div>
                 <div>
                   <app-date-box
                     [label]="'Shift Period End Date'"
+                    [form]="form"
+                    [control]="'end_date'"
                   ></app-date-box>
                 </div>
                 <div class="row align-content-center">
-                  <app-check-box [label]="'Set as Default'"></app-check-box>
+                  <app-check-box [label]="'Set as Default'" [form]="form" [control]="'set_default'"></app-check-box>
                 </div>
               </div>
             </div>

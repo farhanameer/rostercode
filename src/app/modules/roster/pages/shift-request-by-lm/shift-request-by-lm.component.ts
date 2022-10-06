@@ -44,7 +44,7 @@ export class ShiftRequestByLmComponent implements OnInit {
     this.filters = $event;
   }
 
-  submit(){
+  async submit(){
     // console.warn(this.shiftRequestLMform.value)
     const body = {
       "screen_role": "lm",
@@ -69,7 +69,22 @@ export class ShiftRequestByLmComponent implements OnInit {
       "desg_id": -1,
       "emp_id": -1
     }
-    this.insertShift(body);
+    await this.insertShift(body);
+    await this.getShiftList();
+
+    this.shiftTypeArray = [];
+    this.getShiftTypes();
+
+    this.resetForm();
+
+  }
+
+  resetForm(){
+    console.log('form Cleared');
+    this.shiftRequestLMform.markAsPristine();
+    this.shiftRequestLMform.markAsUntouched();
+    this.shiftRequestLMform.reset();
+    console.log(this.shiftRequestLMform.value);
   }
 
   async insertShift(body){

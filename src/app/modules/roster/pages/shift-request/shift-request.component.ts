@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./shift-request.component.css']
 })
 export class ShiftRequestComponent implements OnInit {
-
+  
   constructor(private fb:FormBuilder , private shiftRequestService : ShiftRequestDataService) { }
 
   shiftTypeArray : any;
@@ -38,10 +38,9 @@ export class ShiftRequestComponent implements OnInit {
   }
 
   shiftRequestForm=this.fb.group({
-    shift_id:["",Validators.required],
+    shiftType:["",Validators.required],
     shiftName:["",Validators.required],
-    start_date:["",Validators.required],
-    end_date:["",Validators.required],
+    from:["",Validators.required],
     comments:["",Validators.required]
   })
 

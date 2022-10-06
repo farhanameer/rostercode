@@ -7,7 +7,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./employee-shift-alloction.component.css'],
 })
 export class EmployeeShiftAlloctionComponent implements OnInit {
+
+  
+  @Input() form: FormGroup
+  
   constructor() {}
-  @Input() form : any;
+  
+
   ngOnInit(): void {}
 }
