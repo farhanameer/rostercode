@@ -57,25 +57,22 @@
       <!-- footer -->
 
       <div class="modal-custom-footer">
-        <div class="clues">
-          <span> </span>
-          <span> </span>
+        <div class="modal-footer-button flex">
+        
+          <input
+            type="button"
+            class="btn-input"
+            value="Submit"
+            (click)="submit()"
+          />
+          <input
+            type="button"
+            class="btn-input"
+            value="Cancel"
+            (click)="activeModal.close('Close click')"
+          />
         </div>
       </div>
-      <div class="modal-footer-button flex">
-        
-        <input
-          type="button"
-          class="btn-input"
-          value="Submit"
-          (click)="submit()"
-        />
-        <input
-          type="button"
-          class="btn-input"
-          value="Cancel"
-          (click)="activeModal.close('Close click')"
-        />
-      </div>
+      
   </app-dialog-layout>
 </div>
