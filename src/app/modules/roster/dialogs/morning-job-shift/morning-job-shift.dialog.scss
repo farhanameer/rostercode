@@ -1,6 +1,6 @@
 .custom-week {
   text-align: center;
-  height: 15px;
+  height: 18px;
   width: 80px;
   background-color: #fb887a;
   color: white;
@@ -13,6 +13,7 @@
   color: white;
   text-align: center;
   align-self: center;
+  border-radius: 2px;
 }
 
 .c-gap {
@@ -25,4 +26,20 @@
   height: 20px;
   width: 105px;
   border: 1px solid #dbdcdf;
+  border-radius: 4px;
+}
+.c-width-li {
+  width: 240px;
+}
+.c-ul-wid-gap {
+  width: 510px;
+  gap: 10px;
+  height: 250px;
+  overflow: auto;
+}
+.w-530 {
+  width: 530px;
+}
+.c-pt-2 {
+  padding: 2px;
 }

@@ -24,16 +24,9 @@ export class FileUploadComponent implements OnInit {
     this.customModal.showFeaturedDialog(DisclaimerDialog, "");
   }
   
-  openEvent(){
-    this.customModal.showFeaturedDialog(EventComponent, "");
-  }
-  openCalendarsetup(){
-    this.customModal.showFeaturedDialog(CalenderSetupComponent, "");
-  }
+ 
   openAvaliable(){
     this.customModal.showFeaturedDialog(AvaliableShiftDialog, "");
   }
-  openlist(){
-    this.customModal.showFeaturedDialog(EmployeeShiftListComponent,"");
-  }
+  
 }
