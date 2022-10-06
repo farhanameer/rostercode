@@ -37,7 +37,7 @@
           <!-- <div class="shift-setup-footer"></div> -->
           <div class="calendar-footer justify-content-end">
             <div class="modal-footer-button flex">
-              <input type="button" class="btn-input" [disabled]="!this.shiftRequestLMform.valid" value="Submit" />
+              <input type="button" class="btn-input"  value="Submit" [disabled]="!this.shiftRequestLMform.valid"  (click)="submit()"/>
             </div>
           </div>
         </div>
