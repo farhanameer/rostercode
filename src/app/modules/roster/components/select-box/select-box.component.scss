@@ -1,14 +1,26 @@
 .agt-module {
+
+  .required > .label , .required > .select-selected {
+    color: #F44437;
+    border-color: #F44437;
+  }
+  .required > .select-selected:after{
+    border-color: #F44437 transparent transparent transparent;
+  }
   .select-wrapper {
     position: relative;
     font-family: Arial;
+  }
+  .text-error{
+    color : #F44437
   }
 
   .label{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 90px;
+    // max-width: 90px;
+    max-width: calc(100% - 12px);
     padding-right: 15px;
   }
 
