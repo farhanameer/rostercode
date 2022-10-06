@@ -33,8 +33,6 @@ export class SingleShiftAllocationDialog implements OnInit {
     this.singleShiftForm=this.fb.group({
       date:["",Validators.required],
       allocateShift:["",Validators.required]
-
-
     })
   }
 
@@ -59,7 +57,6 @@ export class SingleShiftAllocationDialog implements OnInit {
       "rosterDate" : this.singleShiftForm.value.date,
       "additional_shift_id" : this.singleShiftForm.value.allocateShift
     }
-  debugger;
     this.assignShift(body);
   }
 
