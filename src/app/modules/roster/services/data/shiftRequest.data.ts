@@ -246,7 +246,7 @@ export class ShiftRequestDataService {
           desg_id: -1,
           emp_id: -1,
         };
-        this.httpService.lmInsertShift(body2).subscribe(
+        this.httpService.lmInsertShift(body).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';
@@ -335,7 +335,6 @@ export class ShiftRequestDataService {
           screen_role: screenRole,
           department_id: 16,
         };
-        debugger;
         this.httpService.getDefaultList(paramss).subscribe(
           (data) => {
             response.data = data;

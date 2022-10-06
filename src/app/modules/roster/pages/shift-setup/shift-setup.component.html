@@ -275,8 +275,23 @@
                   (click)="cancel()"
                 />
               </div>
+            
+          </div>
+          <!-- <div class="shift-setup-footer"></div> -->
+          <div class="calendar-footer justify-content-end">
+            <div class="modal-footer-button flex">
+              <div class="d-flex align-items-center">
+                <app-check-box [label]="'Period'"> </app-check-box>
+              </div>
+              <input *ngIf="!isUpdating" type="submit" class="btn-input" [disabled]="!this.shiftSetUpForm.valid" value="Submit" />
+              <!-- <input *ngIf="isUpdating" type="submit" class="btn-input" value="Update" /> -->
+              <input *ngIf="isUpdating" type="submit" class="btn-input" value="Approve" (click)="approve()" />
+              <input *ngIf="isUpdating" type="submit" class="btn-input" value="Disapprove" (click)="disApprove()" />
+              <input *ngIf="isUpdating" type="submit" class="btn-input" value="Cancel" (click)="cancel()" />
             </div>
           </div>
+        </div>
+     
         </div>
       </app-full-layout>
       <app-full-layout>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EmployeeShiftAlloctionComponent implements OnInit {
   constructor() {}
-
+  @Input() form : any;
   ngOnInit(): void {}
 }
