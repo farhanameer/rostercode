@@ -66,6 +66,7 @@
         <input
           type="button"
           class="btn-input"
+          [disabled]="!this.overTimeHoursAdjustmentForm.valid"
           value="Submit"
           (click)="submit()"
         />

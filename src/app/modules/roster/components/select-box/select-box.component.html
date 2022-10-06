@@ -1,5 +1,5 @@
 <div class="agt-module">
-  <div class="comp-wrapper w-h-260" [ngStyle]="{ 'width': width , 'height' : height }" >
+  <div #wrapperSelect class="comp-wrapper w-h-260 required" [class.required]="form?.get(control)?.errors?.required && form?.get(control)?.touched" [ngStyle]="{ 'width': width , 'height' : height }" >
     
       <!-- <input type="text"> -->
       
@@ -33,5 +33,5 @@
       <div>Volvo</div> -->
     </div>
   </div>
-  <span *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched">required</span>
+  <span *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched" class="text-right d-block text-error">required</span>
 </div>

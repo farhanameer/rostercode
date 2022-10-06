@@ -4,8 +4,8 @@
 </div>
  -->
 <div class="agt-module w-100">
-  <div class="date-wrapper w-100">
-    <div class="comp-wrapper date-field toggle-date w-100">
+  <div class="date-wrapper w-100" >
+    <div class="comp-wrapper date-field toggle-date"  [class.required]="form?.get(control)?.errors?.required && form?.get(control)?.touched" [ngStyle]="{ 'width': width , 'height' : height }">
       <input
         matInput
         readonly
@@ -26,6 +26,7 @@
     </div>
   </div>
   <span
+  class="text-right text-error d-block"
     *ngIf="form?.get(control).errors?.required && form?.get(control).touched"
     >required</span
   >

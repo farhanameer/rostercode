@@ -15,10 +15,10 @@ export class ShiftAllocationComponent implements OnInit {
   }
 
   shiftAllocationForm=this.fb.group({
-    shiftName:["",Validators.required],
-    shiftPeriodStartDate:["",Validators.required],
-    shiftPeriodEndDate:["",Validators.required],
-    setAsDefualt:["",Validators.required]
+    shift_id:["",Validators.required],
+    start_date:["",Validators.required],
+    end_date:["",Validators.required],
+    set_default:["",Validators.required]
   })
 
   uploadForm=this.fb.group({
