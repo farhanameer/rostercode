@@ -15,7 +15,7 @@
         [formControl]="form?.get(control)"
         #inputRef
       />
-      <p class="label" [class.agt-float-label]="inputRef?.value != ''">
+      <p class="label" [class.d-none]="hideLabel && inputRef?.value !=''" [class.agt-float-label]="inputRef?.value != ''">
         {{ label }}
       </p>
       <mat-datepicker-toggle
@@ -27,7 +27,7 @@
   </div>
   <span
   class="text-right text-error d-block"
-    *ngIf="form?.get(control).errors?.required && form?.get(control).touched"
+    *ngIf="!hideLabel && form?.get(control).errors?.required && form?.get(control).touched"
     >required</span
   >
 </div>

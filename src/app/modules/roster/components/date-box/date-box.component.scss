@@ -2,7 +2,7 @@
 
   .comp-wrapper {
     width: 260px;
-    height: 26px ;
+    height: 26px;
   }
   .date-wrapper input{
     height: 100%;
@@ -30,7 +30,7 @@
 
     .mat-datepicker-toggle {
       .mat-button-base {
-        height: 24px !important;
+        
         display: flex !important;
         justify-content: flex-end !important;
         align-items: center !important;
@@ -55,7 +55,7 @@
     position: static !important;
     padding: 0 3px 0 10px !important;
     text-align: right !important;
-    height: 24px;
+    
   }
 
   .mat-datepicker-toggle .mat-button-base .mat-datepicker-toggle-default-icon {
