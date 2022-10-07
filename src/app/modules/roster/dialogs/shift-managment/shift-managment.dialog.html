@@ -1,7 +1,9 @@
 <app-dialog-layout>
   <div class="modal-custom modal-lg bg-white modal-center">
     <div class="gradient-head flex justify-content-between">
-      <div class="heading">Shift Management ({{dates.start}} - {{dates.end}})</div>
+      <div class="heading">
+        Shift Management ({{dates.start}} - {{dates.end}})
+      </div>
       <div class="btn-options flex align-content-center">
         <a
           ><img
@@ -33,13 +35,8 @@
     </div>
     <!-- footer -->
     <div>
-      <app-sort-by-date *ngIf="display"
-      [dates]=dates
-      ></app-sort-by-date>
-      <app-sort-by-employee *ngIf="!display"
-      [dates]=dates
-      >
-
+      <app-sort-by-date *ngIf="display" [dates]="dates"></app-sort-by-date>
+      <app-sort-by-employee *ngIf="!display" [dates]="dates">
       </app-sort-by-employee>
     </div>
     <div class="modal-custom-footer">

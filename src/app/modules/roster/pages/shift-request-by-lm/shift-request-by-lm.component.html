@@ -14,21 +14,42 @@
               <div class="shift-card">
                 <div class="form-col">
                   <div>
-                    <app-select-box [label]="'Shift Type'" [form]="shiftRequestLMform" [control]="'shift_id'"></app-select-box>
+                    <app-select-box
+                      [label]="'Shift Type'"
+                      [form]="shiftRequestLMform"
+                      [control]="'shift_id'"
+                    ></app-select-box>
                   </div>
                   <div>
-                    <app-select-box [label]="'Shift Name'" [form]="shiftRequestLMform" [control]="'shift_name'"></app-select-box>
+                    <app-select-box
+                      [label]="'Shift Name'"
+                      [form]="shiftRequestLMform"
+                      [control]="'shift_name'"
+                    ></app-select-box>
                   </div>
                   <div>
-                    <app-time-box [label]="'From'" [form]="shiftRequestLMform" [control]="'start_date'"></app-time-box>
+                    <app-time-box
+                      [label]="'From'"
+                      [form]="shiftRequestLMform"
+                      [control]="'start_date'"
+                    ></app-time-box>
                   </div>
                   <div>
-                    <app-time-box [label]="'To'" [form]="shiftRequestLMform" [control]="'end_date'"></app-time-box>
+                    <app-time-box
+                      [label]="'To'"
+                      [form]="shiftRequestLMform"
+                      [control]="'end_date'"
+                    ></app-time-box>
                   </div>
                 </div>
                 <div class="form-col pt10-0">
                   <div>
-                    <app-input-box [label]="'comments'" [form]="shiftRequestLMform" [control]="'lm_comment'"></app-input-box>
+                    <app-input-box
+                      [width]="'1149px'"
+                      [label]="'comments'"
+                      [form]="shiftRequestLMform"
+                      [control]="'lm_comment'"
+                    ></app-input-box>
                   </div>
                 </div>
               </div>
@@ -37,7 +58,13 @@
           <!-- <div class="shift-setup-footer"></div> -->
           <div class="calendar-footer justify-content-end">
             <div class="modal-footer-button flex">
-              <input type="button" class="btn-input"  value="Submit" [disabled]="!this.shiftRequestLMform.valid"  (click)="submit()"/>
+              <input
+                type="button"
+                class="btn-input"
+                value="Submit"
+                [disabled]="!this.shiftRequestLMform.valid"
+                (click)="submit()"
+              />
             </div>
           </div>
         </div>

@@ -15,9 +15,9 @@ export class EmployeeShiftManagmentDialog implements OnInit {
 @Input() modelData : any;
 
 view:string="weekend";
-change:string;
-additional:string;
-weekend:string;
+// change:string;
+// additional:string;
+// weekend:string;
 submitted : boolean = false;
 
   constructor(public activeModal: NgbActiveModal ,private customModal:ModalService ) { }
@@ -44,7 +44,11 @@ submitted : boolean = false;
     }, 200);
   }
 
-  
+ 
+
+radioChange(val: string) {
+    this.view = val;
+  }
 
 
 }

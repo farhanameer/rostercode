@@ -27,13 +27,23 @@
       <div>Additional Shifts</div>
       &nbsp;
       <div style="padding: 30px">
-        <input type="radio" (click)="view = 'shift'" />
+        <input
+          type="radio"
+          value="shift"
+          name="additional"
+          (click)="radioChange('shift')"
+        />
         &nbsp;
         <label>Additional Shift</label>
       </div>
       &nbsp;
       <div>
-        <input type="radio" (click)="view = 'hours'" />
+        <input
+          name="additional"
+          type="radio"
+          value="hours"
+          (click)="radioChange('hours')"
+        />
         &nbsp;
         <label>Additional Hours</label>
       </div>
