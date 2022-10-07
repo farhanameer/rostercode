@@ -246,7 +246,7 @@ export class ShiftRequestDataService {
           desg_id: -1,
           emp_id: -1,
         };
-        this.httpService.lmInsertShift(body2).subscribe(
+        this.httpService.lmInsertShift(body).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';
@@ -326,25 +326,15 @@ export class ShiftRequestDataService {
     });
   }
 
-  getDefaultList(params = {}) {
+  getDefaultList(screenRole) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
         const paramss = {
           client_id: 48,
-          screen_role: 'lm',
-          glob_mkt_id: -1,
-          region_id: -1,
-          sub_region_id: -1,
-          country_id: 154,
-          state_id: 2723,
-          city_id: -1,
-          branch_id: -1,
+          screen_role: screenRole,
           department_id: 16,
-          desg_id: -1,
-          emp_id: -1,
         };
-
         this.httpService.getDefaultList(paramss).subscribe(
           (data) => {
             response.data = data;

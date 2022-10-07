@@ -2,7 +2,7 @@ import { AppLocalStorageService } from './../../../../services/app-local-storage
 import { EmployeeRosterDataService } from './../../services/data/employeeAttendance.data';
 import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MarkWeekendComponent } from '../../components/mark-weekend/mark-weekend.component';
 import { RosterService } from '../../services/data/rosterView.data.service';
@@ -37,7 +37,8 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     private shiftDataService: ShiftRequestDataService,
     private employeeroster: EmployeeRosterDataService,
     private shiftByDepartmentManager : ShiftRequestDataService,
-    private appLocalStorage: AppLocalStorageService) { }
+    private appLocalStorage: AppLocalStorageService,
+    private shiftRequest: ShiftRequestDataService) { }
   
   
   ngOnChanges(changes: SimpleChanges): void {
@@ -73,11 +74,11 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   ngOnInit(): void {
 
     this.swipeShiftForm=this.fb.group({
-      employee_id:[''],
-      assigned_shift:[''],
-      assigned_roster_date:[''],
+      employee_id:["",Validators.required],
+      assigned_shift:["",Validators.required],
+      assigned_roster_date:["",Validators.required],
       replaceWithEmployeeId:[null],
-      swipeShift:['']
+      swipeShift:["",Validators.required]
     })
     this.getDefaultList();
     this.getEmployeeList({
@@ -92,13 +93,13 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     const res = await this.rosterService.swapShift(body);
     
   }
-
+  screenRole = "lm";
   async getDefaultList() {
     const params = {
       client_id: this.appLocalStorage.getClientId(),
       line_manager_id: this.appLocalStorage.getUserId(),
     }
-    const res = await this.shiftByDepartmentManager.getShiftByDepartmentManager(params);
+    const res = await this.shiftRequest.getDefaultList(this.screenRole);
     let swipeData = res['data'].payload;
     //this.shifts = res['data'].payload;
 
@@ -166,4 +167,13 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     }
     this.getAssignedShift(params , true);
   }
+
+  get validateAForm(): any {
+    return this.swipeShiftForm.controls;
+  }
+  submit(){
+    console.warn(this.swipeShiftForm.value)
+  }
+
+
 }

@@ -1,23 +1,32 @@
+<form [formGroup]="shiftRequestLMform">
 <div class="wrapper">
   <div class="container">
     <div class="header-menu"></div>
     <app-full-layout>
       <div>
         <div>
-          <app-location-and-designation-filter>
+          <app-location-and-designation-filter (filtersChange)="filterChange($event)">
             <div class="heading">Shift Request</div>
           </app-location-and-designation-filter>
         </div>
         <div class="shift-setup">
-          <div class="shadow">
+          <div class="shadow pb0-10">
             <app-sub-layout>
               <div class="shift-card">
                 <div class="form-col">
                   <div>
-                    <app-select-box [label]="'Shift Type'" [form]="shiftRequestLMform" [control]="'shift_id'"></app-select-box>
+                    <app-select-box 
+                      [label]="'Shift Type'" 
+                      [form]="shiftRequestLMform" 
+                      [control]="'shift_id'"
+                      [data]="shiftTypeArray"></app-select-box>
                   </div>
                   <div>
-                    <app-select-box [label]="'Shift Name'" [form]="shiftRequestLMform" [control]="'shift_name'"></app-select-box>
+                    <app-input-box 
+                      [label]="'Shift Name'" 
+                      [form]="shiftRequestLMform" 
+                      [control]="'shift_name'"
+                      ></app-input-box>
                   </div>
                   <div>
                     <app-time-box [label]="'From'" [form]="shiftRequestLMform" [control]="'start_date'"></app-time-box>
@@ -26,7 +35,7 @@
                     <app-time-box [label]="'To'" [form]="shiftRequestLMform" [control]="'end_date'"></app-time-box>
                   </div>
                 </div>
-                <div class="form-col">
+                <div class="form-col pt10-0">
                   <div>
                     <app-input-box [label]="'comments'" [form]="shiftRequestLMform" [control]="'lm_comment'"></app-input-box>
                   </div>
@@ -37,7 +46,7 @@
           <!-- <div class="shift-setup-footer"></div> -->
           <div class="calendar-footer justify-content-end">
             <div class="modal-footer-button flex">
-              <input type="button" class="btn-input" [disabled]="!this.shiftRequestLMform.valid" value="Submit" />
+              <input type="button" class="btn-input"  value="Submit" [disabled]="!this.shiftRequestLMform.valid"  (click)="submit()"/>
             </div>
           </div>
         </div>
@@ -51,7 +60,7 @@
         </div>
         <div class="shift-setup">
           <div class="shadow no-pad">
-            <app-shift-list></app-shift-list>
+            <app-shift-list [data] = "shiftsArray"></app-shift-list>
           </div>
           <div class="shift-setup-footer"></div>
         </div>
@@ -59,3 +68,4 @@
     </app-full-layout>
   </div>
 </div>
+</form>

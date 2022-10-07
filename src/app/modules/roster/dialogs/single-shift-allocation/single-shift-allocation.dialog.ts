@@ -1,3 +1,4 @@
+import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { RosterService } from './../../services/data/rosterView.data.service';
 import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -15,7 +16,9 @@ export class SingleShiftAllocationDialog implements OnInit {
 
   singleShiftForm: FormGroup;
   submitted : boolean = false;
-
+  shiftsArray: any;
+  shiftNameArray: any;
+  screenRole = 'lm';
   @Input() data;
 
   shiftAllocate :any;
@@ -25,7 +28,8 @@ export class SingleShiftAllocationDialog implements OnInit {
     private employeeShiftDataService: EmployeeShiftDataService,
     private fb: FormBuilder,
     private appLocalStorage : AppLocalStorageService,
-    private rosterService : RosterService
+    private rosterService : RosterService,
+    private shiftRequest: ShiftRequestDataService
   ) { }
 
   ngOnInit(): void {
@@ -33,13 +37,28 @@ export class SingleShiftAllocationDialog implements OnInit {
     this.singleShiftForm=this.fb.group({
       date:["",Validators.required],
       allocateShift:["",Validators.required]
-
-
     })
   }
 
+  
   async getShiftDropdown() {
-    this.shiftAllocate = <Array<any>>(await this.employeeShiftDataService.getEmployeeShift({}));
+    // this.shiftAllocate = <Array<any>>(await this.shiftRequest.getDefaultList(this.screenRole));
+    const data = await this.shiftRequest.getDefaultList(this.screenRole);
+    let shifts = data["data"]["payload"];
+    if(!Array.isArray(shifts)){
+      console.log('error occured');
+    }
+    this.shiftsArray = shifts;
+
+    const shiftName = [];
+    shifts.forEach(shift => {
+      shiftName.push({
+        id: shift.shift_type_id,
+        name: shift.name
+      })
+    });
+    this.shiftNameArray = shiftName;
+    debugger;
   }
 
 
@@ -59,13 +78,12 @@ export class SingleShiftAllocationDialog implements OnInit {
       "rosterDate" : this.singleShiftForm.value.date,
       "additional_shift_id" : this.singleShiftForm.value.allocateShift
     }
-  debugger;
     this.assignShift(body);
   }
 
   async assignShift(body){
     const res = await this.rosterService.assignAddtionalShift(body);
-    debugger;
+    
   }  
 
 }
