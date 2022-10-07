@@ -37,7 +37,8 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     private shiftDataService: ShiftRequestDataService,
     private employeeroster: EmployeeRosterDataService,
     private shiftByDepartmentManager : ShiftRequestDataService,
-    private appLocalStorage: AppLocalStorageService) { }
+    private appLocalStorage: AppLocalStorageService,
+    private shiftRequest: ShiftRequestDataService) { }
   
   
   ngOnChanges(changes: SimpleChanges): void {
@@ -92,13 +93,13 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     const res = await this.rosterService.swapShift(body);
     
   }
-
+  screenRole = "lm";
   async getDefaultList() {
     const params = {
       client_id: this.appLocalStorage.getClientId(),
       line_manager_id: this.appLocalStorage.getUserId(),
     }
-    const res = await this.shiftByDepartmentManager.getShiftByDepartmentManager(params);
+    const res = await this.shiftRequest.getDefaultList(this.screenRole);
     let swipeData = res['data'].payload;
     //this.shifts = res['data'].payload;
 

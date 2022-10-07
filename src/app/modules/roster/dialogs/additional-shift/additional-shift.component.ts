@@ -24,7 +24,7 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
   employeesName : any=[];
   assignedEmployeeShift : any;
   selectedEmployeeId: any;
-
+  screenRole = 'lm';
   additionalShiftForm:FormGroup
   additionalHoursForm:FormGroup
   constructor(public activeModal: NgbActiveModal ,
@@ -90,7 +90,7 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
   }
 
   async getDefaultList() {
-    const res = await this.shiftRequestDataService.getDefaultList();
+    const res = await this.shiftRequestDataService.getDefaultList(this.screenRole);
     this.shifts = res['data'].payload;
   }
   
