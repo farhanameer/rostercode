@@ -326,15 +326,20 @@ export class ShiftRequestDataService {
     });
   }
 
-  getDefaultList(screenRole) {
+  getDefaultList(screenRole , filters = null) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const paramss = {
-          client_id: 48,
-          screen_role: screenRole,
-          department_id: 16,
+        let paramss = {
+          client_id: this.appLocalStorage.getClientId(),
+          screen_role: screenRole
         };
+        if(screenRole == 'lm'){
+          paramss["department_id"] = 16;
+        }
+        if(filters){
+          paramss = {...paramss , ...filters}
+        }
         this.httpService.getDefaultList(paramss).subscribe(
           (data) => {
             response.data = data;

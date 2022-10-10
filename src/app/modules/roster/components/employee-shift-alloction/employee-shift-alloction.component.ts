@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,8 +9,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EmployeeShiftAlloctionComponent implements OnInit {
 
   
-  @Input() form: FormGroup
-  
+  @Input() form: FormGroup;
+  @Input() shifts : any;
+  @Output() filterSelection : EventEmitter<any> = new EventEmitter();
+  @Output() selectedShift : EventEmitter<any> = new EventEmitter();
+  filtersChanged(filters){
+    this.filterSelection.emit(filters)
+  }
+
+  shiftSelection(shift){
+    this.selectedShift.emit(shift);
+  }
   constructor() {}
   
 

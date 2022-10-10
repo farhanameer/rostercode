@@ -11,6 +11,7 @@ import { ModalService } from '../../services/modal/modal.service';
 export class EmployeeShiftCardComponent implements OnInit {
 
   @Input() data : any;
+  @Input() dayName : any;
   @Output() itemDropped : EventEmitter<any> = new EventEmitter();
   constructor(public activeModal: NgbActiveModal,
     private customModal: ModalService) { }

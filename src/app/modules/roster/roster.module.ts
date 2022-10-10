@@ -78,6 +78,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragAndDropComponent } from './components/drag-drop/drag-drop.component';
 
 
 
@@ -144,6 +145,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     CalenderSetupComponent,
     LocationAndDesignationFilterComponent,
     ShiftRequestByLmComponent,
+    DragAndDropComponent
     
 
    

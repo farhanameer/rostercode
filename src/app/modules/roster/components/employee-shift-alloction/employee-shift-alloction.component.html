@@ -3,7 +3,9 @@
     <app-full-layout>
       <div>
         <div>
-          <app-location-and-designation-filter>
+          <app-location-and-designation-filter
+          (filtersChange)="filtersChanged($event)"
+          >
             <div class="heading">Shift Allocation</div>
           </app-location-and-designation-filter>
         </div>
@@ -12,7 +14,11 @@
             <div class="shift-card">
               <div class="form-col p-20">
                 <div>
-                  <app-select-box [label]="'Shift Name'" [form]="form" [control]="'shift_id'"></app-select-box>
+                  <app-select-box [label]="'Shift Name'" [form]="form" 
+                  [control]="'shift_id'"
+                  [data]="shifts"
+                  (selectionChange)="shiftSelection($event)"
+                  ></app-select-box>
                 </div>
                 <div>
                   <app-date-box

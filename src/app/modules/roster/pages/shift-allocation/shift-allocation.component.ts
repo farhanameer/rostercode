@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { ShiftRequestDataService } from '../../services/data/shiftRequest.data';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { RosterService } from '../../services/data/rosterView.data.service';
+import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 
 @Component({
   selector: 'app-shift-allocation',
@@ -9,11 +13,58 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class ShiftAllocationComponent implements OnInit {
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder , private shiftRequestService : ShiftRequestDataService , 
+    private rosterViewService : RosterService , private appLocalStorage : AppLocalStorageService) { }
 
+  filters : any = {
+    glob_mkt_id : -1 , 
+    region_id : -1,
+    sub_region_id : -1,
+    country_id : -1,
+    state_id : -1,
+    city_id : -1,
+    branch_id : -1
+  };
   ngOnInit(): void {
+    this.getShifts();
+    this.getEmployees();
   }
 
+  shiftsArray=[];
+  filtersChanged(selectedFilters){
+    console.log('in shift allocation screen',selectedFilters);
+    this.filters.glob_mkt_id = selectedFilters.marketId;
+    this.filters.region_id = selectedFilters.clusterId;
+    this.filters.sub_region_id = selectedFilters.subClusterId;
+    this.filters.country_id = selectedFilters.countryId;
+    this.filters.state_id = selectedFilters.stateId;
+    this.filters.city_id = selectedFilters.cityId;
+    this.filters.branch_id = selectedFilters.branchId;
+  }
+  async getShifts(){
+    const shifts = await this.shiftRequestService.getDefaultList('lm' , this.filters);
+    console.log('shift request being get' , shifts);
+
+    if(!shifts["status"]) return; //posible error message
+    if(!shifts["data"]["status"]) return; //posible error message
+    this.shiftsArray = shifts["data"]["payload"];
+  }
+  shiftSelected(shift){
+    console.log('selected shift data in shift allocation',shift);
+  }
+  async getEmployees(){
+    const employee = await this.rosterViewService.getEmployeeList({
+      client_id : this.appLocalStorage.getClientId(),
+      department_id : 16 ,
+      username : "waqas.nisar@people.com.pk",
+      dept_id : this.appLocalStorage.getUserId()
+    });
+
+    console.log('employees' , employee);
+    if(!employee["status"]) return; //possible error;
+    this.employees = employee["data"]["payload"];
+  }
+  creatShiftEmployees:any = [];
   shiftAllocationForm=this.fb.group({
     shift_id:["",Validators.required],
     start_date:["",Validators.required],
@@ -38,154 +89,6 @@ export class ShiftAllocationComponent implements OnInit {
   get validateForm(): any {
     return this.uploadForm.controls
   }
-
-  employees = [
-    {
-      id : 1 , 
-      name : "Michael", 
-      number : 2563
-    } ,
-    {
-      id : 2 , 
-      name : "Michael 1", 
-      number : 25631
-    },{
-      id : 3 , 
-      name : "Michael 3", 
-      number : 25633
-    }
-    ,{
-      id : 14 , 
-      name : "Michael4", 
-      number : 25634
-    }
-    ,{
-      id : 15, 
-      name : "Michael5", 
-      number : 25635
-    }
-    ,{
-      id : 16 , 
-      name : "Michael6", 
-      number : 25636
-    },
-    {
-      id : 17 , 
-      name : "Michael7", 
-      number : 25637
-    },
-    {
-      id : 18 , 
-      name : "Michael8", 
-      number : 25638
-    },
-    {
-      id : 19 , 
-      name : "Michael9", 
-      number : 25639
-    },
-    {
-      id : 110 , 
-      name : "Michael10", 
-      number : 256310
-    },
-    {
-      id : 111 , 
-      name : "Michael11", 
-      number : 256311
-    }
-  ]
-
-
-
-  
-  secondEmployees = [
-    {
-      id : 1 , 
-      name: "michael" , 
-      number:58655
-    },
-    {
-      id : 125 , 
-      name: "michael25" , 
-      number:5865525
-    },
-    {
-      id : 156 , 
-      name: "michael56" , 
-      number:5865556
-    },
-    {
-      id : 189 , 
-      name: "michael89" , 
-      number:5865589
-    },
-    {
-      id : 152 , 
-      name: "michael52" , 
-      number:5865552
-    },
-    {
-      id : 187 , 
-      name: "michael87" , 
-      number:5865587
-    },
-    {
-      id : 122 , 
-      name: "michael22" , 
-      number:5865522
-    }
-  ]
-
-
-  thirdEmployees = [
-    {
-      id : 1 , 
-      name: "michael" , 
-      number:58655
-    },
-    {
-      id : 12555 , 
-      name: "michael2555" , 
-      number:586552555
-    },
-    {
-      id : 15641 , 
-      name: "michael5641" , 
-      number:586555641
-    },
-    {
-      id : 18945 , 
-      name: "michael8945" , 
-      number:586558945
-    },
-    {
-      id : 15252 , 
-      name: "michael5252" , 
-      number:586555252
-    },
-    {
-      id : 18700 , 
-      name: "michael8700" , 
-      number:586558700
-    },
-    {
-      id : 12211 , 
-      name: "michael2211" , 
-      number:586552211
-    }
-  ]
-
-  masterArray = [
-    {
-      array : this.secondEmployees
-    } , 
-    {
-      array : this.thirdEmployees
-    }
-  ]
-
-
   drop(event){
     console.log(event.previousContainer.data);
 
@@ -198,17 +101,34 @@ export class ShiftAllocationComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      if(event.previousContainer.data.length == 0){
-        console.log('push a new item huh');
-        event.previousContainer.data.push({
-          empty : true
-        })
-      }
     }
   }
+  employees = [
+    
+  ]
 
+  searchAndDeleteIfExists(array , searchValue , key){
+    let newArray = [];
+    array.forEach(emp =>{
+      if(emp[key] != searchValue){
+        newArray.push(emp)
+      }
+    });
+    return newArray;
+  }
+  employeeChange(data){
+    console.log('data after being changed' , data);
+    console.log('before removal',this.creatShiftEmployees);
+    this.creatShiftEmployees = this.searchAndDeleteIfExists(this.creatShiftEmployees , data.shift_id , 'shift_id');
+    console.log('after removal of shift if possible',this.creatShiftEmployees);
+    data.shift_allocation_emp_list.forEach(emp =>{
+      this.creatShiftEmployees.forEach(singleEmployee =>{
+        singleEmployee.shift_allocation_emp_list = this.searchAndDeleteIfExists(singleEmployee.shift_allocation_emp_list , emp.emp_id , 'emp_id');
+      });
+    });
+    this.creatShiftEmployees.push(data);
 
+    console.log('data after a long time',this.creatShiftEmployees);
 
-
-
+  }
 }
