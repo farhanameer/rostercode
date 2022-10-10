@@ -144,4 +144,9 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
     }
     this.getAssignedShift(params , true);
   }
+  // ***radio button function
+ 
+  radioChange(val: string) {
+    this.view = val;
+  }
 }

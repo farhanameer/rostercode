@@ -20,5 +20,8 @@ additional:string;
   ngOnInit(): void {
     console.log('modelData', this.modelData);
   }
+  radioChange(val:string){
+    this.view=val
 
+  }
 }

@@ -1,5 +1,4 @@
 <app-dialog-layout>
-
   <div class="modal-custom modal-lg bg-white">
     <div class="gradient-head flex justify-content-between">
       <div class="heading">Shift Management (01-11-2021 - 01-12-2021)</div>
@@ -19,14 +18,29 @@
           <div class="mark-sheet">
             <div class="left-col">
               <label for="radio1">
-                <input type="radio" (click)="view='weekend'" />Mark
-                Weekends</label
+                <input
+                  type="radio"
+                  value="weekend"
+                  name="additional"
+                  (click)="radioChange('weekend')"
+                />
+                Mark Weekends</label
               >
               <label for="radio1" (click)="view='change'">
-                <input type="radio" />Change Shift</label
+                <input
+                  type="radio"
+                  value="change"
+                  name="additional"
+                  (click)="radioChange('change')"
+                />Change Shift</label
               >
               <label for="radio1" (click)="view='additional'">
-                <input type="radio" />Assign Additional Shift</label
+                <input
+                  type="radio"
+                  value="additional"
+                  name="additional"
+                  (click)="radioChange('additional')"
+                />Assign Additional Shift</label
               >
             </div>
           </div>
