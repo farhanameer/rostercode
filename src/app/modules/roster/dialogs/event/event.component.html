@@ -1,4 +1,4 @@
-<div class="modal-custom bg-white">
+<div class="modal-custom bg-white custom-w-596">
   <app-dialog-layout>
     <form [formGroup]="eventForm" (submit)="submit(eventForm.value)">
       <div class="gradient-head flex justify-content-between">
@@ -13,7 +13,7 @@
 
       <div class="overtime-form p-20 px-0">
         <div class="row m-0">
-          <div class="col">
+          <div class="col p-0">
             <app-input-box
               [form]="eventForm"
               [control]="'hdesc'"
@@ -24,7 +24,7 @@
         </div>
         <br />
         <div class="row m-0">
-          <div class="col-6">
+          <div class="col-6 p-0">
             <app-date-box
               [form]="eventForm"
               [control]="'start_date'"
@@ -50,8 +50,18 @@
         </div>
 
         <div class="modal-footer-button flex">
-          <input *ngIf="!isUpdating" type="submit" class="btn-input" value="Submit" />
-          <input *ngIf="isUpdating" type="submit" class="btn-input" value="Update" />
+          <input
+            *ngIf="!isUpdating"
+            type="submit"
+            class="btn-input"
+            value="Submit"
+          />
+          <input
+            *ngIf="isUpdating"
+            type="submit"
+            class="btn-input"
+            value="Update"
+          />
           <input
             type="button"
             class="btn-input"

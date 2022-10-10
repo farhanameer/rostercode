@@ -12,7 +12,7 @@ export class ShiftManagmentDialog implements OnInit {
 
   @Input() dates: any;
 
-  display:boolean;
+  view:string="date";
 
 
 
@@ -27,5 +27,8 @@ export class ShiftManagmentDialog implements OnInit {
     this.customModel.showFeaturedDialog(EmployeeShiftManagmentDialog, "" , this.dates);
     this.activeModal.close(ShiftManagmentDialog);
   }
-
+// ********* radio button function
+radioChange(val:string){
+this.view=val;
+}
 }

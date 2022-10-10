@@ -1,5 +1,5 @@
 <app-dialog-layout>
-  <div class="modal-custom modal-lg bg-white modal-center">
+  <div class="modal-custom modal-lg bg-white modal-center custom-w-800">
     <div class="gradient-head flex justify-content-between">
       <div class="heading">
         Shift Management ({{dates.start}} - {{dates.end}})
@@ -14,11 +14,11 @@
       </div>
     </div>
     <!-- Body -->
-    <div class="shift-management-wrapper pt-0">
+    <div class="shift-management-wrapper pb-0">
       <div class="header">
         <div class="search-row">
           <form action="" class="flex space-between w-100">
-            <div class="left-col">
+            <!-- <div class="left-col">
               <label for="radio1">
                 <input type="radio" id="date" (click)="display=true" />Sort by
                 Date</label
@@ -26,6 +26,24 @@
               <label for="radio1">
                 <input type="radio" id="employee" (click)="display=false" />Sort
                 by Employee</label
+              >
+            </div> -->
+            <div class="left-col">
+              <label for="radio1">
+                <input
+                  type="radio"
+                  value="date"
+                  name="sort"
+                  (click)="radioChange('date')"
+                />Sort by Date</label
+              >
+              <label for="radio1">
+                <input
+                  type="radio"
+                  value="employee"
+                  name="sort"
+                  (click)="radioChange('employee')"
+                />Sort by Employee</label
               >
             </div>
             <input type="text" />
@@ -35,8 +53,11 @@
     </div>
     <!-- footer -->
     <div>
-      <app-sort-by-date *ngIf="display" [dates]="dates"></app-sort-by-date>
-      <app-sort-by-employee *ngIf="!display" [dates]="dates">
+      <app-sort-by-date
+        *ngIf="view == 'date'"
+        [dates]="dates"
+      ></app-sort-by-date>
+      <app-sort-by-employee *ngIf="view == 'employee'" [dates]="dates">
       </app-sort-by-employee>
     </div>
     <div class="modal-custom-footer">

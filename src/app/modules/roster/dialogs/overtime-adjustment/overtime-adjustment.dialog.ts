@@ -12,7 +12,7 @@ import { RosterService } from '../../services/data/roster.dataService';
 @Component({
   selector: 'app-overtime-adjustment',
   templateUrl: './overtime-adjustment.dialog.html',
-  styleUrls: ['./overtime-adjustment.dialog.css'],
+  styleUrls: ['./overtime-adjustment.dialog.scss'],
 })
 
 
