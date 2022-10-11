@@ -16,11 +16,14 @@
       <td>{{entry.dep_name}}</td>
       <td>{{entry.time_in}}</td>
       <td>{{entry.time_out}}</td>
-      <td *ngIf="entry.hr_status != 0">
-        <div class="label">Approved</div>
+      <td *ngIf="entry.hr_status == 2">
+        <div class="label" [ngStyle]="{'color' : colors[entry.hr_status]}">Approved</div>
       </td>
       <td *ngIf="entry.hr_status == 0">
-        <div class="label">Pending</div>
+        <div class="label" [ngStyle]="{'color' : colors[entry.hr_status]}">Pending</div>
+      </td>
+      <td *ngIf="entry.hr_status == 1">
+        <div class="label" [ngStyle]="{'color' : colors[entry.hr_status]}">Rejected</div>
       </td>
     </tr>
     

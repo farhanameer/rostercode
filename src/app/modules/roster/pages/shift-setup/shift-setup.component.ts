@@ -110,8 +110,10 @@ export class ShiftSetupComponent implements OnInit {
     this.filters = filters;
   }
 
+  screenRole = 'hr';
+
   async getShifts(){
-    const data = await this.shiftRequestService.getShiftByDepartmentManager();
+    const data = await this.shiftRequestService.getDefaultList(this.screenRole);
     if(!data["status"]) return; // posibile error
     let shifts = data["data"]["payload"];
     this.shiftArray = shifts;
