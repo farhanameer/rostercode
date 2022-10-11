@@ -55,8 +55,6 @@ export class ShiftAllocationComponent implements OnInit {
   async getEmployees(){
     const employee = await this.rosterViewService.getEmployeeList({
       client_id : this.appLocalStorage.getClientId(),
-      department_id : 16 ,
-      username : "waqas.nisar@people.com.pk",
       dept_id : this.appLocalStorage.getUserId()
     });
 

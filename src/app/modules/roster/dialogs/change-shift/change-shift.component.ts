@@ -82,10 +82,8 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     })
     this.getDefaultList();
     this.getEmployeeList({
-      "client_id" : 48,
-      "username" : "waqas.nisar@people.com.pk",
-      "dept_id" : 343,
-      "department_id" : 16
+      "client_id" : this.appLocalStorage.getClientId(),
+      "dept_id" : this.appLocalStorage.getUserId(),
   })
   }
 
@@ -143,7 +141,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     
     const res = await this.employeeroster.getEmployeeRoster(params, replace);
     this.assignedEmployeeShift = res['data']['payload']['data'][0];
-
+    
     this.employeesName.push({
       id : this.assignedEmployeeShift.id , 
       name : `${this.assignedEmployeeShift.shift_name} (${this.assignedEmployeeShift.actual_shift_time_in}-${this.assignedEmployeeShift.actual_shift_time_out})`
@@ -161,7 +159,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     console.log('selected value' , $event);
     const params = {
       "screen_role" : "emp",
-      "client_id" : 48,
+      "client_id" : this.appLocalStorage.getClientId(),
       "employee_id" : $event.value,
       "custom_date" : "2022-07-18"
     }
