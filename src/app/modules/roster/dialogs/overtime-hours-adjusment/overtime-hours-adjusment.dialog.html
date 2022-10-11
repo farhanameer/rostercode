@@ -1,4 +1,4 @@
-<div class="modal-custom bg-white">
+<div class="modal-custom bg-white custom-w-596">
   <app-dialog-layout>
     <div class="gradient-head flex justify-content-between">
       <div class="heading">Overtime Hours Adjustment</div>
@@ -26,14 +26,14 @@
 
     <div class="overtime-form">
       <div class="row m-0">
-        <div class="col-6">
+        <div class="pl-20">
           <app-input-box
             [label]="'Overtime Hours'"
             [form]="overTimeHoursAdjustmentForm"
             [control]="'hours'"
           ></app-input-box>
         </div>
-        <div class="col-6">
+        <div class="pl-36">
           <app-input-box
             [label]="'Approved Hours'"
             [form]="overTimeHoursAdjustmentForm"
@@ -42,15 +42,14 @@
         </div>
       </div>
       <br />
-      <div class="row m-0">
-        <div class="col mb-3">
-          <app-input-box
-            [label]="'Comments'"
-            [form]="overTimeHoursAdjustmentForm"
-            [control]="'note'"
-            [width]="'100%'"
-          ></app-input-box>
-        </div>
+
+      <div class="pt-0-20">
+        <app-input-box
+          [label]="'Comments'"
+          [form]="overTimeHoursAdjustmentForm"
+          [control]="'note'"
+          [width]="'100%'"
+        ></app-input-box>
       </div>
     </div>
 
