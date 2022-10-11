@@ -1,31 +1,38 @@
-<table class="table table-striped job-table-custom">
-  <thead>
-    <tr>
-      <th scope="col">Shift Name</th>
-      <th scope="col">Shift Type</th>
-      <th scope="col">Department</th>
-      <th scope="col">Time In</th>
-      <th scope="col">Time Out</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let entry of data">
-      <td (click)="singleShift(entry.id)">{{entry.name}}</td>
-      <td>{{entry.shift_type_name}}</td>
-      <td>{{entry.dep_name}}</td>
-      <td>{{entry.time_in}}</td>
-      <td>{{entry.time_out}}</td>
-      <td *ngIf="entry.hr_status == 2">
-        <div class="label" [ngStyle]="{'color' : colors[entry.hr_status]}">Approved</div>
-      </td>
-      <td *ngIf="entry.hr_status == 0">
-        <div class="label" [ngStyle]="{'color' : colors[entry.hr_status]}">Pending</div>
-      </td>
-      <td *ngIf="entry.hr_status == 1">
-        <div class="label" [ngStyle]="{'color' : colors[entry.hr_status]}">Rejected</div>
-      </td>
-    </tr>
-    
-  </tbody>
-</table>
+<div class="shadow no-pad cstm-h-scroll">
+  <table class="table table-striped job-table-custom">
+    <thead>
+      <tr>
+        <th scope="col">Shift Name</th>
+        <th scope="col">Shift Type</th>
+        <th scope="col">Department</th>
+        <th scope="col">Time In</th>
+        <th scope="col">Time Out</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of data">
+        <td (click)="singleShift(entry.id)">{{ entry.name }}</td>
+        <td>{{ entry.shift_type_name }}</td>
+        <td>{{ entry.dep_name }}</td>
+        <td>{{ entry.time_in }}</td>
+        <td>{{ entry.time_out }}</td>
+        <td *ngIf="entry.hr_status == 2">
+          <div class="label" [ngStyle]="{ color: colors[entry.hr_status] }">
+            Approved
+          </div>
+        </td>
+        <td *ngIf="entry.hr_status == 0">
+          <div class="label" [ngStyle]="{ color: colors[entry.hr_status] }">
+            Pending
+          </div>
+        </td>
+        <td *ngIf="entry.hr_status == 1">
+          <div class="label" [ngStyle]="{ color: colors[entry.hr_status] }">
+            Rejected
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
