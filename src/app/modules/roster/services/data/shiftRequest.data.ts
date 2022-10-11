@@ -334,8 +334,11 @@ export class ShiftRequestDataService {
           client_id: this.appLocalStorage.getClientId(),
           screen_role: screenRole
         };
+        // if(screenRole == 'lm'){
+        //   paramss["department_id"] = 16;
+        // }
         if(screenRole == 'lm'){
-          paramss["department_id"] = 16;
+          paramss["line_manager_id"] = this.appLocalStorage.getUserId();
         }
         if(filters){
           paramss = {...paramss , ...filters}
