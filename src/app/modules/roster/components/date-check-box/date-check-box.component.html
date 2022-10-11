@@ -11,12 +11,12 @@
           </div>
         </div>
         <app-employee-card *ngFor="let employee of entry.employees">
-          <div class="row">
-            <div class="col d-flex pl-20" style="flex-grow: 0">
+          <div class="row custom-w-260">
+            <div class="col d-flex pl-20">
               <input type="checkbox" (click)="open()" />
             </div>
-            <div class="col">
-              <li>
+            <div class="col custom-pl-6">
+              <li class="custom-w-210">
                 <div class="user-img">
                   <img src="assets/images/img-dummy.png" alt="" />
                 </div>
