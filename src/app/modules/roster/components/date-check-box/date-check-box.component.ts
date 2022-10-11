@@ -8,7 +8,7 @@ import { ModalService } from '../../services/modal/modal.service';
 @Component({
   selector: 'app-date-check-box',
   templateUrl: './date-check-box.component.html',
-  styleUrls: ['./date-check-box.component.css']
+  styleUrls: ['./date-check-box.component.scss']
 })
 export class DateCheckBoxComponent implements OnInit {
   data : any = [];

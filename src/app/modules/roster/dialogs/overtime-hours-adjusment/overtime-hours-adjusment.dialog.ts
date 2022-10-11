@@ -7,7 +7,7 @@ import { RosterService } from '../../services/data/roster.dataService';
 @Component({
   selector: 'app-overtime-hours-adjusment',
   templateUrl: './overtime-hours-adjusment.dialog.html',
-  styleUrls: ['./overtime-hours-adjusment.dialog.css'],
+  styleUrls: ['./overtime-hours-adjusment.dialog.scss'],
 })
 export class OvertimeHoursAdjusmentDialog implements OnInit {
   @Input() modelData: any;
