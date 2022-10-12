@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppLocalStorageService } from '../../../../services/app-local-storage.service';
 import { HolidayHttpService } from '../http/holidays.http';
+import { RosterToastService } from '../roster.toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,8 @@ import { HolidayHttpService } from '../http/holidays.http';
 export class HolidayDataService {
   constructor(
     private httpService: HolidayHttpService,
-    private appLocalStorage: AppLocalStorageService
+    private appLocalStorage: AppLocalStorageService ,
+    private tostService : RosterToastService
   ) {}
 
   getHoliday(params) {
@@ -42,25 +44,28 @@ export class HolidayDataService {
 
       try {
         const body = {
-          client_id: 48,
-          created_by: this.appLocalStorage.getUserId(),
+          client_id: 48
         };
         let data = {...body , ...params}
         this.httpService.addHoliday(data).subscribe(
           (data) => {
             response.data = data['payload'];
             response.message = 'success';
+            this.tostService.toast(data['payload'] , 'success-toast')
             response.status = true;
             resolve(response);
             console.log('BEru', response);
           },
           (err) => {
-            response.message = err;
+            response.message = err.error.error;
+            console.log('add Holiday Error',err.error.error);
+            this.tostService.toast(err.error.error , 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.tostService.toast(error , 'error-toast');
         resolve(response);
       }
     });
