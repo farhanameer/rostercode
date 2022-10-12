@@ -4,18 +4,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { RosterService } from '../../services/data/roster.dataService';
 
-
-
-
-
-
 @Component({
   selector: 'app-overtime-adjustment',
   templateUrl: './overtime-adjustment.dialog.html',
   styleUrls: ['./overtime-adjustment.dialog.scss'],
 })
-
-
 export class OvertimeAdjustmentDialog implements OnInit {
   constructor(
     private fb: FormBuilder,
@@ -27,30 +20,46 @@ export class OvertimeAdjustmentDialog implements OnInit {
   overTimeForm: FormGroup;
   // type: string = 'cpl';
 
-   requiredIfValidator(predicate , customValue) {
-    return (formControl => {
+  requiredIfValidator(predicate, customValue) {
+    return (formControl) => {
       console.log('running erveytime');
       if (!formControl.parent) {
         console.log('returned nulify Values');
         return null;
       }
       if (predicate() == customValue) {
-        console.log('returned required value' , predicate());
-        return Validators.required(formControl); 
+        console.log('returned required value', predicate());
+        return Validators.required(formControl);
       }
-      console.log('finally returned nulify values')
+      console.log('finally returned nulify values');
       return null;
-    })
+    };
   }
 
   ngOnInit(): void {
     console.log('employee Data', this.modelData);
     this.overTimeForm = this.fb.group({
       overTime: [this.modelData.overtime, Validators.required],
-      givenHours: ['' , [this.requiredIfValidator(() => this.overTimeForm.get('type').value, 'payment')]],
+      givenHours: [
+        '',
+        [
+          this.requiredIfValidator(
+            () => this.overTimeForm.get('type').value,
+            'payment'
+          ),
+        ],
+      ],
       tillDate: ['', Validators.required],
-      type : ['cpl'],
-      cpl: ['' , [this.requiredIfValidator(() => this.overTimeForm.get('type').value, 'cpl')]],
+      type: ['cpl'],
+      cpl: [
+        '',
+        [
+          this.requiredIfValidator(
+            () => this.overTimeForm.get('type').value,
+            'cpl'
+          ),
+        ],
+      ],
     });
 
     this.overTimeForm.get('type').valueChanges.subscribe((value) => {
@@ -60,8 +69,7 @@ export class OvertimeAdjustmentDialog implements OnInit {
     console.log(this.overTimeForm.value);
   }
 
-
-  valueType : string  = 'cpl';
+  valueType: string = 'cpl';
   overtimeType(val: string) {
     this.valueType = val;
 
@@ -99,10 +107,10 @@ export class OvertimeAdjustmentDialog implements OnInit {
       line_manager_id: this.appLocalStorage.getUserId(),
     };
 
-    if(this.valueType == 'cpl'){
+    if (this.valueType == 'cpl') {
       delete obj.givenHours;
     }
-    if(this.valueType == 'payment'){
+    if (this.valueType == 'payment') {
       delete obj.givenCPL;
     }
     // console.log('my obj', obj);

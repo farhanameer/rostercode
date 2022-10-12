@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { AppLocalStorageService } from '../../../../services/app-local-storage.service';
 import { ClusterAndSubClusterService } from '../http/clusterAndSubcluster.service';
 import { HttpEmployeeShift } from '../http/http.dropdown';
+import { RosterToastService } from '../roster.toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClusterAndSubClusterDataService {
   constructor(
-    private httpService : ClusterAndSubClusterService,
-    private appLocalStorage: AppLocalStorageService
+    private httpService: ClusterAndSubClusterService,
+    private appLocalStorage: AppLocalStorageService,
+    private toastService: RosterToastService
   ) {}
 
   getMarket() {
@@ -21,21 +23,29 @@ export class ClusterAndSubClusterDataService {
             response.data = data['data'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
   }
-
 
   getClusterByMarket(marketId) {
     return new Promise((resolve, reject) => {
@@ -46,21 +56,29 @@ export class ClusterAndSubClusterDataService {
             response.data = data['data'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
   }
-
 
   getSubClusterByCluster(clusterId) {
     return new Promise((resolve, reject) => {
@@ -71,16 +89,25 @@ export class ClusterAndSubClusterDataService {
             response.data = data['data'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -90,27 +117,34 @@ export class ClusterAndSubClusterDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        this.httpService.getCountries(keyName , value).subscribe(
+        this.httpService.getCountries(keyName, value).subscribe(
           (data) => {
             response.data = data['data'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
   }
-
-
 
   getStatesByCountry(countryId) {
     return new Promise((resolve, reject) => {
@@ -121,21 +155,29 @@ export class ClusterAndSubClusterDataService {
             response.data = data['data'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
   }
-
 
   getCitiesByState(stateId) {
     return new Promise((resolve, reject) => {
@@ -146,22 +188,29 @@ export class ClusterAndSubClusterDataService {
             response.data = data['data'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
   }
-
-
 
   getBarnchByCity(cityId) {
     return new Promise((resolve, reject) => {
@@ -172,21 +221,29 @@ export class ClusterAndSubClusterDataService {
             response.data = data['data'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
   }
-
 
   getDepartment() {
     return new Promise((resolve, reject) => {
@@ -197,31 +254,27 @@ export class ClusterAndSubClusterDataService {
             response.data = data['data'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
   }
-
-
-
-
-
-
-
-
-
-  
-
-  
-
 }

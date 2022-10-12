@@ -4,7 +4,6 @@ import { AppLocalStorageService } from 'src/app/services/app-local-storage.servi
 import { CalendarService } from '../../services/calander.service';
 import { EmployeeShiftDataService } from '../../services/data/dropdown.data';
 import { EmployeeRosterDataService } from '../../services/data/employeeAttendance.data';
-import { HolidayDataService } from '../../services/data/holidays.data.service';
 
 @Component({
   selector: 'app-attendence-calender',
@@ -16,8 +15,7 @@ export class AttendenceCalenderComponent implements OnInit {
     private calender: CalendarService,
     private dataService: EmployeeRosterDataService,
     private dataShiftService: EmployeeShiftDataService,
-    private appLocalStorage: AppLocalStorageService,
-    private holidayService: HolidayDataService
+    private appLocalStorage: AppLocalStorageService
   ) {}
   // weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -54,26 +52,7 @@ export class AttendenceCalenderComponent implements OnInit {
     this.getMonthAndYear(false, true);
 
     this.weekDaysShortWord = this.weekDays.map((x) => x[0]);
-
-    this.getHoliday({
-      client_id: this.appLocalStorage.getClientId(),
-      year: 2019,
-      country_id: 154,
-    });
-
-    // this.addHoliday();
   }
-
-  async getHoliday(params) {
-    console.log('working');
-    const result = await this.holidayService.getHoliday(params);
-    console.log(`Holiday API ${result}`);
-  }
-  // async addHoliday() {
-  //   const result = await this.holidayService.addHoliday();
-
-  //   console.log(result);
-  // }
   async getEmpRoster() {
     const result = await this.dataService.getEmployeeRoster({
       year_month: this.year_month,
