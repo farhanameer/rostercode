@@ -44,14 +44,9 @@ export class ShiftRequestDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const paramss = {
-          screen_role: 'hr',
-          client_id: 48,
-          shift_id: 7,
-          action: 'approve',
-        };
+        
 
-        this.httpService.putDeleteDisapprovedById(paramss).subscribe(
+        this.httpService.putDeleteDisapprovedById(params).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';
@@ -249,7 +244,7 @@ export class ShiftRequestDataService {
           desg_id: -1,
           emp_id: -1,
         };
-        this.httpService.lmInsertShift(body2).subscribe(
+        this.httpService.lmInsertShift(body).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';
@@ -329,25 +324,23 @@ export class ShiftRequestDataService {
     });
   }
 
-  getDefaultList(params = {}) {
+  getDefaultList(screenRole , filters = null) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const paramss = {
-          client_id: 48,
-          screen_role: 'lm',
-          glob_mkt_id: -1,
-          region_id: -1,
-          sub_region_id: -1,
-          country_id: 154,
-          state_id: 2723,
-          city_id: -1,
-          branch_id: -1,
-          department_id: 16,
-          desg_id: -1,
-          emp_id: -1,
+        let paramss = {
+          client_id: this.appLocalStorage.getClientId(),
+          screen_role: screenRole
         };
-
+        // if(screenRole == 'lm'){
+        //   paramss["department_id"] = 16;
+        // }
+        if(screenRole == 'lm'){
+          paramss["line_manager_id"] = this.appLocalStorage.getUserId();
+        }
+        if(filters){
+          paramss = {...paramss , ...filters}
+        }
         this.httpService.getDefaultList(paramss).subscribe(
           (data) => {
             response.data = data;

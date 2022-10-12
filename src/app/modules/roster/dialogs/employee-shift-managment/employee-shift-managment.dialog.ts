@@ -13,11 +13,11 @@ import { ChangeShiftComponent } from '../change-shift/change-shift.component';
 export class EmployeeShiftManagmentDialog implements OnInit {
 
 @Input() modelData : any;
-
+valueType:string="weekend";
 view:string="weekend";
-change:string;
-additional:string;
-weekend:string;
+// change:string;
+// additional:string;
+// weekend:string;
 submitted : boolean = false;
 
   constructor(public activeModal: NgbActiveModal ,private customModal:ModalService ) { }
@@ -37,8 +37,18 @@ submitted : boolean = false;
   openMark(){
     this.customModal.showFeaturedDialog(EmployeeShiftManagmentDialog, "");
   }
+  submit(){
+    this.submitted = true;
+    setTimeout(() => {
+      this.submitted = false;
+    }, 200);
+  }
 
-  
+ 
+
+radioChange(val: string) {
+    this.view = val;
+  }
 
 
 }

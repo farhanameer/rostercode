@@ -97,8 +97,8 @@ export class CheckInOutCalendarComponent implements OnInit {
     this.empRosterArray.every((empRoster) => {
       if (empRoster.start == matchingDate) {
         const obj = {
-          actual_shift_time_in: empRoster.actual_shift_time_in,
-          actual_shift_time_out: empRoster.actual_shift_time_out,
+          actual_shift_time_in: empRoster?.actual_shift_time_in,
+          actual_shift_time_out: empRoster?.actual_shift_time_out,
           shift_color: empRoster.shift_color,
           shift_name: empRoster.shift_name,
         };

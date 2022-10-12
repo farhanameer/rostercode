@@ -2,6 +2,7 @@
   <div class="container">
     <div>
       <app-location-and-designation-filter
+        (filtersChange)="filterChange($event)"
         ><div class="heading">
           Calendar
         </div></app-location-and-designation-filter

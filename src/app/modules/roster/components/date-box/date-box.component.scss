@@ -1,10 +1,19 @@
 .agt-module {
+
+  .comp-wrapper {
+    width: 260px;
+    height: 26px;
+  }
+  .date-wrapper input{
+    height: 100%;
+    width: 100%;
+  }
   .date-wrapper div input {
     font: normal normal normal 11px/13px Roboto !important;
     letter-spacing: 0px !important;
     color: #343434 !important;
     background: #ffffff 0% 0% no-repeat padding-box !important;
-    border: 1px solid #d8dcdf !important;
+    border: 1px solid #d8dcdf ;
     border-radius: 4px !important;
     padding-left: 10px !important;
   }
@@ -14,17 +23,14 @@
   .date-wrapper > div mat-form-field:focus-visible {
     outline: none !important;
   }
-  .date-wrapper input {
-    width: 260px !important;
-    height: 26px !important;
-  }
+  
   
   .date-field {
     position: relative;
 
     .mat-datepicker-toggle {
       .mat-button-base {
-        height: 24px !important;
+        
         display: flex !important;
         justify-content: flex-end !important;
         align-items: center !important;
@@ -49,7 +55,7 @@
     position: static !important;
     padding: 0 3px 0 10px !important;
     text-align: right !important;
-    height: 24px;
+    
   }
 
   .mat-datepicker-toggle .mat-button-base .mat-datepicker-toggle-default-icon {
@@ -59,4 +65,19 @@
   .agt-float-label {
     transform: translateY(-15px) !important;
   }
+
+  .required > input {
+    border-color: #F44437 !important;
+}
+
+.required > label {
+    color: #F44437 !important;
+}
+
+.text-error{
+    color : #F44437 !important
+}
+
+  
+
 }

@@ -1,41 +1,41 @@
-<div class="wrapper">
-  <div class="container">
-    <div class="header-menu"></div>
-
-    <div class="modal-custom custom-avaliable-width">
-      <div class="gradient-head flex justify-content-between">
-        <div class="heading">Avaliable Shifts</div>
-        <div class="btn-options flex align-content-center">
-          <a href="#"><img src="assets/icons/ico-close.svg" alt="" /></a>
-        </div>
+<div class="modal-custom custom-avaliable-width bg-white">
+  <app-dialog-layout>
+    <div class="gradient-head flex justify-content-between">
+      <div class="heading">Avaliable Shifts</div>
+      <div class="btn-options flex align-content-center">
+        <a (click)="activeModal.close('Close click')"
+          ><img src="assets/icons/ico-close.svg" alt=""
+        /></a>
       </div>
-      <!-- Body -->
-      <div class="modal-custom-body p-0">
-        <div class="row m-0 custom-pd">
-          <div class="Custom-color-orange"></div>
-          <p>Morning Shift</p>
-
-          <div class="col">09:00-17:00</div>
-        </div>
-        <div class="row m-0 custom-pd custom-b">
-          <div class="Custom-color-pink"></div>
-          <p>Evening Shift</p>
-
-          <div class="col">14:00-00.00</div>
-        </div>
-        <div class="row m-0 custom-pd">
-          <div class="Custom-color-purple"></div>
-          <p>Night Shift</p>
-          <div class="col">21:00-05:00</div>
-        </div>
-      </div>
-      <!-- footer -->
-
-      <div class="modal-custom-footer"></div>
     </div>
+    <!-- Body -->
+    <div class="modal-custom-body p-0">
+      <div class="row m-0 custom-pd">
+        <div class="Custom-color-orange c-align"></div>
+        <p class="ml-2">Morning Shift</p>
 
-    <!-- Modal list -->
-  </div>
+        <div class="col ml-3"><p class="ml-4">21:00-05:00</p></div>
+      </div>
+      <div class="row m-0 custom-pd custom-b">
+        <div class="Custom-color-pink c-align"></div>
+        <p class="ml-2">Evening Shift</p>
+
+        <div class="col ml-3"><p class="ml-4">21:00-05:00</p></div>
+      </div>
+      <div class="row m-0 custom-pd">
+        <div class="Custom-color-purple c-align"></div>
+        <p class="ml-2">Night Shift</p>
+        &nbsp;
+
+        <div class="col ml-5"><p class="ml-1">21:00-05:00</p></div>
+      </div>
+    </div>
+    <!-- footer -->
+
+    <div class="modal-custom-footer"></div>
+  </app-dialog-layout>
 </div>
+
+<!-- Modal list -->
 
 <!-- second -->

@@ -13,6 +13,9 @@ export class DateBoxComponent implements OnInit {
   @Input() control:string;
   @Input() label:string;
   @Input() width : string;
+  @Input() height : string;
+  @Input() hideLabel : Boolean = false;
+  
 
   constructor() { }
 

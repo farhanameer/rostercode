@@ -2,7 +2,7 @@ import { AppLocalStorageService } from './../../../../services/app-local-storage
 import { EmployeeRosterDataService } from './../../services/data/employeeAttendance.data';
 import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MarkWeekendComponent } from '../../components/mark-weekend/mark-weekend.component';
 import { RosterService } from '../../services/data/rosterView.data.service';
@@ -10,6 +10,7 @@ import { ModalService } from '../../services/modal/modal.service';
 import { AdditionalShiftComponent } from '../additional-shift/additional-shift.component';
 import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employee-shift-managment.dialog';
 import { tick } from '@angular/core/testing';
+import moment from 'moment';
 
 @Component({
   selector: 'app-change-shift',
@@ -28,6 +29,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   replaceWith: any;
   swipeDropdownValue: any;
   selectedEmployeeId: any;
+  assignedRosterDate: any;
   constructor(public activeModal: NgbActiveModal ,
     private customModal:ModalService, 
     private fb:FormBuilder, 
@@ -35,51 +37,67 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     private shiftDataService: ShiftRequestDataService,
     private employeeroster: EmployeeRosterDataService,
     private shiftByDepartmentManager : ShiftRequestDataService,
-    private appLocalStorage: AppLocalStorageService) { }
+    private appLocalStorage: AppLocalStorageService,
+    private shiftRequest: ShiftRequestDataService) { }
   
   
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('submit value change' , this.submitBtn);
 
-    const params = {
-      "client_id" : this.appLocalStorage.getClientId(),
-      "linemanager_id" : this.appLocalStorage.getUserId(),
-      "shift_id" : this.swipeShiftForm.value.swipeShift,
-      "employee_id" : this.swipeShiftForm.value.employee_id,
-      "assigned_shift" : this.assignedShiftDefaultValue.id,
-      "assigned_roster_date" : this.swipeShiftForm.value.assigned_roster_date,
-      "replaceWithEmployeeId" : this.swipeShiftForm.value.replaceWithEmployeeId
+    if(this.submitBtn == true){
+      console.log('submit value change' , this.submitBtn);
+
+      this.swipeShiftForm.value.assigned_roster_date = moment(this.swipeShiftForm.value.assigned_roster_date).format('YYYY-MM-DD');
+      const body = {
+        "client_id" : this.appLocalStorage.getClientId(),
+        "linemanager_id" : this.appLocalStorage.getUserId(),
+        "shift_id" : this.swipeShiftForm.value.swipeShift,
+        "employee_id" : this.swipeShiftForm.value.employee_id,
+        "assigned_shift" : this.assignedShiftDefaultValue.id,
+        "assigned_roster_date" : this.assignedEmployeeShift.start,
+        "replaceWithEmployeeId" : null || this.swipeShiftForm.value.replaceWithEmployeeId,
+        "rosterDate": this.swipeShiftForm.value.assigned_roster_date
+      }
+          
+      this.submitBtn = false;
+      if(body.replaceWithEmployeeId){
+        delete body.shift_id
+      } else if(!body.replaceWithEmployeeId){
+        delete body.replaceWithEmployeeId
+      }
+      console.log(body); 
+
+      this.swapShift(body);
     }
-
-    console.log(params);
     
-    this.submitBtn = false;
   }
 
   ngOnInit(): void {
 
     this.swipeShiftForm=this.fb.group({
-      employee_id:[''],
-      assigned_shift:[''],
-      assigned_roster_date:[''],
-      replaceWithEmployeeId:[''],
-      swipeShift:['']
+      employee_id:["",Validators.required],
+      assigned_shift:["",Validators.required],
+      assigned_roster_date:["",Validators.required],
+      replaceWithEmployeeId:[null],
+      swipeShift:["",Validators.required]
     })
     this.getDefaultList();
     this.getEmployeeList({
-      "client_id" : 48,
-      "username" : "waqas.nisar@people.com.pk",
-      "dept_id" : 343,
-      "department_id" : 16
+      "client_id" : this.appLocalStorage.getClientId(),
+      "dept_id" : this.appLocalStorage.getUserId(),
   })
   }
 
+  async swapShift(body){
+    const res = await this.rosterService.swapShift(body);
+    
+  }
+  screenRole = "lm";
   async getDefaultList() {
     const params = {
       client_id: this.appLocalStorage.getClientId(),
       line_manager_id: this.appLocalStorage.getUserId(),
     }
-    const res = await this.shiftByDepartmentManager.getShiftByDepartmentManager(params);
+    const res = await this.shiftRequest.getDefaultList(this.screenRole);
     let swipeData = res['data'].payload;
     //this.shifts = res['data'].payload;
 
@@ -123,6 +141,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     
     const res = await this.employeeroster.getEmployeeRoster(params, replace);
     this.assignedEmployeeShift = res['data']['payload']['data'][0];
+    
     this.employeesName.push({
       id : this.assignedEmployeeShift.id , 
       name : `${this.assignedEmployeeShift.shift_name} (${this.assignedEmployeeShift.actual_shift_time_in}-${this.assignedEmployeeShift.actual_shift_time_out})`
@@ -140,20 +159,19 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     console.log('selected value' , $event);
     const params = {
       "screen_role" : "emp",
-      "client_id" : 48,
+      "client_id" : this.appLocalStorage.getClientId(),
       "employee_id" : $event.value,
       "custom_date" : "2022-07-18"
     }
     this.getAssignedShift(params , true);
   }
 
-  replaceWithSelection($event){
-    console.log($event.value)
-    this.replaceWith = $event.value;
-
+  get validateAForm(): any {
+    return this.swipeShiftForm.controls;
+  }
+  submit(){
+    console.warn(this.swipeShiftForm.value)
   }
 
-  onSelectionSwipeDropdown($event){
-    this.swipeDropdownValue = $event.value;
-  }
+
 }

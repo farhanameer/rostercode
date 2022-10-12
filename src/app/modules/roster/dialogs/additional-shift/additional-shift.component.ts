@@ -1,3 +1,4 @@
+import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
 import { EmployeeRosterDataService } from './../../services/data/employeeAttendance.data';
 import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
@@ -17,13 +18,14 @@ import { ShiftManagmentDialog } from '../shift-managment/shift-managment.dialog'
 })
 export class AdditionalShiftComponent implements OnInit, OnChanges {
   @Input() additionalShifts : any;
+  valueType:string="shift";
   view:string="shift";
   shifts: Array<any> = [];
   employeesDropdown : any=[];
   employeesName : any=[];
   assignedEmployeeShift : any;
   selectedEmployeeId: any;
-
+  screenRole = 'lm';
   additionalShiftForm:FormGroup
   additionalHoursForm:FormGroup
   constructor(public activeModal: NgbActiveModal ,
@@ -31,45 +33,63 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
     private fb: FormBuilder, 
     private shiftRequestDataService: ShiftRequestDataService,
     private rosterService: RosterService,
-    private employeeroster: EmployeeRosterDataService) { }
+    private employeeroster: EmployeeRosterDataService,
+    private appLocalStorage : AppLocalStorageService) { }
 
   ngOnInit(): void {
 
     this.additionalShiftForm=this.fb.group({
       additionalShift:[''],
       employee_id:[''],
-      additional_shift_id:['']
+      additional_shift_id:[null]
     })
 
     this.getDefaultList();
     this.getEmployeeList({
-      "client_id" : 48,
-      "username" : "waqas.nisar@people.com.pk",
-      "dept_id" : 343,
-      "department_id" : 16
+      "client_id" : this.appLocalStorage.getClientId(),
+      "dept_id" : this.appLocalStorage.getUserId(),
   });
     
 
     this.additionalHoursForm=this.fb.group({
-      additionalShiftHours:['']
+      additionalShiftHours:[null]
     })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('submit value change' , this.additionalShifts);
 
-    const params = {
-      "employee_id" : this.additionalShiftForm.value.employee_id,
-      "assigned_shift" : this.assignedShiftDefaultValue.id,
-      "additionalShift" : this.additionalShiftForm.value.additionalShift
+    if(this.additionalShifts==true){
+      console.log('submit value change' , this.additionalShifts);
+
+      const body = {
+        "client_id" : this.appLocalStorage.getClientId(),
+        "linemanager_id" : this.appLocalStorage.getUserId(),
+        "shift_id" : this.assignedShiftDefaultValue.id,
+        "employee_id" : this.additionalShiftForm.value.employee_id,
+        "rosterDate" : this.assignedEmployeeShift.start,
+        "additional_shift_id" : null || this.additionalShiftForm.value.additionalShift, 
+        "additionalHours" : null || this.additionalHoursForm.value.additionalShiftHours
+      }
+      
+      if(body.additional_shift_id){
+        delete body.additionalHours
+      } else if(!body.additional_shift_id){
+        delete body.additional_shift_id
+      }
+      console.log("THESE ARE THE PARAMS",body);
+      this.assignShift(body);
+
+      this.additionalShifts = false;
     }
+    
+  }
 
-    console.log("THESE ARE THE PARAMS",params);
-    this.additionalShifts = false;
+  async assignShift(body){
+    const res = await this.rosterService.assignAddtionalShift(body);
   }
 
   async getDefaultList() {
-    const res = await this.shiftRequestDataService.getDefaultList();
+    const res = await this.shiftRequestDataService.getDefaultList(this.screenRole);
     this.shifts = res['data'].payload;
   }
   
@@ -117,10 +137,15 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
     console.log('selected value' , $event);
     const params = {
       "screen_role" : "emp",
-      "client_id" : 48,
+      "client_id" : this.appLocalStorage.getClientId(),
       "employee_id" : $event.value,
       "custom_date" : "2022-07-18"
     }
     this.getAssignedShift(params , true);
+  }
+  // ***radio button function
+ 
+  radioChange(val: string) {
+    this.view = val;
   }
 }

@@ -1,8 +1,8 @@
 <div class="agt-module w-100">
-  <div class="comp-wrapper w-100">
+  <div class="comp-wrapper w-100" [class.required]="form?.get(control)?.errors?.required && form?.get(control)?.touched">
     <input
       [type]="type"
-      [disabled]="isdisabled"
+      [attr.disabled]="isdisabled? true : null"
       [ngStyle]="{ width: width }"
       id="input-box"
       [formControl]="form?.get(control)"
@@ -13,6 +13,7 @@
     <p class="label">{{ label }}</p>
   </div>
   <span
+  class="text-right text-error d-block"
     *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched"
     >required</span
   >

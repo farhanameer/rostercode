@@ -18,8 +18,9 @@ export class HolidayHttpService {
   addHoliday(body = {}) {
     return this.http.post(`${this.roster}/Holiday`, body);
   }
-  updateHoliday(params = {}) {
-    return this.http.put(`${this.roster}/Holiday`, { params });
+  updateHoliday(body = {}) {
+    let uri = `Holiday?id=${body["id"]}`
+    return this.http.put(`${this.roster}/${uri}`, body);
   }
   deleteHoliday(params = {}) {
     return this.http.delete(`${this.roster}/Holiday`, { params });

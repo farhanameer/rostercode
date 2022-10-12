@@ -3,13 +3,15 @@
     <div class="gradient-head flex justify-content-between">
       <div class="heading">Work Calendar Setup</div>
       <div class="btn-options flex align-content-center">
-        <a><img src="assets/icons/ico-close.svg" alt="" /></a>
+        <a (click)="activeModal.close('Close click')"
+          ><img src="assets/icons/ico-close.svg" alt=""
+        /></a>
       </div>
     </div>
     <!-- Body -->
-    <div class="shift-management-wrapper pt-0">
-      <div class="header">
-        <div class="search-row">
+    <div class="shift-management-wrapper p-20">
+      <div class="header m-0">
+        <div class="search-row m-0">
           <form action="" class="flex space-between w-100">
             <div>
               <app-select-box [label]="'Period Start Year'"></app-select-box>
@@ -22,7 +24,7 @@
             </div>
           </form>
         </div>
-        <div class="search-row">
+        <div class="search-row m-0 custom-pt--15">
           <form action="" class="flex space-between w-100">
             <div>
               <app-select-box [label]="'Half Day'"></app-select-box>
@@ -38,59 +40,62 @@
       </div>
     </div>
     <div class="shift-setup">
-      <div class="shadow">
-        <app-sub-layout>
-          <div class="shift-card-wrapper">
-            <div class="shift-header">Set Public Holidays</div>
-            <div class="shift-card">
-              <div class="row">
-                <div class="col">
-                  <app-check-box [label]="'Kashmir Day'"> </app-check-box>
-                </div>
-                <div class="col">
-                  <app-check-box [label]="'Pakistan Day'"> </app-check-box>
-                </div>
-                <div class="col">
-                  <app-check-box [label]="'Labour Day'"> </app-check-box>
-                </div>
-                <div class="col">
-                  <app-check-box [label]="'Eid-ul-Fitr Day'"> </app-check-box>
-                </div>
-                <div class="col">
-                  <app-check-box [label]="'Independence Day'"> </app-check-box>
-                </div>
+      <app-sub-layout>
+        <div class="shift-card-wrapper pt0-20">
+          <div class="shift-header">Set Public Holidays</div>
+          <div class="shift-card">
+            <div class="row pb-10">
+              <div class="col">
+                <app-check-box [label]="'Kashmir Day'"> </app-check-box>
               </div>
-              <div class="row">
-                <div class="col">
-                  <app-check-box [label]="'Eid-ul-Azha'"> </app-check-box>
-                </div>
-                <div class="col">
-                  <app-check-box [label]="'Ashura'"> </app-check-box>
-                </div>
-                <div class="col">
-                  <app-check-box [label]="'Allama Iqbal Day'"> </app-check-box>
-                </div>
-                <div class="col">
-                  <app-check-box [label]="'Eid-Milad-ul-Nabi'"> </app-check-box>
-                </div>
-                <div class="col">
-                  <app-check-box [label]="'Quaid-e-Azam Day'"> </app-check-box>
-                </div>
+              <div class="col">
+                <app-check-box [label]="'Pakistan Day'"> </app-check-box>
+              </div>
+              <div class="col">
+                <app-check-box [label]="'Labour Day'"> </app-check-box>
+              </div>
+              <div class="col">
+                <app-check-box [label]="'Eid-ul-Fitr Day'"> </app-check-box>
+              </div>
+              <div class="col">
+                <app-check-box [label]="'Independence Day'"> </app-check-box>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <app-check-box [label]="'Eid-ul-Azha'"> </app-check-box>
+              </div>
+              <div class="col">
+                <app-check-box [label]="'Ashura'"> </app-check-box>
+              </div>
+              <div class="col">
+                <app-check-box [label]="'Allama Iqbal Day'"> </app-check-box>
+              </div>
+              <div class="col">
+                <app-check-box [label]="'Eid-Milad-ul-Nabi'"> </app-check-box>
+              </div>
+              <div class="col">
+                <app-check-box [label]="'Quaid-e-Azam Day'"> </app-check-box>
               </div>
             </div>
           </div>
-        </app-sub-layout>
+        </div>
+      </app-sub-layout>
+    </div>
+    <div class="modal-custom-footer">
+      <div class="clues">
+        <span> </span>
+        <span> </span>
       </div>
-      <div class="modal-custom-footer">
-        <div class="clues">
-          <span> </span>
-          <span> </span>
-        </div>
 
-        <div class="modal-footer-button flex">
-          <input type="button" class="btn-input" value="Submit" />
-          <input type="button" class="btn-input" value="Cancel" />
-        </div>
+      <div class="modal-footer-button flex">
+        <input type="button" class="btn-input" value="Submit" />
+        <input
+          (click)="activeModal.close('Close click')"
+          type="button"
+          class="btn-input"
+          value="Cancel"
+        />
       </div>
     </div>
     <!-- footer -->

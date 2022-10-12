@@ -23,7 +23,8 @@ import { updateFor } from 'typescript';
 export class SelectBoxComponent implements OnInit , AfterViewInit {
   selectedValue: string = '';
   isClicked: boolean = false;
-  @ViewChild('dropdownList') dropdownList:ElementRef; 
+  @ViewChild('dropdownList') dropdownList:ElementRef;
+  @ViewChild('wrapperSelect') wrapperSelect : ElementRef; 
   
 
   @Input() form: FormGroup;
@@ -48,6 +49,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
 
   @ViewChild('selectWrapper') selectWrapper: any;
   @ViewChild('mainContainer') mainContainer: ElementRef;
+  
 
 
   locData = {};
@@ -121,7 +123,9 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
       if(this.disabled) return;
       this.isClicked = false;
       this.toggleView();
-      this.form?.get(this.control).markAsTouched();
+      if(this.checkIfTouched()){
+        this.form?.get(this.control).markAsTouched();
+      }
     }
   }
 
@@ -132,16 +136,24 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
 
   }
 
-
+  checkIfTouched(){
+    const div = this.dropdownList.nativeElement;
+    let foundClass = false;
+    div.classList.forEach(cls =>{
+      if(cls == 'touched'){
+        foundClass = true;
+      }
+    })
+    return foundClass;
+  }
   toggleView(show = false){
 
-    
-
-    
     const div = this.dropdownList.nativeElement;
 
+    
     if(show){
       div.classList.remove('select-hide');
+      div.classList.add('touched');
       return;
     }
     div.classList.add('select-hide');

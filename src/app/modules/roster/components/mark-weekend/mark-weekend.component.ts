@@ -7,12 +7,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./mark-weekend.component.css']
 })
 export class MarkWeekendComponent implements OnInit {
-  view:string="default";
-default:string;
-date:string;
-employee:string;
-change:string;
-additional:string;
+  view:string="date";
+  valueType:string="date";
 @Input() modelData:any;
 
   constructor(public activeModal: NgbActiveModal) { }
@@ -20,5 +16,8 @@ additional:string;
   ngOnInit(): void {
     console.log('modelData', this.modelData);
   }
+  radioChange(val:string){
+    this.view=val
 
+  }
 }

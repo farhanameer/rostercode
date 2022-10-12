@@ -3,6 +3,7 @@
 
   <div class="modal-custom bg-white">
     <app-dialog-layout>
+      <form [formGroup]="singleShiftForm">
       <div class="gradient-head flex justify-content-between">
         <div class="heading">Single Shift Allocation</div>
         <div
@@ -31,11 +32,25 @@
           <tbody>
             <tr>
               <td>
-                <app-select-box [width]="'105px'" [height]="'20px'"></app-select-box>
+                <app-date-box
+                  [label]="'Date'"
+                  [form]="singleShiftForm"
+                  [control]="'date'"
+                  [width]="'105px'"
+                  [height]="'20px'"
+                  [hideLabel]="true"
+                ></app-date-box>
               </td>
               <td>Morning</td>
               <td>
-                <app-select-box [data]="shiftAllocate.data" [width]="'105px'" [height]="'20px'"></app-select-box>
+                <app-select-box
+                  [data]="shiftNameArray"
+                  [width]="'105px'"
+                  [height]="'20px'"
+                  [label]="'Shift Allocate'"
+                  [form]="singleShiftForm"
+                  [control]="'allocateShift'"
+                ></app-select-box>
               </td>
             </tr>
           </tbody>
@@ -58,8 +73,10 @@
           <input
             type="button"
             class="btn-input"
+            [disabled]="!this.singleShiftForm.valid"
+            
             value="Submit"
-            (click)="activeModal.close('Close click')"
+            (click)="submit()"
           />
           <input
             type="button"
@@ -69,6 +86,7 @@
           />
         </div>
       </div>
+    </form>
     </app-dialog-layout>
   </div>
 

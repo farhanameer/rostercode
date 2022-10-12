@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MorningJobShiftDialog } from '../../dialogs/morning-job-shift/morning-job-shift.dialog';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-employee-shift-card',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeShiftCardComponent implements OnInit {
 
-  constructor() { }
+  @Input() data : any;
+  @Input() dayName : any;
+  @Output() itemDropped : EventEmitter<any> = new EventEmitter();
+  constructor(public activeModal: NgbActiveModal,
+    private customModal: ModalService) { }
 
   ngOnInit(): void {
   }
-
+  drop(event){
+    this.itemDropped.emit(event);
+  }
+  open(){
+    this.customModal.showFeaturedDialog(MorningJobShiftDialog, "");
+  }
 }

@@ -16,5 +16,7 @@ export class InputBoxComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('disabled value ' , this.isdisabled);
+  }
 }

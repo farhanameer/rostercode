@@ -1,59 +1,58 @@
 <!-- Body -->
 <!-- Modal Body -->
-<div class="form-col">
-
+<div class="form-col pbt-0">
   <div>
-    <app-select-box 
-      [label]="'Select Employee'" 
-      [form]="swipeShiftForm" 
-      [control]="'employee_id'" 
+    <app-select-box
+      [label]="'Select Employee'"
+      [form]="swipeShiftForm"
+      [control]="'employee_id'"
       [data]="employeesDropdown"
       (selectionChange)="selectionChanged($event)"
-      ></app-select-box>
+    ></app-select-box>
   </div>
   <div>
-    <app-select-box 
-      [label]="'Assigned Shift'" 
-      [form]="swipeShiftForm" 
-      [control]="'assigned_shift'" 
+    <app-select-box
+      [label]="'Assigned Shift'"
+      [form]="swipeShiftForm"
+      [control]="'assigned_shift'"
       [data]="employeesName"
       [defaultValue]="assignedShiftDefaultValue"
     ></app-select-box>
   </div>
 </div>
 <app-sub-layout>
-  <div class="shift-card-wrapper">
-    <div class="shift-header">Swap Shift</div>
-    <div class="shift-card">
-      <div class="form-col">
-        <div>
-          <app-date-box
-            [form]="swipeShiftForm"
-            [control]="'assigned_roster_date'"
-            [label]="'Select Date'"
-          ></app-date-box>
-        </div>
-        <div>
-          <app-select-box
-            [data]="swipeDropdown"
-            [form]="swipeShiftForm"
-            [control]="'swipeShift'"
-            [label]="'Swipe Shift'"
-            (selectionChange)="onSelectionSwipeDropdown($event)"
-          ></app-select-box>
-        </div>
-        <div>
-          <app-select-box
-            [data]="employeesDropdown"
-            [form]="swipeShiftForm"
-            [control]="'replaceWithEmployeeId'"
-            [label]="'Replace With'"
-            (selectionChange)="replaceWithSelection($event)"
-          ></app-select-box>
+  <form [formGroup]="swipeShiftForm">
+    <div class="shift-card-wrapper custom-ptb">
+      <div class="shift-header">Swap Shift</div>
+      <div class="shift-card">
+        <div class="form-col">
+          <div>
+            <app-date-box
+              [form]="swipeShiftForm"
+              [control]="'assigned_roster_date'"
+              [label]="'Select Date'"
+            ></app-date-box>
+          </div>
+          <div>
+            <app-select-box
+              [data]="swipeDropdown"
+              [form]="swipeShiftForm"
+              [control]="'swipeShift'"
+              [label]="'Swipe Shift'"
+            ></app-select-box>
+          </div>
+          <div>
+            <app-select-box
+              [data]="employeesDropdown"
+              [form]="swipeShiftForm"
+              [control]="'replaceWithEmployeeId'"
+              [label]="'Replace With'"
+            ></app-select-box>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </app-sub-layout>
 
 <!-- footer -->

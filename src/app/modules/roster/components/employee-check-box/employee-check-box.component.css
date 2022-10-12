@@ -1,0 +1,13 @@
+.pl-20{
+    padding: 0px 0px 0px 20px;
+    flex-grow: 0;
+}
+.custom-pl-6{
+    padding: 0px 10px 0px 6px;
+}
+.custom-w-260{
+    width: 260px;
+}
+.custom-w-210{
+width: 210px;
+}

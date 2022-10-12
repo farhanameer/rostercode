@@ -1,6 +1,6 @@
 <!-- Body -->
 <!-- Modal Body -->
-<div class="form-col">
+<div class="form-col pbt-0">
   <div>
     <app-select-box
       [label]="'Select Employee'"
@@ -22,18 +22,30 @@
 </div>
 
 <app-sub-layout>
-  <div class="shift-card-wrapper">
+  <div class="shift-card-wrapper custom-ptb">
     <div class="shift-header">
       <div>Additional Shifts</div>
       &nbsp;
       <div style="padding: 30px">
-        <input type="radio" (click)="view = 'shift'" />
+        <input
+          type="radio"
+          value="shift"
+          name="additional"
+          (click)="radioChange('shift')"
+          [checked]="valueType == 'shift'"
+        />
         &nbsp;
         <label>Additional Shift</label>
       </div>
       &nbsp;
       <div>
-        <input type="radio" (click)="view = 'hours'" />
+        <input
+          name="additional"
+          type="radio"
+          value="hours"
+          (click)="radioChange('hours')"
+          [checked]="valueType == 'hours'"
+        />
         &nbsp;
         <label>Additional Hours</label>
       </div>

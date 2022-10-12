@@ -1,9 +1,9 @@
 <div class="agt-module">
-  <div class="comp-wrapper">
+  <div class="comp-wrapper" [class.required]="form?.get(control)?.errors?.required && form?.get(control)?.touched">
     <img class="icon-time-picker" src="assets/icons/agt-icon-time-picker.svg" alt="">
     <input id="input-box" [formControl]="form?.get(control)" class="input-box" placeholder=" " [ngxTimepicker]="picker" [format]="24">
     <p class="label"> {{label}} </p>
     <ngx-material-timepicker #picker></ngx-material-timepicker>
   </div>
-  <span *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched">required</span>
+  <span *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched" class="text-right text-error d-block">required</span>
 </div>

@@ -1,15 +1,26 @@
 <div>
   <div class="shift-management-wrapper pt-0">
     <div class="header">
-      <div class="search-row">
+      <div class="search-row mt-0">
         <form action="" class="flex space-between w-100">
           <div class="left-col">
             <label for="radio1">
-              <input type="radio" (click)="view = 'date'" />Sort by Date</label
+              <input
+                [checked]="valueType == 'date'"
+                type="radio"
+                value="date"
+                name="sort"
+                (click)="radioChange('date')"
+              />Sort by Date</label
             >
             <label for="radio1">
-              <input type="radio" (click)="view = 'employee'" />Sort by
-              Employee</label
+              <input
+                [checked]="valueType == 'employee'"
+                type="radio"
+                value="employee"
+                name="sort"
+                (click)="radioChange('employee')"
+              />Sort by Employee</label
             >
           </div>
 

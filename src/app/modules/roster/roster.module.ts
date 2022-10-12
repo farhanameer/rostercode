@@ -77,6 +77,9 @@ import { ShiftRequestByLmComponent } from './pages/shift-request-by-lm/shift-req
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragAndDropComponent } from './components/drag-drop/drag-drop.component';
+
 
 
 
@@ -142,6 +145,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     CalenderSetupComponent,
     LocationAndDesignationFilterComponent,
     ShiftRequestByLmComponent,
+    DragAndDropComponent
     
 
    
@@ -157,7 +161,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     NgbModule,
     MatInputModule,
     MatDatepickerModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule , 
+    DragDropModule
   ],
   providers: [ModalService, NgbActiveModal, NgbModal],
 })
