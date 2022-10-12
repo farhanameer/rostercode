@@ -5,6 +5,7 @@ import { PromiseAble } from './../../models/PromiseAble';
 import { RosterViewHttpService } from '../http/rosterVIew.http.service';
 import { Injectable } from '@angular/core';
 import { AppLocalStorageService } from '../../../../services/app-local-storage.service';
+import { RosterToastService } from '../roster.toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,8 @@ import { AppLocalStorageService } from '../../../../services/app-local-storage.s
 export class ShiftRequestDataService {
   constructor(
     private httpService: ShiftRequestHttpService,
-    private appLocalStorage: AppLocalStorageService
+    private appLocalStorage: AppLocalStorageService,
+    private toastService: RosterToastService
   ) {}
 
   putUpdateShift(params = {}) {
@@ -26,15 +28,24 @@ export class ShiftRequestDataService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -44,22 +55,29 @@ export class ShiftRequestDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        
-
         this.httpService.putDeleteDisapprovedById(params).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -76,15 +94,24 @@ export class ShiftRequestDataService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -101,15 +128,24 @@ export class ShiftRequestDataService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -126,15 +162,24 @@ export class ShiftRequestDataService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -151,15 +196,24 @@ export class ShiftRequestDataService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -180,15 +234,24 @@ export class ShiftRequestDataService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -203,15 +266,24 @@ export class ShiftRequestDataService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -249,15 +321,24 @@ export class ShiftRequestDataService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -310,51 +391,69 @@ export class ShiftRequestDataService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
   }
 
-  getDefaultList(screenRole , filters = null) {
+  getDefaultList(screenRole, filters = null) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
         let paramss = {
           client_id: this.appLocalStorage.getClientId(),
-          screen_role: screenRole
+          screen_role: screenRole,
         };
         // if(screenRole == 'lm'){
         //   paramss["department_id"] = 16;
         // }
-        if(screenRole == 'lm'){
-          paramss["line_manager_id"] = this.appLocalStorage.getUserId();
+        if (screenRole == 'lm') {
+          paramss['line_manager_id'] = this.appLocalStorage.getUserId();
         }
-        if(filters){
-          paramss = {...paramss , ...filters}
+        if (filters) {
+          paramss = { ...paramss, ...filters };
         }
         this.httpService.getDefaultList(paramss).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
