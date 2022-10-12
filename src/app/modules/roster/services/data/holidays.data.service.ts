@@ -42,17 +42,17 @@ export class HolidayDataService {
 
       try {
         const body = {
-          client_id: 48,
+          client_id: this.appLocalStorage.getClientId(),
           line_manager_id: this.appLocalStorage.getUserId(),
         };
-        let data = {...body , ...params}
+        let data = { ...body, ...params };
         this.httpService.addHoliday(data).subscribe(
           (data) => {
             response.data = data['payload'];
             response.message = 'success';
             response.status = true;
             resolve(response);
-            console.log('BEru', response);
+            console.log('abhi responce aye ga na BEru', response);
           },
           (err) => {
             response.message = err;

@@ -51,7 +51,7 @@ export class OvertimeAdjustmentDialog implements OnInit {
   }
   async HoursAdjustMentTest() {
     let obj = {
-      type: 'cpl',
+      type: this.type,
       employee_id: this.modelData.employee_id,
       givenHours: this.overTimeForm.value.givenHours,
       givenCPL: this.overTimeForm.value.cpl,

@@ -19,9 +19,9 @@ export class ShiftRequestDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        const paramss = {};
+        // const paramss = {};
 
-        this.httpService.putUpdateShift(paramss).subscribe(
+        this.httpService.putUpdateShift(params).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';
@@ -203,8 +203,6 @@ export class ShiftRequestDataService {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        
-
         this.httpService.shiftById(body).subscribe(
           (data) => {
             response.data = data;
