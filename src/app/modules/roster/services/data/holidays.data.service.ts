@@ -28,11 +28,13 @@ export class HolidayDataService {
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });

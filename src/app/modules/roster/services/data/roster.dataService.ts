@@ -55,6 +55,13 @@ export class RosterService {
             response.data = data;
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
           },
           (err) => {
