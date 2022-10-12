@@ -32,6 +32,7 @@
           value="shift"
           name="additional"
           (click)="radioChange('shift')"
+          [checked]="valueType == 'shift'"
         />
         &nbsp;
         <label>Additional Shift</label>
@@ -43,6 +44,7 @@
           type="radio"
           value="hours"
           (click)="radioChange('hours')"
+          [checked]="valueType == 'hours'"
         />
         &nbsp;
         <label>Additional Hours</label>
