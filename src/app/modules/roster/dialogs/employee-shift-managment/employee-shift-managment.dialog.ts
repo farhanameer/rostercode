@@ -13,7 +13,7 @@ import { ChangeShiftComponent } from '../change-shift/change-shift.component';
 export class EmployeeShiftManagmentDialog implements OnInit {
 
 @Input() modelData : any;
-
+valueType:string="weekend";
 view:string="weekend";
 // change:string;
 // additional:string;

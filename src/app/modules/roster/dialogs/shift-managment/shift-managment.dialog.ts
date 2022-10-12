@@ -11,7 +11,7 @@ import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employ
 export class ShiftManagmentDialog implements OnInit {
 
   @Input() dates: any;
-
+  valueType : string  = 'date';
   view:string="date";
 
 

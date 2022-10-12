@@ -18,6 +18,7 @@ import { ShiftManagmentDialog } from '../shift-managment/shift-managment.dialog'
 })
 export class AdditionalShiftComponent implements OnInit, OnChanges {
   @Input() additionalShifts : any;
+  valueType:string="shift";
   view:string="shift";
   shifts: Array<any> = [];
   employeesDropdown : any=[];
