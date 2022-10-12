@@ -10,7 +10,7 @@ export class HolidayDataService {
   constructor(
     private httpService: HolidayHttpService,
     private appLocalStorage: AppLocalStorageService,
-    private tostService: RosterToastService
+    private toastService: RosterToastService
   ) {}
 
   getHoliday(params) {
@@ -44,14 +44,15 @@ export class HolidayDataService {
 
       try {
         const body = {
-          client_id: 48,
+          client_id: this.appLocalStorage.getClientId(),
+          created_by: this.appLocalStorage.getUserId(),
         };
         let data = { ...body, ...params };
         this.httpService.addHoliday(data).subscribe(
           (data) => {
             response.data = data['payload'];
             response.message = 'success';
-            this.tostService.toast(data['payload'], 'success-toast');
+            this.toastService.toast(data['payload'], 'success-toast');
             response.status = true;
             resolve(response);
             console.log('abhi responce aye ga na BEru', response);
@@ -59,13 +60,13 @@ export class HolidayDataService {
           (err) => {
             response.message = err.error.error;
             console.log('add Holiday Error', err.error.error);
-            this.tostService.toast(err.error.error, 'error-toast');
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
-        this.tostService.toast(error, 'error-toast');
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
@@ -83,17 +84,20 @@ export class HolidayDataService {
           (data) => {
             response.data = data['payload'];
             response.message = 'success';
+            this.toastService.toast(data['payload'], 'success-toast');
             response.status = true;
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });
