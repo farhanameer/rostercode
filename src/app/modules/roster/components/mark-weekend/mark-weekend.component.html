@@ -6,6 +6,7 @@
           <div class="left-col">
             <label for="radio1">
               <input
+                [checked]="valueType == 'date'"
                 type="radio"
                 value="date"
                 name="sort"
@@ -14,6 +15,7 @@
             >
             <label for="radio1">
               <input
+                [checked]="valueType == 'employee'"
                 type="radio"
                 value="employee"
                 name="sort"

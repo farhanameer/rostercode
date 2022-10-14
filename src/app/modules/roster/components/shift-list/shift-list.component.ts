@@ -6,7 +6,7 @@ import { AppLocalStorageService } from 'src/app/services/app-local-storage.servi
 @Component({
   selector: 'app-shift-list',
   templateUrl: './shift-list.component.html',
-  styleUrls: ['./shift-list.component.css'],
+  styleUrls: ['./shift-list.component.scss'],
 })
 export class ShiftListComponent implements OnInit {
   constructor(private holidayService: HolidayDataService,

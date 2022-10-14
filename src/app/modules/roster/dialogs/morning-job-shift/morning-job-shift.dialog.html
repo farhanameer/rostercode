@@ -168,7 +168,12 @@
     </div>
 
     <div class="modal-footer-button flex">
-      <input type="button" class="btn-input" value="Close" />
+      <input
+        (click)="activeModal.close('Close click')"
+        type="button"
+        class="btn-input"
+        value="Close"
+      />
     </div>
   </div>
 </div>

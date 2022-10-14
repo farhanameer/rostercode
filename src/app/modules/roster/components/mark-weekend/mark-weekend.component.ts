@@ -7,8 +7,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./mark-weekend.component.css']
 })
 export class MarkWeekendComponent implements OnInit {
-  view:string="";
-
+  view:string="date";
+  valueType:string="date";
 @Input() modelData:any;
 
   constructor(public activeModal: NgbActiveModal) { }

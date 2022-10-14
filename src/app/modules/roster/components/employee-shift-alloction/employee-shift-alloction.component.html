@@ -4,7 +4,7 @@
       <div>
         <div>
           <app-location-and-designation-filter
-          (filtersChange)="filtersChanged($event)"
+            (filtersChange)="filtersChanged($event)"
           >
             <div class="heading">Shift Allocation</div>
           </app-location-and-designation-filter>
@@ -14,10 +14,12 @@
             <div class="shift-card">
               <div class="form-col p-20">
                 <div>
-                  <app-select-box [label]="'Shift Name'" [form]="form" 
-                  [control]="'shift_id'"
-                  [data]="shifts"
-                  (selectionChange)="shiftSelection($event)"
+                  <app-select-box
+                    [label]="'Shift Name'"
+                    [form]="form"
+                    [control]="'shift_id'"
+                    [data]="shifts"
+                    (selectionChange)="shiftSelection($event)"
                   ></app-select-box>
                 </div>
                 <div>
@@ -36,7 +38,7 @@
                 </div>
                 <div class="row align-content-center">
                   <app-check-box
-                    [color]="'blue'"
+                    [color]="'#3080EA'"
                     [label]="'Set as Default'"
                     [form]="form"
                     [control]="'set_default'"

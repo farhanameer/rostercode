@@ -4,7 +4,9 @@
       <div class="gradient-head flex justify-content-between">
         <div class="heading">Disclaimer</div>
         <div class="btn-options flex align-content-center">
-          <a><img src="assets/icons/ico-close.svg" alt="" /></a>
+          <a (click)="activeModal.close('Close click')"
+            ><img src="assets/icons/ico-close.svg" alt=""
+          /></a>
         </div>
       </div>
       <!-- Body -->
@@ -65,7 +67,12 @@
 
         <div class="modal-footer-button flex">
           <input type="submit" class="btn-input" value="Accept" />
-          <input type="button" class="btn-input" value="Cancel" />
+          <input
+            (click)="activeModal.close('Close click')"
+            type="button"
+            class="btn-input"
+            value="Cancel"
+          />
         </div>
       </div>
     </form>

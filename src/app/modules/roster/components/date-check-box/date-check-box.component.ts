@@ -4,6 +4,7 @@ import { AppLocalStorageService } from 'src/app/services/app-local-storage.servi
 import { WeekendTypeComponent } from '../../dialogs/weekend-type/weekend-type.component';
 import { RosterService } from '../../services/data/rosterView.data.service';
 import { ModalService } from '../../services/modal/modal.service';
+import { RosterToastService } from '../../services/roster.toast.service';
 
 @Component({
   selector: 'app-date-check-box',
@@ -17,7 +18,8 @@ export class DateCheckBoxComponent implements OnInit {
     public activeModal: NgbActiveModal,
        private customModal: ModalService , 
        private dataService : RosterService , 
-       private appLocalStorage: AppLocalStorageService
+       private appLocalStorage: AppLocalStorageService ,
+       private tosterService : RosterToastService
    ) { }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ open(){
     const data = await this.dataService.getLMRosterView(params);
 
     if (!data['data']['status']) {
+      this.tosterService.toast(data['message'] , 'error-toast');
       return;
     }
 
