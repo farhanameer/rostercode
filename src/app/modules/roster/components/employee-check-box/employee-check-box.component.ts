@@ -8,7 +8,7 @@ import { ModalService } from '../../services/modal/modal.service';
 @Component({
   selector: 'app-employee-check-box',
   templateUrl: './employee-check-box.component.html',
-  styleUrls: ['./employee-check-box.component.css']
+  styleUrls: ['./employee-check-box.component.scss']
 })
 export class EmployeeCheckBoxComponent implements OnInit {
   @Input() modelData : any;
