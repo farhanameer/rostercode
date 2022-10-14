@@ -12,6 +12,15 @@ export class HolidayHttpService {
     this.roster = APIs['workCalendarUrl'];
   }
 
+  getWeekends(params = {}) {
+    return this.http.get(`${this.roster}/weekends`, { params });
+  }
+  workCalendarSetting(body = {}) {
+    return this.http.post(`${this.roster}/work-calendar-settings`, body);
+  }
+  getWorkCalendarSetting(params = {}) {
+    return this.http.get(`${this.roster}/work-calendar-settings`, { params });
+  }
   getHoliday(params = {}) {
     return this.http.get(`${this.roster}/Holiday`, { params });
   }
