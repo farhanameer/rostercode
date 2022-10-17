@@ -68,13 +68,29 @@ export class ClusterAndSubClusterService {
     return this.http.get(`${this.staticData}/getBranch` , {params});
   }
 
-  getDepartment(){
-    const params = {
+  getDepartment(bodyParams = null){
+    let params = {
          
         'client_id' : this.appLocalService.getClientId()
     }
+    if(bodyParams){
+      params = {...params , ...bodyParams}
+    }
     return this.http.get(`${this.staticData}/getDepartment` , {params});
   }
+
+  getRosterType(params){
+    
+    return this.http.get(`${this.staticData}/roster-type` , {params});
+  }
+
+
+  getReporting(params){
+    
+    return this.http.get(`${this.staticData}/reporting` , {params});
+  }
+
+
 
 
 }

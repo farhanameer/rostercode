@@ -11,6 +11,7 @@ export class CheckBoxComponent implements OnInit {
   @Input() form: FormGroup
   @Input() control: string;
   @Input() color:string;
+  @Input() checked:Boolean = false;
   constructor() { }
 
   ngOnInit(): void {

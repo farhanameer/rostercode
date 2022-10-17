@@ -39,6 +39,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   @Input() hideLabel : Boolean;
   @Input() customClass : any;
   @Input() defaultValue : any;
+  @Input() multiSelect : boolean = false;
  
 
   
@@ -79,20 +80,76 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   ];
 
   hash = {};
+  previousSelectionArray = [];
+  removeIfAlreadySelected(item){
+    let found = false;
+    const newArray = [];
+    let hashMap = {};
+    this.previousSelectionArray.forEach(it =>{
+      if(item.id == it){
+        found = true;
+      }
+      if(item.id != it){
+        newArray.push(it);
+        hashMap[it] = true;
+       
+      }
+    });
+    
+    return {selectionArray : newArray , found : found , map:hashMap};
+  }
   optionSelected(option){
     console.log(option);
-    this.isClicked =!this.isClicked;
-    this.selectedValue = option.name;
     this.hash = {};
-    this.hash[option.id] = true;
-    this.toggleView();
+    this.isClicked =!this.isClicked;
+    
+    if(!this.multiSelect) {
+      this.hash = {};
+    }
+    const {selectionArray , found , map} = this.removeIfAlreadySelected(option);
+    if(this.multiSelect) {
+      
+      this.previousSelectionArray = selectionArray;
+      this.hash=map;
+    }
+    if(!found && this.multiSelect) {
+      this.hash[option.id] = true;
+      this.previousSelectionArray.push(option.id);
+    }else if(!this.multiSelect){
+      this.hash[option.id] = true;
+    }
+    
 
+    this.toggleView();
     this.selectionChange.next({
       value : option.id , 
-      controlName : this.name
+      controlName : this.name,
+      multiSelect : this.multiSelect , 
+      multiSelectValues : this.previousSelectionArray
+    
     });
+    
 
-    this.form.get(this.control).setValue(option.id);
+    if(this.multiSelect && this.previousSelectionArray.length !=0 && this.previousSelectionArray.length != this.data.length) {
+      this.selectedValue = `${this.previousSelectionArray.length} Selected`;
+    } else if(this.multiSelect && this.previousSelectionArray.length == this.data.length){
+      this.selectedValue = 'All Selected'
+    }else{
+      this.selectedValue = ''
+    }
+    if(!this.multiSelect){
+      this.selectedValue = option.name;
+    }
+    
+
+
+    if(this.form && this.control && !this.multiSelect) {
+      this.form.get(this.control).setValue(option.id);
+    }
+
+    if(this.form && this.control && this.multiSelect) {
+      this.form.get(this.control).setValue(this.previousSelectionArray);
+    }
 
   }
   private wasInside = false;
@@ -105,7 +162,16 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event: PointerEvent) {
-    var paths = event['path'] as Array<any>;
+
+
+    // console.log('event paths' , event);
+    // console.log('composed path',event.composedPath());
+    // console.log('event paths' , event['path']);
+
+
+    var paths = event.composedPath() as any;
+
+    // if(event.composedPath())
 
     var inComponent = false;
     paths.forEach((path) => {
@@ -178,6 +244,9 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
         if(value.id == this.defaultValue.id){
           this.hash[this.defaultValue.id] = this.defaultValue.id;
           this.selectedValue = this.defaultValue.name;
+          if(this.form && this.control) {
+            this.form.get(this.control).setValue(this.defaultValue.id);
+          }
         }
       })
     }
@@ -207,7 +276,6 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   }
   getSelectData() {
     console.log('getSelectData');
-
     this.onResetDropDown.emit();
     this.selectionChange.emit();
   }
