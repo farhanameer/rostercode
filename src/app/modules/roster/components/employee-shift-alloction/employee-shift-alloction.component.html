@@ -2,11 +2,11 @@
   <div class="container">
     <app-full-layout>
       <div>
-        <div>
+        <div class="table-header gradient-head flex justify-content-between">
+          <div class="heading">Shift Allocation</div>
           <app-location-and-designation-filter
             (filtersChange)="filtersChanged($event)"
           >
-            <div class="heading">Shift Allocation</div>
           </app-location-and-designation-filter>
         </div>
         <div class="shift-setup">
