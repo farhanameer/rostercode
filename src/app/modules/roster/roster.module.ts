@@ -79,6 +79,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DragAndDropComponent } from './components/drag-drop/drag-drop.component';
+import { SingleSortByEmployeeComponent } from './components/single-sort-by-employee/single-sort-by-employee.component';
+import { SingleEmployeeCheckBoxComponent } from './components/single-employee-check-box/single-employee-check-box.component';
 
 
 
@@ -145,7 +147,9 @@ import { DragAndDropComponent } from './components/drag-drop/drag-drop.component
     CalenderSetupComponent,
     LocationAndDesignationFilterComponent,
     ShiftRequestByLmComponent,
-    DragAndDropComponent
+    DragAndDropComponent,
+    SingleSortByEmployeeComponent,
+    SingleEmployeeCheckBoxComponent
     
 
    

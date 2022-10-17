@@ -20,14 +20,14 @@
               <app-select-box [label]="'Period End Year'"></app-select-box>
             </div>
             <div>
-              <app-select-box [label]="'Weekend'"></app-select-box>
+              <app-select-box [label]="'Weekend'" [data]="weekDays"></app-select-box>
             </div>
           </form>
         </div>
         <div class="search-row m-0 custom-pt--15">
           <form action="" class="flex space-between w-100">
             <div>
-              <app-select-box [label]="'Half Day'"></app-select-box>
+              <app-select-box [label]="'Half Day'" [data]="weekDays"></app-select-box>
             </div>
             <div>
               <app-time-box [label]="'From'"></app-time-box>
