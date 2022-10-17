@@ -15,7 +15,7 @@ export class CalenderSetupComponent implements OnInit {
   weekDays = [];
   years = [];
   current;
-  holidayStatus;
+  holidayStatus = [];
 
   constructor(private fb:FormBuilder, public activeModal: NgbActiveModal,
     private holiday: HolidayDataService,
@@ -130,16 +130,37 @@ export class CalenderSetupComponent implements OnInit {
     
   }
 
+  selectionChange(value,id){
+    console.log(value, id);
+    if(value){
+      id.status = 1;
+    }else{
+      id.status = 0;
+    }
+  }
+
   async getWorkCalendarSetting(){
-    debugger;
+
     const params = {
       "client_id" : this.appLocalStorage.getClientId(),
       "year" : 2022,
       "country_id" : 154
     }
     const res = await this.holiday.getWorkCalendarSetting(params); 
-    this.holidayStatus = res['data'].publicHolidays;
-    debugger;
+    // this.holidayStatus = res['data'].publicHolidays;
+    const holidays = res['data'].publicHolidays;
+    let counter = Math.ceil(holidays.length/5);
+    let holidayStatus2 = [];
+    let loopCounter = 0;
+    for(let i = 1; i<=counter; i++){
+      let array = [];
+      for(let j = 0; j<5; j++){
+        array.push(holidays[loopCounter]);
+        loopCounter = loopCounter + 1;
+      }
+      this.holidayStatus.push(array);
+    }
+    console.log(this.holidayStatus);
   }
   
   async weekends(){

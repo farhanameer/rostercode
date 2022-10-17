@@ -44,38 +44,12 @@
         <div class="shift-card-wrapper pt0-20">
           <div class="shift-header">Set Public Holidays</div>
           <div class="shift-card">
-            <div class="row pb-10">
-              <div class="col">
-                <app-check-box [label]="'Kashmir Day'"> </app-check-box>
-              </div>
-              <div class="col">
-                <app-check-box [label]="'Pakistan Day'"> </app-check-box>
-              </div>
-              <div class="col">
-                <app-check-box [label]="'Labour Day'"> </app-check-box>
-              </div>
-              <div class="col">
-                <app-check-box [label]="'Eid-ul-Fitr Day'"> </app-check-box>
-              </div>
-              <div class="col">
-                <app-check-box [label]="'Independence Day'"> </app-check-box>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <app-check-box [label]="'Eid-ul-Azha'"> </app-check-box>
-              </div>
-              <div class="col">
-                <app-check-box [label]="'Ashura'"> </app-check-box>
-              </div>
-              <div class="col">
-                <app-check-box [label]="'Allama Iqbal Day'"> </app-check-box>
-              </div>
-              <div class="col">
-                <app-check-box [label]="'Eid-Milad-ul-Nabi'"> </app-check-box>
-              </div>
-              <div class="col">
-                <app-check-box [label]="'Quaid-e-Azam Day'"> </app-check-box>
+            <div class="row pb-10" *ngFor="let holiday of holidayStatus">
+              <div class="col" *ngFor="let singleHoliday of holiday">
+                <app-check-box 
+                  [label]="singleHoliday.name" 
+                  [checked]="singleHoliday.status" 
+                  (selectionChanged)="selectionChange($event,singleHoliday)"></app-check-box>
               </div>
             </div>
           </div>
