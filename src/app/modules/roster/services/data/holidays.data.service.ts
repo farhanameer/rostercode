@@ -13,6 +13,81 @@ export class HolidayDataService {
     private toastService: RosterToastService
   ) {}
 
+  getWorkCalendarSetting(params) {
+    return new Promise((resolve, reject) => {
+      const response = { data: null, status: false, message: null };
+      try {
+        // params.client_id = this.appLocalStorage.getClientId();
+        this.httpService.getWorkCalendarSetting(params).subscribe(
+          (data) => {
+            response.data = data['payload'];
+            response.message = 'success';
+            response.status = true;
+            resolve(response);
+            console.log(response);
+          },
+          (err) => {
+            response.message = err;
+            resolve(response);
+          }
+        );
+      } catch (error) {
+        response.message = error;
+        resolve(response);
+      }
+    });
+  }
+
+  workCalendarSetting(body) {
+    return new Promise((resolve, reject) => {
+      const response = { data: null, status: false, message: null };
+      try {
+        // params.client_id = this.appLocalStorage.getClientId();
+        this.httpService.workCalendarSetting(body).subscribe(
+          (data) => {
+            response.data = data['payload'];
+            response.message = 'success';
+            response.status = true;
+            resolve(response);
+            console.log(response);
+          },
+          (err) => {
+            response.message = err;
+            resolve(response);
+          }
+        );
+      } catch (error) {
+        response.message = error;
+        resolve(response);
+      }
+    });
+  }
+
+  getWeekends(params) {
+    return new Promise((resolve, reject) => {
+      const response = { data: null, status: false, message: null };
+      try {
+        // params.client_id = this.appLocalStorage.getClientId();
+        this.httpService.getWeekends(params).subscribe(
+          (data) => {
+            response.data = data['payload'];
+            response.message = 'success';
+            response.status = true;
+            resolve(response);
+            console.log(response);
+          },
+          (err) => {
+            response.message = err;
+            resolve(response);
+          }
+        );
+      } catch (error) {
+        response.message = error;
+        resolve(response);
+      }
+    });
+  }
+
   getHoliday(params) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
@@ -46,6 +121,7 @@ export class HolidayDataService {
       }
     });
   }
+
   addHoliday(params) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
