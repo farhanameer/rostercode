@@ -1,12 +1,27 @@
 <div class="wrapper">
   <div class="container">
-    <div>
+    <!-- <div>
       <app-location-and-designation-filter
         (filtersChange)="filterChange($event)"
         ><div class="heading">
           Calendar
         </div></app-location-and-designation-filter
       >
+    </div> -->
+    <div class="table-header gradient-head flex">
+      <div class="heading">Calendar</div>
+      <div class="custom-pl-142">
+        <app-location-and-designation-filter
+          (filtersChange)="filterChange($event)"
+        >
+        </app-location-and-designation-filter>
+      </div>
+      <div class="btn-options flex align-content-center p-0">
+        <a (click)="openCalendar()" class="btn-custom"
+          >Advance Filter
+          <i><img src="assets/icons/filter.svg" alt="" /></i>
+        </a>
+      </div>
     </div>
 
     <div class="shadow">
@@ -43,23 +58,24 @@
               </li>
               <li
                 *ngFor="let singleDate of date.totalDaysInMonth"
-                (click)="open(singleDate , date)"
-                [ngStyle]="{'background-color': singleDate.color }"
+                (click)="open(singleDate, date)"
+                [ngStyle]="{ 'background-color': singleDate.color }"
                 [class.selected]="singleDate.start_date"
                 class="show-hover"
               >
                 {{ singleDate.date }}
 
                 <div class="btn-group dropright" *ngIf="singleDate.start_date">
-                  <button type="button" class="btn btn-secondary"
-                  type="button"
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    type="button"
                     class="date-dd bg-white dropdown-toggle dropdown-toggle-split"
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
-                  >{{singleDate.hdesc}}
-            
-                    
+                  >
+                    {{ singleDate.hdesc }}
                   </button>
                   <div class="dropdown-menu">
                     <a class="">Add</a>
@@ -68,7 +84,6 @@
                   </div>
                 </div>
               </li>
-
 
               <!-- 
               <li>2</li>

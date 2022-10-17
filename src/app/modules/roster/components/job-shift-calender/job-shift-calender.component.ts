@@ -6,6 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from '../../services/modal/modal.service';
 import { HolidayDataService } from '../../services/data/holidays.data.service';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
+import { CalenderSetupComponent } from '../../dialogs/calender-setup/calender-setup.component';
 
 @Component({
   selector: 'app-job-shift-calender',
@@ -231,5 +232,9 @@ export class JobShiftCalenderComponent implements OnInit {
         date : singleDate.date
       }
     }
+  // *** shift calendar pop up
+  openCalendar(){
+    this.customModal.showFeaturedDialog(CalenderSetupComponent,"")
+  }
   }
 

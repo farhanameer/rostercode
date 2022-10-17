@@ -6,7 +6,7 @@
           <div class="user-img">
             <img src="assets/images/img-dummy.png" alt="" />
           </div>
-          {{employee.name}}
+          {{ employee.name }}
         </li>
         <app-date-card *ngFor="let shift of employee.shifts">
           <li>
@@ -14,8 +14,8 @@
               <span></span>
             </div>
             <div class="employee-detail">
-              <div class="heading-lg">{{shift.start}}</div>
-              <img src="assets/assets/icons/ico-present-02.svg" alt="" />
+              <div class="heading-lg">{{ shift.start }}</div>
+              <img src="assets/icons/ico-present-02.svg" alt="" />
             </div></li
         ></app-date-card>
       </ul>

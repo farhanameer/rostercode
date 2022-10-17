@@ -4,13 +4,21 @@
       <div class="header-menu"></div>
       <app-full-layout>
         <div>
-          <div>
+          <div class="table-header gradient-head flex justify-content-between">
+            <div class="heading">Shift Setup</div>
             <app-location-and-designation-filter
               (filtersChange)="filterChange($event)"
             >
-              <div class="heading">Shift Request</div>
             </app-location-and-designation-filter>
+
+            <!-- <div class="btn-options flex align-content-center">
+            <a href="#" class="btn-custom"
+              >Advance Filter
+              <i><img src="assets/icons/filter.svg" alt="" /></i>
+            </a>
+          </div> -->
           </div>
+
           <div class="shift-setup">
             <div class="shadow pb0-10">
               <app-sub-layout>

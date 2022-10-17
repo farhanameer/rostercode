@@ -1,91 +1,121 @@
-<div class="table-header gradient-head flex justify-content-between">
-  <ng-content></ng-content>
-  <div class="btn-options flex align-content-center">
-    <div>
-      <app-select-box [label]="'Market'" [width]="'105px'" [height]="'20px'"
+<!-- <div class="table-header gradient-head flex justify-content-between">
+  <ng-content></ng-content> -->
+<div class="btn-options flex align-content-center">
+  <div>
+    <app-select-box
+      [label]="'Market'"
+      [width]="'105px'"
+      [height]="'20px'"
       [data]="marketArray"
-      [disabled]="marketArray.length==0"
+      [disabled]="marketArray.length == 0"
       (selectionChange)="selectionChanged($event)"
       [name]="'market'"
       [hideLabel]="true"
-      [customClass]="['padding-top-3','carret_position_9']"
-      > </app-select-box>
-    </div>
-    <div>
-      <app-select-box [label]="'Cluster'" [width]="'105px'" [height]="'20px'"
+      [customClass]="['padding-top-3', 'carret_position_9']"
+    >
+    </app-select-box>
+  </div>
+  <div>
+    <app-select-box
+      [label]="'Cluster'"
+      [width]="'105px'"
+      [height]="'20px'"
       [data]="clusterArray"
-      [disabled]="clusterArray.length==0"
+      [disabled]="clusterArray.length == 0"
       (selectionChange)="selectionChanged($event)"
       [name]="'cluster'"
       [hideLabel]="true"
-      [customClass]="['padding-top-3','carret_position_9']"
-      > </app-select-box>
-    </div>
-    <div>
-      <app-select-box [label]="'Sub Cluster'" [width]="'105px'" [height]="'20px'"
+      [customClass]="['padding-top-3', 'carret_position_9']"
+    >
+    </app-select-box>
+  </div>
+  <div>
+    <app-select-box
+      [label]="'Sub Cluster'"
+      [width]="'105px'"
+      [height]="'20px'"
       [data]="subClusterArray"
-      [disabled]="subClusterArray.length==0"
+      [disabled]="subClusterArray.length == 0"
       (selectionChange)="selectionChanged($event)"
       [name]="'subCluster'"
       [hideLabel]="true"
-      [customClass]="['padding-top-3','carret_position_9']"
-      > </app-select-box>
-    </div>
-    <div>
-      <app-select-box [label]="'Country'" [width]="'105px'" [height]="'20px'"
+      [customClass]="['padding-top-3', 'carret_position_9']"
+    >
+    </app-select-box>
+  </div>
+  <div>
+    <app-select-box
+      [label]="'Country'"
+      [width]="'105px'"
+      [height]="'20px'"
       [data]="countriesArray"
-      [disabled]="countriesArray.length==0"
+      [disabled]="countriesArray.length == 0"
       (selectionChange)="selectionChanged($event)"
       [name]="'country'"
       [hideLabel]="true"
-      [customClass]="['padding-top-3','carret_position_9']"
-      > </app-select-box>
-    </div>
-    <div>
-      <app-select-box [label]="'State'" [width]="'105px'" [height]="'20px'"
+      [customClass]="['padding-top-3', 'carret_position_9']"
+    >
+    </app-select-box>
+  </div>
+  <div>
+    <app-select-box
+      [label]="'State'"
+      [width]="'105px'"
+      [height]="'20px'"
       [data]="statesArray"
-      [disabled]="statesArray.length==0"
+      [disabled]="statesArray.length == 0"
       (selectionChange)="selectionChanged($event)"
       [name]="'state'"
       [hideLabel]="true"
-      [customClass]="['padding-top-3','carret_position_9']"
-      > </app-select-box>
-    </div>
-    
-    <div>
-      <app-select-box [label]="'City'" [width]="'105px'" [height]="'20px'"
+      [customClass]="['padding-top-3', 'carret_position_9']"
+    >
+    </app-select-box>
+  </div>
+
+  <div>
+    <app-select-box
+      [label]="'City'"
+      [width]="'105px'"
+      [height]="'20px'"
       [data]="citiesArray"
-      [disabled]="citiesArray.length==0"
+      [disabled]="citiesArray.length == 0"
       (selectionChange)="selectionChanged($event)"
       [name]="'city'"
       [hideLabel]="true"
-      [customClass]="['padding-top-3','carret_position_9']"
-      > </app-select-box>
-    </div>
+      [customClass]="['padding-top-3', 'carret_position_9']"
+    >
+    </app-select-box>
+  </div>
 
-
-    <div>
-      <app-select-box [label]="'Branch'" [width]="'105px'" [height]="'20px'"
+  <div>
+    <app-select-box
+      [label]="'Branch'"
+      [width]="'105px'"
+      [height]="'20px'"
       [data]="branchesArray"
-      [disabled]="branchesArray.length==0"
+      [disabled]="branchesArray.length == 0"
       (selectionChange)="selectionChanged($event)"
       [name]="'branch'"
       [hideLabel]="true"
-      [customClass]="['padding-top-3','carret_position_9']"
-      > </app-select-box>
-    </div>
+      [customClass]="['padding-top-3', 'carret_position_9']"
+    >
+    </app-select-box>
+  </div>
 
-
-    <div>
-      <app-select-box [label]="'Department'" [width]="'105px'" [height]="'20px'"
+  <div>
+    <app-select-box
+      [label]="'Department'"
+      [width]="'105px'"
+      [height]="'20px'"
       [data]="departmentArray"
-      [disabled]="departmentArray.length==0"
+      [disabled]="departmentArray.length == 0"
       (selectionChange)="selectionChanged($event)"
       [name]="'department'"
       [hideLabel]="true"
-      [customClass]="['padding-top-3','carret_position_9']"
-      > </app-select-box>
-    </div>
-    <div></div>
+      [customClass]="['padding-top-3', 'carret_position_9']"
+    >
+    </app-select-box>
   </div>
+  <div></div>
 </div>
+<!-- </div> -->
