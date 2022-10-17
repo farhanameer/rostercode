@@ -38,6 +38,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: flex;
+    justify-content: space-between;
   }
 
   /*style the arrow inside the select element:*/
@@ -87,8 +89,9 @@
 
 
   /*style the items (options), including the selected item:*/
-  .select-items div,
+  .select-items > div,
   .select-selected {
+    display: flex;
     padding: 6px 10px;
     border: 1px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -139,7 +142,7 @@
     display: none;
   }
 
-  .select-items div:hover,
+  .select-items > div:hover,
   .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -154,6 +157,22 @@
   .padding-top-3{
     padding-top: 3.4px;
     padding-bottom: 3.4px;
+  }
+
+  .data-tooltip{
+    margin-right: 16px;
+    background: #61bf63;
+    color: white;
+    padding: 6px 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  .overflow-text-hidden{
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   }
 
 }

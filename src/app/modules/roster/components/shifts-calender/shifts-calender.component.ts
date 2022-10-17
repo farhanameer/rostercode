@@ -1,6 +1,6 @@
 import { RosterService } from './../../services/data/rosterView.data.service';
 import  moment  from 'moment';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CalendarService } from '../../services/calander.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { ShiftManagmentDialog } from '../../dialogs/shift-managment/shift-managment.dialog';
@@ -11,7 +11,7 @@ import { AppLocalStorageService } from 'src/app/services/app-local-storage.servi
   templateUrl: 'shifts-calender.component.html',
   styleUrls: ['shifts-calender.component.css']
 })
-export class ShiftsCalenderComponent implements OnInit {
+export class ShiftsCalenderComponent implements OnInit , OnChanges {
 
   months = new Array(5);
   currentDate: any;
@@ -19,9 +19,21 @@ export class ShiftsCalenderComponent implements OnInit {
   reshapedData : any;
   year_month = '';
   weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  @Input() filters : any = null;
 
   constructor(private calendar: CalendarService, private dataService: RosterService,
-    private customModal: ModalService, private appLocalStorage: AppLocalStorageService) { }
+    private customModal: ModalService, private appLocalStorage: AppLocalStorageService ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('filters getting changed' , this.filters);
+    if(this.filters && (Object.entries(this.filters).length!=0)) {
+      console.log('after filter selection');
+      this.getLMRosterView({
+        "client_id" :this.appLocalStorage.getClientId(),
+        "year_month" : this.year_month, 
+        "reporting_to_id" : this.appLocalStorage.getUserId()
+      });
+    }
+  }
 
   ngOnInit(): void {
       this.currentDate = moment();
@@ -35,7 +47,7 @@ export class ShiftsCalenderComponent implements OnInit {
         );
 
 
-        console.log('calendar from moment',this.currentMonthDates);
+        
         
       this.months[0] = moment(this.currentDate).subtract(2,'month').format('MMMM YYYY');
       this.months[1] = moment(this.currentDate).subtract(1,'month').format('MMMM YYYY');
@@ -48,7 +60,6 @@ export class ShiftsCalenderComponent implements OnInit {
       this.getLMRosterView({
         "client_id" :this.appLocalStorage.getClientId(),
         "year_month" : this.year_month,
-        "is_roster_employees" : 1 , 
         "reporting_to_id" : this.appLocalStorage.getUserId()
     });
   }
@@ -57,10 +68,10 @@ export class ShiftsCalenderComponent implements OnInit {
 
   getRosterShiftsByDate(date){
     let foundData = [];
-    console.log('lm view Array' , this.lmRosterViewArray);
+    
     this.lmRosterViewArray.every(singleShift =>{
       if(date == singleShift["date"]){
-        console.log('data' , singleShift["date"])
+        
         foundData = singleShift["shifts"];
         return false;
       }
@@ -71,6 +82,25 @@ export class ShiftsCalenderComponent implements OnInit {
   }
 
   async getLMRosterView(params){
+
+    if(this.filters) {
+      if(this.filters["employeeType"]) {
+        params['is_roster_employees'] = this.filters["employeeType"]
+      }
+      if(this.filters["reportingLevel"]) {
+        params['reporting'] = this.filters["reportingLevel"]
+      }
+
+      if(this.filters["department"]) {
+        params['department'] = this.filters["department"]
+      }
+      if(this.filters["employees"]) {
+        params['employee_id'] = this.filters["employees"]
+      }
+      if(this.filters["shifts"]) {
+        params['shift_id'] = this.filters["shifts"]
+      }
+    }
     const data = await this.dataService.getLMRosterView(params);
     
     this.lmRosterViewArray = data["data"]["payload"];
@@ -100,16 +130,16 @@ export class ShiftsCalenderComponent implements OnInit {
           date = `${this.year_month}-${calendarData["date"]}`;
         }
         if(calendarData["date"]){
-          console.log(date);
+          
           calendarData["shifts"]  = this.getRosterShiftsByDate(date);
-          console.log(calendarData["shifts"].length);
+          
         }
         resultingArray.push(array[counter]);
         counter = counter + 1;
       }
       responseArray.push([...resultingArray]);
     }
-    console.log('shifts Data',responseArray);
+    
     return responseArray;
   }
 
@@ -133,7 +163,7 @@ export class ShiftsCalenderComponent implements OnInit {
         } 
         this.months[i] = this.months[i-1];       
       }
-      console.log(this.months); 
+      
     }
 
     this.year_month = moment(this.currentDate).format('YYYY')+'-'+moment(this.currentDate).format('MM');
@@ -141,7 +171,6 @@ export class ShiftsCalenderComponent implements OnInit {
     this.getLMRosterView({
       "client_id" :this.appLocalStorage.getClientId(),
       "year_month" : this.year_month,
-      "is_roster_employees" : 1 , 
       "reporting_to_id" : this.appLocalStorage.getUserId()
   });
   }

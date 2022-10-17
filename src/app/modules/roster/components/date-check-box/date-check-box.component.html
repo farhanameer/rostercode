@@ -3,7 +3,7 @@
     <app-main-card *ngFor="let entry of data">
       <ul>
         <div class="row m-0">
-          <div class="col p-0 d-flex" style="flex-grow: 0">
+          <div class="col p-0 d-flex" style="flex-grow: 0; align-items: center;">
             <input type="checkbox" (click)="open()" />
           </div>
           <div class="col p-0">
@@ -12,7 +12,7 @@
         </div>
         <app-employee-card *ngFor="let employee of entry.employees">
           <div class="row custom-w-260">
-            <div class="col d-flex pl-20">
+            <div class="col d-flex pl-20" style="align-items: center;">
               <input type="checkbox" (click)="open()" />
             </div>
             <div class="col custom-pl-6">

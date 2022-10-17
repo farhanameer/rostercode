@@ -17,7 +17,7 @@
       cdkDropList
       [cdkDropListData]="data"
       (cdkDropListDropped)="drop($event)"
-      *ngIf="data.length != 0"
+      style="min-height:60px"
     >
       <div *ngFor="let emp of data" class="JobCard example-box" cdkDrag>
         <div class="vh-center">
@@ -36,22 +36,6 @@
       
     </div>
 
-    <div
-      class="example-list"
-      cdkDropList
-      [cdkDropListData]="data"
-      (cdkDropListDropped)="drop($event)"
-      *ngIf="data.length == 0"
-    >
-      <div class="JobCard example-box">
-        <div class="vh-center">
-          
-        </div>
-        <div class="content">
-        </div>
-      </div>
-
-      
-    </div>
+    
   </app-employee-card>
 </div>

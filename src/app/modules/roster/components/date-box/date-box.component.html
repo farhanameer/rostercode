@@ -14,6 +14,8 @@
         [ngStyle]="{ width: width }"
         [formControl]="form?.get(control)"
         #inputRef
+        (dateChange)="dateChange($event)"
+
       />
       <p class="label" [class.d-none]="hideLabel && inputRef?.value !=''" [class.agt-float-label]="inputRef?.value != ''">
         {{ label }}
@@ -21,6 +23,7 @@
       <mat-datepicker-toggle
         [disableRipple]="true"
         [for]="varIssueDate"
+        
       ></mat-datepicker-toggle>
       <mat-datepicker #varIssueDate></mat-datepicker>
     </div>

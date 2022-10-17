@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import moment from 'moment';
 
 @Component({
   selector: 'app-date-box',
@@ -20,5 +21,10 @@ export class DateBoxComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  dateChange(date){
+    const selectedDate = moment(date.value).format('YYYY-MM-DD')
+    console.log('selected date' , selectedDate);
   }
 }

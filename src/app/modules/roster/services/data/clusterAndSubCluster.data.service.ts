@@ -245,11 +245,11 @@ export class ClusterAndSubClusterDataService {
     });
   }
 
-  getDepartment() {
+  getDepartment(bodyParams = null) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
-        this.httpService.getDepartment().subscribe(
+        this.httpService.getDepartment(bodyParams).subscribe(
           (data) => {
             response.data = data['data'];
             response.message = 'success';
@@ -261,6 +261,72 @@ export class ClusterAndSubClusterDataService {
             ) {
               this.toastService.toast(data['payload'], 'success-toast');
             }
+            resolve(response);
+            console.log(response);
+          },
+          (err) => {
+            response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
+            resolve(response);
+          }
+        );
+      } catch (error) {
+        response.message = error;
+        this.toastService.toast(error, 'error-toast');
+        resolve(response);
+      }
+    });
+  }
+
+
+  getRosterType() {
+
+
+    return new Promise((resolve, reject) => {
+      const response = { data: null, status: false, message: null };
+      const params = {
+        "client_id" : this.appLocalStorage.getClientId()
+      }
+      try {
+        this.httpService.getRosterType(params).subscribe(
+          (data) => {
+            response.data = data;
+            response.message = 'success';
+            response.status = true;
+            
+            resolve(response);
+            console.log(response);
+          },
+          (err) => {
+            response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
+            resolve(response);
+          }
+        );
+      } catch (error) {
+        response.message = error;
+        this.toastService.toast(error, 'error-toast');
+        resolve(response);
+      }
+    });
+  }
+
+
+  getReporting() {
+
+
+    return new Promise((resolve, reject) => {
+      const response = { data: null, status: false, message: null };
+      const params = {
+        "client_id" : this.appLocalStorage.getClientId()
+      }
+      try {
+        this.httpService.getReporting(params).subscribe(
+          (data) => {
+            response.data = data;
+            response.message = 'success';
+            response.status = true;
+            
             resolve(response);
             console.log(response);
           },
