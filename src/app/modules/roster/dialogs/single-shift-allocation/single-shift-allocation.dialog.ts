@@ -58,7 +58,6 @@ export class SingleShiftAllocationDialog implements OnInit {
       })
     });
     this.shiftNameArray = shiftName;
-    debugger;
   }
 
 

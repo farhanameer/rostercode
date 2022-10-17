@@ -185,6 +185,9 @@ export class ShiftSetupComponent implements OnInit {
 
   async submit(){
     
+    console.log(this.shiftSetUpForm.value);
+
+    return;
 
     if(this.isUpdating){
       console.log(this.shiftSetUpForm.value);

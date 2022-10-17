@@ -10,30 +10,44 @@
             [name]="'employeeType'"
             [hideLabel]="true"
             [customClass]="['padding-top-3','carret_position_9']"
+            [data]="clientTypesArray"
+            [disabled]="clientTypesArray.length==0"
+            (selectionChange)="selectionChanged($event)"
             > </app-select-box>
             <app-select-box
             [label]="'Reporting Level'" [width]="'105px'" [height]="'20px'"
             [name]="'reportingLevel'"
             [hideLabel]="true"
             [customClass]="['padding-top-3','carret_position_9']"
+            [data]="reportingTypesArray"
+            [disabled]="reportingTypesArray.length==0"
+            (selectionChange)="selectionChanged($event)"
             > </app-select-box>
             <app-select-box
             [label]="'Department'" [width]="'105px'" [height]="'20px'"
             [name]="'department'"
             [hideLabel]="true"
             [customClass]="['padding-top-3','carret_position_9']"
+            [data]="departmentsArray"
+            [disabled]="departmentsArray.length==0"
+            (selectionChange)="selectionChanged($event)"
             > </app-select-box>
             <app-select-box
             [label]="'Employees'" [width]="'105px'" [height]="'20px'"
             [name]="'employees'"
             [hideLabel]="true"
             [customClass]="['padding-top-3','carret_position_9']"
+            [data]="employeesArray"
+            [disabled]="employeesArray.length==0"
+            (selectionChange)="selectionChanged($event)"
             > </app-select-box>
             <app-select-box
             [label]="'Shifts'" [width]="'105px'" [height]="'20px'"
             [name]="'shifts'"
             [hideLabel]="true"
             [customClass]="['padding-top-3','carret_position_9']"
+            [data]="shiftsArray"
+            [disabled]="shiftsArray.length==0"
             > </app-select-box>
           </div>
         </div>
@@ -49,7 +63,7 @@
               </div>
             </app-sub-layout>
           </div>
-          <app-shifts-calender class="w-100"></app-shifts-calender>
+          <app-shifts-calender class="w-100" [filters]="filters"></app-shifts-calender>
         </div>
         <div class="calendar-footer">
           <ul class="shift-hints">
