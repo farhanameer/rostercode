@@ -84,7 +84,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
   async getLMRosterView(params){
 
     if(this.filters) {
-      if(this.filters["employeeType"]) {
+      if(this.filters["employeeType"] !=undefined) {
         params['is_roster_employees'] = this.filters["employeeType"]
       }
       if(this.filters["reportingLevel"]) {
@@ -272,8 +272,11 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
 
   // dialog open function below:
   openManagement(dateRange){
-    
-    this.customModal.showFeaturedDialog(ShiftManagmentDialog,"" , dateRange);
+    const payload = {
+      dateRagne : dateRange , 
+      filters : this.filters
+    }
+    this.customModal.showFeaturedDialog(ShiftManagmentDialog,"" , payload);
   }
   
 }

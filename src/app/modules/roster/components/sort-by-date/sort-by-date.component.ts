@@ -24,14 +24,33 @@ export class SortByDateComponent implements OnInit {
     console.log('in popup', this.dates);
     this.getLMRosterView({
       client_id: this.appLocalStorage.getClientId(),
-      start_date : this.dates.start , 
-      end_date : this.dates.end,
-      is_roster_employees: 1,
+      start_date : this.dates.dateRagne.start , 
+      end_date : this.dates.dateRagne.end,
       reporting_to_id: this.appLocalStorage.getUserId(),
     });
   }
 
   async getLMRosterView(params) {
+
+    let body = params;
+    if(this.dates.filters) {
+      if(this.dates.filters["employeeType"] !=undefined) {
+        params['is_roster_employees'] = this.dates.filters["employeeType"]
+      }
+      if(this.dates.filters["reportingLevel"]) {
+        params['reporting'] = this.dates.filters["reportingLevel"]
+      }
+
+      if(this.dates.filters["department"]) {
+        params['department'] = this.dates.filters["department"]
+      }
+      if(this.dates.filters["employees"]) {
+        params['employee_id'] = this.dates.filters["employees"]
+      }
+      if(this.dates.filters["shifts"]) {
+        params['shift_id'] = this.dates.filters["shifts"]
+      }
+    }
     const data = await this.dataService.getLMRosterView(params);
 
     if (!data['data']['status']) {

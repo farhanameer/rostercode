@@ -26,9 +26,8 @@ export class DateCheckBoxComponent implements OnInit {
     console.log('model Data' , this.modelData);
     this.getLMRosterView({
       client_id: this.appLocalStorage.getClientId(),
-      start_date : this.modelData.start , 
-      end_date : this.modelData.end,
-      is_roster_employees: 1,
+      start_date : this.modelData.dateRagne.start , 
+      end_date : this.modelData.dateRagne.end,
       reporting_to_id: this.appLocalStorage.getUserId(),
     });
   }
@@ -39,6 +38,24 @@ open(){
 
 
   async getLMRosterView(params) {
+    if(this.modelData.filters) {
+      if(this.modelData.filters["employeeType"] !=undefined) {
+        params['is_roster_employees'] = this.modelData.filters["employeeType"]
+      }
+      if(this.modelData.filters["reportingLevel"]) {
+        params['reporting'] = this.modelData.filters["reportingLevel"]
+      }
+
+      if(this.modelData.filters["department"]) {
+        params['department'] = this.modelData.filters["department"]
+      }
+      if(this.modelData.filters["employees"]) {
+        params['employee_id'] = this.modelData.filters["employees"]
+      }
+      if(this.modelData.filters["shifts"]) {
+        params['shift_id'] = this.modelData.filters["shifts"]
+      }
+    }
     const data = await this.dataService.getLMRosterView(params);
 
     if (!data['data']['status']) {

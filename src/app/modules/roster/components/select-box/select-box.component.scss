@@ -92,6 +92,7 @@
   .select-items > div,
   .select-selected {
     display: flex;
+    align-items: center;
     padding: 6px 10px;
     border: 1px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -160,14 +161,16 @@
   }
 
   .data-tooltip{
-    margin-right: 16px;
+    margin-right: 19px;
     background: #61bf63;
     color: white;
-    padding: 6px 6px;
+    height: 14px;
+    /* padding: 6px 6px; */
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    width: 14px;
   }
   .overflow-text-hidden{
     white-space: nowrap;
