@@ -7,7 +7,7 @@ import moment from 'moment';
 @Component({
   selector: 'app-shift-setup',
   templateUrl: './shift-setup.component.html',
-  styleUrls: ['./shift-setup.component.css']
+  styleUrls: ['./shift-setup.component.scss']
 })
 export class ShiftSetupComponent implements OnInit {
 
@@ -177,6 +177,14 @@ export class ShiftSetupComponent implements OnInit {
     });
 
     this.qrt_break.push(qrtForm);
+  }
+
+  pushOrDeleteFromArray(flag , index){
+    if(flag=='plus'){
+      this.newqrtbreak();
+      return;
+    }
+    this.qrt_break.removeAt(index);
   }
 
   get validateAForm(): any {
