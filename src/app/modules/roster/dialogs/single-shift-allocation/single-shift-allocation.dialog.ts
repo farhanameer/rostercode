@@ -1,7 +1,7 @@
 import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { RosterService } from './../../services/data/rosterView.data.service';
 import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeShiftDataService } from '../../services/data/dropdown.data';
@@ -12,7 +12,7 @@ import moment from 'moment';
   templateUrl: './single-shift-allocation.dialog.html',
   styleUrls: ['./single-shift-allocation.dialog.css']
 })
-export class SingleShiftAllocationDialog implements OnInit {
+export class SingleShiftAllocationDialog implements OnInit , OnChanges{
 
   singleShiftForm: FormGroup;
   submitted : boolean = false;
@@ -31,6 +31,11 @@ export class SingleShiftAllocationDialog implements OnInit {
     private rosterService : RosterService,
     private shiftRequest: ShiftRequestDataService
   ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.singleShiftForm.value.date);
+    
+  }
 
   ngOnInit(): void {
     this.getShiftDropdown()

@@ -19,11 +19,15 @@ view:string="weekend";
 // additional:string;
 // weekend:string;
 submitted : boolean = false;
+single: boolean = false;
 
   constructor(public activeModal: NgbActiveModal ,private customModal:ModalService ) { }
 
   ngOnInit(): void {
     console.log('model Data we got' , this.modelData);
+    if(this.modelData.dateRagne.start == this.modelData.dateRagne.end){
+      this.single = false;
+    }
   }
 
   openChangeShift() {
