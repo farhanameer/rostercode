@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import moment from 'moment';
 
@@ -16,6 +16,8 @@ export class DateBoxComponent implements OnInit {
   @Input() width : string;
   @Input() height : string;
   @Input() hideLabel : Boolean = false;
+
+  @Output() dateChanged : EventEmitter<any> = new EventEmitter()
   
 
   constructor() { }
@@ -26,5 +28,6 @@ export class DateBoxComponent implements OnInit {
   dateChange(date){
     const selectedDate = moment(date.value).format('YYYY-MM-DD')
     console.log('selected date' , selectedDate);
+    this.dateChanged.emit(selectedDate);
   }
 }

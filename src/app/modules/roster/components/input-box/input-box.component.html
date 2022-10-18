@@ -15,7 +15,13 @@
       type="text"
       placeholder=" "
     />
-    <p class="label" [ngStyle]="{ color: color }">{{ label }}</p>
+    <p
+      class="label"
+      [class.ags-bg-transparent]="isdisabled ? true : null"
+      [ngStyle]="{ color: color }"
+    >
+      {{ label }}
+    </p>
   </div>
   <span
     class="text-right text-error d-block"
