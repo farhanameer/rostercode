@@ -1,8 +1,8 @@
 <app-dialog-layout>
   <div class="modal-custom modal-lg bg-white modal-center custom-w-800">
     <div class="gradient-head flex justify-content-between">
-      <div class="heading">
-        Shift Management ({{dates.start}} - {{dates.end}})
+      <div class="heading" *ngIf="dates.dateRagne">
+        Shift Management ({{dates.dateRagne.start}} - {{dates.dateRagne.end}})
       </div>
       <div class="btn-options flex align-content-center">
         <a

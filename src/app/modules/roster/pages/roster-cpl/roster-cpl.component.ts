@@ -40,11 +40,12 @@ export class RosterCplComponent implements OnInit {
     this.filters = {...this.filters , ...obj};
     this.filters[selection.controlName]=selection.value;
     if(selection.controlName == 'department'){
-      this.getEmployees(selection.value)
+      this.getEmployees(selection.value);
+      this.getShifts(selection.value);
     }
-    if(selection.controlName == 'employees'){
-      this.getShifts(selection.value)
-    }
+    // if(selection.controlName == 'employees'){
+    //   this.getShifts(selection.value)
+    // }
   }
   transformDropDownData(array , idKey , valueKey){
     if(!Array.isArray(array)) return [];
@@ -100,10 +101,10 @@ export class RosterCplComponent implements OnInit {
   }
 
 
-  async getShifts(employeeId){
+  async getShifts(departmentId){
     console.log('getClientTypes');
     const params = {
-      emp_id : employeeId
+      department_id : departmentId
     }
     const data =await this.shiftRequestService.getDefaultList('lm' , params);
     if(!data["status"]) return;
