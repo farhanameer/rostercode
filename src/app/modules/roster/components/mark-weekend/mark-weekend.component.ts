@@ -18,6 +18,5 @@ export class MarkWeekendComponent implements OnInit {
   }
   radioChange(val:string){
     this.view=val
-
   }
 }
