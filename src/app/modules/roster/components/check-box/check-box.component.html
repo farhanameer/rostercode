@@ -1,5 +1,9 @@
 <div class="d-flex agt-check-box-container">
-  <input class="agt-check-box" type="checkbox" [checked]="checked" />
+  <input class="agt-check-box" 
+    type="checkbox" 
+    [checked]="checked" 
+    #checkbox 
+    (change)="selectionChange(checkbox)"/>
   <p class="ml-1" [ngStyle]="{ color: color }">
     {{ label }}
   </p>

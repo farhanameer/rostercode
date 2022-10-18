@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
 import { HolidayDataService } from './../../services/data/holidays.data.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,6 +13,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class CalenderSetupComponent implements OnInit {
   workCalenderSetupForm:FormGroup
   weekDays = [];
+  years = [];
+  current;
+  holidayStatus = [];
+
   constructor(private fb:FormBuilder, public activeModal: NgbActiveModal,
     private holiday: HolidayDataService,
     private appLocalStorage : AppLocalStorageService) { }
@@ -24,13 +29,29 @@ export class CalenderSetupComponent implements OnInit {
       halfDay:["",Validators.required],
       from:["",Validators.required],
       to:["",Validators.required]
-
-
     });
-
+    this.getYears();
     this.weekends();
     this.getWorkCalendarSetting();
     this.workCalendarSetting();
+  }
+
+  getYears(){
+    this.current = moment();
+    let obj = {
+      id : 0,
+      name :  moment(this.current).format('YYYY')
+    }
+    this.years.push(obj);
+
+    for(let i = 1; i < 10; i++){
+      this.current = moment(this.current).add(1, 'year').format('YYYY');
+      this.years.push({
+        id : i,
+        name : this.current
+      })
+    }
+    console.log(this.years);
   }
 
   async workCalendarSetting(){
@@ -109,13 +130,37 @@ export class CalenderSetupComponent implements OnInit {
     
   }
 
+  selectionChange(value,id){
+    console.log(value, id);
+    if(value){
+      id.status = 1;
+    }else{
+      id.status = 0;
+    }
+  }
+
   async getWorkCalendarSetting(){
+
     const params = {
       "client_id" : this.appLocalStorage.getClientId(),
       "year" : 2022,
       "country_id" : 154
     }
     const res = await this.holiday.getWorkCalendarSetting(params); 
+    // this.holidayStatus = res['data'].publicHolidays;
+    const holidays = res['data'].publicHolidays;
+    let counter = Math.ceil(holidays.length/5);
+    let holidayStatus2 = [];
+    let loopCounter = 0;
+    for(let i = 1; i<=counter; i++){
+      let array = [];
+      for(let j = 0; j<5; j++){
+        array.push(holidays[loopCounter]);
+        loopCounter = loopCounter + 1;
+      }
+      this.holidayStatus.push(array);
+    }
+    console.log(this.holidayStatus);
   }
   
   async weekends(){
