@@ -129,6 +129,8 @@
     right: 0;
     z-index: 99;
     box-shadow: 0 3px 6px 0 rgba(0,0,0,.16)!important;
+    max-height: 302px;
+    overflow-y: hidden;
   }
 
   .label_up{

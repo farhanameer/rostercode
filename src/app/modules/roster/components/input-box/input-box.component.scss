@@ -12,4 +12,12 @@
 .ags-bg-transparent{
     background-color: transparent !important;
 }
+.hide-label{
+    transform: translateY(0px) !important;
+}
 
+.input-box::placeholder{
+   
+    color: #b6b6b6 !important;
+    opacity: 1 !important;
+}

@@ -21,7 +21,16 @@
     <!-- <app-error-msg [form]="form" [control]="control"></app-error-msg> -->
     <div class="select-items select-hide" id="custom-select" #dropdownList>
 
-    <div *ngFor="let option of data" [class.same-as-selected]="hash[option.id]" (click)="optionSelected(option)"> <app-check-box *ngIf="multiSelect" [checked]="hash[option.id]"></app-check-box> {{option.name}}</div>
+    <div>
+      <app-input-box [label]="'Search'" class="w-100" [width]="'100%'" [height]="'20px'" [hideLabel]="true" [placeHolder]="'Search'"
+      (inputChanged)="search($event)"
+      ></app-input-box>
+    </div>
+
+    <div *ngFor="let option of data" [class.same-as-selected]="hash[option.id]" (click)="optionSelected(option)"> 
+
+      <app-check-box *ngIf="multiSelect" [checked]="hash[option.id]"></app-check-box> {{option.name}}
+    </div>
 
 
       <!-- <div>BMW</div>

@@ -1,5 +1,7 @@
 .agt-module {
   .comp-wrapper {
+    width: 260px;
+    height: 26px;
     display: flex !important;
     justify-content: right !important;
     flex-wrap: wrap !important;
@@ -22,14 +24,14 @@
       transition: .25s;
     }
     .input-box {
-      width: 260px;
-      height: 26px;
+      width: 100%;
+      height: 100%;
       border: 1px solid #D8DCDF;
       border-radius: 4px;
       padding-left: 10px;
       &::placeholder {
-        color: transparent !important;
-        user-select: none !important;
+        // color: transparent !important;
+        // user-select: none !important;
       }
     }
     .input-box:focus + .label,
