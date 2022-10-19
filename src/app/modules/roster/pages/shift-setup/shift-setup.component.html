@@ -191,6 +191,7 @@
                       class="form-col"
                       *ngFor="let qrt of qrt_break.controls; let i = index"
                     >
+                    
                       <div [formGroup]="qrt" class="form-col">
                         <div>
                           <app-input-box
@@ -206,20 +207,24 @@
                             [control]="'qrt_break_time_in'"
                           ></app-time-box>
                         </div>
-                        <div>
+                        <div class="d-flex">
                           <app-time-box
                             [label]="'To'"
                             [form]="qrt"
                             [control]="'qrt_break_time_out'"
                           ></app-time-box>
+
+                          <img *ngIf="qrt_break.length!=(i+1)" class="ags-ml-3 ags-h-w-16" (click)="pushOrDeleteFromArray('minus',i)" src="assets/images/roster/minus.svg" alt="">
+                          <img *ngIf="qrt_break.length==(i+1)" class="ags-ml-3 ags-h-w-16" (click)="pushOrDeleteFromArray('plus',i)" src="assets/images/roster/plus.svg" alt="">
                         </div>
-                        <div>
+                        <div *ngIf="(i+1)==qrt_break.length">
                           <app-check-box
                             [color]="'#3080EA'"
                             [label]="'Tolerance'"
                           >
                           </app-check-box>
                         </div>
+                        
                       </div>
                     </div>
                     <div class="form-col">
@@ -251,6 +256,9 @@
                   </div>
                 </div>
               </app-sub-layout>
+              <!-- <div>
+                <app-approval-details></app-approval-details>
+              </div> -->
             </div>
             <!-- <div class="shift-setup-footer"></div> -->
             <!-- <div class="calendar-footer justify-content-end">

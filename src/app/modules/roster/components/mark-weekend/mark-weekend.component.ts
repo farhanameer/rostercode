@@ -22,6 +22,5 @@ single: boolean = false;
   }
   radioChange(val:string){
     this.view=val
-
   }
 }
