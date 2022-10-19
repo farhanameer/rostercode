@@ -20,16 +20,9 @@ export class ClusterAndSubClusterDataService {
       try {
         this.httpService.getMarket().subscribe(
           (data) => {
-            response.data = data['data'];
+            response.data = data;
             response.message = 'success';
             response.status = true;
-            if (
-              data['payload'] &&
-              !Array.isArray(data['payload']) &&
-              typeof data['payload'] == 'string'
-            ) {
-              this.toastService.toast(data['payload'], 'success-toast');
-            }
             resolve(response);
             console.log(response);
           },
@@ -53,16 +46,9 @@ export class ClusterAndSubClusterDataService {
       try {
         this.httpService.getClusterByMarket(marketId).subscribe(
           (data) => {
-            response.data = data['data'];
+            response.data = data;
             response.message = 'success';
             response.status = true;
-            if (
-              data['payload'] &&
-              !Array.isArray(data['payload']) &&
-              typeof data['payload'] == 'string'
-            ) {
-              this.toastService.toast(data['payload'], 'success-toast');
-            }
             resolve(response);
             console.log(response);
           },
@@ -86,16 +72,9 @@ export class ClusterAndSubClusterDataService {
       try {
         this.httpService.getSubClusterByCluster(clusterId).subscribe(
           (data) => {
-            response.data = data['data'];
+            response.data = data;
             response.message = 'success';
             response.status = true;
-            if (
-              data['payload'] &&
-              !Array.isArray(data['payload']) &&
-              typeof data['payload'] == 'string'
-            ) {
-              this.toastService.toast(data['payload'], 'success-toast');
-            }
             resolve(response);
             console.log(response);
           },
@@ -119,16 +98,9 @@ export class ClusterAndSubClusterDataService {
       try {
         this.httpService.getCountries(keyName, value).subscribe(
           (data) => {
-            response.data = data['data'];
+            response.data = data;
             response.message = 'success';
             response.status = true;
-            if (
-              data['payload'] &&
-              !Array.isArray(data['payload']) &&
-              typeof data['payload'] == 'string'
-            ) {
-              this.toastService.toast(data['payload'], 'success-toast');
-            }
             resolve(response);
             console.log(response);
           },
@@ -152,16 +124,10 @@ export class ClusterAndSubClusterDataService {
       try {
         this.httpService.getStatesByCountry(countryId).subscribe(
           (data) => {
-            response.data = data['data'];
+            response.data = data;
             response.message = 'success';
             response.status = true;
-            if (
-              data['payload'] &&
-              !Array.isArray(data['payload']) &&
-              typeof data['payload'] == 'string'
-            ) {
-              this.toastService.toast(data['payload'], 'success-toast');
-            }
+            
             resolve(response);
             console.log(response);
           },
@@ -185,16 +151,10 @@ export class ClusterAndSubClusterDataService {
       try {
         this.httpService.getCitiesByState(stateId).subscribe(
           (data) => {
-            response.data = data['data'];
+            response.data = data;
             response.message = 'success';
             response.status = true;
-            if (
-              data['payload'] &&
-              !Array.isArray(data['payload']) &&
-              typeof data['payload'] == 'string'
-            ) {
-              this.toastService.toast(data['payload'], 'success-toast');
-            }
+            
             resolve(response);
             console.log(response);
           },
@@ -218,16 +178,10 @@ export class ClusterAndSubClusterDataService {
       try {
         this.httpService.getBarnchByCity(cityId).subscribe(
           (data) => {
-            response.data = data['data'];
+            response.data = data;
             response.message = 'success';
             response.status = true;
-            if (
-              data['payload'] &&
-              !Array.isArray(data['payload']) &&
-              typeof data['payload'] == 'string'
-            ) {
-              this.toastService.toast(data['payload'], 'success-toast');
-            }
+            
             resolve(response);
             console.log(response);
           },

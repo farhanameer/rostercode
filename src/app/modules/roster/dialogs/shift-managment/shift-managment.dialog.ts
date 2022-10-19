@@ -13,6 +13,7 @@ export class ShiftManagmentDialog implements OnInit {
   @Input() dates: any;
   valueType : string  = 'date';
   view:string="date";
+  single: boolean = false;
 
 
 
@@ -20,7 +21,11 @@ export class ShiftManagmentDialog implements OnInit {
     private customModel:ModalService) { }
 
   ngOnInit(): void {
-    console.log('data was first got' , this.dates);
+    console.log('shift management' , this.dates);
+    if(this.dates.dateRagne.start == this.dates.dateRagne.end){
+      this.single = true;
+    }
+
   }
   open(){
     console.log('data range to be passed down' , this.dates.dateRange);

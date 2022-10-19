@@ -12,28 +12,54 @@
     <div class="shift-management-wrapper p-20">
       <div class="header m-0">
         <div class="search-row m-0">
-          <form action="" class="flex space-between w-100">
+          <form action="" class="flex space-between w-100" [formGroup]="workCalenderSetupForm">
             <div>
-              <app-select-box [label]="'Period Start Year'" [data]="years"></app-select-box>
+              <app-select-box 
+                [label]="'Period Start Year'" 
+                [data]="years"
+                [form]="workCalenderSetupForm"
+                [control]="'periodStartYear'"
+              ></app-select-box>
             </div>
             <div>
-              <app-select-box [label]="'Period End Year'" [data]="years"></app-select-box>
+              <app-select-box 
+                [label]="'Period End Year'" 
+                [data]="years"
+                [form]="workCalenderSetupForm"
+                [control]="'periodEndYear'"
+                ></app-select-box>
             </div>
             <div>
-              <app-select-box [label]="'Weekend'" [data]="weekDays"></app-select-box>
+              <app-select-box 
+                [label]="'Weekend'" 
+                [data]="weekDays"
+                [form]="workCalenderSetupForm"
+                [multiSelect]="true"
+                [control]="'weekend'"
+                ></app-select-box>
             </div>
           </form>
         </div>
         <div class="search-row m-0 custom-pt--15">
           <form action="" class="flex space-between w-100">
             <div>
-              <app-select-box [label]="'Half Day'" [data]="weekDays"></app-select-box>
+              <app-select-box 
+                [label]="'Half Day'" 
+                [data]="weekDays"
+                [form]="workCalenderSetupForm"
+                [control]="'halfDay'"></app-select-box>
             </div>
             <div>
-              <app-time-box [label]="'From'"></app-time-box>
+              <app-time-box 
+                [label]="'From'"
+                [form]="workCalenderSetupForm"
+                [control]="'from'"></app-time-box>
             </div>
             <div>
-              <app-time-box [label]="'To'"></app-time-box>
+              <app-time-box 
+                [label]="'To'"
+                [form]="workCalenderSetupForm"
+                [control]="'to'"></app-time-box>
             </div>
           </form>
         </div>
@@ -63,7 +89,7 @@
       </div>
 
       <div class="modal-footer-button flex">
-        <input type="button" class="btn-input" value="Submit" />
+        <input type="button" class="btn-input" value="Submit" (click)=submit()/>
         <input
           (click)="activeModal.close('Close click')"
           type="button"

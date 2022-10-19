@@ -10,14 +10,17 @@ export class MarkWeekendComponent implements OnInit {
   view:string="date";
   valueType:string="date";
 @Input() modelData:any;
+single: boolean = false;
 
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
     console.log('modelData', this.modelData);
+    if(this.modelData.dateRagne.start == this.modelData.dateRagne.end){
+      this.single = true;
+    }
   }
   radioChange(val:string){
     this.view=val
-
   }
 }

@@ -21,11 +21,11 @@
       [placeholder]="placeHolder"
       (change)="inputChange($event)"
     />
-    <p class="label" [class.ags-bg-transparent]="isdisabled? true : null" *ngIf="!hideLabel">{{ label }}</p>
+    <p class="label" [class.ags-bg-transparent]="isdisabled? true : null" [ngStyle]="{ color: color }" *ngIf="!hideLabel">{{ label }}</p>
 
   </div>
   <span
-  class="text-right text-error d-block"
+    class="text-right text-error d-block"
     *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched"
     >required</span
   >

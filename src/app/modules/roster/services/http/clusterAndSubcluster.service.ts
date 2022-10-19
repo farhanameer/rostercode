@@ -14,58 +14,62 @@ export class ClusterAndSubClusterService {
   }
 
   getMarket() {
-    const params = {
+    const body = {
         'client_id' : this.appLocalService.getClientId()
     }
-    return this.http.get(`${this.staticData}/getMarket`, { params });
+    return this.http.post(`${this.staticData}/getMarketList`, { body });
   }
   getClusterByMarket(marketId){
-    const params = {
+    const body = {
         'client_id' : this.appLocalService.getClientId() , 
         'market_id' : marketId
     }
-    return this.http.get(`${this.staticData}/getCluster`, { params });
+    return this.http.post(`${this.staticData}/clustersListByMarket`, { body });
   }
 
   getSubClusterByCluster(clusterId){
-    const params = {
+    const body = {
         'client_id' : this.appLocalService.getClientId() , 
         'cluster_id' : clusterId
     }
-    return this.http.get(`${this.staticData}/getSubCluster`, { params });
+    return this.http.post(`${this.staticData}/subClustersListByCluster`, { body });
   }
 
   getCountries(keyName = null , keyValue = null){
-    const params = {
+    const body = {
         'client_id' : this.appLocalService.getClientId() , 
     }
-    if(keyName) params[keyName] = keyValue;
+    let array = [];
+    if(keyName) {
+      array.push(keyValue)
+      body['id'] = array;
+    };
 
-    return this.http.get(`${this.staticData}/getCountry`, { params });
+    return this.http.post(`${this.staticData}/countriesListBySubCluster`, body);
   }
 
   getStatesByCountry(countryId){
-    const params = {
-        'country_id' : countryId , 
+    const body = {
+        'id' : [countryId] , 
         'client_id' : this.appLocalService.getClientId()
     }
-    return this.http.get(`${this.staticData}/getStatesByCountry` , {params});
+    return this.http.post(`${this.staticData}/statesListByCountry` , body);
   }
 
   getCitiesByState(stateId){
-    const params = {
-        'state_id' : stateId , 
+    const body = {
+        'id' : [stateId] , 
         'client_id' : this.appLocalService.getClientId()
     }
-    return this.http.get(`${this.staticData}/getCityByState` , {params});
+    return this.http.post(`${this.staticData}/citiesListByState` , body);
   }
 
   getBarnchByCity(cityId) {
-    const params = {
-        'city_id' : cityId , 
+    const body = {
+        'city_id' : [cityId] , 
         'client_id' : this.appLocalService.getClientId()
     }
-    return this.http.get(`${this.staticData}/getBranch` , {params});
+    return this.http.post(`${this.staticData}/branchesListByCity` , body);
   }
 
   getDepartment(bodyParams = null){

@@ -17,6 +17,7 @@ export class InputBoxComponent implements OnInit {
   @Input() hideLabel : Boolean = false;
   @Input() placeHolder : string = ' '
   @Output() inputChanged : EventEmitter<any> = new EventEmitter();
+  @Input() color:string;
 
   constructor() {}
 
