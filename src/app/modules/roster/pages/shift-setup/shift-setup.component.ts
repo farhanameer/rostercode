@@ -114,30 +114,24 @@ export class ShiftSetupComponent implements OnInit {
       revert_shift_id: [
         null,
         [
-          this.shiftExtendedValidator(
-            () => this.shiftSetUpForm.get('specific_period').value,
-            Validators.required,
-            'illuminatiError'
+          this.shiftQrtExtendedValidator(
+            () => this.shiftSetUpForm.get('specific_period').value
           ),
         ],
       ],
       shift_revert_date_start: [
         null,
         [
-          this.shiftExtendedValidator(
-            () => this.shiftSetUpForm.get('specific_period').value,
-            Validators.required,
-            'illuminatiError'
+          this.shiftQrtExtendedValidator(
+            () => this.shiftSetUpForm.get('specific_period').value
           ),
         ],
       ],
       shift_revert_date_end: [
         null,
         [
-          this.shiftExtendedValidator(
-            () => this.shiftSetUpForm.get('specific_period').value,
-            Validators.required,
-            'illuminatiError'
+          this.shiftQrtExtendedValidator(
+            () => this.shiftSetUpForm.get('specific_period').value
           ),
         ],
       ],
@@ -219,7 +213,7 @@ export class ShiftSetupComponent implements OnInit {
       console.log('predicate value', predicate());
       if (predicate()) {
         console.log('predication');
-        return Validators.required;
+        return Validators.required(formControl);
       }
       return error;
     };

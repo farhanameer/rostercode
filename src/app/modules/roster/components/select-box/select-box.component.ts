@@ -288,7 +288,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
     div.classList.add('select-hide');
      
   }
-
+  masterArray = [];
   search(value){
     console.log('searching values' , value);
   }
@@ -296,6 +296,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
       console.log('dsabled value' , this.disabled);
       console.log('container' , this.customClass);
       this.data = this.sampleData;
+      this.masterArray = [...this.data];
     // this.form.get(this.control).setValue(-1);
   }
 
@@ -316,6 +317,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
         }
       })
     }
+    this.masterArray = [...this.data];
   }
 
   ngAfterViewInit(): void {
