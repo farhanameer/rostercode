@@ -151,10 +151,12 @@
                         <app-check-box
                           [color]="'#3080EA'"
                           [label]="'Specific Period'"
+                          [control]="'specific_period'"
+                          (selectionChanged)="onShiftExtendedChecked($event)"
                         >
                         </app-check-box>
                       </div>
-                      <div class="form-col">
+                      <div class="form-col" *ngIf="isShiftExtended">
                         <div>
                           <app-date-box
                             [label]="'Period From'"
@@ -191,7 +193,6 @@
                       class="form-col"
                       *ngFor="let qrt of qrt_break.controls; let i = index"
                     >
-                    
                       <div [formGroup]="qrt" class="form-col">
                         <div>
                           <app-input-box
@@ -214,20 +215,33 @@
                             [control]="'qrt_break_time_out'"
                           ></app-time-box>
 
-                          <img *ngIf="qrt_break.length!=(i+1)" class="ags-ml-3 ags-h-w-16" (click)="pushOrDeleteFromArray('minus',i)" src="assets/images/roster/minus.svg" alt="">
-                          <img *ngIf="qrt_break.length==(i+1)" class="ags-ml-3 ags-h-w-16" (click)="pushOrDeleteFromArray('plus',i)" src="assets/images/roster/plus.svg" alt="">
+                          <img
+                            *ngIf="qrt_break.length != i + 1"
+                            class="ags-ml-3 ags-h-w-16"
+                            (click)="pushOrDeleteFromArray('minus', i)"
+                            src="assets/images/roster/minus.svg"
+                            alt=""
+                          />
+                          <img
+                            *ngIf="qrt_break.length == i + 1"
+                            class="ags-ml-3 ags-h-w-16"
+                            (click)="pushOrDeleteFromArray('plus', i)"
+                            src="assets/images/roster/plus.svg"
+                            alt=""
+                          />
                         </div>
-                        <div *ngIf="(i+1)==qrt_break.length">
+                        <div *ngIf="i + 1 == qrt_break.length">
                           <app-check-box
                             [color]="'#3080EA'"
                             [label]="'Tolerance'"
+                            [control]="'Tolerance'"
+                            (selectionChanged)="onQrtChecked($event)"
                           >
                           </app-check-box>
                         </div>
-                        
                       </div>
                     </div>
-                    <div class="form-col">
+                    <div class="form-col" *ngIf="isQrtBreak">
                       <div>
                         <app-input-box
                           [label]="'Consecutive Late'"
@@ -304,7 +318,7 @@
                   *ngIf="!isUpdating"
                   type="submit"
                   class="btn-input"
-                  [disabled]="!this.shiftSetUpForm.valid"
+                  [disabled]="shiftSetUpForm.invalid"
                   value="Submit"
                 />
                 <!-- <input *ngIf="isUpdating" type="submit" class="btn-input" value="Update" /> -->
