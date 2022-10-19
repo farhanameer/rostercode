@@ -152,6 +152,7 @@
                           [color]="'#3080EA'"
                           [label]="'Specific Period'"
                           [control]="'specific_period'"
+                          [form]="shiftSetUpForm"
                           (selectionChanged)="onShiftExtendedChecked($event)"
                         >
                         </app-check-box>
@@ -235,6 +236,7 @@
                             [color]="'#3080EA'"
                             [label]="'Tolerance'"
                             [control]="'Tolerance'"
+                            [form]="shiftSetUpForm"
                             (selectionChanged)="onQrtChecked($event)"
                           >
                           </app-check-box>

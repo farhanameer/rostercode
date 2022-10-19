@@ -158,6 +158,7 @@ export class ShiftSetupComponent implements OnInit {
     this.shiftSetUpForm
       .get('specific_period')
       .valueChanges.subscribe((value) => {
+        console.log('checking');
         this.shiftSetUpForm
           .get('shift_revert_date_start')
           .updateValueAndValidity();
@@ -215,8 +216,9 @@ export class ShiftSetupComponent implements OnInit {
         return null;
       }
       let error = null;
-
+      console.log('predicate value', predicate());
       if (predicate()) {
+        console.log('predication');
         return Validators.required;
       }
       return error;
