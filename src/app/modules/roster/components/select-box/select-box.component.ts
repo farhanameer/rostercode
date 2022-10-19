@@ -1,3 +1,4 @@
+import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { SearchService } from './../../services/data/searchService.service';
 import {
   AfterViewInit,
@@ -301,7 +302,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   ngOnInit(): void {
       console.log('dsabled value' , this.disabled);
       console.log('container' , this.customClass);
-      this.data = this.sampleData;
+      // this.data = this.sampleData;
       this.masterArray = [...this.data];
     // this.form.get(this.control).setValue(-1);
   }
@@ -311,7 +312,6 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
       this.selectedValue = '';
       this.hash = {};
     } 
-
     if(this.defaultValue && this.defaultValue.id && this.defaultValue.name && this.data){
       this.data.forEach(value =>{
         if(value.id == this.defaultValue.id){
