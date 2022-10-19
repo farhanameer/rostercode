@@ -51,6 +51,7 @@
       ></app-sort-by-date>
       <app-sort-by-employee *ngIf="view == 'employee'" [dates]="dates">
       </app-sort-by-employee>
+      <app-single-sort-by-employee *ngIf="single && view == 'employee'"> </app-single-sort-by-employee>
     </div>
     <div class="modal-custom-footer">
       <ul class="shift-hints" style="display: flex; gap: 20px" git>

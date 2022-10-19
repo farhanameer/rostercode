@@ -76,6 +76,69 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
     {
       id : 4 , 
       name : 'Toyota'
+    },{
+      id : 1 , 
+      name : 'Audi 1'
+    },
+    {
+      id : 2 , 
+      name : 'BMW 1'
+    } , 
+    {
+      id : 3 , 
+      name : 'Nisan 1'
+    } , 
+    {
+      id : 4 , 
+      name : 'Toyota 1'
+    },
+    {
+      id : 1 , 
+      name : 'Audi 2'
+    },
+    {
+      id : 2 , 
+      name : 'BMW 2'
+    } , 
+    {
+      id : 3 , 
+      name : 'Nisan 2'
+    } , 
+    {
+      id : 4 , 
+      name : 'Toyota 2'
+    },
+    {
+      id : 1 , 
+      name : 'Audi 5'
+    },
+    {
+      id : 2 , 
+      name : 'BMW 5'
+    } , 
+    {
+      id : 3 , 
+      name : 'Nisan 5'
+    } , 
+    {
+      id : 4 , 
+      name : 'Toyota 5'
+    },
+    {
+      id : 1 , 
+      name : 'Audi 6'
+    },
+    {
+      id : 2 , 
+      name : 'BMW 6'
+    } , 
+    {
+      id : 3 , 
+      name : 'Nisan 6'
+    } , 
+    {
+      id : 4 , 
+      name : 'Toyota 6'
     }
   ];
 
@@ -226,10 +289,13 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
      
   }
 
- 
+  search(value){
+    console.log('searching values' , value);
+  }
   ngOnInit(): void {
       console.log('dsabled value' , this.disabled);
       console.log('container' , this.customClass);
+      this.data = this.sampleData;
     // this.form.get(this.control).setValue(-1);
   }
 

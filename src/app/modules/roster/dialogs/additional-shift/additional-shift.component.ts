@@ -18,6 +18,7 @@ import { ShiftManagmentDialog } from '../shift-managment/shift-managment.dialog'
 })
 export class AdditionalShiftComponent implements OnInit, OnChanges {
   @Input() additionalShifts : any;
+  @Input() modelData:any;
   valueType:string="shift";
   view:string="shift";
   shifts: Array<any> = [];
@@ -37,7 +38,7 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
     private appLocalStorage : AppLocalStorageService) { }
 
   ngOnInit(): void {
-
+    console.log('modelData', this.modelData);
     this.additionalShiftForm=this.fb.group({
       additionalShift:[''],
       employee_id:[''],
@@ -139,7 +140,7 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
       "screen_role" : "emp",
       "client_id" : this.appLocalStorage.getClientId(),
       "employee_id" : $event.value,
-      "custom_date" : "2022-07-18"
+      "custom_date" : this.modelData.dateRagne.start 
     }
     this.getAssignedShift(params , true);
   }

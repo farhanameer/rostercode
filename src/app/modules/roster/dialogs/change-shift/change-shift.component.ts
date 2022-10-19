@@ -19,6 +19,7 @@ import moment from 'moment';
 })
 export class ChangeShiftComponent implements OnInit, OnChanges {
   @Input() submitBtn : any;
+  @Input() modelData:any;
   swipeShiftForm: FormGroup;
   shifts: Array<any> = [];
   employees: Array<any> = [];
@@ -72,7 +73,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-
+    console.log('modelData', this.modelData);
     this.swipeShiftForm=this.fb.group({
       employee_id:["",Validators.required],
       assigned_shift:["",Validators.required],
@@ -161,7 +162,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
       "screen_role" : "emp",
       "client_id" : this.appLocalStorage.getClientId(),
       "employee_id" : $event.value,
-      "custom_date" : "2022-07-18"
+      "custom_date" : this.modelData.dateRagne.start 
     }
     this.getAssignedShift(params , true);
   }

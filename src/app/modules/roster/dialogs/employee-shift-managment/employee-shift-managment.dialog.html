@@ -1,7 +1,7 @@
 <app-dialog-layout>
   <div class="modal-custom modal-lg bg-white custom-w-932">
     <div class="gradient-head flex justify-content-between">
-      <div class="heading">Shift Management (01-11-2021 - 01-12-2021)</div>
+      <div class="heading">Shift Management ({{modelData.dateRagne.start}} - {{modelData.dateRagne.end}})</div>
       <div class="btn-options flex align-content-center">
         <a
           ><img
@@ -27,22 +27,25 @@
                 />
                 Mark Weekends</label
               >
-              <label for="radio1" (click)="view='change'">
+              <label for="radio1">
                 <input
+                  #additionalInput
                   type="radio"
                   value="change"
                   name="additional"
                   [checked]="valueType == 'change'"
+                  [disabled]="this.modelData.dateRagne.start != this.modelData.dateRagne.end"
                   (click)="radioChange('change')"
                 />Change Shift</label
               >
-              <label for="radio1" (click)="view='additional'">
+              <label for="radio1" >
                 <input
                   type="radio"
                   value="additional"
                   name="additional"
                   [checked]="valueType == 'additional'"
                   (click)="radioChange('additional')"
+                  [disabled]="this.modelData.dateRagne.start != this.modelData.dateRagne.end"
                 />Assign Additional Shift</label
               >
             </div>
@@ -56,10 +59,12 @@
       <app-change-shift
         *ngIf="view=='change'"
         [submitBtn]="submitted"
+        [modelData]="modelData"
       ></app-change-shift>
       <app-additional-shift
         *ngIf="view=='additional'"
         [additionalShifts]="submitted"
+        [modelData]="modelData"
       ></app-additional-shift>
     </div>
 

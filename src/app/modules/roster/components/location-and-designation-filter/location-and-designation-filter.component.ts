@@ -1,3 +1,4 @@
+import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { AfterViewChecked, AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ClusterAndSubClusterDataService } from '../../services/data/clusterAndSubCluster.data.service';
 
@@ -8,7 +9,8 @@ import { ClusterAndSubClusterDataService } from '../../services/data/clusterAndS
 })
 export class LocationAndDesignationFilterComponent implements OnInit , AfterViewInit {
 
-  constructor(private dataService : ClusterAndSubClusterDataService) { }
+  constructor(private dataService : ClusterAndSubClusterDataService,
+    private appLocalStorage : AppLocalStorageService) { }
   
 
   @Output() filtersChange : EventEmitter<any> = new EventEmitter();
@@ -70,7 +72,8 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
   }
 
 
-  transformArrayForDropdown(array , idKey , nameKey) {
+  transformArrayForDropdown(array : [], idKey , nameKey) {
+    
     const transformedArray = [];
     array.forEach(entry =>{
       transformedArray.push({
@@ -145,9 +148,11 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     const data = await this.dataService.getMarket();
     
     if(!data["status"]) return; //possible show error
-    const markets = data["data"];
+    const markets = data['data'];
+    
     if(markets.length != 0) {
-      this.marketArray = this.transformArrayForDropdown(markets , 'id' , 'label');
+      
+      this.marketArray = this.transformArrayForDropdown(markets , 'id' , 'value');
       return;
     }
     this.getCountries();
@@ -155,25 +160,25 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
   async getCluster(marketId){
     const data = await this.dataService.getClusterByMarket(marketId);
     if(!data["status"]) return; //possible show error
-    const clusters = data["data"];
+    const clusters = data['data'] as any;
     console.log('cluster' , clusters);
     if(clusters.length == 0 ) {
       this.getCountries();
       return;
     }
-    this.clusterArray = this.transformArrayForDropdown(clusters , 'id' , 'label');
+    this.clusterArray = this.transformArrayForDropdown(clusters , 'id' , 'value');
     console.log('clusters Array' , this.clusterArray);
   }
   async getSubCluster(clusterId){
     const data = await this.dataService.getSubClusterByCluster(clusterId);
     if(!data["status"]) return; //possible show error
-    const array = data["data"];
+    const array = data['data'] as any;
     console.log('sub cluster' , array);
     if(array.length == 0){
       this.getCountries();
       return;
     }
-    this.subClusterArray = this.transformArrayForDropdown(array , 'id' , 'label');
+    this.subClusterArray = this.transformArrayForDropdown(array , 'id' , 'value');
     console.log('sub clusters Array' , this.clusterArray);
   }
   async getCountries(key = null , value = null){
@@ -181,7 +186,7 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     if(!data["status"]) return; //possible show error
     const array = data["data"];
     console.log('countries Array' , array);
-    this.countriesArray = this.transformArrayForDropdown(array , 'country_id' , 'country');
+    this.countriesArray = this.transformArrayForDropdown(array , 'id' , 'value');
     console.log('countries Array' , this.countriesArray);
   }
   async getStates(countryId){
@@ -193,11 +198,13 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     console.log('states Array' , this.statesArray);
   }
   async getCities(stateId){
+    
     const data = await this.dataService.getCitiesByState(stateId);
+    
     if(!data["status"]) return; //possible show error
     const array = data["data"];
     console.log('cities Array' , array);
-    this.citiesArray = this.transformArrayForDropdown(array , 'id' , 'city_name');
+    this.citiesArray = this.transformArrayForDropdown(array , 'id' , 'value');
     console.log('cities Array' , this.citiesArray);
   }
   async getBranches(cityId){
@@ -205,11 +212,15 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     if(!data["status"]) return; //possible show error
     const array = data["data"];
     console.log('branched Array' , array);
-    this.branchesArray = this.transformArrayForDropdown(array , 'loc_id' , 'loc_desc');
+    this.branchesArray = this.transformArrayForDropdown(array , 'id' , 'value');
     console.log('branches Array' , this.branchesArray);
   }
   async getDepartments(branchId){
-    const data = await this.dataService.getDepartment();
+    const params = {
+      'country_id'  : this.locationFilters.countryId,
+      'line_manager_id' : this.appLocalStorage.getUserId()
+    }
+    const data = await this.dataService.getDepartment(params);
     if(!data["status"]) return; //possible show error
     const array = data["data"];
     console.log('departments Array' , array);

@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
 import { HolidayDataService } from './../../services/data/holidays.data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -16,6 +16,7 @@ export class CalenderSetupComponent implements OnInit {
   years = [];
   current;
   holidayStatus = [];
+  workCalendarSetting = {};
 
   constructor(private fb:FormBuilder, public activeModal: NgbActiveModal,
     private holiday: HolidayDataService,
@@ -33,13 +34,13 @@ export class CalenderSetupComponent implements OnInit {
     this.getYears();
     this.weekends();
     this.getWorkCalendarSetting();
-    this.workCalendarSetting();
   }
 
+  
   getYears(){
     this.current = moment();
     let obj = {
-      id : 0,
+      id : moment(this.current).format('YYYY'),
       name :  moment(this.current).format('YYYY')
     }
     this.years.push(obj);
@@ -47,96 +48,25 @@ export class CalenderSetupComponent implements OnInit {
     for(let i = 1; i < 10; i++){
       this.current = moment(this.current).add(1, 'year').format('YYYY');
       this.years.push({
-        id : i,
+        id : this.current,
         name : this.current
       })
     }
     console.log(this.years);
   }
 
-  async workCalendarSetting(){
-    const body = {
-      "workCalendarSetting": {
-          "client_id": 48,
-          "wday_id": "0",
-          "half_day_id": "6",
-          "half_time_in": "09:00",
-          "half_time_out": "14:30",
-          "startYear": 2022,
-          "endYear": 2022,
-          "glob_mkt_id": -1,
-          "region_id": -1,
-          "sub_region_id": -1,
-          "country_id": 154,
-          "state_id": -1,
-          "city_id": -1,
-          "loc_id": -1,
-          "department_id": -1
-      },
-      "publicHolidays": [
-          {
-              "name": "Allama Iqbal Day",
-              "holiday_id": 8,
-              "status": 1
-          },
-          {
-              "name": "Ashura",
-              "holiday_id": 7,
-              "status": 1
-          },
-          {
-              "name": "Eid Milad-un-Nabi ",
-              "holiday_id": 9,
-              "status": 1
-          },
-          {
-              "name": "Eid-ul-Azha",
-              "holiday_id": 6,
-              "status": 1
-          },
-          {
-              "name": "Eid-ul-fitr",
-              "holiday_id": 4,
-              "status": 1
-          },
-          {
-              "name": "Independance Day",
-              "holiday_id": 5,
-              "status": 1
-          },
-          {
-              "name": "Kashmir Day",
-              "holiday_id": 1,
-              "status": 1
-          },
-          {
-              "name": "Labour Day",
-              "holiday_id": 3,
-              "status": 1
-          },
-          {
-              "name": "Pakistan Day",
-              "holiday_id": 2,
-              "status": 1
-          },
-          {
-              "name": "Quaid-e-Azam Day",
-              "holiday_id": 10,
-              "status": 1
-          }
-      ]
-  }
-    const res = await this.holiday.workCalendarSetting(body);
-    
+  async postWorkCalendarSetting(body){
+    const res = await this.holiday.workCalendarSetting(body);    
   }
 
-  selectionChange(value,id){
-    console.log(value, id);
+  selectionChange(value,holiday){
+    console.log(value, holiday);
     if(value){
-      id.status = 1;
+      holiday.status = 1;
     }else{
-      id.status = 0;
+      holiday.status = 0;
     }
+    console.log(this.holidayStatus);
   }
 
   async getWorkCalendarSetting(){
@@ -185,7 +115,35 @@ export class CalenderSetupComponent implements OnInit {
   }
 
   submit(){
-    console.warn(this.workCalenderSetupForm.value)
+    console.warn(this.workCalenderSetupForm.value);
+    this.workCalendarSetting = {
+      "client_id" : this.appLocalStorage.getClientId(),
+      "wday_id": this.workCalenderSetupForm.value.weekend.toString(),
+      "half_day_id": this.workCalenderSetupForm.value.halfDay.toString(),
+      "half_time_in": this.workCalenderSetupForm.value.from,
+      "half_time_out": this.workCalenderSetupForm.value.to,
+      "startYear": this.workCalenderSetupForm.value.periodStartYear,
+      "endYear": this.workCalenderSetupForm.value.periodEndYear,
+      "glob_mkt_id": -1,
+      "region_id": -1,
+      "sub_region_id": -1,
+      "country_id": 154,
+      "state_id": -1,
+      "city_id": -1,
+      "loc_id": -1,
+      "department_id": -1
+    }
+    console.log(this.workCalendarSetting);
+    let publicHolidays = [];
+    this.holidayStatus.forEach(array =>{
+      publicHolidays = [...publicHolidays , ...array];
+    });
+    const body = {
+      workCalendarSetting : this.workCalendarSetting,
+      publicHolidays : publicHolidays
+    }
+
+    this.postWorkCalendarSetting(body);
   }
 
 }

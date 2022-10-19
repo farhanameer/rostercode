@@ -1,5 +1,14 @@
 <div class="d-flex agt-check-box-container">
-  <input class="agt-check-box" 
+  <input 
+  *ngIf="!form && !control"
+  class="agt-check-box" 
+    type="checkbox" 
+    [checked]="checked"
+    #checkbox 
+    (change)="selectionChange(checkbox)"
+    />
+    <input *ngIf="form && control"
+    class="agt-check-box" 
     type="checkbox" 
     [checked]="checked"
     #checkbox 
@@ -12,7 +21,7 @@
 
   <span
   class="text-right text-error d-block"
-    *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched"
+    *ngIf="form && control && form?.get(control)?.errors?.required && form?.get(control)?.touched"
     >required</span
   >
 </div>

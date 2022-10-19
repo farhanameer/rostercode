@@ -81,6 +81,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DragAndDropComponent } from './components/drag-drop/drag-drop.component';
 import { SingleSortByEmployeeComponent } from './components/single-sort-by-employee/single-sort-by-employee.component';
 import { SingleEmployeeCheckBoxComponent } from './components/single-employee-check-box/single-employee-check-box.component';
+import { ApprovalDetailsComponent } from './components/approval-details/approval-details.component';
 
 
 
@@ -149,7 +150,8 @@ import { SingleEmployeeCheckBoxComponent } from './components/single-employee-ch
     ShiftRequestByLmComponent,
     DragAndDropComponent,
     SingleSortByEmployeeComponent,
-    SingleEmployeeCheckBoxComponent
+    SingleEmployeeCheckBoxComponent,
+    ApprovalDetailsComponent
     
 
    

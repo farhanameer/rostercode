@@ -106,24 +106,9 @@
               </div>
             </app-sub-layout>
 
-            <app-sub-layout>
-              <div class="shift-card-wrapper">
-                <div class="shift-header">Approval Details</div>
-                <div class="shift-card">
-                  <div class="form-col">
-                    <div>
-                      <app-input-box [label]="'BL Status'"></app-input-box>
-                    </div>
-                    <div>
-                      <app-input-box [label]="'BL comments'"></app-input-box>
-                    </div>
-                    <div>
-                      <app-input-box [label]="'Dated'"></app-input-box>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </app-sub-layout>
+            <div>
+              <app-approval-details></app-approval-details>
+            </div>
           </div>
           <div class="shift-setup-footer"></div>
         </div>
