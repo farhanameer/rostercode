@@ -39,9 +39,10 @@
                   [width]="'105px'"
                   [height]="'20px'"
                   [hideLabel]="true"
+                  (dateChanged) = "changeDate()"
                 ></app-date-box>
               </td>
-              <td>Morning</td>
+              <td>{{alreadyAllocatedShift}}</td>
               <td>
                 <app-select-box
                   [data]="shiftNameArray"

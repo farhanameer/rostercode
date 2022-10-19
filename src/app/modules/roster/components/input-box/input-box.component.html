@@ -10,7 +10,8 @@
       type="text"
       placeholder=" "
     />
-    <p class="label">{{ label }}</p>
+    <p class="label" [class.ags-bg-transparent]="isdisabled? true : null">{{ label }}</p>
+    
   </div>
   <span
   class="text-right text-error d-block"

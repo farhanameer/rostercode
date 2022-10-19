@@ -1,7 +1,8 @@
+import { EmployeeRosterDataService } from './../../services/data/employeeAttendance.data';
 import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { RosterService } from './../../services/data/rosterView.data.service';
 import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeShiftDataService } from '../../services/data/dropdown.data';
@@ -12,13 +13,14 @@ import moment from 'moment';
   templateUrl: './single-shift-allocation.dialog.html',
   styleUrls: ['./single-shift-allocation.dialog.css']
 })
-export class SingleShiftAllocationDialog implements OnInit , OnChanges{
+export class SingleShiftAllocationDialog implements OnInit {
 
   singleShiftForm: FormGroup;
   submitted : boolean = false;
   shiftsArray: any;
   shiftNameArray: any;
   screenRole = 'lm';
+  alreadyAllocatedShift: any;
   @Input() data;
 
   shiftAllocate :any;
@@ -26,16 +28,12 @@ export class SingleShiftAllocationDialog implements OnInit , OnChanges{
   constructor(
     public activeModal: NgbActiveModal,
     private employeeShiftDataService: EmployeeShiftDataService,
+    private employeeroster: EmployeeRosterDataService,
     private fb: FormBuilder,
     private appLocalStorage : AppLocalStorageService,
     private rosterService : RosterService,
     private shiftRequest: ShiftRequestDataService
   ) { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.singleShiftForm.value.date);
-    
-  }
 
   ngOnInit(): void {
     this.getShiftDropdown()
@@ -43,6 +41,29 @@ export class SingleShiftAllocationDialog implements OnInit , OnChanges{
       date:["",Validators.required],
       allocateShift:["",Validators.required]
     })
+  }
+
+  async changeDate(){
+    this.singleShiftForm.value.date = moment(this.singleShiftForm.value.date).format("YYYY-MM-DD");
+    const params = {
+      "screen_role" : "emp",
+      "client_id" : this.appLocalStorage.getClientId(),
+      "employee_id" : this.data.employee_id,
+      "custom_date" : this.singleShiftForm.value.date
+    }
+    // const params = {
+    //   "screen_role" : "emp",
+    //   "client_id" : 48,
+    //   "employee_id" : "17278",
+    //   "custom_date" : "2022-07-18"
+    // }
+    let replace = true;
+    const res = await this.employeeroster.getEmployeeRoster(params, replace);
+    if(res['data']['payload']['data'].length !== 0){
+      this.alreadyAllocatedShift = res['data']['payload']['data'][0].shift_name;
+    }else{
+      console.log("Error")
+    }
   }
 
   
