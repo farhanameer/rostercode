@@ -27,6 +27,10 @@
       ></app-input-box>
     </div>
 
+    <div *ngIf="data.length == 0">
+      No Data Found
+    </div>
+
     <div *ngFor="let option of data" [class.same-as-selected]="hash[option.id]" (click)="optionSelected(option)"> 
 
       <app-check-box *ngIf="multiSelect" [checked]="hash[option.id]"></app-check-box> {{option.name}}

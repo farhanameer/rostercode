@@ -1,3 +1,4 @@
+import { SearchService } from './../../services/data/searchService.service';
 import {
   AfterViewInit,
   Component,
@@ -56,7 +57,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   locData = {};
   searchedFilter: string = '';
 
-  constructor() {}
+  constructor(private searchService: SearchService) {}
 
 
   
@@ -291,6 +292,11 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   masterArray = [];
   search(value){
     console.log('searching values' , value);
+    const res = this.searchService.search(this.masterArray, value, 'name');
+    this.data = res['searchedArray']; 
+    if(this.data.length==0 && value == ''){
+      this.data = this.masterArray;
+    }
   }
   ngOnInit(): void {
       console.log('dsabled value' , this.disabled);
@@ -317,6 +323,8 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
         }
       })
     }
+    
+    
     this.masterArray = [...this.data];
   }
 
