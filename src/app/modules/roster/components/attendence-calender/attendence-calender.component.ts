@@ -1,3 +1,4 @@
+import { SearchService } from './../../services/data/searchService.service';
 import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
@@ -15,7 +16,8 @@ export class AttendenceCalenderComponent implements OnInit {
     private calender: CalendarService,
     private dataService: EmployeeRosterDataService,
     private dataShiftService: EmployeeShiftDataService,
-    private appLocalStorage: AppLocalStorageService
+    private appLocalStorage: AppLocalStorageService,
+    private search: SearchService
   ) {}
   // weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -45,7 +47,9 @@ export class AttendenceCalenderComponent implements OnInit {
     Dec: '12',
   };
 
+
   ngOnInit(): void {
+    
     this.currentDate = moment();
     this.month = moment(this.currentDate).format('MMM');
     this.year = moment(this.currentDate).format('YYYY');
