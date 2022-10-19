@@ -19,6 +19,7 @@ export class CheckBoxComponent implements OnInit {
   }
 
   selectionChange(checkedValue){
+    this.form?.get(this.control).setValue(checkedValue.checked)
     this.selectionChanged.emit(checkedValue.checked);
     console.log(checkedValue.checked);
   }
