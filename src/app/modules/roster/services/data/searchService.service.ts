@@ -58,7 +58,7 @@ export class SearchService implements OnInit{
             if(item[field].toLowerCase().startsWith(term.toLowerCase())){
                 newArray.push(item);
             }
-        });
+        }); // comment added again
         return {
             originalArray : array,
             searchedArray : newArray
