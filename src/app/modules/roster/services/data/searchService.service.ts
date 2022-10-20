@@ -49,13 +49,14 @@ export class SearchService implements OnInit{
             }
         }
         array.forEach(item =>{
+          // debugger;
             if(!field){
-                if(item.toLowerCase().startsWith(term.toLowerCase())){
+                if(item.toLowerCase().search(term.toLowerCase()) !== -1){
                     newArray.push(item)
                 }
                 return;
             }
-            if(item[field].toLowerCase().startsWith(term.toLowerCase())){
+            if(item[field].toLowerCase().search(term.toLowerCase()) !== -1){
                 newArray.push(item);
             }
         }); // comment added again
