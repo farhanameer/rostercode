@@ -21,7 +21,7 @@
     <!-- <app-error-msg [form]="form" [control]="control"></app-error-msg> -->
     <div class="select-items select-hide" id="custom-select" #dropdownList>
 
-    <div >
+    <div *ngIf="masterArray.length > 10">
       <app-input-box [label]="'Search'" class="w-100" [width]="'100%'" [height]="'20px'" [hideLabel]="true" [placeHolder]="'Search'"
       (inputChanged)="search($event)"
       ></app-input-box>
