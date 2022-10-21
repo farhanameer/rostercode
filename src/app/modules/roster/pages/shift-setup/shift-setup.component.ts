@@ -72,6 +72,8 @@ export class ShiftSetupComponent implements OnInit {
   dropDownDefaultValues = {
     shiftType: {},
     shiftColor: {},
+    day : {},
+    revert : {}
   };
   ngOnInit(): void {
     this.shiftSetUpForm = this.fb.group({
@@ -287,6 +289,7 @@ export class ShiftSetupComponent implements OnInit {
 
   async getShiftColors() {
     const data = await this.shiftRequestService.getShiftColors();
+    debugger;
     let colors = data['data']['payload'];
     if (!Array.isArray(colors)) {
       console.log('error occured');
@@ -294,8 +297,8 @@ export class ShiftSetupComponent implements OnInit {
     const colorsArray = [];
     colors.forEach((color) => {
       let obj = {
-        id: color,
-        name: color,
+        id: color.color,
+        name: color.name,
       };
       colorsArray.push(obj);
     });
@@ -513,6 +516,22 @@ export class ShiftSetupComponent implements OnInit {
         this.shiftColorCopiedArray,
         'id',
         shift.color
+      );
+    }
+    if(shift.ext_mid_break_day_id){
+      
+      this.dropDownDefaultValues.day = this.searchInArray(
+        this.weekDaysArray , 
+        'id',
+        shift.ext_mid_break_day_id
+      );
+    
+    }
+    if(shift.revert_shift_id){    
+      this.dropDownDefaultValues.revert = this.searchInArray(
+        this.shiftArray , 
+        'id',
+        shift.revert_shift_id
       );
     }
     console.log('default values set', this.dropDownDefaultValues.shiftColor);
