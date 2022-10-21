@@ -32,7 +32,6 @@
                           [control]="'shift_type_id'"
                           [data]="shiftTypeArray"
                           [defaultValue]="dropDownDefaultValues.shiftType"
-                          [multiSelect]="true"
                         ></app-select-box>
                       </div>
                       <div>
@@ -131,6 +130,7 @@
                           [form]="shiftSetUpForm"
                           [control]="'ext_mid_break_day_id'"
                           [data]="weekDaysArray"
+                          [defaultValue]="dropDownDefaultValues.day"
                         ></app-select-box>
                       </div>
                       <div>
@@ -178,6 +178,7 @@
                             [form]="shiftSetUpForm"
                             [control]="'revert_shift_id'"
                             [data] = "shiftArray"
+                            [defaultValue]="dropDownDefaultValues.revert"
                           ></app-select-box>
                         </div>
                       </div>

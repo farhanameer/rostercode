@@ -360,9 +360,7 @@ export class ShiftRequestByLmComponent implements OnInit {
       );
     
     }
-    debugger;
     if(shift.revert_shift_id){    
-      debugger;
       this.dropDownDefaultValues.revert = this.searchInArray(
         this.shiftsArray , 
         'id',
