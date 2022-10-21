@@ -1,3 +1,5 @@
+import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
+import { SearchService } from './../../services/data/searchService.service';
 import {
   AfterViewInit,
   Component,
@@ -56,7 +58,7 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
   locData = {};
   searchedFilter: string = '';
 
-  constructor() {}
+  constructor(private searchService: SearchService) {}
 
 
   
@@ -288,14 +290,20 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
     div.classList.add('select-hide');
      
   }
-
+  masterArray = [];
   search(value){
     console.log('searching values' , value);
+    const res = this.searchService.search(this.masterArray, value, 'name');
+    this.data = res['searchedArray']; 
+    if(this.data.length==0 && value == ''){
+      this.data = this.masterArray;
+    }
   }
   ngOnInit(): void {
       console.log('dsabled value' , this.disabled);
       console.log('container' , this.customClass);
-      this.data = this.sampleData;
+      // this.data = this.sampleData;
+      this.masterArray = [...this.data];
     // this.form.get(this.control).setValue(-1);
   }
 
@@ -304,7 +312,6 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
       this.selectedValue = '';
       this.hash = {};
     } 
-
     if(this.defaultValue && this.defaultValue.id && this.defaultValue.name && this.data){
       this.data.forEach(value =>{
         if(value.id == this.defaultValue.id){
@@ -316,6 +323,9 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
         }
       })
     }
+    
+    
+    this.masterArray = [...this.data];
   }
 
   ngAfterViewInit(): void {

@@ -28,7 +28,7 @@ export class SearchService implements OnInit{
     }
   ]
   term = 'i';
-
+  noValueFound: Boolean = false;
     constructor(){}
     
     ngOnInit(): void {
@@ -49,21 +49,20 @@ export class SearchService implements OnInit{
             }
         }
         array.forEach(item =>{
+          // debugger;
             if(!field){
-                if(item.startsWith(term)){
+                if(item.toLowerCase().search(term.toLowerCase()) !== -1){
                     newArray.push(item)
                 }
                 return;
             }
-            if(item[field].startsWith(term)){
+            if(item[field].toLowerCase().search(term.toLowerCase()) !== -1){
                 newArray.push(item);
             }
-        });
-
+        }); // comment added again
         return {
             originalArray : array,
             searchedArray : newArray
         }
     }
-
 }
