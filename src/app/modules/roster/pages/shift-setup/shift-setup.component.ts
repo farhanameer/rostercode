@@ -22,6 +22,8 @@ export interface BooleanFn {
 export class ShiftSetupComponent implements OnInit {
   isShiftExtended: boolean = false;
   isQrtBreak: boolean = false;
+  shiftNameClick: boolean = false;
+
   constructor(
     private shiftRequestService: ShiftRequestDataService,
     private fb: FormBuilder,
@@ -148,6 +150,11 @@ export class ShiftSetupComponent implements OnInit {
       emp_id: [''],
       qrt_break: this.fb.array([]),
       hr_comment: ['', Validators.required],
+      hr_date : [''],
+      hr_status : [''],
+      lm_comment : [''],
+      lm_date : [''],
+      lm_request : ['']
     });
     this.shiftSetUpForm
       .get('specific_period')
@@ -172,20 +179,18 @@ export class ShiftSetupComponent implements OnInit {
     });
 
     this.newqrtbreak();
-
-    // debugger;
     this.getShiftTypes();
     this.getShiftColors();
     this.getShifts();
     // this.getShift
   }
+  
   shiftExtendedValidator(
     predicate: BooleanFn,
     validator: ValidatorFn,
     errorNamespace?: string
   ): ValidatorFn {
     console.log(predicate);
-    // debugger;
     return (formControl) => {
       if (!formControl.parent) {
         return null;
@@ -204,7 +209,6 @@ export class ShiftSetupComponent implements OnInit {
   }
   shiftQrtExtendedValidator(predicate: BooleanFn): ValidatorFn {
     console.log(predicate);
-    // debugger;
     return (formControl) => {
       if (!formControl.parent) {
         return null;
@@ -219,7 +223,7 @@ export class ShiftSetupComponent implements OnInit {
     };
   }
   onShiftExtendedChecked(val: any) {
-    // debugger;
+    debugger;
     console.log('onShiftExtendedChecked', val);
     this.isShiftExtended = !this.isShiftExtended;
     // if (val) {
@@ -417,6 +421,7 @@ export class ShiftSetupComponent implements OnInit {
   isUpdating: boolean = false;
   updateAbleShiftId: any;
   async getSingleShift(id) {
+    
     console.log('single Shift Id', id);
     const payload = {
       client_id: this.appLocalStorage.getClientId(),
@@ -438,6 +443,7 @@ export class ShiftSetupComponent implements OnInit {
     //   "testcontrol": testdata.id,
     //   "desc": "testdata value"
     // });
+
 
     if (shift.ext_mid_break_time_in && shift.ext_mid_break_time_out) {
       shift.ext_mid_break_time_in = this.changeTimeFormate(
@@ -463,9 +469,12 @@ export class ShiftSetupComponent implements OnInit {
         qrt.qrt_break_time_out = this.changeTimeFormate(qrt.qrt_break_time_out);
       });
     }
+    this.onShiftExtendedChecked(id);
     this.populateDefaultDropDownValues(shift);
 
     this.shiftSetUpForm.patchValue(shift);
+
+    this.shiftNameClick = true;
     this.isUpdating = true;
     this.updateAbleShiftId = id;
   }

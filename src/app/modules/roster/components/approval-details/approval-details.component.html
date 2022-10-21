@@ -7,6 +7,8 @@
           <app-input-box
             [color]="'black'"
             [label]="'LM Status'"
+            [form]="form"
+            [control]="'lm_request'"
           ></app-input-box>
         </div>
         <div>
@@ -14,10 +16,16 @@
             [width]="'558px'"
             [label]="'LM Comments'"
             [color]="'black'"
+            [form]="form"
+            [control]="'lm_comment'"
           ></app-input-box>
         </div>
         <div>
-          <app-input-box [color]="'black'" [label]="'Dated'"></app-input-box>
+          <app-input-box 
+            [color]="'black'" 
+            [label]="'Dated'"
+            [form]="form"
+            [control]="'lm_date'"></app-input-box>
         </div>
       </div>
       <div class="form-col no-wrap">
@@ -25,16 +33,25 @@
           <app-input-box
             [color]="'black'"
             [label]="'HR Status'"
+            [form]="form"
+            [control]="'hr_status'"
           ></app-input-box>
         </div>
         <div>
           <app-input-box
             [width]="'558px'"
             [label]="'HR Comments'"
+            [form]="form"
+            [control]="'hr_comment'"
           ></app-input-box>
         </div>
         <div>
-          <app-input-box [color]="'black'" [label]="'Dated'"></app-input-box>
+          <app-input-box 
+            [color]="'black'" 
+            [label]="'Dated'"
+            [form]="form"
+            [control]="'hr_date'"
+          ></app-input-box>
         </div>
       </div>
     </div>

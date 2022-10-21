@@ -13,6 +13,7 @@ export class ShiftListComponent implements OnInit {
     private shiftRequest : ShiftRequestDataService) {}
   
   @Input() data : any;
+  // @Output() shiftNameClick: EventEmitter<any> = new EventEmitter();
 
   @Output() singleShiftId : EventEmitter<any> = new EventEmitter();
   colors : any;
@@ -46,5 +47,8 @@ export class ShiftListComponent implements OnInit {
 
   singleShift(id){
     this.singleShiftId.emit(id);
+    // debugger;
+    // this.shiftNameClick.emit(true);
+    // debugger;
   }
 }

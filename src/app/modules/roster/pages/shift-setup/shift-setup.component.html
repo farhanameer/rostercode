@@ -58,7 +58,7 @@
                       </div>
 
                       <div class="form-col p-0">
-                        <div>
+                        <div *ngIf="!shiftNameClick">
                           <app-input-box
                             [label]="'Comments'"
                             [form]="shiftSetUpForm"
@@ -273,9 +273,11 @@
                   </div>
                 </div>
               </app-sub-layout>
-              <!-- <div>
-                <app-approval-details></app-approval-details>
-              </div> -->
+              <div *ngIf="shiftNameClick">
+                <app-approval-details 
+                [form]="shiftSetUpForm"
+                ></app-approval-details>
+              </div>
             </div>
             <!-- <div class="shift-setup-footer"></div> -->
             <!-- <div class="calendar-footer justify-content-end">
