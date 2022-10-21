@@ -1,0 +1,77 @@
+.custom-dropdown {
+  .dropdown-item {
+    color: #414D55;
+    font-size: 12px;
+  }
+  button {
+    font-size: 12px;
+    width: 100%;
+  }
+  .dropdown-menu {
+    width: 100%;
+    min-width: auto;
+    @include reset-list;
+    a{
+      
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding:5px 0px 5px 14px;
+    }
+    }
+}
+.custom-dropdown .dropdown-item:active {
+  background-color: #414D55;
+  color: #fff;
+}
+
+.status_dropdown {
+  @include square(90px, 24px, $radius: 4px);
+  display: flex;
+  align-items: center;
+  span {
+    @include square(6px, 6px, $radius: 50px);
+    display: inline-block;
+    margin-right: 6px;
+  }
+}
+
+.status_dropdown[data-color=active-status] {
+  background-color: rgba($blue, 0.1);
+  color: $blue;
+  button{
+    span {
+      background-color: $blue;
+    }
+  }
+  .dropdown-item[data-class=active]{
+    >span {
+      background-color: $blue;
+    }
+  }
+}
+.dropdown-item[data-class=active]{
+  >span {
+    background-color: $blue !important;
+  }
+}
+
+
+.status_dropdown[data-color=hold-status] {
+  background-color: #E9E9E9;
+  button{
+    span {
+      background-color: #34394D;
+    }
+  }
+  .dropdown-item[data-class=active]{
+    >span {
+      background-color: #34394D;
+    }
+  }
+}
+.dropdown-item[data-class=hold]{
+  >span {
+    background-color: #34394D !important;
+  }
+}

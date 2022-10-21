@@ -154,7 +154,15 @@ export const APIs = {
 
   /* NMS Module Api */
 
-  notificationUrl: environment.nodeApiUrl + "Notification"
+  notificationUrl: environment.nodeApiUrl + "Notification",
+
+  // Roster Module Api
+  rosterUrl: environment.nodeApiUrl + 'roster',
+  // Shift Allocation
+  shiftAllocationUrl: environment.nodeApiUrl + 'ShiftAllocation',
+  //ShiftRequestAndSetup
+  ShiftRequestAndSetupUrl: environment.nodeApiUrl + 'ShiftRequestAndSetup',
+  workCalendarUrl: environment.nodeApiUrl + 'WorkCalendar',
 };
 
 /*

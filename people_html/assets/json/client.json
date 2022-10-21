@@ -1,0 +1,49 @@
+[
+    { 
+      "id": 1,
+      "clientName":"AC Nelson",
+      "jobCount":9,
+      "clientIndustry":null,
+      "clientLocation":"Lahore,Pakistan",
+      "clientOwner":"Fatima Afzal",
+      "clientStage":true,
+      "clientTeam":[{
+        "id":1,
+        "image":""
+      }],
+      "clientCreatedData":"new Date()"
+        
+    },
+    { 
+      "id": 2,
+       "clientName":"Advance Lab",
+      "jobCount":6,
+      "clientIndustry":"Pharma",
+      "clientLocation":"Karachi,Sindh,Pakistan",
+      "clientOwner":"AppsGenii",
+      "clientStage":false,
+      "clientTeam":[{
+        "id":2,
+        "image":""
+      }],
+      "clientCreatedData":"new Date()"
+        
+      
+    },
+    { 
+      "id": 3,
+       "clientName":"BMA Capital",
+      "jobCount":5,
+      "clientIndustry":null,
+      "clientLocation":"Bahwalpur,Punjab,Pakistan",
+      "clientOwner":"People",
+      "clientStage":true,
+      "clientTeam":[{
+        "id":3,
+        "image":""
+      }],
+      "clientCreatedData":"new Date()"
+        
+    
+    }
+]

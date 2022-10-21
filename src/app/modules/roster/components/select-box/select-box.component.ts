@@ -303,7 +303,9 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
       console.log('dsabled value' , this.disabled);
       console.log('container' , this.customClass);
       // this.data = this.sampleData;
-      this.masterArray = [...this.data];
+      if(this.data && Array.isArray(this.data)){
+        this.masterArray = [...this.data];
+      }
     // this.form.get(this.control).setValue(-1);
   }
 
@@ -324,8 +326,10 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
       })
     }
     
+    if(this.data && Array.isArray(this.data)){
+      this.masterArray = [...this.data];
+    }
     
-    this.masterArray = [...this.data];
   }
 
   ngAfterViewInit(): void {

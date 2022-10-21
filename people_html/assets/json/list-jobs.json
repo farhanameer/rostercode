@@ -1,0 +1,32 @@
+[
+    { 
+      "id": 1,
+      "positionName": "Account Executive",
+      "jobClient": "People",
+      "jobCreatedDate": "13 Aug 2020",
+      "headCount": 9,
+      "jobLocation": "Lahore, Pakistan",
+      "jobStage": "Head",
+      "minimumSalary": 40000    
+    },
+    { 
+      "id": 2,
+      "positionName": "Admin & Logistic Officer",
+      "jobClient": "People",
+      "jobCreatedDate": "13 Aug 2020",
+      "headCount": 9,
+      "jobLocation": "Karachi, Pakistan",
+      "jobStage": "Head",
+      "minimumSalary": 40000    
+    },
+    { 
+      "id": 3,
+      "positionName": "AM Accounts",
+      "jobClient": "People",
+      "jobCreatedDate": "13 Aug 2020",
+      "headCount": 9,
+      "jobLocation": "Karachi, Pakistan",
+      "jobStage": "Head",
+      "minimumSalary": 40000    
+    }
+]
