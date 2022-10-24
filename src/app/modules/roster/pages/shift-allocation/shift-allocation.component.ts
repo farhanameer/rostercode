@@ -5,6 +5,8 @@ import { ShiftRequestDataService } from '../../services/data/shiftRequest.data';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { RosterService } from '../../services/data/rosterView.data.service';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
+import { ShiftAllocationDataService } from '../../services/data/shiftAllocation.data.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-shift-allocation',
@@ -14,8 +16,11 @@ import { AppLocalStorageService } from 'src/app/services/app-local-storage.servi
 export class ShiftAllocationComponent implements OnInit {
 
   constructor(private fb:FormBuilder , private shiftRequestService : ShiftRequestDataService , 
-    private rosterViewService : RosterService , private appLocalStorage : AppLocalStorageService) { }
+    private rosterViewService : RosterService , private appLocalStorage : AppLocalStorageService , 
+    private shiftAllocationService : ShiftAllocationDataService) { }
 
+
+  reset = false;
   filters : any = {
     glob_mkt_id : -1 , 
     region_id : -1,
@@ -40,14 +45,31 @@ export class ShiftAllocationComponent implements OnInit {
     this.filters.state_id = selectedFilters.stateId;
     this.filters.city_id = selectedFilters.cityId;
     this.filters.branch_id = selectedFilters.branchId;
+    this.getShifts();
   }
+  removeDefaultFiltersVallues(){
+    let locationFilters = null;
+    for (const key in this.filters) {
+      if(this.filters[key]==-1){
+        delete this.filters[key]
+      }
+    }
+    if(Object.entries(this.filters).length == 0){
+      return null;
+    }
+    locationFilters = {...this.filters};
+    return locationFilters;
+  }
+  copiedShiftsArray = [];
   async getShifts(){
-    const shifts = await this.shiftRequestService.getDefaultList('lm' , this.filters);
+
+    const shifts = await this.shiftRequestService.getDefaultList('lm' , this.removeDefaultFiltersVallues());
     console.log('shift request being get' , shifts);
 
     if(!shifts["status"]) return; //posible error message
     if(!shifts["data"]["status"]) return; //posible error message
     this.shiftsArray = shifts["data"]["payload"];
+    this.copiedShiftsArray = [...this.shiftsArray];
   }
   shiftSelected(shift){
     console.log('selected shift data in shift allocation',shift);
@@ -64,10 +86,10 @@ export class ShiftAllocationComponent implements OnInit {
   }
   creatShiftEmployees:any = [];
   shiftAllocationForm=this.fb.group({
-    shift_id:["",Validators.required],
+    shift_id:[""],
     start_date:["",Validators.required],
     end_date:["",Validators.required],
-    set_default:["",Validators.required]
+    set_default:[false,Validators.required]
   })
 
   uploadForm=this.fb.group({
@@ -75,10 +97,39 @@ export class ShiftAllocationComponent implements OnInit {
   })
 
 
-  submit(){
-    console.warn(this.shiftAllocationForm.value)
+  async submit(){
+    const body = this.shiftAllocationForm.value;
+    delete body.shift_id;
+    console.log(body);
+    if(body.set_default) {
+      body.set_default = 1;
+    }else{
+      body.set_default = 0;
+    }
+    body.start_date = moment(body.start_date).format('YYYY-MM-DD');
+    body.end_date = moment(body.end_date).format('YYYY-MM-DD');
+    body.shifts = this.creatShiftEmployees;
+    const result = await this.shiftAllocationService.createShift(body);
+    console.warn(result);
   }
 
+
+  resetForm() {
+    console.log('form Cleared');
+    this.shiftAllocationForm.markAsPristine();
+    this.shiftAllocationForm.markAsUntouched();
+    this.shiftAllocationForm.reset();
+    console.log(this.shiftAllocationForm.value);
+    this.resetDropDown();
+    this.reset = !this.reset;
+  }
+
+  resetDropDown() {
+    this.shiftsArray = [];
+    setTimeout(() => {
+      this.shiftsArray = this.copiedShiftsArray;
+    }, 200);
+  }
 
   get validateAForm(): any {
     return this.shiftAllocationForm.controls

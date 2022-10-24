@@ -6,6 +6,7 @@
           <div class="heading">Shift Allocation</div>
           <app-location-and-designation-filter
             (filtersChange)="filtersChanged($event)"
+            [resetFilters]="reset"
           >
           </app-location-and-designation-filter>
         </div>

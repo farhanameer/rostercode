@@ -31,8 +31,9 @@ export class DateCheckBoxComponent implements OnInit {
       reporting_to_id: this.appLocalStorage.getUserId(),
     });
   }
-open(){
-    this.customModal.showFeaturedDialog(WeekendTypeComponent, "");
+open(employee){
+    this.modelData.employee = employee;
+    this.customModal.showFeaturedDialog(WeekendTypeComponent, "" , this.modelData);
 
   }
 

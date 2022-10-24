@@ -3,6 +3,7 @@
   (filterSelection)="filtersChanged($event)"
   [shifts]="shiftsArray"
   (selectedShift)="shiftSelected($event)"
+  [resetFilters]="reset"
   >
   </app-employee-shift-alloction>
 </div>
@@ -118,9 +119,9 @@
     </app-full-layout>
     <div class="calendar-footer justify-content-end">
       <div class="modal-footer-button flex">
-        <input type="submit" class="btn-input" value="Create"  />
+        <input type="submit" (click)="submit()" class="btn-input" value="Create"  />
 
-        <input type="submit" class="btn-input" value="Reset" />
+        <input type="submit" class="btn-input" (click)="resetForm()" value="Reset" />
       </div>
     </div>
   </div>

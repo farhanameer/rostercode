@@ -18,4 +18,7 @@ export class HttpHoursAdjustment {
   getOverTimeAdjustment(body) {
     return this.http.post(`${this.roster}/ApprovedHoursToCpl&Payment`, body);
   }
+  getLeaveTypes(){
+    return this.http.get(`${this.roster}/GetLeaveTypes`);
+  }
 }

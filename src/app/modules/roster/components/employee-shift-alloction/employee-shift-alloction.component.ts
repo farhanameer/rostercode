@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,9 +6,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './employee-shift-alloction.component.html',
   styleUrls: ['./employee-shift-alloction.component.css'],
 })
-export class EmployeeShiftAlloctionComponent implements OnInit {
+export class EmployeeShiftAlloctionComponent implements OnInit , OnChanges{
 
-  
+
+  @Input() resetFilters : Boolean = false;
+  reset : Boolean = false;
+
   @Input() form: FormGroup;
   @Input() shifts : any;
   @Output() filterSelection : EventEmitter<any> = new EventEmitter();
@@ -21,7 +24,11 @@ export class EmployeeShiftAlloctionComponent implements OnInit {
     this.selectedShift.emit(shift);
   }
   constructor() {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.reset = this.resetFilters;
+  }
   
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

@@ -77,4 +77,29 @@ export class RosterService {
       }
     });
   }
+
+  getLeaveTypes() {
+    return new Promise((resolve, reject) => {
+      const response = { data: null, status: false, message: null };
+      try {
+        this.httpService.getLeaveTypes().subscribe(
+          (data) => {
+            response.data = data;
+            response.message = 'success';
+            response.status = true;
+            resolve(response);
+          },
+          (err) => {
+            response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
+            resolve(response);
+          }
+        );
+      } catch (error) {
+        response.message = error;
+        this.toastService.toast(error, 'error-toast');
+        resolve(response);
+      }
+    });
+  }
 }

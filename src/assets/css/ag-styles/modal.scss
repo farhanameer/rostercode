@@ -109,3 +109,6 @@ margin-top: 0;
 .modal-content > *:last-child {
 margin-bottom: 0;
 }
+.modal-backdrop.fade.show {
+  z-index: 1050 !important;
+}

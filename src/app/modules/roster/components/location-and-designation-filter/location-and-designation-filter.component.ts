@@ -1,5 +1,5 @@
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
-import { AfterViewChecked, AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ClusterAndSubClusterDataService } from '../../services/data/clusterAndSubCluster.data.service';
 
 @Component({
@@ -7,14 +7,18 @@ import { ClusterAndSubClusterDataService } from '../../services/data/clusterAndS
   templateUrl: './location-and-designation-filter.component.html',
   styleUrls: ['./location-and-designation-filter.component.css']
 })
-export class LocationAndDesignationFilterComponent implements OnInit , AfterViewInit {
+export class LocationAndDesignationFilterComponent implements OnInit , AfterViewInit , OnChanges {
 
   constructor(private dataService : ClusterAndSubClusterDataService,
     private appLocalStorage : AppLocalStorageService) { }
   
+  
 
   @Output() filtersChange : EventEmitter<any> = new EventEmitter();
+  @Input() resetFilters : Boolean = false;
 
+
+  copiedMarketArray = [];
   marketArray : any[] = [];
   clusterArray :any[] = [];
   subClusterArray :any [] = [];
@@ -69,6 +73,19 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
 
   ngAfterViewInit(): void {
     this.filtersChange.emit(this.locationFilters);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.clusterArray = [];
+    this.subClusterArray = [];
+    this.countriesArray = [];
+    this.statesArray = [];
+    this.citiesArray = [];
+    this.branchesArray = [];
+    this.departmentArray = [];
+    this.marketArray = [];
+    setTimeout(() => {
+      this.marketArray = [...this.copiedMarketArray];
+    }, 200);
   }
 
 
@@ -149,10 +166,12 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     
     if(!data["status"]) return; //possible show error
     const markets = data['data'];
+
     
     if(markets.length != 0) {
       
       this.marketArray = this.transformArrayForDropdown(markets , 'id' , 'value');
+      this.copiedMarketArray = [...this.marketArray];
       return;
     }
     this.getCountries();

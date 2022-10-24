@@ -11,7 +11,10 @@
     <!-- Body -->
     <div class="overtime-form">
       <div style="padding: 20px 20px">
-        <app-select-box [label]="'Weekend Type'"></app-select-box>
+        <app-select-box [label]="'Weekend Type'"
+        [data]="weekendTypes"
+        (selectionChange)="leaveTypeSelection($event)"
+        ></app-select-box>
       </div>
     </div>
 

@@ -20,6 +20,7 @@ export class EmployeeCheckBoxComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('employee checkbox',this.modelData);
     this.getLMRosterView({
       client_id: this.appLocalStorage.getClientId(),
       start_date : this.modelData.dateRagne.start , 
@@ -29,7 +30,7 @@ export class EmployeeCheckBoxComponent implements OnInit {
     });
   }
   open(){
-    this.customModal.showFeaturedDialog(WeekendTypeComponent, "");
+    this.customModal.showFeaturedDialog(WeekendTypeComponent, "" , this.modelData);
 
   }
 

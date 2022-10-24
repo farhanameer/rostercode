@@ -225,7 +225,6 @@ export class ShiftSetupComponent implements OnInit {
     };
   }
   onShiftExtendedChecked(val: any) {
-    debugger;
     console.log('onShiftExtendedChecked', val);
     this.isShiftExtended = !this.isShiftExtended;
     // if (val) {
@@ -289,7 +288,7 @@ export class ShiftSetupComponent implements OnInit {
 
   async getShiftColors() {
     const data = await this.shiftRequestService.getShiftColors();
-    debugger;
+    
     let colors = data['data']['payload'];
     if (!Array.isArray(colors)) {
       console.log('error occured');
@@ -338,8 +337,6 @@ export class ShiftSetupComponent implements OnInit {
   async submit() {
     console.log(this.shiftSetUpForm.value);
 
-    return;
-
     if (this.isUpdating) {
       console.log(this.shiftSetUpForm.value);
       return;
@@ -356,9 +353,10 @@ export class ShiftSetupComponent implements OnInit {
     body.state_id = this.filters.stateId;
     body.city_id = this.filters.cityId;
     body.branch_id = this.filters.branchId;
-    body.desg_id = this.filters.departmentId;
+    body.department_id = this.filters.departmentId;
     body.ext_mid_break_time_in = `${body.ext_mid_break_time_in}:00`;
     body.ext_mid_break_time_out = `${body.ext_mid_break_time_out}:00`;
+    body.desg_id = -1;
     body.time_in = `${body.time_in}:00`;
     body.time_out = `${body.time_out}:00`;
     body.qrt_break.forEach((br) => {
@@ -386,9 +384,18 @@ export class ShiftSetupComponent implements OnInit {
     // confused Entries
     //body.ext_mid_break_day_id = "5";
     body.mid_break_enable = 0;
-    body.department_id = 16; //desig_id emp_id = -1 by default
+    //body.department_id = 16; //desig_id emp_id = -1 by default
     body.emp_id = -1;
 
+
+    delete body.lm_request;
+    delete body.lm_date;
+    delete body.lm_comment;
+    delete body.hr_status;
+    delete body.hr_date;
+    delete body.Tolerance;
+    delete body.specific_period;
+    body.is_roster = 1;
     const response = await this.shiftRequestService.hrInsertShift(body);
     this.shiftSetUpForm.reset(this.shiftSetUpForm.value);
     console.log('response', response);
