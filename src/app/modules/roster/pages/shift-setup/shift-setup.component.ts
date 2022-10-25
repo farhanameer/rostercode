@@ -360,7 +360,14 @@ export class ShiftSetupComponent implements OnInit {
     body.time_in = `${body.time_in}:00`;
     body.time_out = `${body.time_out}:00`;
     body.qrt_break.forEach((br) => {
-      br.qrt_break_time_in = `${br.qrt_break_time_in}:00`;
+      let lengh = br.qrt_break_time_in.split(':');
+      if(lengh.length ==2){
+        br.qrt_break_time_in = `${br.qrt_break_time_in}:00`;
+      }
+      lengh = br.qrt_break_time_out.split(':');
+      if(lengh.length ==2){
+        br.qrt_break_time_in = `${br.qrt_break_time_out}:00`;
+      }
       br.qrt_break_time_out = `${br.qrt_break_time_out}:00`;
     });
     body.consecutive_late = Number(body.consecutive_late);
@@ -430,6 +437,7 @@ export class ShiftSetupComponent implements OnInit {
 
   isUpdating: boolean = false;
   updateAbleShiftId: any;
+  defaultFilters : any=null;
   async getSingleShift(id) {
     
     console.log('single Shift Id', id);
@@ -487,6 +495,16 @@ export class ShiftSetupComponent implements OnInit {
     this.shiftNameClick = true;
     this.isUpdating = true;
     this.updateAbleShiftId = id;
+    this.defaultFilters = {
+      glob_mkt_id : shift.glob_mkt_id , 
+      region_id : shift.region_id , 
+      sub_region_id : shift.sub_region_id,
+      country_id : shift.country_id , 
+      state_id : shift.state_id , 
+      city_id  : shift.city_id , 
+      branch_id : shift.branch_id , 
+      department_id : shift.department_id
+    }
   }
 
   update() {

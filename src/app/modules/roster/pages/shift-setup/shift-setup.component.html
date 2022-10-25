@@ -8,6 +8,7 @@
             <div class="heading">Shift Setup</div>
             <app-location-and-designation-filter
               (filtersChange)="filtersChanged($event)"
+              [defaultValues]="defaultFilters"
             >
             </app-location-and-designation-filter>
 

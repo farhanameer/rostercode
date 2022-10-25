@@ -122,12 +122,12 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
     const res = await this.employeeroster.getEmployeeRoster(params, replace);
     this.assignedEmployeeShift = res['data']['payload']['data'][0];
     this.employeesName.push({
-      id : this.assignedEmployeeShift.id , 
+      id : this.assignedEmployeeShift.shift_id , 
       name : `${this.assignedEmployeeShift.shift_name} (${this.assignedEmployeeShift.actual_shift_time_in}-${this.assignedEmployeeShift.actual_shift_time_out})`
     });
 
     this.assignedShiftDefaultValue = {
-      id : this.assignedEmployeeShift.id , 
+      id : this.assignedEmployeeShift.shift_id , 
       name : `${this.assignedEmployeeShift.shift_name} (${this.assignedEmployeeShift.actual_shift_time_in}-${this.assignedEmployeeShift.actual_shift_time_out})`
     };
 

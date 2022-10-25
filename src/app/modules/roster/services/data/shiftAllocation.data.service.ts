@@ -40,6 +40,7 @@ export class ShiftAllocationDataService {
             resolve(response);
           },
           (err) => {
+
             response.message = err;
             this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);

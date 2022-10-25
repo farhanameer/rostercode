@@ -118,7 +118,7 @@ export class ShiftRequestByLmComponent implements OnInit {
       shift_revert_date_end : [''],
       revert_shift_id : [''],
       qrt_break: this.fb.array([]),
-      hr_comment: ['', Validators.required],
+      hr_comment: [''],
       hr_date : [''],
       hr_status : [''],
       lm_date : [''],
@@ -180,7 +180,7 @@ export class ShiftRequestByLmComponent implements OnInit {
       "state_id": this.filters.stateId,
       "city_id": this.filters.cityId,
       "branch_id": this.filters.branchId, 
-      "department_id": 16,
+      "department_id": this.filters.departmentId,
       "desg_id": -1,
       "emp_id": -1
     }
