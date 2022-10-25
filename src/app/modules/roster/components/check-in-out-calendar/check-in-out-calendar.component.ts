@@ -17,17 +17,19 @@ export class CheckInOutCalendarComponent implements OnInit {
   year_month = '';
   reshapedData: any;
   empRosterArray = [];
+  shiftsArray = [];
 
   constructor(
     private calendar: CalendarService,
-    private dataService: RosterService
+    private dataService: RosterService,
+    private shiftRequest : ShiftRequestDataService
   ) // private shiftDataService: ShiftRequestDataService,
   // private HoursAdjustment:RosterService
   {}
 
   ngOnInit(): void {
     // hoursAdjustment Service testing
-
+    this.getShiftsArray();
     //
     this.currentDate = moment();
 
@@ -56,6 +58,24 @@ export class CheckInOutCalendarComponent implements OnInit {
       .add(2, 'month')
       .format('MMMM YYYY');
     this.getEmpRosterView(this.year_month);
+  }
+
+  async getShiftsArray(){
+    let params = {
+      emp_id : 53130
+    }
+    const res = await this.shiftRequest.getShiftsByEmployee(params);
+    const data = res['data']['payload']
+
+    data.forEach(item => {
+      const obj = {
+        id : item.shift_id,
+        name : item.shift_name
+      }
+      this.shiftsArray.push(obj)
+    });
+    console.log(this.shiftsArray);
+    debugger;
   }
 
   getCheckingColor(shift) {

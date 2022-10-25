@@ -15,6 +15,10 @@ export class ShiftRequestHttpService {
     this.ShiftRequestAndSetup = APIs['ShiftRequestAndSetupUrl'];
   }
 
+  getShiftsByEmployee(params = {}) {
+    return this.http.get(`${this.ShiftRequestAndSetup}/employee-shifts`, {params});
+  }
+
   getDefaultList(params = {}) {
     return this.http.get(`${this.ShiftRequestAndSetup}/DefaultShift`, {params});
   }
