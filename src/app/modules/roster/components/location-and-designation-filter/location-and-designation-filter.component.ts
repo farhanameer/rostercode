@@ -16,7 +16,7 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
 
   @Output() filtersChange : EventEmitter<any> = new EventEmitter();
   @Input() resetFilters : Boolean = false;
-
+  @Input() defaultValues : any = null;
 
   copiedMarketArray = [];
   marketArray : any[] = [];
@@ -38,6 +38,17 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     cityId : -1,
     branchId : -1,
     departmentId : -1
+  }
+
+  defaultFiltersValues = {
+    marketId : {} , 
+    clusterId : {} , 
+    subClusterId : {},
+    countryId : {} , 
+    stateId : {} , 
+    cityId : {},
+    branchId : {},
+    departmentId : {}
   }
   dropDowns = {
     'market' : 'getCluster' , 
@@ -75,6 +86,7 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     this.filtersChange.emit(this.locationFilters);
   }
   ngOnChanges(changes: SimpleChanges): void {
+    
     this.clusterArray = [];
     this.subClusterArray = [];
     this.countriesArray = [];
@@ -86,8 +98,63 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     setTimeout(() => {
       this.marketArray = [...this.copiedMarketArray];
     }, 200);
+    
+    setTimeout(() => {
+      this.populateFilterValues();
+    }, 200);
+    console.log('getting default values for filters' , this.defaultValues);
+    
   }
 
+
+  async populateFilterValues(){
+    
+    if(this.defaultValues && Object.entries(this.defaultValues).length !=0){
+      await this.search(this.marketArray , this.defaultValues.glob_mkt_id , 'marketId' , this.getMarket , null);
+      await this.search(this.clusterArray , this.defaultValues.region_id , 'clusterId' , this.getCluster, this.defaultValues.glob_mkt_id);
+      await this.search(this.subClusterArray , this.defaultValues.sub_region_id , 'subClusterId' , this.getSubCluster, this.defaultValues.region_id );
+     
+      if(this.defaultValues.glob_mkt_id != -1){
+        if(this.defaultValues.region_id == -1 && this.defaultValues.sub_region_id == -1) {
+          await this.getCountries('marketId' , this.defaultValues.glob_mkt_id);
+        }
+        if(this.defaultValues.region_id != -1 && this.defaultValues.sub_region_id == -1){
+          await this.getCountries('clusterId' , this.defaultValues.region_id);
+        }
+        if(this.defaultValues.region_id != -1 && this.defaultValues.sub_region_id != -1){
+          await this.getCountries('subClusterId' , this.defaultValues.sub_region_id);
+        }
+      }
+      else{
+        await this.getCountries();
+      }
+      await this.search(this.countriesArray , this.defaultValues.country_id , 'countryId' , this.getCountries, null);
+      await this.search(this.statesArray , this.defaultValues.state_id , 'stateId' , this.getStates, this.defaultValues.country_id);
+      await this.search(this.citiesArray , this.defaultValues.city_id , 'cityId' , this.getCities, this.defaultValues.state_id);
+      await this.search(this.branchesArray , this.defaultValues.branch_id , 'branchId' , this.getBranches, this.defaultValues.city_id);
+      await this.search(this.departmentArray , this.defaultValues.department_id , 'departmentId' , this.getDepartments, this.defaultValues.branch_id);
+    }
+    else{
+      console.log('problems')
+    }
+  }
+  async search(array , value , key , apiFunction : any , apiFunctionParams = null){
+    if(value == -1 && apiFunctionParams == -1){
+      return;
+    }
+    if(array.length == 0){
+      if(apiFunctionParams){
+        array = await apiFunction(apiFunctionParams);
+      }else{
+        array = await apiFunction();
+      }
+    }
+    array.forEach(item =>{
+      if(item.id == value){
+        this.defaultFiltersValues[key]=item;
+      }
+    })
+  }
 
   transformArrayForDropdown(array : [], idKey , nameKey) {
     
