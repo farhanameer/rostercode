@@ -632,7 +632,6 @@ export class ShiftSetupComponent implements OnInit {
       "qrt_break": values.qrt_break
     }
     const res = await this.shiftRequestService.putUpdateShift(body);
-    debugger;
     const params = {
       screen_role: 'hr',
       client_id: this.appLocalStorage.getClientId(),
