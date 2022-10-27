@@ -83,12 +83,14 @@ export class ShiftSetupComponent implements OnInit {
       name: ['', Validators.required],
       time_in: [null, Validators.required],
       time_out: ['', Validators.required],
-      mid_break_enable: [''],
+      mid_break_enable: [0],
       mid_break_time_in: ['', Validators.required],
       mid_break_time_out: ['', Validators.required],
       ext_mid_break_day_id: ['', Validators.required],
       ext_mid_break_time_in: ['', Validators.required],
       ext_mid_break_time_out: ['', Validators.required],
+      is_roster: [0],
+      is_default: [0],
       Tolerance: [''],
       consecutive_late: [
         null,
@@ -438,8 +440,9 @@ export class ShiftSetupComponent implements OnInit {
   isUpdating: boolean = false;
   updateAbleShiftId: any;
   defaultFilters : any=null;
+  shiftId: any;
   async getSingleShift(id) {
-    
+    this.shiftId = id;
     console.log('single Shift Id', id);
     const payload = {
       client_id: this.appLocalStorage.getClientId(),
@@ -571,17 +574,78 @@ export class ShiftSetupComponent implements OnInit {
   }
 
   async approve() {
+    const qrtBreaks = [];
+    const values = this.shiftSetUpForm.value;
+    values.qrt_break.forEach(br =>{
+      let lengh = br.qrt_break_time_in.split(':');
+      if(lengh.length ==2){
+        br.qrt_break_time_in = `${br.qrt_break_time_in}:00`;
+      }
+      lengh = br.qrt_break_time_out.split(':');
+      if(lengh.length ==2){
+        br.qrt_break_time_in = `${br.qrt_break_time_out}:00`;
+      }
+      br.qrt_break_time_out = `${br.qrt_break_time_out}:00`;
+      qrtBreaks.push(br);
+    })
+
+    let shift_revert_date_start = this.shiftSetUpForm.get('shift_revert_date_start').value
+    shift_revert_date_start = moment(shift_revert_date_start).format('YYYY-MM-DD');
+
+    let shift_revert_date_end = this.shiftSetUpForm.get('shift_revert_date_end').value
+    shift_revert_date_end = moment(shift_revert_date_end).format('YYYY-MM-DD');
+           
+    const body = {
+      "client_id": this.appLocalStorage.getClientId(),
+      "shift_id": this.shiftId,
+      "proll_filter_table_id": 7,
+      "hr_status": 2,
+      "color": "#f2ab01",
+      "name": this.shiftSetUpForm.get('name').value,
+      "time_in": this.shiftSetUpForm.get('time_in').value,
+      "time_out": this.shiftSetUpForm.get('time_out').value,
+      "mid_break_enable": this.shiftSetUpForm.get('mid_break_enable').value,
+      "mid_break_time_in": `${this.shiftSetUpForm.get('mid_break_time_in').value}:00`, 
+      "mid_break_time_out": `${this.shiftSetUpForm.get('mid_break_time_out').value}:00`,
+      "ext_mid_break_day_id": this.shiftSetUpForm.get('ext_mid_break_day_id').value,
+      "ext_mid_break_time_in": `${this.shiftSetUpForm.get('ext_mid_break_time_in').value}:00`,
+      "ext_mid_break_time_out": `${this.shiftSetUpForm.get('ext_mid_break_time_out').value}:00`,
+      "is_roster": this.shiftSetUpForm.get('is_roster').value,
+      "is_default": this.shiftSetUpForm.get('is_default').value,
+      "consecutive_late": this.shiftSetUpForm.get('consecutive_late').value,
+      "late_arrival_tolerance": this.shiftSetUpForm.get('late_arrival_tolerance').value,
+      "attendance_tolerance": this.shiftSetUpForm.get('attendance_tolerance').value,
+      "revert_shift_id": this.shiftSetUpForm.get('revert_shift_id').value,
+      "shift_revert_date_start": shift_revert_date_start, 
+      "shift_revert_date_end": shift_revert_date_end,
+      "shift_type_id": this.shiftSetUpForm.get('shift_type_id').value,
+      "glob_mkt_id": this.filters.marketId,
+      "region_id": this.filters.clusterId,
+      "sub_region_id": this.filters.subClusterId,
+      "country_id": this.filters.countryId,
+      "state_id": this.filters.stateId,
+      "city_id": this.filters.cityId,
+      "branch_id": this.filters.branchId,
+      "department_id": this.filters.departmentId,
+      "desg_id": -1,
+      "emp_id": -1, 
+      "qrt_break": values.qrt_break
+    }
+    const res = await this.shiftRequestService.putUpdateShift(body);
+    debugger;
     const params = {
       screen_role: 'hr',
       client_id: this.appLocalStorage.getClientId(),
       shift_id: this.updateAbleShiftId,
       action: 'approve',
+      hr_comment: this.shiftSetUpForm.get('hr_comment').value
     };
     const response = await this.shiftRequestService.putDeleteDisapprovedById(
       params
     );
     console.log(response);
     this.resetForm();
+    this.shiftNameClick = false;
   }
   async disApprove() {
     const params = {
@@ -589,12 +653,14 @@ export class ShiftSetupComponent implements OnInit {
       client_id: this.appLocalStorage.getClientId(),
       shift_id: this.updateAbleShiftId,
       action: 'disapprove',
+      hr_comment: this.shiftSetUpForm.get('hr_comment').value
     };
     const response = await this.shiftRequestService.putDeleteDisapprovedById(
       params
     );
     console.log(response);
     this.resetForm();
+    this.shiftNameClick = false;
   }
   cancel() {
     this.resetForm();

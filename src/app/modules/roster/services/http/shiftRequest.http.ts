@@ -69,6 +69,6 @@ export class ShiftRequestHttpService {
   }
 
   putUpdateShift(params = {}){
-    return this.http.put(`${this.ShiftRequestAndSetup}/UpdateShift`, {params});
+    return this.http.put(`${this.ShiftRequestAndSetup}/UpdateShift`, params);
   }
 }

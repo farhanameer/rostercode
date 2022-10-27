@@ -96,6 +96,8 @@
                             <app-check-box
                               [color]="'#3080EA'"
                               [label]="'Roster'"
+                              [form]="shiftSetUpForm"
+                              [control]="'is_roster'"
                             >
                             </app-check-box>
                           </div>
@@ -110,6 +112,8 @@
                             <app-check-box
                               [color]="'#3080EA'"
                               [label]="'Default'"
+                              [form]="shiftSetUpForm"
+                              [control]="'is_default'"
                             >
                             </app-check-box>
                           </div>
@@ -334,6 +338,7 @@
                 <!-- <input *ngIf="isUpdating" type="submit" class="btn-input" value="Update" /> -->
                 <input
                   *ngIf="isUpdating"
+                  [disabled] = "!shiftSetUpForm.valid"
                   type="submit"
                   class="btn-input"
                   value="Approve"
@@ -341,6 +346,7 @@
                 />
                 <input
                   *ngIf="isUpdating"
+                  [disabled] = "!shiftSetUpForm.valid"
                   type="submit"
                   class="btn-input"
                   value="Disapprove"
