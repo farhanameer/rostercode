@@ -24,7 +24,12 @@
             >
           </div>
 
-          <input type="text" />
+          <app-input-box 
+            [width]="'105px'" 
+            [height]="'20px'"
+            (inputChanged)="search($event)">
+          </app-input-box>
+
         </form>
       </div>
     </div>
@@ -33,10 +38,12 @@
   <app-employee-check-box
     *ngIf="view == 'employee'"
     [modelData]="modelData"
+    [searchedValue]="searchedValue"
   ></app-employee-check-box>
   <app-date-check-box
     *ngIf="view == 'date'"
     [modelData]="modelData"
+    [searchedValue]="searchedValue"
   ></app-date-check-box>
   <app-single-employee-check-box *ngIf="single && view == 'employee'"> </app-single-employee-check-box>
 </div>

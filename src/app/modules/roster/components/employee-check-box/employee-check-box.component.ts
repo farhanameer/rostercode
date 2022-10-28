@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { WeekendTypeComponent } from '../../dialogs/weekend-type/weekend-type.component';
@@ -10,17 +10,47 @@ import { ModalService } from '../../services/modal/modal.service';
   templateUrl: './employee-check-box.component.html',
   styleUrls: ['./employee-check-box.component.scss']
 })
-export class EmployeeCheckBoxComponent implements OnInit {
+export class EmployeeCheckBoxComponent implements OnInit, OnChanges {
   @Input() modelData : any;
+  @Input() searchedValue = null;
   constructor( 
    public activeModal: NgbActiveModal,
       private customModal: ModalService,
       private dataService : RosterService , 
        private appLocalStorage: AppLocalStorageService
   ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("Employee-Check-Box",this.searchedValue);
+    if(!this.searchedValue){
+      this.getLMRosterView({
+        client_id: this.appLocalStorage.getClientId(),
+        start_date : this.modelData.dateRagne.start , 
+        end_date : this.modelData.dateRagne.end,
+        reporting_to_id: this.appLocalStorage.getUserId(),
+      });
+      return;
+    }
+    
+    this.getLMRosterView({
+      client_id: this.appLocalStorage.getClientId(),
+      start_date : this.modelData.dateRagne.start , 
+      end_date : this.modelData.dateRagne.end,
+      reporting_to_id: this.appLocalStorage.getUserId(),
+      search : this.searchedValue
+    });
+  }
 
   ngOnInit(): void {
     console.log('employee checkbox',this.modelData);
+    if(this.searchedValue){
+      this.getLMRosterView({
+        client_id: this.appLocalStorage.getClientId(),
+        start_date : this.modelData.dateRagne.start , 
+        end_date : this.modelData.dateRagne.end,
+        reporting_to_id: this.appLocalStorage.getUserId(),
+        search : this.searchedValue
+      });
+    }
     this.getLMRosterView({
       client_id: this.appLocalStorage.getClientId(),
       start_date : this.modelData.dateRagne.start , 

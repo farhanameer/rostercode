@@ -11,6 +11,7 @@ export class MarkWeekendComponent implements OnInit {
   valueType:string="date";
 @Input() modelData:any;
 single: boolean = false;
+searchedValue: any;
 
   constructor(public activeModal: NgbActiveModal) { }
 
@@ -22,5 +23,9 @@ single: boolean = false;
   }
   radioChange(val:string){
     this.view=val
+  }
+  search(event){
+    console.log(event);
+    this.searchedValue = event;
   }
 }

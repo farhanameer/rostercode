@@ -14,6 +14,7 @@ export class ShiftManagmentDialog implements OnInit {
   valueType : string  = 'date';
   view:string="date";
   single: boolean = false;
+  
 
 
 
@@ -33,7 +34,8 @@ export class ShiftManagmentDialog implements OnInit {
     this.activeModal.close(ShiftManagmentDialog);
   }
 // ********* radio button function
-radioChange(val:string){
-this.view=val;
-}
+  radioChange(val:string){
+    this.view=val;
+  }
+  
 }

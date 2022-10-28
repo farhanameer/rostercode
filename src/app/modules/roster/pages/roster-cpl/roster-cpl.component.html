@@ -56,10 +56,13 @@
             <app-sub-layout style="width: 358px">
               <div class="header-gray">
                 <div class="heading">CPL/Overtime</div>
-                <input type="text" />
+                <app-input-box 
+                  [width]="'105px'" 
+                  [height]="'20px'"
+                  (inputChanged)="search($event)"></app-input-box>
               </div>
               <div class="height-fixed">
-                <app-overview-table></app-overview-table>
+                <app-overview-table [search]="searchValue"></app-overview-table>
               </div>
             </app-sub-layout>
           </div>

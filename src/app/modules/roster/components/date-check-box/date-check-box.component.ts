@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { WeekendTypeComponent } from '../../dialogs/weekend-type/weekend-type.component';
@@ -11,9 +11,10 @@ import { RosterToastService } from '../../services/roster.toast.service';
   templateUrl: './date-check-box.component.html',
   styleUrls: ['./date-check-box.component.scss']
 })
-export class DateCheckBoxComponent implements OnInit {
+export class DateCheckBoxComponent implements OnInit, OnChanges {
   data : any = [];
   @Input() modelData : any = [];
+  @Input() searchedValue = null;
   constructor( 
     public activeModal: NgbActiveModal,
        private customModal: ModalService , 
@@ -22,8 +23,38 @@ export class DateCheckBoxComponent implements OnInit {
        private tosterService : RosterToastService
    ) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("Date-Check-Box",this.searchedValue);
+    if(!this.searchedValue){
+      this.getLMRosterView({
+        client_id: this.appLocalStorage.getClientId(),
+        start_date : this.modelData.dateRagne.start , 
+        end_date : this.modelData.dateRagne.end,
+        reporting_to_id: this.appLocalStorage.getUserId(),
+      });
+      return;
+    }
+    
+    this.getLMRosterView({
+      client_id: this.appLocalStorage.getClientId(),
+      start_date : this.modelData.dateRagne.start , 
+      end_date : this.modelData.dateRagne.end,
+      reporting_to_id: this.appLocalStorage.getUserId(),
+      search : this.searchedValue
+    });
+  }
+
   ngOnInit(): void {
     console.log('model Data' , this.modelData);
+    if(this.searchedValue){
+      this.getLMRosterView({
+        client_id: this.appLocalStorage.getClientId(),
+        start_date : this.modelData.dateRagne.start , 
+        end_date : this.modelData.dateRagne.end,
+        reporting_to_id: this.appLocalStorage.getUserId(),
+        search : this.searchedValue
+      });
+    }
     this.getLMRosterView({
       client_id: this.appLocalStorage.getClientId(),
       start_date : this.modelData.dateRagne.start , 
@@ -60,7 +91,8 @@ open(employee){
     const data = await this.dataService.getLMRosterView(params);
 
     if (!data['data']['status']) {
-      this.tosterService.toast(data['message'] , 'error-toast');
+      this.tosterService.toast(data['data']['payload'] , 'error-toast');
+      this.data = [];
       return;
     }
 

@@ -22,6 +22,7 @@ export class RosterCplComponent implements OnInit {
   employeesArray : any = [];
   shiftsArray : any = [];
   filters : any = {};
+  searchValue: any;
   ngOnInit(): void {
     this.getClientTypes();
     this.getReportingTypes();
@@ -110,6 +111,11 @@ export class RosterCplComponent implements OnInit {
     if(!data["status"]) return;
     console.log(data["payload"]);
     this.shiftsArray = this.transformDropDownData(data["data"]["payload"] , 'id' , 'name');
+  }
+
+  search(event: any){
+    console.log(event);
+    this.searchValue = event;
   }
 
 

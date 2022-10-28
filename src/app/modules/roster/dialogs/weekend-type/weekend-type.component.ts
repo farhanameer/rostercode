@@ -1,5 +1,7 @@
+import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { RosterService as RosterViewService} from '../../services/data/rosterView.data.service';
 import { RosterService } from '../../services/data/roster.dataService';
 
 @Component({
@@ -10,13 +12,18 @@ import { RosterService } from '../../services/data/roster.dataService';
 export class WeekendTypeComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal , 
-    private dataService : RosterService) { }
+    private dataService : RosterService,
+    private appLocalStorage: AppLocalStorageService,
+    private rosterViewDataService: RosterViewService) { }
   
   weekendTypes :any = [];
+  roster_id : any;
+  markWeekendBody = {};
   @Input() modelData : any;
   ngOnInit(): void {
     this.getWeekendTypes();
     console.log('employee Data' , this.modelData);
+    this.roster_id = this.modelData['employee'].roster_id;
   }
   async getWeekendTypes(){
     const result = await this.dataService.getLeaveTypes();
@@ -34,6 +41,23 @@ export class WeekendTypeComponent implements OnInit {
   }
   leaveTypeSelection(value){
     console.log('weekend Type' , value);
+    this.postMArkWeekend(value);
+  }
+  postMArkWeekend(value){
+    this.markWeekendBody = {
+      roster_id : [this.roster_id],
+      client_id : this.appLocalStorage.getClientId(),
+      leave_type : "value",
+      linemanager_id : this.appLocalStorage.getUserId()
+    }
+  }
+
+  async onSubmit(){
+    const res = await this.rosterViewDataService.markWeekend(this.markWeekendBody);
+    debugger;
+    if(res['status']==true){
+      this.activeModal.close('Close click')
+    }
   }
 
 }
