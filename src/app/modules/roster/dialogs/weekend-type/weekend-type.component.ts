@@ -23,7 +23,7 @@ export class WeekendTypeComponent implements OnInit {
   ngOnInit(): void {
     this.getWeekendTypes();
     console.log('employee Data' , this.modelData);
-    this.roster_id = this.modelData['employee'].roster_id;
+    this.roster_id = this.modelData.rosterIds;
   }
   async getWeekendTypes(){
     const result = await this.dataService.getLeaveTypes();
@@ -45,7 +45,7 @@ export class WeekendTypeComponent implements OnInit {
   }
   postMArkWeekend(value){
     this.markWeekendBody = {
-      roster_id : [this.roster_id],
+      roster_id : this.roster_id,
       client_id : this.appLocalStorage.getClientId(),
       leave_type : "value",
       linemanager_id : this.appLocalStorage.getUserId()

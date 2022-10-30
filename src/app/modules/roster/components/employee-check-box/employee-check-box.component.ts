@@ -21,12 +21,13 @@ export class EmployeeCheckBoxComponent implements OnInit, OnChanges {
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
     console.log("Employee-Check-Box",this.searchedValue);
-    if(!this.searchedValue){
+    if(!this.searchedValue || this.searchedValue == ''){
       this.getLMRosterView({
         client_id: this.appLocalStorage.getClientId(),
         start_date : this.modelData.dateRagne.start , 
         end_date : this.modelData.dateRagne.end,
         reporting_to_id: this.appLocalStorage.getUserId(),
+        sortByEmployee : 'ASC'
       });
       return;
     }
@@ -36,7 +37,8 @@ export class EmployeeCheckBoxComponent implements OnInit, OnChanges {
       start_date : this.modelData.dateRagne.start , 
       end_date : this.modelData.dateRagne.end,
       reporting_to_id: this.appLocalStorage.getUserId(),
-      search : this.searchedValue
+      search : this.searchedValue,
+      sortByEmployee : 'ASC'
     });
   }
 
@@ -48,8 +50,10 @@ export class EmployeeCheckBoxComponent implements OnInit, OnChanges {
         start_date : this.modelData.dateRagne.start , 
         end_date : this.modelData.dateRagne.end,
         reporting_to_id: this.appLocalStorage.getUserId(),
+        sortByEmployee : 'ASC',
         search : this.searchedValue
       });
+      return;
     }
     this.getLMRosterView({
       client_id: this.appLocalStorage.getClientId(),
@@ -59,7 +63,16 @@ export class EmployeeCheckBoxComponent implements OnInit, OnChanges {
       sortByEmployee : 'ASC'
     });
   }
-  open(){
+  open(shifts , isSingle = false){
+    const shiftIds = [];
+    if(!isSingle){
+      shifts.forEach(shift =>{
+        shiftIds.push(shift.roster_id);
+      })
+    }else{
+      shiftIds.push(shifts.roster_id);
+    }
+    this.modelData.rosterIds = shiftIds;
     this.customModal.showFeaturedDialog(WeekendTypeComponent, "" , this.modelData);
 
   }
@@ -89,6 +102,7 @@ export class EmployeeCheckBoxComponent implements OnInit, OnChanges {
     const data = await this.dataService.getLMRosterView(params);
 
     if (!data['data']['status']) {
+      this.data = [];
       return;
     }
 

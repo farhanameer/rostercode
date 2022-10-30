@@ -25,7 +25,7 @@ export class DateCheckBoxComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log("Date-Check-Box",this.searchedValue);
-    if(!this.searchedValue){
+    if(!this.searchedValue || this.searchedValue == ''){
       this.getLMRosterView({
         client_id: this.appLocalStorage.getClientId(),
         start_date : this.modelData.dateRagne.start , 
@@ -62,14 +62,24 @@ export class DateCheckBoxComponent implements OnInit, OnChanges {
       reporting_to_id: this.appLocalStorage.getUserId(),
     });
   }
-open(employee){
-    this.modelData.employee = employee;
+open(employees , isSingle = false){
+    console.log('emps' , employees);
+    const rosterIds = [];
+    if(!isSingle){
+      employees.forEach(emp =>{
+        rosterIds.push(emp.roster_id);
+      })
+    }else{
+      rosterIds.push(employees.roster_id);
+    }
+    this.modelData.rosterIds = rosterIds;
     this.customModal.showFeaturedDialog(WeekendTypeComponent, "" , this.modelData);
 
   }
 
 
   async getLMRosterView(params) {
+    this.data = [];
     if(this.modelData.filters) {
       if(this.modelData.filters["employeeType"] !=undefined) {
         params['is_roster_employees'] = this.modelData.filters["employeeType"]
@@ -99,7 +109,7 @@ open(employee){
     const response = data['data']['payload'];
     const hash = {};
     const transformedData = [];
-
+    this.data = [];
     response.forEach((singleData) => {
       let employeeArray = [];
       const obj = {

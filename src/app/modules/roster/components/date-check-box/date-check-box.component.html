@@ -4,7 +4,7 @@
       <ul>
         <div class="row m-0">
           <div class="col p-0 d-flex" style="flex-grow: 0; align-items: center;">
-            <input type="checkbox" (click)="open('all Employees')" />
+            <input type="checkbox" (click)="open(entry.employees)" checked = true/>
           </div>
           <div class="col p-0">
             <li class="heading-date pl-2">{{ entry.date }}</li>
@@ -13,7 +13,7 @@
         <app-employee-card *ngFor="let employee of entry.employees">
           <div class="row custom-w-260">
             <div class="col d-flex pl-20" style="align-items: center;">
-              <input type="checkbox" (click)="open(employee)" />
+              <input type="checkbox" (click)="open(employee , true)" checked = true/>
             </div>
 
             <div class="col custom-pl-6">

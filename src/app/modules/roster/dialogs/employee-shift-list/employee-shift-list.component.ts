@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,8 +9,22 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class EmployeeShiftListComponent implements OnInit {
 
   constructor(  public activeModal: NgbActiveModal) { }
+  @Input() top:any;
+  @Input() bottom : any;
+  @Input() left : any;
+  @Input() show:boolean = false;
+  @Input() employees : any;
+  @Input() date : any;
+  
+  @Output() close : EventEmitter<any> = new EventEmitter();
 
+  
   ngOnInit(): void {
+  }
+
+  closeModal(){
+    console.log('event closing');
+    this.close.emit();
   }
 
 }

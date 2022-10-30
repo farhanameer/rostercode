@@ -1,9 +1,9 @@
 <app-dialog-layout>
-  <div class="shift-drop-down bg-white">
+  <div class="shift-drop-down bg-white" *ngIf="show" style="position: absolute;" [ngStyle]="{'z-index' : 1, 'top': top , 'bottom' : bottom , 'left' : left }">
     <div class="shift-dd-header">
-      Wednesday, 01 June 2022
+      {{date}}
       <i
-        ><a (click)="activeModal.close('Close click')"
+        ><a (click)="closeModal()"
           ><img src="assets/icons/ico-close.svg" alt="" /></a
       ></i>
     </div>
@@ -14,91 +14,13 @@
     <!-- users list -->
     <div class="dd-list">
       <ul>
-        <app-employee-card>
+        <app-employee-card *ngFor="let emp of employees">
           <li>
             <div class="user-img">
               <div class="img-icon">
                 <img src="assets/images/img-dummy.png" alt="" />
               </div>
-              Natalya Neidhart
-            </div>
-            <div class="employee-detail">
-              <img src="assets/icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-employee-card>
-        <app-employee-card>
-          <li>
-            <div class="user-img">
-              <div class="img-icon">
-                <img src="assets/images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
-            </div>
-            <div class="employee-detail">
-              <img src="assets/icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-employee-card>
-        <app-employee-card>
-          <li>
-            <div class="user-img">
-              <div class="img-icon">
-                <img src="assets/images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
-            </div>
-            <div class="employee-detail">
-              <img src="assets/icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-employee-card>
-        <app-employee-card>
-          <li>
-            <div class="user-img">
-              <div class="img-icon">
-                <img src="assets/images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
-            </div>
-            <div class="employee-detail">
-              <img src="assets/icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-employee-card>
-        <app-employee-card>
-          <li>
-            <div class="user-img">
-              <div class="img-icon">
-                <img src="assets/images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
-            </div>
-            <div class="employee-detail">
-              <img src="assets/icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-employee-card>
-        <app-employee-card>
-          <li>
-            <div class="user-img">
-              <div class="img-icon">
-                <img src="assets/images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
-            </div>
-            <div class="employee-detail">
-              <img src="assets/icons/ico-present-02.svg" alt="" />
-            </div>
-          </li>
-        </app-employee-card>
-        <app-employee-card>
-          <li>
-            <div class="user-img">
-              <div class="img-icon">
-                <img src="assets/images/img-dummy.png" alt="" />
-              </div>
-              Natalya Neidhart
+              {{emp.emp_name}}
             </div>
             <div class="employee-detail">
               <img src="assets/icons/ico-present-02.svg" alt="" />

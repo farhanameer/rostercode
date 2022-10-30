@@ -1,6 +1,6 @@
 import { RosterService } from './../../services/data/rosterView.data.service';
 import  moment  from 'moment';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CalendarService } from '../../services/calander.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { ShiftManagmentDialog } from '../../dialogs/shift-managment/shift-managment.dialog';
@@ -64,6 +64,36 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
     });
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event: PointerEvent) {
+
+
+    // console.log('event paths' , event);
+    // console.log('composed path',event.composedPath());
+    // console.log('event paths' , event['path']);
+
+
+    var paths = event.composedPath() as any;
+
+    // if(event.composedPath())
+
+    var inComponent = false;
+    paths.forEach((path) => {
+      if (path.tagName != undefined) {
+        var tagName = path.tagName.toString().toLowerCase();
+        if (tagName == 'app-shifts-calender') inComponent = true;
+      }
+    });
+
+    if (inComponent) {
+      console.log('clicked inside');
+      
+    } else {
+      console.log('clicked inside');
+      this.show = false;
+    }
+  }
+
   lmRosterViewArray : [] = [];
 
   getRosterShiftsByDate(date){
@@ -109,6 +139,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
       this.lmRosterViewArray = [];
     }
     this.reshapedData = this.reshapeData(this.currentMonthDates);
+    console.log('reshaped data',this.reshapedData);
   }
 
   calendarArray : any = [];
@@ -123,6 +154,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
       for(let j=1; j<=7; j++){
         const calendarData = array[counter];
         let date;
+        
         calendarData["shifts"] = [];
         if(calendarData["date"] && calendarData["date"] <=9){
           date = `${this.year_month}-0${calendarData["date"]}`;
@@ -202,25 +234,111 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
       return false;
       }
   }
-  onDragStart(event){
+  startIndex = null;
+  hoveredOnDate = false;
+  preventOpningDialoug = false;
+  startingPointer : any = null;
+  wasDragged : boolean = false;
+  onDragStart(event , index , actualEvent){
+    console.log('current index',index);
+    this.startingPointer = actualEvent;
+    console.log('total indexes', this.reshapedData.length);
+    if(event){
+      this.hoveredOnDate = true;
+    }
+    this.startIndex = index;
     this.mouseStart = event;
     this.mouseDown = true;
     this.obj.start = this.mouseStart;
+    this.obj.end = this.mouseStart;
     this.resetColor = false;
     
   }
-  onDrag(event){
-
-    if(!this.mouseDown) return;
+  
+  getPoint(array , index = 0){
+    let point = null;
+    if(index == 0){
+      array.every(item=>{
+        if(item.date){
+          point = item.date;
+          return false;
+        }
+        return true;
+      });
+      return point;
+    }
     
-    this.obj.end = event ? event : this.obj.end;
+    array.forEach(item =>{
+      if(item.date){
+        point = item.date;
+      }
+    });
+    return point;
   }
   
-  onDragOver(event){
+  onDrag(event , index){
+   
+    if(!event && this.startIndex == index){
+      this.preventOpningDialoug = true;
+      console.log('prevention',index);
+    }else{
+      this.preventOpningDialoug = false;
+    }
+    if(!this.mouseDown) return;
+
+    this.wasDragged = true;
+    if(event) this.hoveredOnDate = true;
+    
+    console.log('mouse was');
+    
+    if(!this.mouseStart && event) {
+      this.mouseStart= this.getPoint(this.reshapedData[this.startIndex] , this.startIndex);
+      this.obj.start = this.mouseStart;
+    }
+    if(!event && this.hoveredOnDate){
+      this.obj.end = this.getPoint(this.reshapedData[index] , index);
+      return;  
+    }
+    this.obj.end = event ? event : this.obj.end;
+    console.log(this.obj.start);
+    console.log(this.obj.end);
+  }
+  
+  mouseLeft(){
+    this.mouseDown = false;
+    this.mouseDown = false;
+    this.mouseEnd = null;
+    this.obj.end = 0;
+    this.obj.start = 0;
+    this.mouseStart = null;
+    this.resetColor = true;
+    this.hoveredOnDate = false;
+    this.wasDragged = false;
+  }
+  checkIfOpenEmp(event){
+    if(event.target.id == 'shiftName' || event.target.id == 'empCount' || event.target.id == 'openEmpLogs'){
+      return event.target.id;
+    }
+    return Math.random();
+  }
+  onDragOver(event , actualEvent){
+
+    console.log('called first ');
     if(!this.mouseDown) return;
     this.mouseDown = false;
+    this.mouseDown = false;
     this.mouseEnd = event;
+    this.hoveredOnDate = false;
     this.obj.end = event ? event : this.obj.end;
+    console.log('obj values pluse mouse' , this.mouseStart , this.obj.end);
+
+    if(this.startingPointer.target == actualEvent.target && !this.wasDragged && (this.checkIfOpenEmp(this.startingPointer) == this.checkIfOpenEmp(actualEvent))){
+      return;
+    }
+    this.startingPointer = null;
+    this.wasDragged = false;
+    if(this.preventOpningDialoug) return;
+    if(!this.mouseStart && !this.obj.end) return;
 
     if(this.mouseStart <='9') {
       this.mouseStart = `0${this.mouseStart}`
@@ -243,7 +361,8 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
       start = date;
     }
 
-
+    this.obj.end = 0;
+    this.obj.start = 0;
     console.log('mouseStart after',start);
     console.log('mouseEnd after' , end);
 
@@ -277,6 +396,66 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
       filters : this.filters
     }
     this.customModal.showFeaturedDialog(ShiftManagmentDialog,"" , payload);
+  }
+
+
+  top:any;
+  bottom : any;
+  left : any;
+  show:boolean = false;
+  employees : any = [];
+  date : any;
+
+  onEvent(event, date = null , shifts , isSingle = false) {
+    console.log(shifts);
+    this.employees = [];
+    if(isSingle){
+      shifts.employees.forEach(emp =>{
+        this.employees.push(emp);
+      });
+    }else{
+      shifts.forEach(s =>{
+        s.employees.forEach(emp =>{
+          this.employees.push(emp);
+        });
+      });
+    }
+    console.log('we got employees',this.employees);
+    console.log('event' , event.clientX , event.clientY);
+    console.log(`${this.year_month}-${date}`);
+
+    var dt = moment(`${this.year_month}-${date}`, "YYYY-MM-DD");
+    this.date = `${dt.format('dddd')} , ${date} ${dt.format('MMMM')} ${dt.format('YYYY')}`;
+
+    const elementRect = event.target.getBoundingClientRect();
+    const spaceAbove = elementRect.top;
+    const spaceBelow = window.innerHeight - elementRect.bottom;
+
+    console.log('below',spaceBelow);
+    console.log('above',spaceAbove);
+
+    if(spaceBelow >= 450){
+      this.top = `${event.clientY}px`;
+      this.left = `${event.clientX}px`;
+      // empList.style.top = `${event.clientY}px`;
+      // empList.style.left = `${event.clientX}px`;
+      // empList.style.bottom = null;
+      this.bottom = null;
+      
+    }else{
+      this.bottom = `${spaceBelow}px`;
+      this.left = `${event.clientX}px`;
+      this.top = null;
+      // empList.style.bottom = `${spaceBelow}px`;
+      // empList.style.left = `${event.clientX}px`;
+      // empList.style.top = null;
+     
+    }
+    // console.log('bouding rectangles',event.target.getBoundingClientRect());
+    // console.log(empList.classList);
+    // empList.classList.remove('d-none');
+    // event.stopPropagation();
+    this.show = true;
   }
   
 }

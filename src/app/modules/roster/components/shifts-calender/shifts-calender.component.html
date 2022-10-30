@@ -23,19 +23,19 @@
         <th scope="col" *ngFor="let weekday of weekDays">{{ weekday }}</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let nestedArray of reshapedData">
+    <tbody (mouseleave)="mouseLeft()">
+      <tr *ngFor="let nestedArray of reshapedData; let upIndex=index">
         <td
           *ngFor="let days of nestedArray"
           [ngStyle]="
             checkIfOK(days.date)
-              ? { 'background-color': 'red' }
+              ? { 'background-color': '#EAF2FD' }
               : { 'background-color': 'white' }
           "
           style="-webkit-user-select: none"
-          (mousedown)="onDragStart(days.date)"
-          (mouseover)="onDrag(days.date)"
-          (mouseup)="onDragOver(days.date)"
+          (mousedown)="onDragStart(days.date , upIndex , $event)"
+          (mouseover)="onDrag(days.date , upIndex)"
+          (mouseup)="onDragOver(days.date , $event)"
         >
           <table class="cal-cell">
             <tr>
@@ -47,9 +47,10 @@
 
             <ng-container *ngFor="let shift of days.shifts; let i = index">
               <tr *ngIf="i + 1 <= 1">
-                <td [ngStyle]="{ color: shift.color }">{{ shift.name }}</td>
-                <td [ngStyle]="{ color: shift.color }">{{ shift.shift_employees }} </td>
+                <td id="shiftName" [ngStyle]="{ color: shift.color }" (click)="onEvent($event,days.date , shift , true)">{{ shift.name }}</td>
+                <td id="empCount" [ngStyle]="{ color: shift.color }" (click)="onEvent($event,days.date , shift , true)">{{ shift.shift_employees }} </td>
               </tr>
+              
             </ng-container>
 
             <!-- <tr class="yellow">
@@ -69,7 +70,7 @@
 
             <tr *ngIf="days.shifts.length > 1">
               <td>
-                <a href="#">More +{{ days.shifts.length - 1 }}</a>
+                <a id='openEmpLogs' (click)="onEvent($event,days.date , days.shifts , false)">More +{{ days.shifts.length - 1 }}</a>
               </td>
               <td>&nbsp;</td>
             </tr>
@@ -100,4 +101,13 @@
       </tr>
     </tbody>
   </table>
+  <app-employee-shift-list 
+  [show]="show"
+  [left]="left"
+  [bottom]="bottom"
+  [top]="top"
+  (close)="[show=false]"
+  [employees]="employees"
+  [date]="date"
+  ></app-employee-shift-list>
 </div>
