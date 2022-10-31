@@ -240,6 +240,13 @@
                   [disabled]="!this.shiftRequestLMform.valid"
                   (click)="submit()"
                 />
+                <input
+                  *ngIf="isUpdating"
+                  type="submit"
+                  class="btn-input"
+                  value="Cancel"
+                  (click)="cancel()"
+                />
               </div>
             </div>
           </div>

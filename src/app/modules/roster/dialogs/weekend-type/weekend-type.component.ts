@@ -54,7 +54,6 @@ export class WeekendTypeComponent implements OnInit {
 
   async onSubmit(){
     const res = await this.rosterViewDataService.markWeekend(this.markWeekendBody);
-    debugger;
     if(res['status']==true){
       this.activeModal.close('Close click')
     }

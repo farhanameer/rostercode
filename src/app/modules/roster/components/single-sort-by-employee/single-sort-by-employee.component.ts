@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-single-sort-by-employee',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./single-sort-by-employee.component.css']
 })
 export class SingleSortByEmployeeComponent implements OnInit {
-
+  
   constructor() { }
 
   ngOnInit(): void {
