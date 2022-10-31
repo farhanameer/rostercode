@@ -104,7 +104,17 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     //   this.populateFilterValues();
     // }, 200);
     console.log('getting default values for filters' , this.defaultValues);
-    
+
+    this.defaultFiltersValues = {
+      marketId : {} , 
+      clusterId : {} , 
+      subClusterId : {},
+      countryId : {} , 
+      stateId : {} , 
+      cityId : {},
+      branchId : {},
+      departmentId : {}
+    }
   }
 
 
@@ -383,7 +393,7 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
       'country_id'  : defaultThis.locationFilters.countryId,
       'line_manager_id' : defaultThis.appLocalStorage.getUserId()
     }
-    if(defaultThis.defaultValues['country_id']){
+    if(defaultThis.defaultValues && defaultThis.defaultValues['country_id'] && defaultThis.defaultValues['country_id'] !=null){
       params.country_id = defaultThis.defaultValues['country_id'];
     }
     const data = await defaultThis.dataService.getDepartment(params);

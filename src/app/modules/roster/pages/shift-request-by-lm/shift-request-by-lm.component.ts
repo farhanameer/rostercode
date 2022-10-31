@@ -2,6 +2,7 @@ import { ShiftRequestDataService } from './../../services/data/shiftRequest.data
 import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn } from '@angular/forms';
+import { count } from 'console';
 export interface BooleanFn {
   (): boolean;
 }
@@ -216,7 +217,7 @@ export class ShiftRequestByLmComponent implements OnInit {
       this.shiftTypeArray = this.shiftTypeCopiedArray;
     }, 200);
   }
-
+  defaultFilters : any;
   async getSingleShift(id) {
     console.log('single Shift Id', id);
     const payload = {
@@ -273,12 +274,30 @@ export class ShiftRequestByLmComponent implements OnInit {
       shift.time_in = this.changeTimeFormate(shift.time_in);
       shift.time_out = this.changeTimeFormate(shift.time_out);
     }
+    let counter = 0;
     if (shift.qrt_break) {
       shift.qrt_break.forEach((qrt) => {
+        if(counter != 0){
+          this.newqrtbreak();
+        }
         qrt.qrt_break_time_in = this.changeTimeFormate(qrt.qrt_break_time_in);
         qrt.qrt_break_time_out = this.changeTimeFormate(qrt.qrt_break_time_out);
+        counter = counter + 1;
       });
     }
+
+    if(shift.specific_period == '0'){
+      shift.specific_period = false;
+    }
+
+    if(shift.shift_revert_date_start || shift.shift_revert_date_end || shift.revert_shift_id !=0){
+      shift.specific_period = true;
+    }
+    if(shift.consecutive_late || shift.late_arrival_tolerance || shift.attendance_tolerance){
+      shift.Tolerance = true;
+    }
+
+
     this.populateDefaultDropDownValues(shift);
 
     this.shiftRequestLMform.patchValue(shift);
@@ -288,6 +307,17 @@ export class ShiftRequestByLmComponent implements OnInit {
     this.shiftNameClick = true;
     this.isUpdating = true;
     this.updateAbleShiftId = id;
+
+    this.defaultFilters = {
+      glob_mkt_id : shift.glob_mkt_id , 
+      region_id : shift.region_id , 
+      sub_region_id : shift.sub_region_id,
+      country_id : shift.country_id , 
+      state_id : shift.state_id , 
+      city_id  : shift.city_id , 
+      branch_id : shift.branch_id , 
+      department_id : shift.department_id
+    }
   }
 
   searchInArray(array, key = null, value) {
@@ -424,5 +454,15 @@ export class ShiftRequestByLmComponent implements OnInit {
   cancel() {
     this.resetForm();
     this.shiftNameClick = false;
+    this.defaultFilters = {
+      glob_mkt_id : null , 
+      region_id : null , 
+      sub_region_id : null,
+      country_id : null , 
+      state_id : null , 
+      city_id  : null , 
+      branch_id : null , 
+      department_id : null
+    }
   }
 }

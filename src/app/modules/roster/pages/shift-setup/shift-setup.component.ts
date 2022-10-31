@@ -91,7 +91,7 @@ export class ShiftSetupComponent implements OnInit {
       ext_mid_break_time_out: ['', Validators.required],
       is_roster: [0],
       is_default: [0],
-      Tolerance: [''],
+      Tolerance: [false],
       consecutive_late: [
         null,
         [
@@ -116,7 +116,7 @@ export class ShiftSetupComponent implements OnInit {
           ),
         ],
       ],
-      specific_period: [''],
+      specific_period: [false],
       revert_shift_id: [
         null,
         [
@@ -336,6 +336,13 @@ export class ShiftSetupComponent implements OnInit {
     return this.shiftSetUpForm.controls;
   }
 
+  generalSelection:boolean = false;
+  checkBoxSelection(eventValue){
+    this.generalSelection = eventValue;
+
+    this.shiftSetUpForm.get('is_roster').setValue(0);
+    console.log(this.generalSelection);
+  }
   async submit() {
     console.log(this.shiftSetUpForm.value);
 
@@ -390,6 +397,12 @@ export class ShiftSetupComponent implements OnInit {
     body.mid_break_time_in = `${body.mid_break_time_in}:00`;
     body.mid_break_time_out = `${body.mid_break_time_out}:00`;
 
+    if(body.is_roster){
+      body.is_roster = 1;
+    }else{
+      body.is_roster = 0;
+    }
+
     // confused Entries
     //body.ext_mid_break_day_id = "5";
     body.mid_break_enable = 0;
@@ -404,9 +417,8 @@ export class ShiftSetupComponent implements OnInit {
     delete body.hr_date;
     delete body.Tolerance;
     delete body.specific_period;
-    body.is_roster = 1;
     const response = await this.shiftRequestService.hrInsertShift(body);
-    this.shiftSetUpForm.reset(this.shiftSetUpForm.value);
+    this.resetForm();
     console.log('response', response);
   }
 
@@ -425,7 +437,7 @@ export class ShiftSetupComponent implements OnInit {
     this.resetDropDown();
     this.isUpdating = false;
   }
-
+  resetFilters = false;
   resetDropDown() {
     this.shiftColorArray = [];
     this.shiftTypeArray = [];
@@ -435,6 +447,7 @@ export class ShiftSetupComponent implements OnInit {
       this.shiftColorArray = this.shiftColorCopiedArray;
       this.shiftTypeArray = this.shiftTypeCopiedArray;
     }, 200);
+    this.resetFilters = true;
   }
 
   isUpdating: boolean = false;
@@ -484,18 +497,38 @@ export class ShiftSetupComponent implements OnInit {
       shift.time_in = this.changeTimeFormate(shift.time_in);
       shift.time_out = this.changeTimeFormate(shift.time_out);
     }
+    let counter = 0;
+
     if (shift.qrt_break) {
       shift.qrt_break.forEach((qrt) => {
+        if(counter !=0){
+          this.newqrtbreak();
+        }
         qrt.qrt_break_time_in = this.changeTimeFormate(qrt.qrt_break_time_in);
         qrt.qrt_break_time_out = this.changeTimeFormate(qrt.qrt_break_time_out);
+        counter = counter + 1;
       });
+    }
+
+    if(shift.specific_period == '0'){
+      shift.specific_period = false;
     }
     this.onShiftExtendedChecked(id);
     this.populateDefaultDropDownValues(shift);
 
+
+    if(shift.shift_revert_date_start || shift.shift_revert_date_end || shift.revert_shift_id !=0){
+      shift.specific_period = true;
+    }
+    if(shift.consecutive_late || shift.late_arrival_tolerance || shift.attendance_tolerance){
+      shift.Tolerance = true;
+    }
     this.shiftSetUpForm.patchValue(shift);
 
-    this.shiftNameClick = true;
+    this.isUpdating = true;
+    console.log('shifts Data',shift);
+    
+    // this.shiftNameClick = true;
     this.isUpdating = true;
     this.updateAbleShiftId = id;
     this.defaultFilters = {
@@ -611,7 +644,6 @@ export class ShiftSetupComponent implements OnInit {
       "ext_mid_break_time_in": `${this.shiftSetUpForm.get('ext_mid_break_time_in').value}:00`,
       "ext_mid_break_time_out": `${this.shiftSetUpForm.get('ext_mid_break_time_out').value}:00`,
       "is_roster": this.shiftSetUpForm.get('is_roster').value,
-      "is_default": this.shiftSetUpForm.get('is_default').value,
       "consecutive_late": this.shiftSetUpForm.get('consecutive_late').value,
       "late_arrival_tolerance": this.shiftSetUpForm.get('late_arrival_tolerance').value,
       "attendance_tolerance": this.shiftSetUpForm.get('attendance_tolerance').value,
@@ -664,5 +696,16 @@ export class ShiftSetupComponent implements OnInit {
   cancel() {
     this.resetForm();
     this.shiftNameClick = false;
+    this.isUpdating = false;
+    this.defaultFilters = {
+      glob_mkt_id : null , 
+      region_id : null , 
+      sub_region_id : null,
+      country_id : null , 
+      state_id : null , 
+      city_id  : null , 
+      branch_id : null , 
+      department_id : null
+    }
   }
 }

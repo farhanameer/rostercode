@@ -8,6 +8,7 @@
             <div class="heading">Shift Setup</div>
             <app-location-and-designation-filter
               (filtersChange)="filterChange($event)"
+              [defaultValues]="defaultFilters"
             >
             </app-location-and-designation-filter>
 
@@ -106,7 +107,7 @@
                         >
                         </app-check-box>
                       </div>
-                      <div class="form-col" *ngIf="isShiftExtended">
+                      <div class="form-col" *ngIf="shiftRequestLMform.get('specific_period').value">
                         <div>
                           <app-date-box
                             [label]="'Period From'"
@@ -195,7 +196,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-col" *ngIf="isQrtBreak">
+                    <div class="form-col" *ngIf="shiftRequestLMform.get('Tolerance').value">
                       <div>
                         <app-input-box
                           [label]="'Consecutive Late'"

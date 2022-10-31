@@ -9,6 +9,7 @@
             <app-location-and-designation-filter
               (filtersChange)="filtersChanged($event)"
               [defaultValues]="defaultFilters"
+              [resetFilters]="resetFilters"
             >
             </app-location-and-designation-filter>
 
@@ -58,7 +59,7 @@
                       </div>
 
                       <div class="form-col p-0">
-                        <div *ngIf="!shiftNameClick">
+                        <div *ngIf="!isUpdating">
                           <app-input-box
                             [label]="'Comments'"
                             [form]="shiftSetUpForm"
@@ -98,6 +99,7 @@
                               [label]="'Roster'"
                               [form]="shiftSetUpForm"
                               [control]="'is_roster'"
+                              (selectionChanged)="[generalSelection = false]"
                             >
                             </app-check-box>
                           </div>
@@ -105,6 +107,8 @@
                             <app-check-box
                               [color]="'#3080EA'"
                               [label]="'General'"
+                              (selectionChanged)="checkBoxSelection($event)"
+                              [checked]="generalSelection && (shiftSetUpForm.get('is_roster').value == 0)"
                             >
                             </app-check-box>
                           </div>
@@ -112,8 +116,8 @@
                             <app-check-box
                               [color]="'#3080EA'"
                               [label]="'Default'"
-                              [form]="shiftSetUpForm"
-                              [control]="'is_default'"
+                              [checked]="generalSelection && (shiftSetUpForm.get('is_roster').value == 0)"
+                              (selectionChanged)="checkBoxSelection($event)"
                             >
                             </app-check-box>
                           </div>
@@ -162,7 +166,7 @@
                         >
                         </app-check-box>
                       </div>
-                      <div class="form-col" *ngIf="isShiftExtended">
+                      <div class="form-col" *ngIf="shiftSetUpForm.get('specific_period').value">
                         <div>
                           <app-date-box
                             [label]="'Period From'"
@@ -250,7 +254,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-col" *ngIf="isQrtBreak">
+                    <div class="form-col" *ngIf="shiftSetUpForm.get('Tolerance').value">
                       <div>
                         <app-input-box
                           [label]="'Consecutive Late'"
@@ -279,7 +283,7 @@
                   </div>
                 </div>
               </app-sub-layout>
-              <div *ngIf="shiftNameClick">
+              <div *ngIf="isUpdating">
                 <app-approval-details 
                 [form]="shiftSetUpForm"
                 ></app-approval-details>
