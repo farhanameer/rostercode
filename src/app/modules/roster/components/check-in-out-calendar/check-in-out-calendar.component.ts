@@ -75,7 +75,6 @@ export class CheckInOutCalendarComponent implements OnInit {
       this.shiftsArray.push(obj)
     });
     console.log(this.shiftsArray);
-    debugger;
   }
 
   getCheckingColor(shift) {
@@ -133,7 +132,6 @@ export class CheckInOutCalendarComponent implements OnInit {
     return shiftTiming;
   }
   reshapeData(array) {
-    // // debugger;
     let resultingArray = [];
     const responseArray = [];
     const numberOfIterations = array.length / 7;

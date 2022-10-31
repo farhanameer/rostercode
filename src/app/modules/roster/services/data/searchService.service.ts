@@ -49,7 +49,6 @@ export class SearchService implements OnInit{
             }
         }
         array.forEach(item =>{
-          // debugger;
             if(!field){
                 if(item.toLowerCase().search(term.toLowerCase()) !== -1){
                     newArray.push(item)
