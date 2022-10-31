@@ -66,6 +66,12 @@ export class JobShiftCalenderComponent implements OnInit {
       // this.currentYearData = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), null, this.weekDaysPreset);
       this.getCalendar(moment(this.currentDate).format('YYYY'))
       console.log(this.currentYearData);
+
+
+
+      // setTimeout(() => {
+      //   console.log('filters' , this.filters);
+      // }, 10000);
   }
 
   
@@ -234,6 +240,7 @@ export class JobShiftCalenderComponent implements OnInit {
     }
   // *** shift calendar pop up
   openCalendar(){
+    if(this.filters && this.filters.countryId ==-1) return;
     this.customModal.showFeaturedDialog(CalenderSetupComponent,"")
   }
   }

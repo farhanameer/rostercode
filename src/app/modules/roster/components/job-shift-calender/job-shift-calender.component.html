@@ -16,8 +16,9 @@
         >
         </app-location-and-designation-filter>
       </div>
-      <div class="btn-options flex align-content-center p-0">
-        <a (click)="openCalendar()" class="btn-custom"
+      <div class="btn-options flex align-content-center p-0" [class.disabled]="(filters && filters.countryId==-1)">
+        <a (click)="openCalendar()" 
+          class="btn-custom" 
           >Advance Filter
           <i><img src="assets/icons/filter.svg" alt="" /></i>
         </a>
