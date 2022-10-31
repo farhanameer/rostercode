@@ -81,8 +81,9 @@ export class SortByDateComponent implements OnInit, OnChanges {
         params['shift_id'] = this.dates.filters["shifts"]
       }
     }
+    
     const data = await this.dataService.getLMRosterView(params);
-
+    this.data = [];
     if (!data['data']['status']) {
       this.data = [];
       return;
