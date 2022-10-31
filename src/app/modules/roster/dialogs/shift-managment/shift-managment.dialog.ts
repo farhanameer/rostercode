@@ -14,7 +14,7 @@ export class ShiftManagmentDialog implements OnInit {
   valueType : string  = 'date';
   view:string="date";
   single: boolean = false;
-  
+  searchedValue;
 
 
 
@@ -37,5 +37,8 @@ export class ShiftManagmentDialog implements OnInit {
   radioChange(val:string){
     this.view=val;
   }
-  
+  search(event){
+    console.log(event);
+    this.searchedValue = event;
+  }
 }

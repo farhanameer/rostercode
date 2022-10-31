@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { anyChanged } from '@progress/kendo-angular-common';
 import { inArray } from 'jquery';
@@ -10,15 +10,50 @@ import { RosterService } from '../../services/data/rosterView.data.service';
   templateUrl: './sort-by-employee.component.html',
   styleUrls: ['./sort-by-employee.component.css']
 })
-export class SortByEmployeeComponent implements OnInit {
+export class SortByEmployeeComponent implements OnInit, OnChanges {
   @Input() dates;
+  @Input() searchedValue = null;
   constructor(public activeModal: NgbActiveModal,
     private dataService: RosterService,
     private appLocalStorage: AppLocalStorageService) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("Sort by Employee",this.searchedValue);
+    if(!this.searchedValue || this.searchedValue == ''){
+      this.getLMRosterView({
+        client_id: this.appLocalStorage.getClientId(),
+        start_date : this.dates.dateRagne.start , 
+        end_date : this.dates.dateRagne.end,
+        reporting_to_id: this.appLocalStorage.getUserId(),
+        sortByEmployee : 'ASC'
+      });
+      return;
+    }
+    
+    this.getLMRosterView({
+      client_id: this.appLocalStorage.getClientId(),
+      start_date : this.dates.dateRagne.start , 
+      end_date : this.dates.dateRagne.end,
+      reporting_to_id: this.appLocalStorage.getUserId(),
+      search : this.searchedValue,
+      sortByEmployee : 'ASC'
+    });
+  }
+
   ngOnInit(): void {
     
     console.log('dates we got' , this.dates);
+    if(this.searchedValue){
+      this.getLMRosterView({
+        client_id: this.appLocalStorage.getClientId(),
+        start_date : this.dates.dateRagne.start , 
+        end_date : this.dates.dateRagne.end,
+        reporting_to_id: this.appLocalStorage.getUserId(),
+        sortByEmployee : 'ASC',
+        search : this.searchedValue
+      });
+      return;
+    }
 
     this.getLMRosterView({
       client_id: this.appLocalStorage.getClientId(),
@@ -54,6 +89,7 @@ export class SortByEmployeeComponent implements OnInit {
     const data = await this.dataService.getLMRosterView(params);
 
     if (!data['data']['status']) {
+      this.data = [];
       return;
     }
 

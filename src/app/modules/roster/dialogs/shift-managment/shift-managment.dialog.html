@@ -38,7 +38,11 @@
                 />Sort by Employee</label
               >
             </div>
-            <input type="text" />
+            <app-input-box 
+              [width]="'105px'" 
+              [height]="'20px'"
+              (inputChanged)="search($event)">
+          </app-input-box>
           </form>
         </div>
       </div>
@@ -48,9 +52,13 @@
       <app-sort-by-date
         *ngIf="view == 'date'"
         [dates]="dates"
+        [searchedValue]="searchedValue"
       ></app-sort-by-date>
-      <app-sort-by-employee *ngIf="view == 'employee'" [dates]="dates">
-      </app-sort-by-employee>
+      <app-sort-by-employee 
+        *ngIf="view == 'employee'" 
+        [dates]="dates"
+        [searchedValue]="searchedValue"
+      ></app-sort-by-employee>
       <app-single-sort-by-employee *ngIf="single && view == 'employee'"> </app-single-sort-by-employee>
     </div>
     <div class="modal-custom-footer">

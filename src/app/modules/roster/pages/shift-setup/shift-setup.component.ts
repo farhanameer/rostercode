@@ -663,5 +663,6 @@ export class ShiftSetupComponent implements OnInit {
   }
   cancel() {
     this.resetForm();
+    this.shiftNameClick = false;
   }
 }

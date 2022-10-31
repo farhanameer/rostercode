@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { forEachChild } from 'typescript';
@@ -9,8 +9,9 @@ import { RosterService } from '../../services/data/rosterView.data.service';
   templateUrl: './sort-by-date.component.html',
   styleUrls: ['./sort-by-date.component.css'],
 })
-export class SortByDateComponent implements OnInit {
+export class SortByDateComponent implements OnInit, OnChanges {
   @Input() dates: any;
+  @Input() searchedValue = null;
 
   data: any = [];
 
@@ -19,9 +20,38 @@ export class SortByDateComponent implements OnInit {
     private dataService: RosterService,
     private appLocalStorage: AppLocalStorageService
   ) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("Sort By Date",this.searchedValue);
+    if(!this.searchedValue || this.searchedValue == ''){
+      this.getLMRosterView({
+        client_id: this.appLocalStorage.getClientId(),
+        start_date : this.dates.dateRagne.start , 
+        end_date : this.dates.dateRagne.end,
+        reporting_to_id: this.appLocalStorage.getUserId(),
+      });
+      return;
+    }
+    
+    this.getLMRosterView({
+      client_id: this.appLocalStorage.getClientId(),
+      start_date : this.dates.dateRagne.start , 
+      end_date : this.dates.dateRagne.end,
+      reporting_to_id: this.appLocalStorage.getUserId(),
+      search : this.searchedValue
+    });
+  }
 
   ngOnInit(): void {
     console.log('in popup', this.dates);
+    if(this.searchedValue){
+      this.getLMRosterView({
+        client_id: this.appLocalStorage.getClientId(),
+        start_date : this.dates.dateRagne.start , 
+        end_date : this.dates.dateRagne.end,
+        reporting_to_id: this.appLocalStorage.getUserId(),
+        search : this.searchedValue
+      });
+    }
     this.getLMRosterView({
       client_id: this.appLocalStorage.getClientId(),
       start_date : this.dates.dateRagne.start , 
@@ -52,8 +82,10 @@ export class SortByDateComponent implements OnInit {
       }
     }
     const data = await this.dataService.getLMRosterView(params);
+    debugger;
 
     if (!data['data']['status']) {
+      this.data = [];
       return;
     }
 
