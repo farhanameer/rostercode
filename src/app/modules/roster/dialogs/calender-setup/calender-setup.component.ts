@@ -17,6 +17,7 @@ export class CalenderSetupComponent implements OnInit {
   current;
   holidayStatus = [];
   workCalendarSetting = {};
+  @Input() modelData = {};
 
   constructor(private fb:FormBuilder, public activeModal: NgbActiveModal,
     private holiday: HolidayDataService,
@@ -34,6 +35,8 @@ export class CalenderSetupComponent implements OnInit {
     this.getYears();
     this.weekends();
     this.getWorkCalendarSetting();
+
+    console.log(this.modelData);
   }
 
   
@@ -73,9 +76,10 @@ export class CalenderSetupComponent implements OnInit {
 
     const params = {
       "client_id" : this.appLocalStorage.getClientId(),
-      "year" : 2022,
-      "country_id" : 154
+      "year" : this.modelData['year'],
+      "country_id" : this.modelData['country_id']
     }
+    console.log("Country Year", params);
     const res = await this.holiday.getWorkCalendarSetting(params); 
     // this.holidayStatus = res['data'].publicHolidays;
     const holidays = res['data'].publicHolidays;

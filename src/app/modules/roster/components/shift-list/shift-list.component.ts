@@ -47,8 +47,5 @@ export class ShiftListComponent implements OnInit {
 
   singleShift(id){
     this.singleShiftId.emit(id);
-    // debugger;
-    // this.shiftNameClick.emit(true);
-    // debugger;
   }
 }

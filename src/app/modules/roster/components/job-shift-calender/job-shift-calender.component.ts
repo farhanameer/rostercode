@@ -27,6 +27,7 @@ export class JobShiftCalenderComponent implements OnInit {
   monthsNames = ['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   filters : any;
   currentYearMonthsData : any;
+  modelData = {};
 
   months = {
     'Jan' : '01',
@@ -66,6 +67,12 @@ export class JobShiftCalenderComponent implements OnInit {
       // this.currentYearData = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), null, this.weekDaysPreset);
       this.getCalendar(moment(this.currentDate).format('YYYY'))
       console.log(this.currentYearData);
+
+
+
+      // setTimeout(() => {
+      //   console.log('filters' , this.filters);
+      // }, 10000);
   }
 
   
@@ -166,7 +173,6 @@ export class JobShiftCalenderComponent implements OnInit {
     
   }
   getMonthAndYear(isForwarding = false){
-    // debugger;
     if(isForwarding) {
       this.currentDate = moment(this.currentDate).add(1,'year');
       for(let i = 0; i < 5; i++){
@@ -193,7 +199,7 @@ export class JobShiftCalenderComponent implements OnInit {
   }
   
   
-    open(singleDate , yearData, open = false){
+  open(singleDate , yearData, open = false){
       console.log(yearData);
       // const key = `${year}`
       const year = moment(this.currentDate).format('YYYY');
@@ -213,14 +219,15 @@ export class JobShiftCalenderComponent implements OnInit {
         }, 
         filters : this.filters
       });
-    }
-    edit(singleDate){
+  }
+
+  edit(singleDate){
       this.customModal.showFeaturedDialog(EventComponent,"" , {
         holiday : singleDate, 
         filters : this.filters
       });
-    }
-    async delete(singleDate){
+  }
+  async delete(singleDate){
       const response = await this.holidayService.deleteHoliday({
         id : singleDate.holiday_id , 
         client_id : this.appLocalStorage.getClientId()
@@ -231,10 +238,15 @@ export class JobShiftCalenderComponent implements OnInit {
         day : singleDate.day , 
         date : singleDate.date
       }
-    }
+  }
   // *** shift calendar pop up
   openCalendar(){
-    this.customModal.showFeaturedDialog(CalenderSetupComponent,"")
+    if(this.filters && this.filters.countryId ==-1) return;
+    this.modelData = {
+      "year" : moment(this.currentDate).format('YYYY'),
+      "country_id" : this.filters.countryId
+    }
+    this.customModal.showFeaturedDialog(CalenderSetupComponent,'' , this.modelData)
   }
-  }
+}
 

@@ -44,7 +44,6 @@ export class OverviewTableComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getListCplAndOvertime();
-    // debugger;
   }
 
   

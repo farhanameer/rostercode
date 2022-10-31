@@ -82,7 +82,6 @@ export class SortByDateComponent implements OnInit, OnChanges {
       }
     }
     const data = await this.dataService.getLMRosterView(params);
-    debugger;
 
     if (!data['data']['status']) {
       this.data = [];
