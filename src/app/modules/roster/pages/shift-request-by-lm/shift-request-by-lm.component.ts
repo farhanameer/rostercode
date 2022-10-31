@@ -421,4 +421,8 @@ export class ShiftRequestByLmComponent implements OnInit {
     this.shiftTypeCopiedArray = [...this.shiftTypeArray];
     console.log(this.shiftTypeArray);
   }
+  cancel() {
+    this.resetForm();
+    this.shiftNameClick = false;
+  }
 }
