@@ -87,6 +87,7 @@ export class SortByEmployeeComponent implements OnInit, OnChanges {
     }
 
     const data = await this.dataService.getLMRosterView(params);
+    this.data = [];
 
     if (!data['data']['status']) {
       this.data = [];
