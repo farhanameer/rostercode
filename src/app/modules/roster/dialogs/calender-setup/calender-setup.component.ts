@@ -69,7 +69,7 @@ export class CalenderSetupComponent implements OnInit {
     }else{
       holiday.status = 0;
     }
-    console.log(this.holidayStatus);
+    console.log("Holidays",this.holidayStatus);
   }
 
   async getWorkCalendarSetting(){
@@ -83,18 +83,23 @@ export class CalenderSetupComponent implements OnInit {
     const res = await this.holiday.getWorkCalendarSetting(params); 
     // this.holidayStatus = res['data'].publicHolidays;
     const holidays = res['data'].publicHolidays;
+    
     let counter = Math.ceil(holidays.length/5);
-    let holidayStatus2 = [];
+    // let holidayStatus2 = [];
     let loopCounter = 0;
     for(let i = 1; i<=counter; i++){
       let array = [];
       for(let j = 0; j<5; j++){
-        array.push(holidays[loopCounter]);
+        if(holidays[loopCounter]){
+          array.push(holidays[loopCounter]);
+        }
         loopCounter = loopCounter + 1;
       }
+      
       this.holidayStatus.push(array);
+      
     }
-    console.log(this.holidayStatus);
+    console.log("Holiday Status Array",this.holidayStatus);
   }
   
   async weekends(){

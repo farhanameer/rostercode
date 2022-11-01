@@ -75,6 +75,7 @@
             type="button"
             class="btn-input"
             [disabled]="!this.singleShiftForm.valid"
+            [class.disabled-btn-forms]="!this.singleShiftForm.valid"
             
             value="Submit"
             (click)="submit()"

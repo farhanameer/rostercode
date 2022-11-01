@@ -337,6 +337,7 @@
                   type="submit"
                   class="btn-input"
                   [disabled]="shiftSetUpForm.invalid"
+                  [class.disabled-btn-forms]="shiftSetUpForm.invalid"
                   value="Submit"
                 />
                 <!-- <input *ngIf="isUpdating" type="submit" class="btn-input" value="Update" /> -->
