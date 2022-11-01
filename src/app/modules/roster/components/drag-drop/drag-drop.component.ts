@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { DisclaimerDialog } from '../../dialogs/disclaimer/disclaimer.dialog';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-drag-drop',
@@ -11,11 +13,11 @@ export class DragAndDropComponent implements OnInit , OnChanges {
   @Input() shift : any;
   @Output() changed : EventEmitter<any> = new EventEmitter();
   length : Number = 0;
-  constructor() { }
+  constructor(private customModal: ModalService) { }
   ngOnChanges(changes: SimpleChanges): void {
     console.log('changed occured' , this.shift.id);
   }
-
+  currentLengthOf = 0;
   ngOnInit(): void {
   }
 
@@ -80,6 +82,7 @@ export class DragAndDropComponent implements OnInit , OnChanges {
     });
     return employees;
   }
+  
   emitChange(){
     let employees = [];
     employees = [...employees , ...this.getEmployeesData(this.sunday , [0])]
@@ -93,7 +96,13 @@ export class DragAndDropComponent implements OnInit , OnChanges {
     this.changed.emit({
       shift_id : this.shift.id , 
       shift_allocation_emp_list : employees
-    })
+    });
+    console.log('no weekends',this.noWeekEnds);
+    if(this.noWeekEnds.length >= this.currentLengthOf && this.noWeekEnds.length!=0){
+      this.customModal.showFeaturedDialog(DisclaimerDialog, "");
+      this.currentLengthOf = this.noWeekEnds.length;
+    }
+    this.currentLengthOf = this.noWeekEnds.length;
   }
   drop(event){
     console.log('data being',event.previousContainer.data);
