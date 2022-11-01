@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,8 +9,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class MorningJobShiftDialog implements OnInit {
 
   constructor(public activeModal: NgbActiveModal) { }
-
+  @Input() modelData : any;
   ngOnInit(): void {
+    console.log(this.modelData);
   }
 
 }

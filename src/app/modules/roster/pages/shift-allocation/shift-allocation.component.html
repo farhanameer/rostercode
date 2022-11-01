@@ -3,7 +3,7 @@
     <div>
       <app-employee-shift-alloction [form]="shiftAllocationForm" 
       (filterSelection)="filtersChanged($event)"
-      [shifts]="shiftsArray"
+      [shifts]="copiedShiftsArray"
       (selectedShift)="shiftSelected($event)"
       [resetFilters]="reset"
       >
@@ -45,7 +45,7 @@
                             </div>
     
                             <div class="right-menu">
-                              <div class="label">5</div>
+                              <div class="label">{{employees.length}}</div>
                               <div class="vertical-menu">
                                 <div class="dropdown-vertical">
                                   <!-- three dots -->
@@ -104,7 +104,7 @@
                       <!-- Job list - END -->
                     </li>
                     <!-- Card List Panel-->
-                    <li class="can example-container" *ngFor="let shift of shiftsArray">
+                    <li class="can example-container" *ngFor="let shift of shiftsArray" [ngStyle]="{'border-top-color' : shift.color}">
                       <app-drag-drop
                       [shift]="shift"
                       (changed)="employeeChange($event)"

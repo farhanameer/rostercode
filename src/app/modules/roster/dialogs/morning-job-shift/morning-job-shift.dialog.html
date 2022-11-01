@@ -16,146 +16,30 @@
       <form action="" class="flex space-between w-100">
         <div class="right-menu d-flex c-gap">
           <div class="label custom-week">
-            <p class="c-pt-2">No Weekend</p>
+            <p class="c-pt-2" [class.bg-custom-imp]="modelData.name != 'No Weekends'">{{modelData.name}}</p>
           </div>
-          <div class="c-num-label">16</div>
+          <div class="c-num-label">{{modelData.employees.length}}</div>
         </div>
         <input class="c-input-whb" type="text" />
       </form>
     </div>
     <ul class="c-ul-wid-gap">
-      <app-employee-card>
+      <app-employee-card *ngFor="let emp of modelData.employees">
         <li class="c-width-li">
-          <div class="user-img">
+          <div class="user-img" *ngIf="!emp.picture || emp.picture == 'dummy.jpg'">
             <img src="assets/images/img-dummy.png" alt="" />
           </div>
+
+          <div class="user-img" *ngIf="emp.picture && emp.picture != 'dummy.jpg'">
+            <img src="{{emp.picture}}" alt="" />
+          </div>
           <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
+            <div class="heading-lg">{{emp.name}}</div>
+            <div class="heading-sm text-secondary">#{{emp.emp_id}}</div>
           </div>
         </li>
       </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
-      <app-employee-card>
-        <li class="c-width-li">
-          <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
-          </div>
-          <div class="employee-detail">
-            <div class="heading-lg">Bryan Danielson</div>
-            <div class="heading-sm text-secondary">#98752</div>
-          </div>
-        </li>
-      </app-employee-card>
+      
     </ul>
   </div>
 
