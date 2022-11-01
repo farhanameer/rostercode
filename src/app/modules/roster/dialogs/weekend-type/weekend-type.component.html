@@ -31,6 +31,8 @@
           type="button"
           class="btn-input"
           value="Submit"
+          [disabled]="!isSelected"
+          [class.disabled-btn-forms]="!isSelected"
           (click)="onSubmit()"
         />
         <input

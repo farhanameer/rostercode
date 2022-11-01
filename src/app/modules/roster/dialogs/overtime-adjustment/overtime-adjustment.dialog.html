@@ -108,6 +108,7 @@
           class="btn-input"
           value="Submit"
           [disabled]="!overTimeForm.valid"
+          [class.disabled-btn-forms]="!overTimeForm.valid"
           (click)="submit()"
         />
         <input

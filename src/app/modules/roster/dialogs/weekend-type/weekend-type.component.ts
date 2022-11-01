@@ -20,6 +20,7 @@ export class WeekendTypeComponent implements OnInit {
   roster_id : any;
   markWeekendBody = {};
   @Input() modelData : any;
+  isSelected: boolean = false;
   ngOnInit(): void {
     this.getWeekendTypes();
     console.log('employee Data' , this.modelData);
@@ -40,6 +41,7 @@ export class WeekendTypeComponent implements OnInit {
     this.weekendTypes = array;
   }
   leaveTypeSelection(value){
+    this.isSelected = true;
     console.log('weekend Type' , value);
     this.postMArkWeekend(value);
   }

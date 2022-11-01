@@ -239,6 +239,7 @@
                   class="btn-input"
                   value="Submit"
                   [disabled]="!this.shiftRequestLMform.valid"
+                  [class.disabled-btn-forms]="!this.shiftRequestLMform.valid"
                   (click)="submit()"
                 />
                 <input
