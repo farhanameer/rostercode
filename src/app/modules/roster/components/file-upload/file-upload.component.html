@@ -3,9 +3,7 @@
     <app-full-layout>
       <div>
         <div>
-          <div
-            class="table-header gradient-head flex justify-content-between cutom-z-index"
-          >
+          <div class="table-header gradient-head flex justify-content-between">
             <div class="heading">Upload</div>
             <div class="btn-options flex align-content-center"></div>
           </div>
@@ -14,13 +12,14 @@
           <app-sub-layout>
             <div class="shift-card">
               <div class="form-col p-20">
-                <input type="file"
-                class="d-none"
-                (change)="fileChange($event.target)"
-                #fileUpload
-                >
+                <input
+                  type="file"
+                  class="d-none"
+                  (change)="fileChange($event.target)"
+                  #fileUpload
+                />
                 <div class="file-upload-field" (click)="fileUpload.click()">
-                 <label >Attachment</label>
+                  <label>Attachment</label>
                   <i class="bi bi-paperclip"></i>
                 </div>
                 <div class="download-attachement">
@@ -44,7 +43,14 @@
       </ul>
 
       <div class="modal-footer-button flex">
-        <input type="button" class="btn-input" value="Upload" [class.disabled-btn-forms]="!file" [disabled]="!file" (click)="uploadFile()" />
+        <input
+          type="button"
+          class="btn-input"
+          value="Upload"
+          [class.disabled-btn-forms]="!file"
+          [disabled]="!file"
+          (click)="uploadFile()"
+        />
       </div>
     </div>
   </div>
