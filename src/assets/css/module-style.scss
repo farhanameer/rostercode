@@ -22,6 +22,16 @@
 @import "ag-styles/comp-wrapper.scss";
 @import "ag-styles/shift-dropdown.scss";
 @import "ag-styles/drag-drop.scss";
+
+
+.disabled-btn-forms{
+  background: transparent linear-gradient(180deg,#ededed,#fafafa) 0 0 no-repeat padding-box;
+  color: #cfcfcf;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  opacity: 1;
+  cursor: not-allowed;
+}
 .custom-cdk-input {
   // 3532 - 3553
   .mat-select-panel-wrap {

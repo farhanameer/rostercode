@@ -1,3 +1,22 @@
 .cutom-z-index{
     z-index: 0;
 }
+
+.file-upload-field{
+    width: 260px;
+    height: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #D8DCDF;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
+.file-upload-field label {
+    color: #3080EA;
+}
+
+.download-attachement{
+    display: flex;
+    align-items: center;
+}

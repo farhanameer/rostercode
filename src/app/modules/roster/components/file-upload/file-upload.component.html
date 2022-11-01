@@ -14,10 +14,16 @@
           <app-sub-layout>
             <div class="shift-card">
               <div class="form-col p-20">
-                <div>
-                  <input type="file">
+                <input type="file"
+                class="d-none"
+                (change)="fileChange($event.target)"
+                #fileUpload
+                >
+                <div class="file-upload-field" (click)="fileUpload.click()">
+                 <label >Attachment</label>
+                  <i class="bi bi-paperclip"></i>
                 </div>
-                <div class="row align-content-center">
+                <div class="download-attachement">
                   <p class="label text-primary">Downlaod Template</p>
                 </div>
               </div>
@@ -38,7 +44,7 @@
       </ul>
 
       <div class="modal-footer-button flex">
-        <input type="button" class="btn-input" value="Upload" />
+        <input type="button" class="btn-input" value="Upload" [class.disabled-btn-forms]="!file" [disabled]="!file" (click)="uploadFile()" />
       </div>
     </div>
   </div>
