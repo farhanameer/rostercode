@@ -28,6 +28,8 @@ export class DragAndDropComponent implements OnInit , OnChanges {
   friday = []
   saturday = []
 
+  
+
   masterArray = [
     {
       name : 'No Weekends',

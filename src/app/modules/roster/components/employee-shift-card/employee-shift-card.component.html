@@ -2,10 +2,10 @@
   <div class="list-dd-header">
     <div class="header">
       <div class="flex space-between w-100">
-        <div class="title-column">{{dayName}}</div>
+        <div class="title-column" [class.bg-custom-imp]="dayName !='No Weekends'">{{dayName}}</div>
 
         <div class="right-menu">
-          <div class="label">5</div>
+          <div class="label">{{data.length}}</div>
           <a (click)="open()">View All</a>
         </div>
       </div>

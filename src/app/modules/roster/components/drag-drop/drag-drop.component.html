@@ -1,16 +1,12 @@
 <app-board-card>
     <div class="header">
       <div class="flex space-between w-100">
-        <div class="title-column">
+        <div class="title-column" [ngStyle]="{ 'color': shift.color }">
           {{shift.name}}
-          <div class="filter">
-            <span class="arrow is-triangle is-top"></span>
-            <span class="arrow is-triangle is-bottom"></span>
-          </div>
         </div>
 
         <div class="right-menu">
-          <div class="label">{{length}}</div>
+          <div class="label">{{this.noWeekEnds.length + sunday.length + monday.length + tuesday.length + wednesday.length + thursday.length + friday.length + saturday.length}}</div>
           <div class="vertical-menu">
             <div class="dropdown-vertical">
               <!-- three dots -->
@@ -31,13 +27,6 @@
         </div>
       </div>
       <div class="search-row">
-        <form action="" class="flex space-between w-100">
-          <label for="select">
-            <input type="checkbox" name="select" id="select" />
-            Select All</label
-          >
-          <input type="text" />
-        </form>
       </div>
     </div>
     <!-- Job list -->

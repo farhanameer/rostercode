@@ -22,6 +22,10 @@ export class EmployeeShiftCardComponent implements OnInit {
     this.itemDropped.emit(event);
   }
   open(){
-    this.customModal.showFeaturedDialog(MorningJobShiftDialog, "");
+    const data = {
+      employees : this.data, 
+      name : this.dayName
+    }
+    this.customModal.showFeaturedDialog(MorningJobShiftDialog, "",data);
   }
 }

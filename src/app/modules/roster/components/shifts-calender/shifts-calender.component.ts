@@ -81,7 +81,9 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
     paths.forEach((path) => {
       if (path.tagName != undefined) {
         var tagName = path.tagName.toString().toLowerCase();
-        if (tagName == 'app-shifts-calender') inComponent = true;
+        // if (tagName == 'app-shifts-calender') inComponent = true;
+        if (tagName == 'app-employee-shift-list') inComponent = true;
+       
       }
     });
 
@@ -434,7 +436,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
     console.log('below',spaceBelow);
     console.log('above',spaceAbove);
 
-    if(spaceBelow >= 450){
+    if(spaceBelow >= 255){
       this.top = `${event.clientY}px`;
       this.left = `${event.clientX}px`;
       // empList.style.top = `${event.clientY}px`;
@@ -455,7 +457,9 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
     // console.log(empList.classList);
     // empList.classList.remove('d-none');
     // event.stopPropagation();
-    this.show = true;
+    setTimeout(() => {
+      this.show = true;
+    }, 200);
   }
   
 }

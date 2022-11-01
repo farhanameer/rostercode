@@ -73,7 +73,26 @@ export class ShiftAllocationComponent implements OnInit {
   }
   shiftSelected(shift){
     console.log('selected shift data in shift allocation',shift);
+    let shifts = [];
+    this.copiedShiftsArray.forEach(sh =>{
+      if(sh.id == shift.value){
+        shifts.push(sh);
+      }
+    });
+
+    let creatShiftEmps = [];
+    this.creatShiftEmployees.forEach(shi =>{
+      if(shi.shift_id == shift.value){
+        creatShiftEmps.push(shi);
+      }
+    });
+
+    this.creatShiftEmployees = creatShiftEmps;
+    console.log(this.creatShiftEmployees);
+    this.shiftsArray = shifts;
+    console.log(this.shiftsArray);
   }
+  masterEmployees = [];
   async getEmployees(){
     const employee = await this.rosterViewService.getEmployeeList({
       client_id : this.appLocalStorage.getClientId(),
@@ -83,6 +102,7 @@ export class ShiftAllocationComponent implements OnInit {
     console.log('employees' , employee);
     if(!employee["status"]) return; //possible error;
     this.employees = employee["data"]["payload"];
+    this.masterEmployees = [...this.employees];
   }
   creatShiftEmployees:any = [];
   shiftAllocationForm=this.fb.group({
@@ -110,7 +130,10 @@ export class ShiftAllocationComponent implements OnInit {
     body.end_date = moment(body.end_date).format('YYYY-MM-DD');
     body.shifts = this.creatShiftEmployees;
     const result = await this.shiftAllocationService.createShift(body);
-    console.warn(result);
+    if(!result["status"]){
+      return;
+    }
+    this.resetForm();
   }
 
 
@@ -139,10 +162,11 @@ export class ShiftAllocationComponent implements OnInit {
     return this.uploadForm.controls
   }
   drop(event){
-    console.log(event.previousContainer.data);
+    console.log('event',event.previousContainer.data);
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -150,7 +174,10 @@ export class ShiftAllocationComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+      
     }
+    this.employees = [...this.masterEmployees];
+    
   }
   employees = [
     
@@ -166,6 +193,7 @@ export class ShiftAllocationComponent implements OnInit {
     return newArray;
   }
   employeeChange(data){
+    this.employees = [...this.masterEmployees];
     console.log('data after being changed' , data);
     console.log('before removal',this.creatShiftEmployees);
     this.creatShiftEmployees = this.searchAndDeleteIfExists(this.creatShiftEmployees , data.shift_id , 'shift_id');
@@ -178,6 +206,7 @@ export class ShiftAllocationComponent implements OnInit {
     this.creatShiftEmployees.push(data);
 
     console.log('data after a long time',this.creatShiftEmployees);
+    
 
   }
 }

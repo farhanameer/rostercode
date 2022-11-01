@@ -1,0 +1,13 @@
+.height-custom{
+    height: 253px !important;
+}
+.height-28{
+    height: 28px;
+}
+.ptb-6px{
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+.height-auto{
+    height: auto !important;
+}
