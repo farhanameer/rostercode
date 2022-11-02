@@ -1,5 +1,5 @@
 .shadow {
-  box-shadow: 0px 0px 7px rgba($color: #000000, $alpha:0.24);
+  box-shadow: 0px 0px 7px rgba($color: #000000, $alpha: 0.24);
 }
 .calendar-wrapper {
   padding: 15px;
@@ -13,15 +13,14 @@
   border-bottom: 1px solid #dee2e6;
   margin-bottom: 0px;
   width: 100%;
-  input[type="checkbox"]{
+  input[type="checkbox"] {
     margin-right: 15px;
     margin-top: 2px;
-    
   }
   thead {
     border-collapse: collapse;
-    >tr{
-      th{
+    > tr {
+      th {
         font-size: 10px;
         font-weight: 700;
         color: $blue;
@@ -34,18 +33,19 @@
       }
     }
   }
-  >tbody{
+  > tbody {
     font-size: 11px;
     color: $black;
-      >tr{
-        >td {
-          padding: 9px 8px 8px;
-          border-right: 1px solid #dee2e6;
-          a{
-            color: $blue;
-          }
+    > tr {
+      > td {
+        padding: 9px 8px 8px;
+        border-right: 1px solid #dee2e6;
+        height: 95px;
+        a {
+          color: $blue;
         }
       }
+    }
   }
 
   .cal-cell {
@@ -53,7 +53,7 @@
     td {
       @include reset-list;
       border: none;
-      padding-top:1px;
+      padding-top: 1px;
 
       .cal-day {
         font-size: 16px;
@@ -63,45 +63,45 @@
         display: flex;
       }
     }
-
   }
 }
 
-.disable  tr td, .disable  tr td a, .disable  tr td span  {
+.disable tr td,
+.disable tr td a,
+.disable tr td span {
   color: $disable !important;
-  pointer-events:none !important;
+  pointer-events: none !important;
 }
 
-.sat-cell{
-  pointer-events:none !important;
-  background-color: #F8F8F8;
+.sat-cell {
+  pointer-events: none !important;
+  background-color: #f8f8f8;
 }
 .sunday-cell {
-  pointer-events:none !important;
-  background-color:   #FFF3F3
-
+  pointer-events: none !important;
+  background-color: #fff3f3;
 }
 
 .calendar-footer {
   display: flex;
   align-items: center;
   height: 28px;
-  background-color: #D8DCDF;
+  background-color: #d8dcdf;
   padding: 0px 15px;
   justify-content: space-between;
 
-  ul.shift-hints{
+  ul.shift-hints {
     display: flex;
     gap: 20px;
-    li { 
+    li {
       gap: 5px;
-      display:flex;
+      display: flex;
       @include flex-center;
       span {
         display: flex;
-        @include square (7,7,100px);
+        @include square(7, 7, 100px);
         background-color: $orange;
-        border:1px solid white;
+        border: 1px solid white;
         &.evening-shift {
           background-color: $red-medium;
         }
@@ -110,12 +110,11 @@
         }
       }
     }
-
   }
   ul.shift-tags {
     display: flex;
     gap: 20px;
-    li{
+    li {
       display: flex;
       gap: 5px;
       align-items: center;
@@ -129,24 +128,22 @@
   padding: 10px 0px;
   justify-content: space-between;
   gap: 98px;
-  ul.years-list{
+  ul.years-list {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    
+
     li {
       a {
         white-space: nowrap;
       }
     }
-
   }
-  
 }
 
 .table-header {
   select {
-    border: 1px solid #D8DCDF;
+    border: 1px solid #d8dcdf;
     font-size: 11px;
     border-radius: 4px;
     padding: 0px 1px;
