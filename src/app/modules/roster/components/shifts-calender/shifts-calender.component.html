@@ -7,7 +7,7 @@
         (click)="getMonthAndYear()"
     /></a>
     <ul class="years-list">
-      <li *ngFor="let month of months">{{ month }}</li>
+      <li [class.color-blue]="month == months[2]" *ngFor="let month of months">{{ month }}</li>
     </ul>
     <a
       ><img

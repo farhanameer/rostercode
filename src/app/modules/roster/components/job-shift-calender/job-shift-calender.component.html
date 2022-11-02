@@ -36,7 +36,7 @@
           /></a>
 
           <ul class="years-list">
-            <li *ngFor="let year of years">{{ year }}</li>
+            <li class="grey" [class.color-black]="year == years[2]"*ngFor="let year of years">{{ year }}</li>
           </ul>
 
           <a

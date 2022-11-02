@@ -20,7 +20,7 @@
           <div class="calendar-navigation">
             <a><img src="assets/icons/ico-left-arrow.svg" alt="" (click)="getMonthAndYear()"/></a>
             <ul class="years-list" >
-              <li *ngFor="let month of months"><a href="#">{{month}}</a></li>
+              <li class="black" [class.color-blue]="month == months[2]" *ngFor="let month of months">{{month}}</li>
             </ul>
             <a><img src="assets/icons/ico-right-arrow.svg" alt="" (click)="getMonthAndYear(true)"/></a>
           </div>
