@@ -349,7 +349,6 @@
                   type="submit"
                   class="btn-input"
                   [disabled]="shiftSetUpForm.invalid"
-                  [class.disabled-btn-forms]="shiftSetUpForm.invalid"
                   value="Submit"
                 />
                 <!-- <input *ngIf="isUpdating" type="submit" class="btn-input" value="Update" /> -->
@@ -385,7 +384,17 @@
         <div class="pt-10">
           <div class="table-header gradient-head flex justify-content-between">
             <div class="heading">Shift list</div>
-            <div class="btn-options flex align-content-center"></div>
+            <div class="btn-options flex align-content-center">
+              <app-select-box
+                [label]="'Active'"
+                [width]="'105px'"
+                [height]="'20px'"
+                [name]="'market'"
+                [hideLabel]="true"
+                [customClass]="['padding-top-3', 'carret_position_9']"
+              >
+              </app-select-box>
+            </div>
           </div>
           <div class="shift-setup">
             <div class="shadow no-pad">

@@ -12,7 +12,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let entry of data">
-        <td (click)="singleShift(entry.id)">{{ entry.name }}</td>
+        <td (click)="singleShift(entry.id)" class="custom-text-blue">
+          {{ entry.name }}
+        </td>
         <td>{{ entry.shift_type_name }}</td>
         <td>{{ entry.dep_name }}</td>
         <td>{{ entry.time_in }}</td>
