@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MorningJobShiftDialog } from '../../dialogs/morning-job-shift/morning-job-shift.dialog';
 import { ModalService } from '../../services/modal/modal.service';
@@ -8,13 +8,20 @@ import { ModalService } from '../../services/modal/modal.service';
   templateUrl: './employee-shift-card.component.html',
   styleUrls: ['./employee-shift-card.component.css']
 })
-export class EmployeeShiftCardComponent implements OnInit {
+export class EmployeeShiftCardComponent implements OnInit , OnChanges {
 
   @Input() data : any;
   @Input() dayName : any;
   @Output() itemDropped : EventEmitter<any> = new EventEmitter();
   constructor(public activeModal: NgbActiveModal,
     private customModal: ModalService) { }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.dayName == 'No Weekends'){
+      console.log(this.data);
+    }
+  }
 
   ngOnInit(): void {
   }
