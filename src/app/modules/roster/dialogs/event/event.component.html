@@ -54,12 +54,16 @@
             *ngIf="!isUpdating"
             type="submit"
             class="btn-input"
+            [disabled]="eventForm.invalid"
+            [class.disabled-btn-forms]="eventForm.invalid"
             value="Submit"
           />
           <input
             *ngIf="isUpdating"
             type="submit"
             class="btn-input"
+            [disabled]="eventForm.invalid"
+            [class.disabled-btn-forms]="eventForm.invalid"
             value="Update"
           />
           <input

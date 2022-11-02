@@ -23,11 +23,14 @@ export class HolidayDataService {
             response.data = data['payload'];
             response.message = 'success';
             response.status = true;
+            
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
@@ -48,10 +51,19 @@ export class HolidayDataService {
             response.data = data['payload'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
+            
+            this.toastService.toast(err.error.error, 'error-toast');
             response.message = err;
             resolve(response);
           }
@@ -77,6 +89,8 @@ export class HolidayDataService {
             console.log(response);
           },
           (err) => {
+            
+            this.toastService.toast(err.error.error, 'error-toast');
             response.message = err;
             resolve(response);
           }

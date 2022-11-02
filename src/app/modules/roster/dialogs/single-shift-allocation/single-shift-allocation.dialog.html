@@ -51,6 +51,8 @@
                   [label]="'Shift Allocate'"
                   [form]="singleShiftForm"
                   [control]="'allocateShift'"
+                  [hideLabel]="true"
+                  [customClass]="['padding-top-3', 'carret_position_9']"
                 ></app-select-box>
               </td>
             </tr>
@@ -75,6 +77,7 @@
             type="button"
             class="btn-input"
             [disabled]="!this.singleShiftForm.valid"
+            [class.disabled-btn-forms]="!this.singleShiftForm.valid"
             
             value="Submit"
             (click)="submit()"

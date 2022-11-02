@@ -20,7 +20,11 @@
           </div>
           <div class="c-num-label">{{modelData.employees.length}}</div>
         </div>
-        <input class="c-input-whb" type="text" />
+        <app-input-box 
+          [width]="'105px'" 
+          [height]="'20px'"
+          (inputChanged)="search($event)">
+        </app-input-box>
       </form>
     </div>
     <ul class="c-ul-wid-gap">
