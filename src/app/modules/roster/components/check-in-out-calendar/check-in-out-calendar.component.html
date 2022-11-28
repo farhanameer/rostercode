@@ -5,40 +5,61 @@
         <div class="heading">Roster</div>
         <div class="btn-options flex align-content-center">
           <app-select-box
-          [label]="'Shifts'" [width]="'105px'" [height]="'20px'"
+            [label]="'Shifts'"
+            [width]="'105px'"
+            [height]="'20px'"
             [name]="'employees'"
             [hideLabel]="true"
-            [customClass]="['padding-top-3','carret_position_9']"
+            [customClass]="['padding-top-3', 'carret_position_9']"
             [data]="shiftsArray"
           ></app-select-box>
-          
         </div>
       </div>
 
       <div class="shadow">
         <div class="calendar-wrapper">
           <div class="calendar-navigation">
-            <a><img src="assets/icons/ico-left-arrow.svg" alt="" (click)="getMonthAndYear()"/></a>
-            <ul class="years-list" >
-              <li class="black" [class.color-blue]="month == months[2]" *ngFor="let month of months">{{month}}</li>
+            <a
+              ><img
+                src="assets/icons/ico-left-arrow.svg"
+                alt=""
+                (click)="getMonthAndYear()"
+            /></a>
+            <ul class="years-list">
+              <li
+                class="black"
+                [class.color-blue]="month == months[2]"
+                *ngFor="let month of months"
+              >
+                {{ month }}
+              </li>
             </ul>
-            <a><img src="assets/icons/ico-right-arrow.svg" alt="" (click)="getMonthAndYear(true)"/></a>
+            <a
+              ><img
+                src="assets/icons/ico-right-arrow.svg"
+                alt=""
+                (click)="getMonthAndYear(true)"
+            /></a>
           </div>
           <table class="table calendar-roaster">
             <thead>
               <tr>
-                <th scope="col" *ngFor="let weekday of weekDays">{{weekday}}</th>
+                <th scope="col" *ngFor="let weekday of weekDays">
+                  {{ weekday }}
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let nestedArray of reshapedData; index">
-                <td *ngFor="let days of nestedArray" [ngStyle]="{ background:  getCheckingColor(days)}"
+                <td
+                  *ngFor="let days of nestedArray"
+                  [ngStyle]="{ background: getCheckingColor(days) }"
                 >
                   <table class="cal-cell">
                     <tr *ngIf="days.shift_name">
-                      <td>{{days.shift_name}}</td>
+                      <td>{{ days.shift_name }}</td>
                     </tr>
-                    
+
                     <tr *ngIf="!days.shift_name">
                       <td>&nbsp;</td>
                     </tr>
@@ -47,7 +68,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <span class="cal-day">{{days.date}}</span>
+                        <span class="cal-day">{{ days.date }}</span>
                       </td>
                       <td>&nbsp;</td>
                     </tr>
@@ -57,8 +78,9 @@
 
                     <tr>
                       <td *ngIf="days.actual_shift_time_in">
-                        <span>In</span>{{days?.actual_shift_time_in}}<span class="dash">-</span
-                        ><span>Out</span> {{days?.actual_shift_time_out}}
+                        <span>In</span>{{ days?.actual_shift_time_in
+                        }}<span class="dash">-</span><span>Out</span>
+                        {{ days?.actual_shift_time_out }}
                       </td>
                       <td>&nbsp;</td>
                     </tr>
@@ -230,12 +252,16 @@
         </div>
         <div class="calendar-footer">
           <ul class="shift-hints">
-            <li><span></span> Morning Shift (07:00 - 14:00)</li>
             <li>
-              <span class="evening-shift"></span> Evening Shift (14:00 - 00:00)
+              <span class="custom-hw-10"></span> Morning Shift (07:00 - 14:00)
             </li>
             <li>
-              <span class="night-shift"></span> Night Shift (20:00 - 05:00)
+              <span class="evening-shift custom-hw-10"></span> Evening Shift
+              (14:00 - 00:00)
+            </li>
+            <li>
+              <span class="night-shift custom-hw-10"></span> Night Shift (20:00
+              - 05:00)
             </li>
           </ul>
 
