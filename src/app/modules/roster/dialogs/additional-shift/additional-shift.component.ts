@@ -1,3 +1,4 @@
+import { forEachChild } from 'typescript';
 import { AppLocalStorageService } from './../../../../services/app-local-storage.service';
 import { EmployeeRosterDataService } from './../../services/data/employeeAttendance.data';
 import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
@@ -45,11 +46,12 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
       additional_shift_id:[null]
     })
 
-    this.getDefaultList();
-    this.getEmployeeList({
-      "client_id" : this.appLocalStorage.getClientId(),
-      "dept_id" : this.appLocalStorage.getUserId(),
-  });
+    this.getDefaultEmployeesAndShifts(this.modelData);
+    // this.getDefaultList();
+  //   this.getEmployeeList({
+  //     "client_id" : this.appLocalStorage.getClientId(),
+  //     "dept_id" : this.appLocalStorage.getUserId(),
+  // });
     
 
     this.additionalHoursForm=this.fb.group({
@@ -83,6 +85,32 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
       this.additionalShifts = false;
     }
     
+  }
+  employees = [];
+  
+  getDefaultEmployeesAndShifts(modelData){
+    this.employees = this.modelData.dateRagne.employees;
+    const shifts = this.modelData.dateRagne.shifts;
+    const employeesArray = [];
+    const shiftsArray = [];
+    this.employees.forEach(employee => {
+      employeesArray.push({
+        id : employee.emp_id , 
+        name : employee.emp_name
+      });
+    });
+    console.log(employeesArray);
+    this.employeesDropdown = employeesArray;
+    shifts.forEach(shift => {
+      shiftsArray.push({
+        id : shift.id, 
+        name : shift.name,
+        color : shift.color
+      });
+    });
+    console.log(shiftsArray);
+    this.shifts = [];
+    this.shifts = shiftsArray;
   }
 
   async assignShift(body){
@@ -134,15 +162,53 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
   }
 
   selectionChanged($event){
-    this.selectedEmployeeId = $event.value
     console.log('selected value' , $event);
-    const params = {
-      "screen_role" : "emp",
-      "client_id" : this.appLocalStorage.getClientId(),
-      "employee_id" : $event.value,
-      "custom_date" : this.modelData.dateRagne.start 
-    }
-    this.getAssignedShift(params , true);
+    const employees = this.modelData.dateRagne.employees;
+    const getShifts = this.modelData.dateRagne.shifts;
+    console.log("Get Shifts", getShifts);
+    const shiftsArray = [];
+    let foundEmployee;
+    employees.forEach(employee =>{ 
+      
+        if(employee.emp_id == $event.value){
+          foundEmployee = employee;
+          this.employeesName = [
+            {
+              id : employee.shift_id,
+              name : employee.shift_name
+            }
+          ];
+          this.assignedShiftDefaultValue = {
+            id : employee.shift_id,
+            name : employee.shift_name
+          }
+          return;
+        }
+        
+    });
+
+    getShifts.forEach(s =>{
+      if(s.id !=foundEmployee.shift_id){
+        shiftsArray.push(s);
+      }
+    });
+    console.log("Shifts Array", shiftsArray);
+    this.shifts = [];
+    setTimeout(() => {
+      this.shifts = shiftsArray;
+    }, 100);
+    
+    // shifts.forEach(shift=>{
+
+    // })
+    
+    // const params = {
+    //   "screen_role" : "emp",
+    //   "client_id" : this.appLocalStorage.getClientId(),
+    //   "employee_id" : $event.value,
+    //   "custom_date" : this.modelData.dateRagne.start 
+    // }
+    // this.getAssignedShift(params , true);
   }
   // ***radio button function
  
