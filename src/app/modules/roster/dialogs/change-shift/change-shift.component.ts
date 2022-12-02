@@ -88,10 +88,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
       swipeShift:["",Validators.required]
     })
     // this.getDefaultList();
-    this.getDefaultEmployeesAndShifts(this.modelData);
-    
-    
-    
+    this.getDefaultEmployeesAndShifts(this.modelData);  
     
   //   this.getEmployeeList({
   //     "client_id" : this.appLocalStorage.getClientId(),
