@@ -251,18 +251,35 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     let replaceWithArray = [];
     let shiftDataArray = [];
     payload.forEach(entry => {
-      replaceWithArray.push({
-        id : entry.id,
-        name : entry.emp_name
-      });
-      shiftDataArray.push({
-        id : entry.shift_id,
-        name : entry.shift_name,
-        color : entry.shift_color
-      });
+      if(this.selectedEmployeeId != entry.id){
+        replaceWithArray.push({
+          id : entry.id,
+          name : entry.emp_name
+        });
+        
+      }
+      if(shiftDataArray.length == 0){
+        shiftDataArray.push({
+          id : entry.shift_id,
+          name : entry.shift_name,
+          color : entry.shift_color
+        });
+        return;
+      }
+      for(let i=0; i<shiftDataArray.length; i++){
+        if(shiftDataArray[i].id!=entry.shift_id){
+          shiftDataArray.push({
+            id : entry.shift_id,
+            name : entry.shift_name,
+            color : entry.shift_color
+          });
+        }
+      } 
+      
     });
+  
     this.replaceWithDropdown = [];
-    
+    console.log(shiftDataArray)
     this.swipeDropdown = [];
     // this.replaceWithDropdown = replaceWithArray;
     setTimeout(() => {

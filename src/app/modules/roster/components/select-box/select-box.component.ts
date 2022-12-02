@@ -190,7 +190,8 @@ export class SelectBoxComponent implements OnInit , AfterViewInit {
       value : option.id , 
       controlName : this.name,
       multiSelect : this.multiSelect , 
-      multiSelectValues : this.previousSelectionArray
+      multiSelectValues : this.previousSelectionArray,
+      textValue : option.name
     
     });
     

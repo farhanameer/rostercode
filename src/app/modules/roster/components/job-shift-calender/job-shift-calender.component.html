@@ -8,20 +8,23 @@
         </div></app-location-and-designation-filter
       >
     </div> -->
-    <div class="table-header gradient-head flex">
+    <div class="table-header gradient-head flex d-flex justify-content-between p-10-right">
       <div class="heading">Calendar</div>
-      <div class="custom-pl-142">
-        <app-location-and-designation-filter
-          (filtersChange)="filterChange($event)"
-        >
-        </app-location-and-designation-filter>
-      </div>
-      <div class="btn-options flex align-content-center p-0" [class.disabled]="(filters && filters.countryId==-1)">
-        <a (click)="openCalendar()" 
-          class="btn-custom" 
-          >Advance Filter
-          <i><img src="assets/icons/filter.svg" alt="" /></i>
-        </a>
+      <div class="d-flex justify-content-center align-items-center">
+        
+          <app-location-and-designation-filter
+            [showSearch]="true"
+            (filtersChange)="filterChange($event)"
+          >
+          </app-location-and-designation-filter>
+        
+        <span class="" [class.disabled]="(filters && filters.countryId==-1)">
+          <a (click)="openCalendar()" 
+            class="btn-custom" 
+            >Advance Filter
+            <i><img src="assets/icons/filter.svg" alt="" /></i>
+          </a>
+        </span>
       </div>
     </div>
 

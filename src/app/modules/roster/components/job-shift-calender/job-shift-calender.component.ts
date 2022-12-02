@@ -20,6 +20,7 @@ export class JobShiftCalenderComponent implements OnInit {
   currentDate: any;
   currentYearData: any;
   year_month = '';
+  eventArray = [];
   weekDays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   weekDaysPreset = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -52,7 +53,28 @@ export class JobShiftCalenderComponent implements OnInit {
     this.filters = $event;
     const year = moment(this.currentDate).format('YYYY');
     this.getHolidays(year);
+    if($event.countryId != -1){
+      this.getPublicHoliday($event.countryId)
+    }
   }
+
+  async getPublicHoliday(countryId){
+    const params = {
+      country_id : countryId
+    }
+    const res = await this.holidayService.getPublicHoliday(params);
+    let publicHoliday= res["data"];
+    let eventArr = [];
+    publicHoliday.forEach(entry => {
+      const obj = {
+        id : entry.holiday_id,
+        name : entry.name
+      }
+      eventArr.push(obj);
+    });
+    this.eventArray = [...eventArr];
+  }
+
   ngOnInit(): void {
 
       this.currentDate = moment();
@@ -215,7 +237,8 @@ export class JobShiftCalenderComponent implements OnInit {
       this.customModal.showFeaturedDialog(EventComponent,"" , {
         holiday : {
           start_date: date , 
-          end_date : date
+          end_date : date , 
+          event : this.eventArray
         }, 
         filters : this.filters
       });

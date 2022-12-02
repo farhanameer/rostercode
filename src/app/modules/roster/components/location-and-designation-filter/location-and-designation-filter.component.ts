@@ -18,6 +18,8 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
   @Input() resetFilters : Boolean = false;
   @Input() defaultValues : any = null;
 
+  @Input() showSearch = false;
+
   copiedMarketArray = [];
   marketArray : any[] = [];
   clusterArray :any[] = [];
@@ -224,7 +226,9 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
       
       this.getCountries('sub_cluster_id',$event.value);
       this.locationFilters.subClusterId = $event.value;
-      this.filtersChange.emit(this.locationFilters);
+      if(!this.showSearch){
+        this.filtersChange.emit(this.locationFilters);
+      }
       return;
     }
 
@@ -233,7 +237,9 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     const fun = this.dropDowns[$event.controlName];
     if(!fun){
       this.locationFilters.departmentId = $event.value;
-      this.filtersChange.emit(this.locationFilters);
+      if(!this.showSearch){
+        this.filtersChange.emit(this.locationFilters);
+      }
       return;
     }
     this[fun]($event.value);
@@ -241,6 +247,13 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     
     const filterKey = this.dropDownName[$event.controlName];
     this.locationFilters[filterKey] = $event.value;
+    if(!this.showSearch) {
+      this.filtersChange.emit(this.locationFilters);
+    }
+  }
+
+
+  applyFilters(){
     this.filtersChange.emit(this.locationFilters);
   }
 

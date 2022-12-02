@@ -13,6 +13,34 @@ export class HolidayDataService {
     private toastService: RosterToastService
   ) {}
 
+  getPublicHoliday(params) {
+    return new Promise((resolve, reject) => {
+      const response = { data: null, status: false, message: null };
+      try {
+        // params.client_id = this.appLocalStorage.getClientId();
+        this.httpService.getPublicHoliday(params).subscribe(
+          (data) => {
+            response.data = data['payload'];
+            response.message = 'success';
+            response.status = true;
+            
+            resolve(response);
+            console.log(response);
+          },
+          (err) => {
+            response.message = err;
+            
+            this.toastService.toast(err.error.error, 'error-toast');
+            resolve(response);
+          }
+        );
+      } catch (error) {
+        response.message = error;
+        resolve(response);
+      }
+    });
+  }
+
   getWorkCalendarSetting(params) {
     return new Promise((resolve, reject) => {
       const response = { data: null, status: false, message: null };
