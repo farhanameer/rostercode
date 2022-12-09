@@ -409,6 +409,9 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
   date : any;
 
   onEvent(event, date = null , shifts , isSingle = false) {
+    event.stopPropagation();
+
+    
     console.log(shifts);
     this.employees = [];
     if(isSingle){

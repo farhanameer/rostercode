@@ -20,8 +20,9 @@
       type="text"
       [placeholder]="placeHolder"
       (change)="inputChange($event)"
+      [id]="control"
     />
-    <p class="label" [class.ags-bg-transparent]="isdisabled? true : null" [ngStyle]="{ color: color }" *ngIf="!hideLabel">{{ label }}</p>
+    <label class="label" [for]="control" [class.ags-bg-transparent]="isdisabled? true : null" [ngStyle]="{ color: color }" *ngIf="!hideLabel">{{ label }}</label>
 
   </div>
   <span
