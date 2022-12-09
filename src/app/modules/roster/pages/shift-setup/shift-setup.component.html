@@ -99,7 +99,7 @@
                               [label]="'Roster'"
                               [form]="shiftSetUpForm"
                               [control]="'is_roster'"
-                              (selectionChanged)="[generalSelection = false]"
+                              (selectionChanged)="[(generalSelection = false)]"
                             >
                             </app-check-box>
                           </div>
@@ -108,7 +108,10 @@
                               [color]="'#3080EA'"
                               [label]="'General'"
                               (selectionChanged)="checkBoxSelection($event)"
-                              [checked]="generalSelection && (shiftSetUpForm.get('is_roster').value == 0)"
+                              [checked]="
+                                generalSelection &&
+                                shiftSetUpForm.get('is_roster').value == 0
+                              "
                             >
                             </app-check-box>
                           </div>
@@ -116,7 +119,10 @@
                             <app-check-box
                               [color]="'#3080EA'"
                               [label]="'Default'"
-                              [checked]="generalSelection && (shiftSetUpForm.get('is_roster').value == 0)"
+                              [checked]="
+                                generalSelection &&
+                                shiftSetUpForm.get('is_roster').value == 0
+                              "
                               (selectionChanged)="checkBoxSelection($event)"
                             >
                             </app-check-box>
@@ -166,7 +172,10 @@
                         >
                         </app-check-box>
                       </div>
-                      <div class="form-col" *ngIf="shiftSetUpForm.get('specific_period').value">
+                      <div
+                        class="form-col"
+                        *ngIf="shiftSetUpForm.get('specific_period').value"
+                      >
                         <div>
                           <app-date-box
                             [label]="'Period From'"
@@ -186,7 +195,7 @@
                             [label]="'Revert To'"
                             [form]="shiftSetUpForm"
                             [control]="'revert_shift_id'"
-                            [data] = "shiftArray"
+                            [data]="shiftArray"
                             [defaultValue]="dropDownDefaultValues.revert"
                           ></app-select-box>
                         </div>
@@ -254,7 +263,10 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-col" *ngIf="shiftSetUpForm.get('Tolerance').value">
+                    <div
+                      class="form-col"
+                      *ngIf="shiftSetUpForm.get('Tolerance').value"
+                    >
                       <div>
                         <app-input-box
                           [label]="'Consecutive Late'"
@@ -284,8 +296,8 @@
                 </div>
               </app-sub-layout>
               <div *ngIf="isUpdating">
-                <app-approval-details 
-                [form]="shiftSetUpForm"
+                <app-approval-details
+                  [form]="shiftSetUpForm"
                 ></app-approval-details>
               </div>
             </div>
@@ -330,20 +342,19 @@
             <div class="calendar-footer justify-content-end">
               <div class="modal-footer-button flex">
                 <div class="d-flex align-items-center">
-                  <app-check-box [label]="'Period'"> </app-check-box>
+                  <app-check-box [label]="'Active'"> </app-check-box>
                 </div>
                 <input
                   *ngIf="!isUpdating"
                   type="submit"
                   class="btn-input"
                   [disabled]="shiftSetUpForm.invalid"
-                  [class.disabled-btn-forms]="shiftSetUpForm.invalid"
                   value="Submit"
                 />
                 <!-- <input *ngIf="isUpdating" type="submit" class="btn-input" value="Update" /> -->
                 <input
                   *ngIf="isUpdating"
-                  [disabled] = "!shiftSetUpForm.valid"
+                  [disabled]="!shiftSetUpForm.valid"
                   type="submit"
                   class="btn-input"
                   value="Approve"
@@ -351,7 +362,7 @@
                 />
                 <input
                   *ngIf="isUpdating"
-                  [disabled] = "!shiftSetUpForm.valid"
+                  [disabled]="!shiftSetUpForm.valid"
                   type="submit"
                   class="btn-input"
                   value="Disapprove"
@@ -373,7 +384,17 @@
         <div class="pt-10">
           <div class="table-header gradient-head flex justify-content-between">
             <div class="heading">Shift list</div>
-            <div class="btn-options flex align-content-center"></div>
+            <div class="btn-options flex align-content-center">
+              <app-select-box
+                [label]="'Active'"
+                [width]="'105px'"
+                [height]="'20px'"
+                [name]="'market'"
+                [hideLabel]="true"
+                [customClass]="['padding-top-3', 'carret_position_9']"
+              >
+              </app-select-box>
+            </div>
           </div>
           <div class="shift-setup">
             <div class="shadow no-pad">

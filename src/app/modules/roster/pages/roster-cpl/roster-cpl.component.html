@@ -3,79 +3,102 @@
     <div>
       <app-full-layout>
         <div class="table-header gradient-head flex justify-content-between">
-          <div class="heading">Roaster</div>
+          <div class="heading">Roster</div>
           <div class="btn-options flex align-content-center">
             <app-select-box
-            [label]="'Employee Type'" [width]="'105px'" [height]="'20px'"
-            [name]="'employeeType'"
-            [hideLabel]="true"
-            [customClass]="['padding-top-3','carret_position_9']"
-            [data]="clientTypesArray"
-            [disabled]="clientTypesArray.length==0"
-            (selectionChange)="selectionChanged($event)"
-            > </app-select-box>
+              [label]="'Employee Type'"
+              [width]="'105px'"
+              [height]="'20px'"
+              [name]="'employeeType'"
+              [hideLabel]="true"
+              [customClass]="['padding-top-3', 'carret_position_9']"
+              [data]="clientTypesArray"
+              [disabled]="clientTypesArray.length == 0"
+              (selectionChange)="selectionChanged($event)"
+            >
+            </app-select-box>
             <app-select-box
-            [label]="'Reporting Level'" [width]="'105px'" [height]="'20px'"
-            [name]="'reportingLevel'"
-            [hideLabel]="true"
-            [customClass]="['padding-top-3','carret_position_9']"
-            [data]="reportingTypesArray"
-            [disabled]="reportingTypesArray.length==0"
-            (selectionChange)="selectionChanged($event)"
-            > </app-select-box>
+              [label]="'Reporting Level'"
+              [width]="'105px'"
+              [height]="'20px'"
+              [name]="'reportingLevel'"
+              [hideLabel]="true"
+              [customClass]="['padding-top-3', 'carret_position_9']"
+              [data]="reportingTypesArray"
+              [disabled]="reportingTypesArray.length == 0"
+              (selectionChange)="selectionChanged($event)"
+            >
+            </app-select-box>
             <app-select-box
-            [label]="'Department'" [width]="'105px'" [height]="'20px'"
-            [name]="'department'"
-            [hideLabel]="true"
-            [customClass]="['padding-top-3','carret_position_9']"
-            [data]="departmentsArray"
-            [disabled]="departmentsArray.length==0"
-            (selectionChange)="selectionChanged($event)"
-            > </app-select-box>
+              [label]="'Department'"
+              [width]="'105px'"
+              [height]="'20px'"
+              [name]="'department'"
+              [hideLabel]="true"
+              [customClass]="['padding-top-3', 'carret_position_9']"
+              [data]="departmentsArray"
+              [disabled]="departmentsArray.length == 0"
+              (selectionChange)="selectionChanged($event)"
+            >
+            </app-select-box>
             <app-select-box
-            [label]="'Employees'" [width]="'105px'" [height]="'20px'"
-            [name]="'employees'"
-            [hideLabel]="true"
-            [customClass]="['padding-top-3','carret_position_9']"
-            [data]="employeesArray"
-            [disabled]="employeesArray.length==0"
-            (selectionChange)="selectionChanged($event)"
-            > </app-select-box>
+              [label]="'Employees'"
+              [width]="'105px'"
+              [height]="'20px'"
+              [name]="'employees'"
+              [hideLabel]="true"
+              [customClass]="['padding-top-3', 'carret_position_9']"
+              [data]="employeesArray"
+              [disabled]="employeesArray.length == 0"
+              (selectionChange)="selectionChanged($event)"
+            >
+            </app-select-box>
             <app-select-box
-            [label]="'Shifts'" [width]="'105px'" [height]="'20px'"
-            [name]="'shifts'"
-            [hideLabel]="true"
-            [customClass]="['padding-top-3','carret_position_9']"
-            [data]="shiftsArray"
-            [disabled]="shiftsArray.length==0"
-            > </app-select-box>
+              [label]="'Shifts'"
+              [width]="'105px'"
+              [height]="'20px'"
+              [name]="'shifts'"
+              [hideLabel]="true"
+              [customClass]="['padding-top-3', 'carret_position_9']"
+              [data]="shiftsArray"
+              [disabled]="shiftsArray.length == 0"
+            >
+            </app-select-box>
           </div>
         </div>
-        <div class="col-shift-allocation">
-          <div class="user-list-shifts">
+        <div class="col-shift-allocation pb-0">
+          <div class="user-list-shifts custom-height-518">
             <app-sub-layout style="width: 358px">
               <div class="header-gray">
                 <div class="heading">CPL/Overtime</div>
-                <app-input-box 
-                  [width]="'105px'" 
+                <app-input-box
+                  [width]="'105px'"
                   [height]="'20px'"
-                  (inputChanged)="search($event)"></app-input-box>
+                  (inputChanged)="search($event)"
+                ></app-input-box>
               </div>
               <div class="height-fixed">
                 <app-overview-table [search]="searchValue"></app-overview-table>
               </div>
             </app-sub-layout>
           </div>
-          <app-shifts-calender class="w-100" [filters]="filters"></app-shifts-calender>
+          <app-shifts-calender
+            class="w-100"
+            [filters]="filters"
+          ></app-shifts-calender>
         </div>
         <div class="calendar-footer">
           <ul class="shift-hints">
-            <li><span></span> Morning Shift (07:00 - 14:00)</li>
             <li>
-              <span class="evening-shift"></span> Evening Shift (14:00 - 00:00)
+              <span class="custom-hw-10"></span> Morning Shift (07:00 - 14:00)
             </li>
             <li>
-              <span class="night-shift"></span> Night Shift (20:00 - 05:00)
+              <span class="evening-shift custom-hw-10"></span> Evening Shift
+              (14:00 - 00:00)
+            </li>
+            <li>
+              <span class="night-shift custom-hw-10"></span> Night Shift (20:00
+              - 05:00)
             </li>
           </ul>
 

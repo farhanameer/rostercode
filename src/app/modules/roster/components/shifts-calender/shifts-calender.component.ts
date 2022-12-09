@@ -1,3 +1,4 @@
+import { Employee } from 'src/app/shared/models/employee.model';
 import { RosterService } from './../../services/data/rosterView.data.service';
 import  moment  from 'moment';
 import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
@@ -323,7 +324,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
     }
     return Math.random();
   }
-  onDragOver(event , actualEvent){
+  onDragOver(event , actualEvent , day){
 
     console.log('called first ');
     if(!this.mouseDown) return;
@@ -370,9 +371,25 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
 
     
     this.resetColor = true;
+    let employeeList = [];
+    let shifts = [];
+    if(start == end){
+      console.log('employess list here' , day);
+      shifts = day.shifts;
+      shifts.forEach(shift => {
+        const employees = shift.employees;
+        employees.forEach(employee => {
+          employeeList.push(employee);
+        })
+      });
+      console.log("Edited List", employeeList);
+    }
     this.openManagement({
       start : start , 
-      end : end
+      end : end , 
+      employees : employeeList , 
+      shifts : shifts
+
     });
 
 
@@ -393,6 +410,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
 
   // dialog open function below:
   openManagement(dateRange){
+    console.log("date range", dateRange)
     const payload = {
       dateRagne : dateRange , 
       filters : this.filters

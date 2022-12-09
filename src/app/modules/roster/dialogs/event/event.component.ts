@@ -25,8 +25,11 @@ export class EventComponent implements OnInit {
   year : any;
   filters : any;
   isUpdating : Boolean = false;
+  eventArray = [];
+  hdescValue : any;
   ngOnInit(): void {
     const holidayData = this.modelData.holiday;
+    this.eventArray = this.modelData.holiday.event;
     if(this.modelData) {
       this.eventForm = this.fb.group({
         hdesc: [holidayData.hdesc, Validators.required],
@@ -51,6 +54,11 @@ export class EventComponent implements OnInit {
 
 
     console.log('singleDate we got' , this.modelData);
+  }
+
+  selectionChanged($event){
+    console.log($event.textValue);
+    this.hdescValue = $event.textValue;
   }
 
   async addEvent() {
@@ -83,7 +91,7 @@ export class EventComponent implements OnInit {
     await this.holidayService.addHoliday({
       start_date: this.eventForm.get('start_date').value,
       end_date: this.eventForm.get('end_date').value,
-      hdesc: this.eventForm.get('hdesc').value,
+      hdesc: this.hdescValue,
       year : this.year , 
       country_id : this.filters.countryId , 
       state_id : this.filters.stateId , 

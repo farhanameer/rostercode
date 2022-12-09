@@ -37,4 +37,7 @@ export class HolidayHttpService {
   publicHoliday(params = {}) {
     return this.http.post(`${this.roster}/Holiday`, params);
   }
+  getPublicHoliday(params = {}) {
+    return this.http.get(`${this.roster}/PublicHoliday`, { params });
+  }
 }

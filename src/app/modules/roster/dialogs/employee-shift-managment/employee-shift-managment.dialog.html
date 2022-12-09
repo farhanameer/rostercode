@@ -1,7 +1,10 @@
 <app-dialog-layout>
   <div class="modal-custom modal-lg bg-white custom-w-932">
     <div class="gradient-head flex justify-content-between">
-      <div class="heading">Shift Management ({{modelData.dateRagne.start}} - {{modelData.dateRagne.end}})</div>
+      <div class="heading">
+        Shift Management ({{modelData.dateRagne.start}} -
+        {{modelData.dateRagne.end}})
+      </div>
       <div class="btn-options flex align-content-center">
         <a
           ><img
@@ -38,7 +41,7 @@
                   (click)="radioChange('change')"
                 />Change Shift</label
               >
-              <label for="radio1" >
+              <label for="radio1">
                 <input
                   type="radio"
                   value="additional"
@@ -72,11 +75,17 @@
 
     <div class="modal-custom-footer">
       <ul class="shift-hints" style="display: flex; gap: 20px">
-        <li><span></span> Morning Shift (07:00 - 14:00)</li>
         <li>
-          <span class="evening-shift"></span> Evening Shift (14:00 - 00:00)
+          <span class="custom-hw-10"></span> Morning Shift (07:00 - 14:00)
         </li>
-        <li><span class="night-shift"></span> Night Shift (20:00 - 05:00)</li>
+        <li>
+          <span class="evening-shift custom-hw-10"></span> Evening Shift (14:00
+          - 00:00)
+        </li>
+        <li>
+          <span class="night-shift custom-hw-10"></span> Night Shift (20:00 -
+          05:00)
+        </li>
       </ul>
 
       <div class="modal-footer-button flex">

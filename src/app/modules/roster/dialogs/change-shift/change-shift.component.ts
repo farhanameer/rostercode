@@ -11,6 +11,7 @@ import { AdditionalShiftComponent } from '../additional-shift/additional-shift.c
 import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employee-shift-managment.dialog';
 import { tick } from '@angular/core/testing';
 import moment from 'moment';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-change-shift',
@@ -24,6 +25,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   shifts: Array<any> = [];
   employees: Array<any> = [];
   employeesDropdown : any=[];
+  replaceWithDropdown: any = [];
   employeesName : any=[];
   swipeDropdown : any=[];
   assignedEmployeeShift : any;
@@ -31,6 +33,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   swipeDropdownValue: any;
   selectedEmployeeId: any;
   assignedRosterDate: any;
+  customDate;
   constructor(public activeModal: NgbActiveModal ,
     private customModal:ModalService, 
     private fb:FormBuilder, 
@@ -73,19 +76,50 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log('modelData', this.modelData);
+    console.log('modelData of Change Shift', this.modelData);
+
+
+    this.customDate = this.modelData.dateRagne.start;
     this.swipeShiftForm=this.fb.group({
       employee_id:["",Validators.required],
       assigned_shift:["",Validators.required],
-      assigned_roster_date:["",Validators.required],
+      assigned_roster_date:[this.modelData.dateRagne.start,Validators.required],
       replaceWithEmployeeId:[null],
       swipeShift:["",Validators.required]
     })
-    this.getDefaultList();
-    this.getEmployeeList({
-      "client_id" : this.appLocalStorage.getClientId(),
-      "dept_id" : this.appLocalStorage.getUserId(),
-  })
+    // this.getDefaultList();
+    this.getDefaultEmployeesAndShifts(this.modelData);  
+    
+  //   this.getEmployeeList({
+  //     "client_id" : this.appLocalStorage.getClientId(),
+  //     "dept_id" : this.appLocalStorage.getUserId(),
+  // })
+  }
+
+  getDefaultEmployeesAndShifts(modelData){
+    const employees = this.modelData.dateRagne.employees;
+    const shifts = this.modelData.dateRagne.shifts;
+    
+    const employeesArray = [];
+    const shiftsArray = [];
+    employees.forEach(employee => {
+      employeesArray.push({
+        id : employee.emp_id , 
+        name : employee.emp_name
+      });
+    });
+    console.log(employeesArray);
+    this.employeesDropdown = employeesArray;
+    shifts.forEach(shift => {
+      shiftsArray.push({
+        id : shift.id, 
+        name : shift.name,
+        color : shift.color
+      });
+    });
+    console.log(shiftsArray);
+    this.swipeDropdown = [];
+    this.swipeDropdown = shiftsArray;
   }
 
   async swapShift(body){
@@ -158,13 +192,104 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   selectionChanged($event){
     this.selectedEmployeeId = $event.value
     console.log('selected value' , $event);
+    
+    const employees = this.modelData.dateRagne.employees;
+    const shiftsArray = [];
+    const replaceWithArray = [];
+
+    employees.forEach(employee =>{    
+      if(employee.emp_id == $event.value){
+        const obj = {
+          id : employee.shift_id,
+          name : employee.shift_name
+        }
+        this.assignedShiftDefaultValue = {
+          id : employee.shift_id,
+          name : employee.shift_name
+        }
+        shiftsArray.push(obj);
+        return;
+      }
+
+      replaceWithArray.push({
+        id : employee.emp_id , 
+        name : employee.emp_name
+      });
+    });
+    this.employeesName = shiftsArray;
+
+    if(this.modelData.dateRagne.start != this.customDate){
+      return;
+    }
+    this.replaceWithDropdown = [];
+    setTimeout(() => {
+      this.replaceWithDropdown = replaceWithArray;
+    }, 100);
+
+    
     const params = {
       "screen_role" : "emp",
       "client_id" : this.appLocalStorage.getClientId(),
       "employee_id" : $event.value,
       "custom_date" : this.modelData.dateRagne.start 
     }
-    this.getAssignedShift(params , true);
+    // this.getAssignedShift(params , true);
+  }
+
+  async dateChanged(event){
+    this.customDate = event;
+    console.log(event);
+    const body = {
+      client_id : this.appLocalStorage.getClientId(),
+      reporting_to_id : this.appLocalStorage.getUserId(),
+      custom_date : event
+    }
+    const res = await this.rosterService.getLMRosterView(body);
+    console.log("Response",res);
+    const payload = res["data"]["payload"];
+    
+    let replaceWithArray = [];
+    let shiftDataArray = [];
+    payload.forEach(entry => {
+      if(this.selectedEmployeeId != entry.id){
+        replaceWithArray.push({
+          id : entry.id,
+          name : entry.emp_name
+        });
+        
+      }
+      if(shiftDataArray.length == 0){
+        shiftDataArray.push({
+          id : entry.shift_id,
+          name : entry.shift_name,
+          color : entry.shift_color
+        });
+        return;
+      }
+      for(let i=0; i<shiftDataArray.length; i++){
+        if(shiftDataArray[i].id!=entry.shift_id){
+          shiftDataArray.push({
+            id : entry.shift_id,
+            name : entry.shift_name,
+            color : entry.shift_color
+          });
+        }
+      } 
+      
+    });
+  
+    this.replaceWithDropdown = [];
+    console.log(shiftDataArray)
+    this.swipeDropdown = [];
+    // this.replaceWithDropdown = replaceWithArray;
+    setTimeout(() => {
+      this.replaceWithDropdown = replaceWithArray;
+      if(this.customDate == this.modelData.dateRagne.start){
+        this.getDefaultEmployeesAndShifts(this.modelData);
+        return;
+      }
+      this.swipeDropdown = shiftDataArray;
+    }, 100);
   }
 
   get validateAForm(): any {

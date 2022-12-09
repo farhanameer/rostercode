@@ -5,7 +5,7 @@
       <app-full-layout>
         <div>
           <div class="table-header gradient-head flex justify-content-between">
-            <div class="heading">Shift Setup</div>
+            <div class="heading">Shift Request</div>
             <app-location-and-designation-filter
               (filtersChange)="filterChange($event)"
               [defaultValues]="defaultFilters"
@@ -21,7 +21,7 @@
           </div>
 
           <div class="shift-setup">
-            <div class="shadow pb0-10">
+            <div class="shadow">
               <app-sub-layout>
                 <div class="shift-card">
                   <div class="form-col">
@@ -107,7 +107,10 @@
                         >
                         </app-check-box>
                       </div>
-                      <div class="form-col" *ngIf="shiftRequestLMform.get('specific_period').value">
+                      <div
+                        class="form-col"
+                        *ngIf="shiftRequestLMform.get('specific_period').value"
+                      >
                         <div>
                           <app-date-box
                             [label]="'Period From'"
@@ -127,7 +130,7 @@
                             [label]="'Revert To'"
                             [form]="shiftRequestLMform"
                             [control]="'revert_shift_id'"
-                            [data] = "shiftsArray"
+                            [data]="shiftsArray"
                             [defaultValue]="dropDownDefaultValues.revert"
                           ></app-select-box>
                         </div>
@@ -136,9 +139,8 @@
                   </div>
                 </div>
               </app-sub-layout>
-              
+
               <app-sub-layout *ngIf="shiftNameClick">
-                
                 <div class="shift-card-wrapper">
                   <div class="shift-header">Quarter Break</div>
                   <div class="shift-card">
@@ -196,7 +198,10 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-col" *ngIf="shiftRequestLMform.get('Tolerance').value">
+                    <div
+                      class="form-col"
+                      *ngIf="shiftRequestLMform.get('Tolerance').value"
+                    >
                       <div>
                         <app-input-box
                           [label]="'Consecutive Late'"
@@ -226,8 +231,8 @@
                 </div>
               </app-sub-layout>
               <div *ngIf="shiftNameClick">
-                <app-approval-details 
-                [form]="shiftRequestLMform"
+                <app-approval-details
+                  [form]="shiftRequestLMform"
                 ></app-approval-details>
               </div>
             </div>
@@ -258,13 +263,24 @@
         <div class="pt-10">
           <div class="table-header gradient-head flex justify-content-between">
             <div class="heading">Shift list</div>
-            <div class="btn-options flex align-content-center"></div>
+            <div class="btn-options flex align-content-center">
+              <app-select-box
+                [label]="'Active'"
+                [width]="'105px'"
+                [height]="'20px'"
+                [name]="'market'"
+                [hideLabel]="true"
+                [customClass]="['padding-top-3', 'carret_position_9']"
+              >
+              </app-select-box>
+            </div>
           </div>
           <div class="shift-setup">
             <div class="shadow no-pad">
-              <app-shift-list 
+              <app-shift-list
                 [data]="shiftsArray"
-                (singleShiftId)="getSingleShift($event)"></app-shift-list>
+                (singleShiftId)="getSingleShift($event)"
+              ></app-shift-list>
             </div>
             <div class="shift-setup-footer"></div>
           </div>

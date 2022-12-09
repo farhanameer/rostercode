@@ -38,11 +38,12 @@
                 />Sort by Employee</label
               >
             </div>
-            <app-input-box 
-              [width]="'105px'" 
+            <app-input-box
+              [width]="'105px'"
               [height]="'20px'"
-              (inputChanged)="search($event)">
-          </app-input-box>
+              (inputChanged)="search($event)"
+            >
+            </app-input-box>
           </form>
         </div>
       </div>
@@ -54,20 +55,25 @@
         [dates]="dates"
         [searchedValue]="searchedValue"
       ></app-sort-by-date>
-      <app-sort-by-employee 
-        *ngIf="view == 'employee'" 
+      <app-sort-by-employee
+        *ngIf="view == 'employee'"
         [dates]="dates"
         [searchedValue]="searchedValue"
       ></app-sort-by-employee>
-      
     </div>
     <div class="modal-custom-footer">
       <ul class="shift-hints" style="display: flex; gap: 20px" git>
-        <li><span></span> Morning Shift (07:00 - 14:00)</li>
         <li>
-          <span class="evening-shift"></span> Evening Shift (14:00 - 00:00)
+          <span class="custom-hw-10"></span> Morning Shift (07:00 - 14:00)
         </li>
-        <li><span class="night-shift"></span> Night Shift (20:00 - 05:00)</li>
+        <li>
+          <span class="evening-shift custom-hw-10"></span> Evening Shift (14:00
+          - 00:00)
+        </li>
+        <li>
+          <span class="night-shift custom-hw-10"></span> Night Shift (20:00 -
+          05:00)
+        </li>
       </ul>
 
       <div class="modal-footer-button flex">

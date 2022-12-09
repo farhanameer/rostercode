@@ -14,12 +14,14 @@
       <div class="overtime-form p-20 px-0">
         <div class="row m-0">
           <div class="col p-0">
-            <app-input-box
+            <app-select-box
               [form]="eventForm"
               [control]="'hdesc'"
               [label]="'Name'"
               [width]="'100%'"
-            ></app-input-box>
+              [data]="eventArray"
+              (selectionChange)="selectionChanged($event)"
+            ></app-select-box>
           </div>
         </div>
 

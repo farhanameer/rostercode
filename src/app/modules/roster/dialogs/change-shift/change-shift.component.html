@@ -31,19 +31,25 @@
               [form]="swipeShiftForm"
               [control]="'assigned_roster_date'"
               [label]="'Select Date'"
+              (dateChanged) = "dateChanged($event)"
             ></app-date-box>
+            <div>
+              <p class="custom-opacity-pt">
+                *Select date for swapping on other days shifts
+              </p>
+            </div>
           </div>
           <div>
             <app-select-box
               [data]="swipeDropdown"
               [form]="swipeShiftForm"
               [control]="'swipeShift'"
-              [label]="'Swipe Shift'"
+              [label]="'Swape Shift'"
             ></app-select-box>
           </div>
           <div>
             <app-select-box
-              [data]="employeesDropdown"
+              [data]="replaceWithDropdown"
               [form]="swipeShiftForm"
               [control]="'replaceWithEmployeeId'"
               [label]="'Replace With'"

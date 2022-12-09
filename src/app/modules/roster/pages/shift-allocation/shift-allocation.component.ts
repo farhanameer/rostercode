@@ -1,3 +1,4 @@
+import { SearchService } from './../../services/data/searchService.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -17,9 +18,10 @@ export class ShiftAllocationComponent implements OnInit {
 
   constructor(private fb:FormBuilder , private shiftRequestService : ShiftRequestDataService , 
     private rosterViewService : RosterService , private appLocalStorage : AppLocalStorageService , 
-    private shiftAllocationService : ShiftAllocationDataService) { }
+    private shiftAllocationService : ShiftAllocationDataService,
+    private searchService : SearchService) { }
 
-
+  searchedValue: any;
   reset = false;
   filters : any = {
     glob_mkt_id : -1 , 
@@ -208,5 +210,13 @@ export class ShiftAllocationComponent implements OnInit {
     console.log('data after a long time',this.creatShiftEmployees);
     
 
+  }
+  search(value){
+    console.log('searching values' , value);
+    const res = this.searchService.search(this.masterEmployees, value, 'name');
+    this.employees = res['searchedArray']; 
+    if(this.employees.length==0 && value == ''){
+      this.employees = this.masterEmployees;
+    }
   }
 }

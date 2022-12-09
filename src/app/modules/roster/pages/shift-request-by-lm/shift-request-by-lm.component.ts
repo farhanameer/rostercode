@@ -91,28 +91,13 @@ export class ShiftRequestByLmComponent implements OnInit {
       ext_mid_break_time_out : [''],
       Tolerance: [''],
       consecutive_late: [
-        null,
-        [
-          this.shiftQrtExtendedValidator(
-            () => this.shiftRequestLMform.get('Tolerance').value
-          ),
-        ],
+        null
       ],
       late_arrival_tolerance: [
-        null,
-        [
-          this.shiftQrtExtendedValidator(
-            () => this.shiftRequestLMform.get('Tolerance').value
-          ),
-        ],
+        null
       ],
       attendance_tolerance: [
-        null,
-        [
-          this.shiftQrtExtendedValidator(
-            () => this.shiftRequestLMform.get('Tolerance').value
-          ),
-        ],
+        null
       ],
       specific_period : [''],
       shift_revert_date_start : [''],
@@ -125,8 +110,6 @@ export class ShiftRequestByLmComponent implements OnInit {
       lm_date : [''],
       lm_request : [''],
     })
-
-    this.newqrtbreak();
   }
 
   get validateAForm(): any {

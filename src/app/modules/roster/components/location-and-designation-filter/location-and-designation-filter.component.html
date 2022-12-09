@@ -124,6 +124,14 @@
     >
     </app-select-box>
   </div>
-  <div></div>
+  <div>
+    <span class="" *ngIf="showSearch">
+      <a
+        (click)="applyFilters()"
+        class="btn-custom" 
+        >Search
+      </a>
+    </span>
+  </div>
 </div>
 <!-- </div> -->
