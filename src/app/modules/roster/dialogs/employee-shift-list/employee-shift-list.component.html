@@ -1,6 +1,6 @@
 <app-dialog-layout>
   <div class="shift-drop-down bg-white height-auto" *ngIf="show" style="position: absolute;" [ngStyle]="{'z-index' : 1, 'top': top , 'bottom' : bottom , 'left' : left }">
-    <div class="shift-dd-header">
+    <div class="shift-dd-header" [ngStyle]="{'background-color' : color}">
       {{date}}
       <i
         ><a (click)="closeModal()"

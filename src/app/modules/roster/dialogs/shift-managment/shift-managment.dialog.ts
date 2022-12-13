@@ -22,7 +22,8 @@ export class ShiftManagmentDialog implements OnInit {
     private customModel:ModalService) { }
 
   ngOnInit(): void {
-    console.log('shift management' , this.dates);
+    console.log('shift management dialog' , this.dates);
+    
     if(this.dates.dateRagne.start == this.dates.dateRagne.end){
       this.single = true;
     }

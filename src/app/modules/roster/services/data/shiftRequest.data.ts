@@ -448,7 +448,7 @@ export class ShiftRequestDataService {
   }
 
   getDefaultList(screenRole, filters = null) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
         let paramss = {
@@ -459,7 +459,7 @@ export class ShiftRequestDataService {
         //   paramss["department_id"] = 16;
         // }
         if (screenRole == 'lm') {
-          paramss['line_manager_id'] = this.appLocalStorage.getUserId();
+          paramss['line_manager_id'] =await this.appLocalStorage.getLineManagerId();
         }
         if (filters) {
           paramss = { ...paramss, ...filters };

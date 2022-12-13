@@ -19,6 +19,7 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
   @Input() defaultValues : any = null;
 
   @Input() showSearch = false;
+  @Input() isLineManager = false;
 
   copiedMarketArray = [];
   marketArray : any[] = [];
@@ -82,12 +83,54 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
   }
   ngOnInit(): void {
     this.getMarket();
+    this.restrictFiltersForLM();
   }
 
   ngAfterViewInit(): void {
     this.filtersChange.emit(this.locationFilters);
   }
   
+
+  async restrictFiltersForLM(){
+    if(this.isLineManager){
+      const lmDetails = await this.appLocalStorage.getLineManagerDetails();
+      if(lmDetails){
+        
+    
+          if(lmDetails && Object.entries(lmDetails).length !=0){
+            await this.search(this.marketArray , lmDetails.glob_mkt_id , 'marketId' , this.getMarket , null,this);
+            await this.search(this.clusterArray , lmDetails.region_id , 'clusterId' , this.getCluster, lmDetails.glob_mkt_id,this);
+            await this.search(this.subClusterArray , lmDetails.sub_region_id , 'subClusterId' , this.getSubCluster, lmDetails.region_id ,this);
+           
+            if(lmDetails.glob_mkt_id != -1){
+              if(lmDetails.region_id == -1 && lmDetails.sub_region_id == -1) {
+                await this.getCountries('marketId' , lmDetails.glob_mkt_id);
+              }
+              if(lmDetails.region_id != -1 && lmDetails.sub_region_id == -1){
+                await this.getCountries('clusterId' , lmDetails.region_id);
+              }
+              if(lmDetails.region_id != -1 && lmDetails.sub_region_id != -1){
+                await this.getCountries('subClusterId' , lmDetails.sub_region_id);
+              }
+            }
+            else{
+              await this.getCountries(null,null,this);
+            }
+            await this.search(this.countriesArray , lmDetails.country_id , 'countryId' , this.getCountries, null , this);
+            await this.search(this.statesArray , lmDetails.state_id , 'stateId' , this.getStates, lmDetails.country_id,this);
+            await this.search(this.citiesArray , lmDetails.city_id , 'cityId' , this.getCities, lmDetails.state_id,this);
+            await this.search(this.branchesArray , lmDetails.loc_id , 'branchId' , this.getBranches, lmDetails.city_id,this);
+            await this.search(this.departmentArray , lmDetails.department_id , 'departmentId' , this.getDepartments, lmDetails.loc_id,this);
+      
+            console.log('default filter values',this.defaultFiltersValues);
+          }
+          else{
+            console.log('problems')
+          }
+        
+      }
+    }
+  }
   ngOnChanges(changes: SimpleChanges): void {
     
     this.clusterArray = [];
@@ -276,6 +319,20 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
           }
         })
       }
+
+      if(defaultThis.isLineManager){
+        console.log('in market value');
+        const lmDetails = await defaultThis.appLocalStorage.getLineManagerDetails();
+        console.log('in market value1');
+        if(lmDetails && lmDetails['glob_mkt_id']){
+          defaultThis.marketArray.forEach(item =>{
+            console.log('everyLoop for market' , item);
+            if(item.id == lmDetails['glob_mkt_id']){
+              defaultThis.defaultFiltersValues['marketId']=item;
+            }
+          })
+        }
+      }
       return;
     }
     this.getCountries(null,null,defaultThis);
@@ -299,6 +356,19 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
         }
       })
     }
+
+
+    if(defaultThis.isLineManager){
+      const lmDetails = await defaultThis.appLocalStorage.getLineManagerDetails();
+      if(lmDetails && lmDetails['region_id']){
+        defaultThis.clusterArray.forEach(item =>{
+          console.log('everyLoop' , item);
+          if(item.id == lmDetails['region_id']){
+            defaultThis.defaultFiltersValues['clusterId']=item;
+          }
+        })
+      }
+    }
   }
   async getSubCluster(clusterId , defaultThis=this){
     const data = await defaultThis.dataService.getSubClusterByCluster(clusterId);
@@ -321,6 +391,18 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
       })
     }
 
+    if(defaultThis.isLineManager){
+      const lmDetails = await defaultThis.appLocalStorage.getLineManagerDetails();
+      if(lmDetails && lmDetails['sub_region_id']){
+        defaultThis.subClusterArray.forEach(item =>{
+          console.log('everyLoop' , item);
+          if(item.id == lmDetails['sub_region_id']){
+            defaultThis.defaultFiltersValues['subClusterId']=item;
+          }
+        })
+      }
+    }
+
 
   }
   async getCountries(key = null , value = null,defaultThis=this){
@@ -338,6 +420,18 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
           defaultThis.defaultFiltersValues['countryId']=item;
         }
       })
+    }
+
+    if(defaultThis.isLineManager){
+      const lmDetails = await defaultThis.appLocalStorage.getLineManagerDetails();
+      if(lmDetails && lmDetails['country_id']){
+        defaultThis.countriesArray.forEach(item =>{
+          console.log('everyLoop' , item);
+          if(item.id == lmDetails['country_id']){
+            defaultThis.defaultFiltersValues['countryId']=item;
+          }
+        })
+      }
     }
 
 
@@ -358,6 +452,18 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
         }
       })
     }
+    if(defaultThis.isLineManager){
+      const lmDetails = await defaultThis.appLocalStorage.getLineManagerDetails();
+      if(lmDetails && lmDetails['state_id']){
+        defaultThis.statesArray.forEach(item =>{
+          console.log('everyLoop' , item);
+          if(item.id == lmDetails['state_id']){
+            defaultThis.defaultFiltersValues['stateId']=item;
+          }
+        })
+      }
+    }
+    
 
   }
   async getCities(stateId,defaultThis=this){
@@ -377,6 +483,18 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
           defaultThis.defaultFiltersValues['cityId']=item;
         }
       })
+    }
+
+    if(defaultThis.isLineManager){
+      const lmDetails = await defaultThis.appLocalStorage.getLineManagerDetails();
+      if(lmDetails && lmDetails['city_id']){
+        defaultThis.citiesArray.forEach(item =>{
+          console.log('everyLoop' , item);
+          if(item.id == lmDetails['city_id']){
+            defaultThis.defaultFiltersValues['cityId']=item;
+          }
+        })
+      }
     }
 
 
@@ -399,16 +517,41 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
     }
 
 
+    if(defaultThis.isLineManager){
+      const lmDetails = await defaultThis.appLocalStorage.getLineManagerDetails();
+      if(lmDetails && lmDetails['loc_id']){
+        defaultThis.branchesArray.forEach(item =>{
+          console.log('everyLoop' , item);
+          if(item.id == lmDetails['loc_id']){
+            defaultThis.defaultFiltersValues['branchId']=item;
+          }
+        })
+      }
+    }
+
+
 
   }
   async getDepartments(branchId,defaultThis=this){
+
     const params = {
-      'country_id'  : defaultThis.locationFilters.countryId,
-      'line_manager_id' : defaultThis.appLocalStorage.getUserId()
+      'country_id'  : defaultThis.locationFilters?.countryId,
+      'line_manager_id' : await defaultThis.appLocalStorage.getLineManagerId()
     }
     if(defaultThis.defaultValues && defaultThis.defaultValues['country_id'] && defaultThis.defaultValues['country_id'] !=null){
       params.country_id = defaultThis.defaultValues['country_id'];
     }
+
+
+    if(defaultThis.isLineManager){
+      const lmDetails = await defaultThis.appLocalStorage.getLineManagerDetails();
+      if(lmDetails && lmDetails['country_id']){
+        params.country_id = lmDetails['country_id'];
+      }
+    }
+
+
+
     const data = await defaultThis.dataService.getDepartment(params);
     if(!data["status"]) return; //possible show error
     const array = data["data"];
@@ -424,6 +567,18 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
           defaultThis.defaultFiltersValues['departmentId']=item;
         }
       })
+    }
+
+    if(defaultThis.isLineManager){
+      const lmDetails = await defaultThis.appLocalStorage.getLineManagerDetails();
+      if(lmDetails && lmDetails['department_id']){
+        defaultThis.departmentArray.forEach(item =>{
+          console.log('everyLoop' , item);
+          if(item.id == lmDetails['department_id']){
+            defaultThis.defaultFiltersValues['departmentId']=item;
+          }
+        })
+      }
     }
 
 

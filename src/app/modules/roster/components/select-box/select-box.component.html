@@ -15,8 +15,8 @@
 
 
     <div  class="select-selected light-border" [class.agt-disabled-select-selected]="disabled" (click)="toggleDropdown()" #mainContainer>
-      <span class="overflow-text-hidden">{{selectedValue}}</span>
-      <span *ngIf="selectedValue !='' && multiSelect && !hideLabel" class="data-tooltip">{{previousSelectionArray.length}}</span>
+      <span class="overflow-text-hidden" [class.agt-disabled]="disabled">{{selectedValue}}</span>
+      <span *ngIf="selectedValue !='' && multiSelect && !hideLabel" [class.agt-disabled]="disabled" class="data-tooltip">{{previousSelectionArray.length}}</span>
     </div>
     <!-- <app-error-msg [form]="form" [control]="control"></app-error-msg> -->
     <div class="select-items select-hide" id="custom-select" #dropdownList>

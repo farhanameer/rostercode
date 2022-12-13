@@ -17,6 +17,7 @@ export class EmployeeShiftListComponent implements OnInit, OnChanges {
   @Input() show:boolean = false;
   @Input() employees : any;
   @Input() date : any;
+  @Input() color : any;
   searchedValue;
   masterArray = [];
   

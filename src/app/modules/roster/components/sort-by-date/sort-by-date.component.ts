@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { forEachChild } from 'typescript';
+import { ColorService } from '../../services/colorToRgba.service';
 import { RosterService } from '../../services/data/rosterView.data.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class SortByDateComponent implements OnInit, OnChanges {
   constructor(
     public activeModal: NgbActiveModal,
     private dataService: RosterService,
-    private appLocalStorage: AppLocalStorageService
+    private appLocalStorage: AppLocalStorageService , 
+    private colorService : ColorService
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
     console.log("Sort By Date",this.searchedValue);
@@ -101,13 +103,16 @@ export class SortByDateComponent implements OnInit, OnChanges {
       };
 
       singleData.shifts.forEach((singleShift) => {
+        singleShift.employees.forEach(emp =>{
+          emp.shift_color = singleShift.color;
+          emp.bgColor = this.colorService.hexToRgbA(`${singleShift.color}` , 0.5);
+        });
         employeeArray = [...employeeArray, ...singleShift.employees];
       });
 
       obj.employees = employeeArray;
       this.data.push(obj);
     });
-
     console.log('loopAble Data', this.data);
   }
 }

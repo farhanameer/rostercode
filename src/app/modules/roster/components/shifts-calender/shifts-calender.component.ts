@@ -116,6 +116,10 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
 
   async getLMRosterView(params){
 
+    const lineManagerId = await this.appLocalStorage.getLineManagerId();
+
+    params["reporting_to_id"] = lineManagerId;
+
     if(this.filters) {
       if(this.filters["employeeType"] !=undefined) {
         params['is_roster_employees'] = this.filters["employeeType"]
@@ -425,11 +429,12 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
   show:boolean = false;
   employees : any = [];
   date : any;
+  shiftColor : any = ''
 
   onEvent(event, date = null , shifts , isSingle = false) {
     event.stopPropagation();
 
-    
+    this.shiftColor = shifts.color;
     console.log(shifts);
     this.employees = [];
     if(isSingle){
