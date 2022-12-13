@@ -5,14 +5,14 @@
         <form action="" class="flex space-between w-100">
           <div class="left-col">
             <label for="radio1">
-              <input type="radio" (click)="view = 'date'" />Sort by Date</label
+              <input type="radio" value="date" (change)="view = 'date'" />Sort by Date</label
             >
             <label for="radio1">
-              <input type="radio" (click)="view = 'employee'" />Sort by
+              <input type="radio" value="employee" (change)="view = 'employee'" />Sort by
               Employee</label
             >
             <label for="radio1">
-              <input type="radio" (click)="view = 'default'" />Default
+              <input type="radio" value="default" (change)="view = 'default'" />Default
               View</label
             >
           </div>

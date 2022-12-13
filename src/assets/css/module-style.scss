@@ -19,6 +19,7 @@
 @import "ag-styles/popup.scss";
 @import "ag-styles/shift-setup.scss";
 @import "ag-styles/calendar-02.scss";
+@import "ag-styles/ats.scss";
 
 .custom-cdk-input {
   // 3532 - 3553
@@ -1490,4 +1491,5 @@
   border: none;
   max-width: fit-content !important;
   align-items: center;
+  width: fit-content;
 }
