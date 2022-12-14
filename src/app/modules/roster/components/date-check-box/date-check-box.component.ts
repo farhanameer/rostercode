@@ -79,6 +79,7 @@ open(employees , isSingle = false){
 
 
   async getLMRosterView(params) {
+    params["reporting_to_id"] = await this.appLocalStorage.getLineManagerId();
     this.data = [];
     if(this.modelData.filters) {
       if(this.modelData.filters["employeeType"] !=undefined) {

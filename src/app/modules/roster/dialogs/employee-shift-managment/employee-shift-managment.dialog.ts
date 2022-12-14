@@ -20,6 +20,7 @@ view:string="weekend";
 // weekend:string;
 submitted : boolean = false;
 single: boolean = false;
+shiftsArray = [];
 
   constructor(public activeModal: NgbActiveModal ,private customModal:ModalService ) { }
 
@@ -28,6 +29,7 @@ single: boolean = false;
     if(this.modelData.dateRagne.start == this.modelData.dateRagne.end){
       this.single = false;
     }
+    this.shiftsArray = this.modelData.dateRagne.shifts;
   }
 
   openChangeShift() {

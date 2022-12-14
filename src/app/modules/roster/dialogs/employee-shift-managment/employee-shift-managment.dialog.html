@@ -75,17 +75,17 @@
 
     <div class="modal-custom-footer">
       <ul class="shift-hints" style="display: flex; gap: 20px">
-        <li>
-          <span class="custom-hw-10"></span> Morning Shift (07:00 - 14:00)
+        <li *ngFor="let shift of shiftsArray" >
+          <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} (07:00 - 14:00)
         </li>
-        <li>
+        <!-- <li>
           <span class="evening-shift custom-hw-10"></span> Evening Shift (14:00
           - 00:00)
         </li>
         <li>
           <span class="night-shift custom-hw-10"></span> Night Shift (20:00 -
           05:00)
-        </li>
+        </li> -->
       </ul>
 
       <div class="modal-footer-button flex">

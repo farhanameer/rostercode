@@ -32,6 +32,11 @@ export class RosterCplComponent implements OnInit {
   onClick(object){
     console.log(object);
   }
+  loopAbleShifts;
+  getNewShifts(shifts){
+    this.loopAbleShifts = shifts;
+    console.log('event catched',shifts);
+  }
   selectionChanged(selection){
 
 
