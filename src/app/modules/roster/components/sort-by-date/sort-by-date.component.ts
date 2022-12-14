@@ -63,7 +63,7 @@ export class SortByDateComponent implements OnInit, OnChanges {
   }
 
   async getLMRosterView(params) {
-
+    params['reporting_to_id'] = await this.appLocalStorage.getLineManagerId();
     let body = params;
     if(this.dates.filters) {
       if(this.dates.filters["employeeType"] !=undefined) {

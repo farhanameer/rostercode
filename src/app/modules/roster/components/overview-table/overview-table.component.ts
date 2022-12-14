@@ -60,12 +60,12 @@ export class OverviewTableComponent implements OnInit, OnChanges {
   async getListCplAndOvertime() {
     const data = await (this.dataService.listCplAndOvertime({
       "client_id" :this.appLocalStorage.getClientId(), 
-       "linemanager_id" : this.appLocalStorage.getUserId(),
+       "linemanager_id" :await this.appLocalStorage.getLineManagerId(),
       "is_roster_emp" : 1   
   }) as Promise<
       PromiseAble<APIType<CplAndOvertime>>
     >);
-    if (Array.isArray(data.data.payload)) {
+    if (data.data && Array.isArray(data.data.payload)) {
       this.cplEmployees = data.data.payload;
       this.masterArray = [...this.cplEmployees];
     }

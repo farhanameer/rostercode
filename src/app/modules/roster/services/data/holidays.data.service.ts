@@ -188,7 +188,6 @@ export class HolidayDataService {
               this.toastService.toast(data['payload'], 'success-toast');
             }
             resolve(response);
-            console.log('abhi responce aye ga na BEru', response);
           },
           (err) => {
             response.message = err.error.error;

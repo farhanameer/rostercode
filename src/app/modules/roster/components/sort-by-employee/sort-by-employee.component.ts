@@ -67,6 +67,7 @@ export class SortByEmployeeComponent implements OnInit, OnChanges {
 
   data = [];
   async getLMRosterView(params) {
+    params["reporting_to_id"] = await this.appLocalStorage.getLineManagerId();
     if(this.dates.filters) {
       if(this.dates.filters["employeeType"] !=undefined) {
         params['is_roster_employees'] = this.dates.filters["employeeType"]

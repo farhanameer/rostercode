@@ -78,28 +78,31 @@
                 ></app-input-box>
               </div>
               <div class="height-fixed">
-                <app-overview-table [search]="searchValue"></app-overview-table>
+                <app-overview-table [search]="searchValue"
+                
+                ></app-overview-table>
               </div>
             </app-sub-layout>
           </div>
           <app-shifts-calender
             class="w-100"
             [filters]="filters"
+            (shifts)="getNewShifts($event)"
           ></app-shifts-calender>
         </div>
         <div class="calendar-footer">
           <ul class="shift-hints">
-            <li>
-              <span class="custom-hw-10"></span> Morning Shift (07:00 - 14:00)
+            <li *ngFor="let shift of loopAbleShifts">
+              <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} (07:00 - 14:00)
             </li>
-            <li>
+            <!-- <li>
               <span class="evening-shift custom-hw-10"></span> Evening Shift
               (14:00 - 00:00)
             </li>
             <li>
               <span class="night-shift custom-hw-10"></span> Night Shift (20:00
               - 05:00)
-            </li>
+            </li> -->
           </ul>
 
           <ul class="shift-tags">

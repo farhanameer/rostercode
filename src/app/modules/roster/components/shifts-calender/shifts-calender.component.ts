@@ -1,7 +1,7 @@
 import { Employee } from 'src/app/shared/models/employee.model';
 import { RosterService } from './../../services/data/rosterView.data.service';
 import  moment  from 'moment';
-import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges,EventEmitter } from '@angular/core';
 import { CalendarService } from '../../services/calander.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { ShiftManagmentDialog } from '../../dialogs/shift-managment/shift-managment.dialog';
@@ -21,6 +21,9 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
   year_month = '';
   weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   @Input() filters : any = null;
+  shiftsArray: any;
+  @Output() shifts = new EventEmitter();
+  @Output() date = new EventEmitter();
 
   constructor(private calendar: CalendarService, private dataService: RosterService,
     private customModal: ModalService, private appLocalStorage: AppLocalStorageService ) { }
@@ -142,11 +145,26 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
     
     this.lmRosterViewArray = data["data"]["payload"];
 
+
+
     if(!Array.isArray(this.lmRosterViewArray)){
       this.lmRosterViewArray = [];
     }
+    let shifts = [];
+    let hashMap = {};
+    this.lmRosterViewArray.forEach((lm:any)=>{
+      lm.shifts.forEach(sh=>{
+        if(!hashMap[sh.id]){
+          shifts.push(sh);
+          hashMap[sh.id] = sh.id;
+        }
+      })
+    });
+    this.shiftsArray = shifts;
+    this.shifts.emit(this.shiftsArray);
     this.reshapedData = this.reshapeData(this.currentMonthDates);
     console.log('reshaped data',this.reshapedData);
+    console.log('shifts' , this.shiftsArray);
   }
 
   calendarArray : any = [];
@@ -206,6 +224,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
     }
 
     this.year_month = moment(this.currentDate).format('YYYY')+'-'+moment(this.currentDate).format('MM');
+    this.date.emit(this.year_month);
     this.currentMonthDates = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), moment(this.currentDate).format('MMM'), this.weekDays);
     this.getLMRosterView({
       "client_id" :this.appLocalStorage.getClientId(),

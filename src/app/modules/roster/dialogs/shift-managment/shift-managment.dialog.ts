@@ -15,7 +15,7 @@ export class ShiftManagmentDialog implements OnInit {
   view:string="date";
   single: boolean = false;
   searchedValue;
-
+  shiftsArray = [];
 
 
   constructor(public activeModal: NgbActiveModal,
@@ -27,6 +27,7 @@ export class ShiftManagmentDialog implements OnInit {
     if(this.dates.dateRagne.start == this.dates.dateRagne.end){
       this.single = true;
     }
+    this.shiftsArray = this.dates.dateRagne.shifts
 
   }
   open(){

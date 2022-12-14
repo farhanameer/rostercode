@@ -148,7 +148,7 @@ export class ShiftRequestByLmComponent implements OnInit {
     const body = {
       "screen_role": "lm",
       "client_id" : this.appLocalStorage.getClientId(),
-      "line_manager_id" : this.appLocalStorage.getUserId(),
+      "line_manager_id" :await this.appLocalStorage.getLineManagerId(),
       "shift_type_id": this.shiftRequestLMform.value.shift_id,
       "name": this.shiftRequestLMform.value.shift_name,
       "time_in": this.shiftRequestLMform.value.start_date,

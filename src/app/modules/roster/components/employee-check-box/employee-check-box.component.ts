@@ -80,6 +80,7 @@ export class EmployeeCheckBoxComponent implements OnInit, OnChanges {
 
   data = [];
   async getLMRosterView(params) {
+    params["reporting_to_id"] = await this.appLocalStorage.getLineManagerId();
     if(this.modelData.filters) {
       if(this.modelData.filters["employeeType"] !=undefined) {
         params['is_roster_employees'] = this.modelData.filters["employeeType"]
