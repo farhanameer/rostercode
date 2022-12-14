@@ -20,7 +20,9 @@
     <!-- users list -->
     <div class="dd-list height-custom">
       <ul>
-        <app-employee-card *ngFor="let emp of employees">
+        <app-employee-card *ngFor="let emp of employees"
+        (click)="openEmployeeAttendence()"
+        >
           <li class="height-28">
             <div class="user-img">
               <div class="img-icon">

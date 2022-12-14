@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { EmployeeAttendanceForm } from 'src/app/shared/form/employee-attendance.form';
 import { AvaliableShiftDialog } from '../../dialogs/avaliable-shift/avaliable-shift.dialog';
 import { CalenderSetupComponent } from '../../dialogs/calender-setup/calender-setup.component';
 import { DisclaimerDialog } from '../../dialogs/disclaimer/disclaimer.dialog';
@@ -51,5 +52,6 @@ export class FileUploadComponent implements OnInit , OnChanges {
     const result = await this.shiftAlocation.createShiftFile(this.file);
     console.log(result);
   }
+ 
   
 }
