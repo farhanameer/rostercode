@@ -23,7 +23,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
   @Input() filters : any = null;
   shiftsArray: any;
   @Output() shifts = new EventEmitter();
-  @Output() date = new EventEmitter();
+  @Output() dateChange = new EventEmitter();
 
   constructor(private calendar: CalendarService, private dataService: RosterService,
     private customModal: ModalService, private appLocalStorage: AppLocalStorageService ) { }
@@ -224,7 +224,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
     }
 
     this.year_month = moment(this.currentDate).format('YYYY')+'-'+moment(this.currentDate).format('MM');
-    this.date.emit(this.year_month);
+    this.dateChange.emit(this.year_month);
     this.currentMonthDates = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), moment(this.currentDate).format('MMM'), this.weekDays);
     this.getLMRosterView({
       "client_id" :this.appLocalStorage.getClientId(),

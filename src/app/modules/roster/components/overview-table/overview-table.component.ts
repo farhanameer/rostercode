@@ -12,6 +12,7 @@ import { OvertimeAdjustmentDialog } from '../../dialogs/overtime-adjustment/over
 import { OvertimeHoursAdjusmentDialog } from '../../dialogs/overtime-hours-adjusment/overtime-hours-adjusment.dialog';
 import { EmployeeShiftDataService } from '../../services/data/dropdown.data';
 import { THRESHOLD_DIFF } from '@progress/kendo-angular-popup/dist/es2015/services/scrollable.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-overview-table',
@@ -23,6 +24,7 @@ export class OverviewTableComponent implements OnInit, OnChanges {
   cplEmployees: CplAndOvertime[];
   employeeShift = [];
   @Input() search;
+  @Input() date;
   constructor(
     private dataService: RosterService,
     private customModal: ModalService,
@@ -41,7 +43,9 @@ export class OverviewTableComponent implements OnInit, OnChanges {
     this.cplEmployees = restul.searchedArray;
 
   }
-
+  //this.year_month = moment(this.currentDate).format('YYYY')+'-'+moment(this.currentDate).format('MM');
+  year_month;
+  currentDate;
   ngOnInit(): void {
     this.getListCplAndOvertime();
   }
