@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppLocalStorageService } from '../../../../services/app-local-storage.service';
 import { HttpEmployeeShift } from '../http/http.dropdown';
+import { RosterToastService } from '../roster.toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,8 @@ import { HttpEmployeeShift } from '../http/http.dropdown';
 export class EmployeeShiftDataService {
   constructor(
     private httpService: HttpEmployeeShift,
-    private appLocalStorage: AppLocalStorageService
+    private appLocalStorage: AppLocalStorageService,
+    private toastService: RosterToastService
   ) {}
 
   getEmployeeShift(params) {
@@ -23,16 +25,25 @@ export class EmployeeShiftDataService {
             response.data = data['payload'];
             response.message = 'success';
             response.status = true;
+            if (
+              data['payload'] &&
+              !Array.isArray(data['payload']) &&
+              typeof data['payload'] == 'string'
+            ) {
+              this.toastService.toast(data['payload'], 'success-toast');
+            }
             resolve(response);
             console.log(response);
           },
           (err) => {
             response.message = err;
+            this.toastService.toast(err.error.error, 'error-toast');
             resolve(response);
           }
         );
       } catch (error) {
         response.message = error;
+        this.toastService.toast(error, 'error-toast');
         resolve(response);
       }
     });

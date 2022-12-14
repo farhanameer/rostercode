@@ -1,15 +1,183 @@
-.module-style {
-    .cus-m-0 {
-      margin: 0 !important;
-    }
-  
-    .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-      padding: 0px !important;
-    }
-  
-    input.search-input::placeholder {
-      color: green !important;
-      font-size: 5px !important;
-    }
+.agt-module {
+
+  .required > .label , .required > .select-selected {
+    color: #F44437;
+    border-color: #F44437;
   }
+  .required > .select-selected:after{
+    border-color: #F44437 transparent transparent transparent;
+  }
+  .select-wrapper {
+    position: relative;
+    font-family: Arial;
+  }
+  .text-error{
+    color : #F44437
+  }
+
+  .label{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // max-width: 90px;
+    max-width: calc(100% - 12px);
+    padding-right: 15px;
+  }
+
+
+  .w-h-260{
+    width: 260px;
+    height: 26px;
+  }
+  .select-wrapper select {
+    display: none; /*hide original SELECT element:*/
+  }
+
+  .select-selected {
+    background-color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /*style the arrow inside the select element:*/
+  .select-selected:after {
+    background-color: white;
+    position: absolute;
+    content: "";
+    top: 12px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 4px solid transparent;
+    border-color: black transparent transparent transparent;
+  }
+
+  /*point the arrow upwards when the select box is open (active):*/
+  .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+  }
+
+
+
   
+
+  .mat-option:nth-child(odd) {
+    background: #fafafb;
+  }
+
+
+  .mat-option:nth-child(2n) {
+    background: #fff;
+}
+
+  .hover {
+    background: #d8dcdf;
+
+  }
+
+  .inner_options_text {
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+  }
+
+
+
+
+  /*style the items (options), including the selected item:*/
+  .select-items > div,
+  .select-selected {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    color: #3080EA;
+    font-size: 11px;
+
+    // font-family: Roboto,sans-serif;
+    // font-weight: 400;
+    // font-size: 11px;
+
+    font: normal normal normal 11px/13px Roboto;
+  }
+
+  .select-selected{
+    color: #343434;
+  }
+
+  .light-border {
+    border: 1px solid #D8DCDF;
+    border-radius: 4px;
+  }
+
+  /*style items (options):*/
+  .select-items {
+    position: absolute;
+    background-color: #fff;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.16)!important;
+    max-height: 302px;
+    overflow-y: auto;
+  }
+
+  .label_up{
+    transform: translateY(-15px);
+  }
+  .select-items > div {
+    color: #343434!important;
+  }
+
+  /*hide the items when the select box is closed:*/
+  .select-hide {
+    display: none;
+  }
+
+  .select-items > div:hover,
+  .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .agt-disabled-select-selected:after{
+    border-color: #D8DCDF transparent transparent transparent !important;
+  }
+
+  .carret_position_9::after{
+    top: 9px;
+  }
+  .padding-top-3{
+    padding-top: 3.4px;
+    padding-bottom: 3.4px;
+  }
+
+  .data-tooltip{
+    margin-right: 19px;
+    background: #61bf63;
+    color: white;
+    height: 14px;
+    /* padding: 6px 6px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 14px;
+  }
+  .overflow-text-hidden{
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+
+}

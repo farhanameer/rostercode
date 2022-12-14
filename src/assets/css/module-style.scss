@@ -19,8 +19,35 @@
 @import "ag-styles/popup.scss";
 @import "ag-styles/shift-setup.scss";
 @import "ag-styles/calendar-02.scss";
-@import "ag-styles/ats.scss";
+@import "ag-styles/comp-wrapper.scss";
+@import "ag-styles/shift-dropdown.scss";
+@import "ag-styles/drag-drop.scss";
 
+
+
+::-webkit-scrollbar {
+  width: auto !important;
+  position: inherit !important;
+}
+::-webkit-scrollbar-thumb {
+  background:inherit !important;
+
+}
+::-webkit-scrollbar-track{
+  box-shadow: none;
+  border-radius: 6px;
+  background-color: #f1f1f1;
+  position: fixed !important;
+}
+
+.disabled-btn-forms{
+  background: transparent linear-gradient(180deg,#ededed,#fafafa) 0 0 no-repeat padding-box;
+  color: #cfcfcf;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  opacity: 1;
+  cursor: not-allowed;
+}
 .custom-cdk-input {
   // 3532 - 3553
   .mat-select-panel-wrap {
@@ -1487,6 +1514,7 @@
   font-size: 50px;
 }
 .ag-modal .modal-content {
+  margin: auto;
   background-color: transparent;
   border: none;
   max-width: fit-content !important;

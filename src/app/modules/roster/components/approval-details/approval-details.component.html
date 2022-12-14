@@ -1,0 +1,61 @@
+<app-sub-layout>
+  <div class="shift-card-wrapper">
+    <div class="shift-header">Approval Details</div>
+    <div class="shift-card">
+      <div class="form-col no-wrap">
+        <div>
+          <app-input-box
+            [color]="'black'"
+            [label]="'LM Status'"
+            [form]="form"
+            [control]="'lm_request'"
+          ></app-input-box>
+        </div>
+        <div>
+          <app-input-box
+            [width]="'558px'"
+            [label]="'LM Comments'"
+            [color]="'black'"
+            [form]="form"
+            [control]="'lm_comment'"
+          ></app-input-box>
+        </div>
+        <div>
+          <app-input-box 
+            [color]="'black'" 
+            [label]="'Dated'"
+            [form]="form"
+            [control]="'lm_date'"></app-input-box>
+        </div>
+      </div>
+      <div class="form-col no-wrap">
+        <div>
+          <app-input-box
+            [color]="'black'"
+            [label]="'HR Status'"
+            [form]="form"
+            [control]="'hr_status'"
+          ></app-input-box>
+        </div>
+        <div>
+          <app-input-box
+            [width]="'558px'"
+            [label]="'HR Comments'"
+            [form]="form"
+            [control]="'hr_comment'"
+          ></app-input-box>
+        </div>
+        <div>
+          <app-input-box 
+            [color]="'black'" 
+            [label]="'Dated'"
+            [form]="form"
+            [control]="'hr_date'"
+          ></app-input-box>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-sub-layout>
+
+<!-- checvk -->

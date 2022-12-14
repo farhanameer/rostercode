@@ -1,2 +1,53 @@
-<h1>File Upload</h1>
-<app-upload-files-box></app-upload-files-box>
+<div class="wrapper h-25">
+  <div class="container">
+    <app-full-layout>
+      <div>
+        <div>
+          <div class="table-header gradient-head flex justify-content-between">
+            <div class="heading">Upload</div>
+            <div class="btn-options flex align-content-center"></div>
+          </div>
+        </div>
+        <div class="shift-setup">
+          <app-sub-layout>
+            <div class="shift-card">
+              <div class="form-col p-20">
+                <input
+                  type="file"
+                  class="d-none"
+                  (change)="fileChange($event.target)"
+                  #fileUpload
+                />
+                <div class="file-upload-field" (click)="fileUpload.click()">
+                  <label>Attachment</label>
+                  <i class="bi bi-paperclip"></i>
+                </div>
+                <div class="download-attachement">
+                  <p class="label text-primary">Downlaod Template</p>
+                </div>
+              </div>
+            </div>
+          </app-sub-layout>
+
+          <!-- <div class="shift-setup-footer"></div> -->
+        </div>
+      </div>
+    </app-full-layout>
+    <div class="calendar-footer">
+      <ul class="shift-hints " >
+        
+        <li (click)="openAvaliable()" class="text-primary">Avaliable shifts</li>
+        <li class="text-success">WO:Weekend</li>
+        <li class="text-primary">GH:Gazetted Holiday</li>
+        <li class="text-danger">CPL:Componsatory Leave</li>
+        <li (click)="open()" class="text-success">OFF:leave</li>
+      </ul>
+
+      <div class="modal-footer-button flex">
+        <input 
+          type="button" 
+          class="btn-input" value="Upload" [class.disabled-btn-forms]="!file" [disabled]="!file" (click)="uploadFile()" />
+      </div>
+    </div>
+  </div>
+</div>

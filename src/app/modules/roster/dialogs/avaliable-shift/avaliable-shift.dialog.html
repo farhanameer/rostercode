@@ -1,60 +1,41 @@
-<div class="wrapper">
-  <div class="container">
-    <div class="header-menu"></div>
-
-    <div class="modal-custom">
-      <div class="gradient-head flex justify-content-between">
-        <div class="heading">All Modal Titles</div>
-        <div class="btn-options flex align-content-center">
-          <a href="#"><img src="icons/ico-close.svg" alt="" /></a>
-        </div>
-      </div>
-      <!-- Body -->
-      <div class="modal-custom-body">
-        <div class="table-custom-header">
-          <div><span>Name:</span> Hisham Talib Qureshi</div>
-
-          <div><span>Name:</span> Hisham Talib Qureshi</div>
-        </div>
-        <table class="table table-modal">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Already Allocated Shift</th>
-              <th>Allocate Shift</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><app-select-box></app-select-box></td>
-              <td>Morning</td>
-              <td><app-select-box></app-select-box></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- footer -->
-
-      <div class="modal-custom-footer">
-        <div class="clues">
-          <span>
-            <i><img src="icons/icon-cpl.svg" alt="" /></i> CPL Due</span
-          >
-          <span>
-            <i><img src="icons/icon-minus.svg" alt="" /> Absents</i>
-          </span>
-        </div>
-
-        <div class="modal-footer-button flex">
-          <input type="button" class="btn-input" value="Submit" />
-          <input type="button" class="btn-input" value="Cancel" />
-        </div>
+<div class="modal-custom custom-avaliable-width bg-white">
+  <app-dialog-layout>
+    <div class="gradient-head flex justify-content-between">
+      <div class="heading">Avaliable Shifts</div>
+      <div class="btn-options flex align-content-center">
+        <a (click)="activeModal.close('Close click')"
+          ><img src="assets/icons/ico-close.svg" alt=""
+        /></a>
       </div>
     </div>
+    <!-- Body -->
+    <div class="modal-custom-body p-0">
+      <div class="row m-0 custom-pd">
+        <div class="Custom-color-orange c-align"></div>
+        <p class="ml-2">Morning Shift</p>
 
-    <!-- Modal list -->
-  </div>
+        <div class="col ml-3"><p class="ml-4">21:00-05:00</p></div>
+      </div>
+      <div class="row m-0 custom-pd custom-b">
+        <div class="Custom-color-pink c-align"></div>
+        <p class="ml-2">Evening Shift</p>
+
+        <div class="col ml-3"><p class="ml-4">21:00-05:00</p></div>
+      </div>
+      <div class="row m-0 custom-pd">
+        <div class="Custom-color-purple c-align"></div>
+        <p class="ml-2">Night Shift</p>
+        &nbsp;
+
+        <div class="col ml-5"><p class="ml-1">21:00-05:00</p></div>
+      </div>
+    </div>
+    <!-- footer -->
+
+    <div class="modal-custom-footer"></div>
+  </app-dialog-layout>
 </div>
+
+<!-- Modal list -->
 
 <!-- second -->

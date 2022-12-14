@@ -4,7 +4,7 @@
       <ul>
         <li class="heading-date">{{ date.date }}</li>
         <app-employee-card *ngFor="let employee of date.employees">
-          <li>
+          <li [ngStyle]="{'border-color' : employee.shift_color , 'background-color' : employee.bgColor}">
             <div class="user-img">
               <img src="assets/images/img-dummy.png" alt="" />
             </div>

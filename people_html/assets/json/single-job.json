@@ -1,0 +1,33 @@
+
+    { 
+      "id": 0,
+      "designation": "Principal UI/UX Designer",
+      "stageName": "Applied/Suggested",
+      "isPublished": true,
+      "jobClient": "People",
+      "jobLocation": "Karachi, Pakistan",
+      "salaryRange": "100,000 - 175,000",
+      "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+      "isActive": true,
+      "tags" : [
+        {
+            "id" : 12,
+            "tageName" : "jsksjdf" , 
+            "color" : "#555ccffc"
+        }
+      ],
+      "status" : {
+        "hired" : {
+            "count" : 23,
+            "color" : "green"
+        },
+        "in-pipeline" : {
+            "count" : 7,
+            "color" : "yellow"
+        },
+        "dropped" : {
+            "count" : 14,
+            "color" : "pink"
+        }
+      }
+    }

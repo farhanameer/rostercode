@@ -1,161 +1,28 @@
 <div class="shift-management-wrapper pt-0">
   <div class="shift-management-list">
-    <app-main-card>
+    <app-main-card *ngFor="let entry of data">
       <ul>
-        <div class="row">
-          <div class="col" style="flex-grow: 0">
-            <input type="checkbox" (click)="open()" />
+        <div class="row m-0">
+          <div class="col p-0 d-flex" style="flex-grow: 0; align-items: center;">
+            <input type="checkbox" (click)="open(entry.employees)" checked = true/>
           </div>
-          <div class="col"><li class="heading-date">01 Nov 2021</li></div>
+          <div class="col p-0">
+            <li class="heading-date pl-2">{{ entry.date }}</li>
+          </div>
         </div>
-        <app-employee-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
+        <app-employee-card *ngFor="let employee of entry.employees">
+          <div class="row custom-w-260">
+            <div class="col d-flex pl-20" style="align-items: center;">
+              <input type="checkbox" (click)="open(employee , true)" checked = true/>
             </div>
-            <div class="col">
-              <li>
+
+            <div class="col custom-pl-6">
+              <li class="custom-w-210">
                 <div class="user-img">
                   <img src="assets/images/img-dummy.png" alt="" />
                 </div>
                 <div class="employee-detail">
-                  <div class="heading-lg">Natalya Neidhart</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-employee-card>
-        <app-employee-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <img src="assets/images/img-dummy.png" alt="" />
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">Natalya Neidhart</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-employee-card>
-        <app-employee-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <img src="assets/images/img-dummy.png" alt="" />
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">Natalya Neidhart</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-employee-card>
-        <app-employee-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <img src="assets/images/img-dummy.png" alt="" />
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">Natalya Neidhart</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-employee-card>
-      </ul>
-    </app-main-card>
-    <app-main-card>
-      <ul>
-        <div class="row">
-          <div class="col" style="flex-grow: 0">
-            <input type="checkbox" (click)="open()" />
-          </div>
-          <div class="col"><li class="heading-date">01 Nov 2021</li></div>
-        </div>
-        <app-employee-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <img src="assets/images/img-dummy.png" alt="" />
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">Natalya Neidhart</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-employee-card>
-        <app-employee-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <img src="assets/images/img-dummy.png" alt="" />
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">Natalya Neidhart</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-employee-card>
-        <app-employee-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <img src="assets/images/img-dummy.png" alt="" />
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">Natalya Neidhart</div>
-                  <img src="assets/icons/ico-present-02.svg" alt="" />
-                </div>
-              </li>
-            </div>
-          </div>
-        </app-employee-card>
-        <app-employee-card>
-          <div class="row">
-            <div class="col" style="flex-grow: 0">
-              <input type="checkbox" (click)="open()" />
-            </div>
-            <div class="col">
-              <li>
-                <div class="user-img">
-                  <img src="assets/images/img-dummy.png" alt="" />
-                </div>
-                <div class="employee-detail">
-                  <div class="heading-lg">Natalya Neidhart</div>
+                  <div class="heading-lg">{{ employee.emp_name }}</div>
                   <img src="assets/icons/ico-present-02.svg" alt="" />
                 </div>
               </li>

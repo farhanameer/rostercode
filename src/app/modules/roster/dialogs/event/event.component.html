@@ -1,0 +1,81 @@
+<div class="modal-custom bg-white custom-w-596">
+  <app-dialog-layout>
+    <form [formGroup]="eventForm" (submit)="submit(eventForm.value)">
+      <div class="gradient-head flex justify-content-between">
+        <div class="heading">Event</div>
+        <div class="btn-options flex align-content-center">
+          <a (click)="activeModal.close('Close click')"
+            ><img src="assets/icons/ico-close.svg" alt=""
+          /></a>
+        </div>
+      </div>
+      <!-- Body -->
+
+      <div class="overtime-form p-20 px-0">
+        <div class="row m-0">
+          <div class="col p-0">
+            <app-select-box
+              [form]="eventForm"
+              [control]="'hdesc'"
+              [label]="'Name'"
+              [width]="'100%'"
+              [data]="eventArray"
+              (selectionChange)="selectionChanged($event)"
+            ></app-select-box>
+          </div>
+        </div>
+
+        <div class="row m-0 pt-15">
+          <div class="pr-36">
+            <app-date-box
+              [form]="eventForm"
+              [control]="'start_date'"
+              [label]="'From Date'"
+            ></app-date-box>
+          </div>
+          <div class="">
+            <app-date-box
+              [form]="eventForm"
+              [control]="'end_date'"
+              [label]="'To Date'"
+            ></app-date-box>
+          </div>
+        </div>
+      </div>
+
+      <!-- footer -->
+
+      <div class="modal-custom-footer">
+        <div class="clues">
+          <span> </span>
+          <span> </span>
+        </div>
+
+        <div class="modal-footer-button flex">
+          <input
+            *ngIf="!isUpdating"
+            type="submit"
+            class="btn-input"
+            [disabled]="eventForm.invalid"
+            [class.disabled-btn-forms]="eventForm.invalid"
+            value="Submit"
+          />
+          <input
+            *ngIf="isUpdating"
+            type="submit"
+            class="btn-input"
+            [disabled]="eventForm.invalid"
+            [class.disabled-btn-forms]="eventForm.invalid"
+            value="Update"
+          />
+          <input
+            type="button"
+            class="btn-input"
+            value="Cancel"
+            (click)="activeModal.close('Close click')"
+          />
+        </div>
+      </div>
+    </form>
+  </app-dialog-layout>
+</div>

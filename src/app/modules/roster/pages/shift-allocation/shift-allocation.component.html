@@ -1,11 +1,138 @@
-<div>
-  <div>
-    <app-employee-shift-alloction></app-employee-shift-alloction>
+<div class="minimum">
+  <div class="toggleable">
+    <div>
+      <app-employee-shift-alloction [form]="shiftAllocationForm" 
+      (filterSelection)="filtersChanged($event)"
+      [shifts]="copiedShiftsArray"
+      (selectedShift)="shiftSelected($event)"
+      [resetFilters]="reset"
+      >
+      </app-employee-shift-alloction>
+    </div>
+    <!-- upload component -->
+    <div>
+      <app-file-upload></app-file-upload>
+    </div>
+    <!-- *** Set shifts -->
+    <div class="wrapper h-25">
+      <div class="container">
+        <app-full-layout>
+          <div>
+            <div>
+              <div>
+                <div
+                  class="table-header gradient-head flex justify-content-between"
+                >
+                  <div class="heading">Set Weekend</div>
+                  <div class="btn-options flex align-content-center"></div>
+                </div>
+              </div>
+            </div>
+            <div class="shift-setup p-20">
+              <app-sub-layout>
+                <div class="job-cards-wrapper job-cards-drag">
+                  <ul class="job-cards-column" cdkDropListGroup>
+                    <li class="can example-container">
+                      <app-board-card>
+                        <div class="header">
+                          <div class="flex space-between w-100">
+                            <div class="title-column">
+                              Employees
+                              <div class="filter">
+                                <span class="arrow is-triangle is-top"></span>
+                                <span class="arrow is-triangle is-bottom"></span>
+                              </div>
+                            </div>
+    
+                            <div class="right-menu">
+                              <div class="label">{{employees.length}}</div>
+                              <div class="vertical-menu">
+                                <div class="dropdown-vertical">
+                                  <!-- three dots -->
+                                  <ul
+                                    class="dropbtn icons showLeft btn-right"
+                                    onclick="showDropdown()"
+                                  >
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                  </ul>
+                                  <!-- menu -->
+                                  <div id="myDropdown" class="dropdown-content">
+                                    <a href="#home">Open</a>
+                                    <a href="#about">Edit</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="search-row">
+                            <form action="" class="flex space-between w-100">
+                              <label for="select">
+                                <input type="checkbox" name="select" id="select" />
+                                Select All</label
+                              >
+                              <app-input-box 
+                                [width]="'105px'" 
+                                [height]="'20px'"
+                                (inputChanged)="search($event)">
+                              </app-input-box>
+                              
+                            </form>
+                          </div>
+                        </div>
+                        <div class="list example-list" cdkDropList
+                        [cdkDropListData]="employees"
+                        (cdkDropListDropped)="drop($event)">
+                          <div class="example-box" *ngFor="let emp of employees" cdkDrag>
+                            <app-employee-card class="w-100">
+                              <div class="JobCard">
+                                <div class="vh-center">
+                                  <input type="checkbox" />
+                                  <span class="logo-vendor"
+                                    ><img src="assets/icons/pic2.png" alt=""
+                                  /></span>
+                                </div>
+                                <div class="content">
+                                  <div class="card-description">
+                                    <div class="job-card-title">{{emp.name}}</div>
+                                    <div class="card-title-vendor">#{{emp.empcode}}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </app-employee-card>
+                          </div>
+                          
+                        </div>
+                      </app-board-card>
+                      <!-- Job list -->
+                      <!-- Job list - END -->
+                    </li>
+                    <!-- Card List Panel-->
+                    <li class="can example-container" *ngFor="let shift of shiftsArray" [ngStyle]="{'border-top-color' : shift.color}">
+                      <app-drag-drop
+                      [shift]="shift"
+                      (changed)="employeeChange($event)"
+                      ></app-drag-drop>
+                    </li>
+                    <!-- END-->
+                  </ul>
+                </div>
+              </app-sub-layout>
+    
+              <!-- <div class="shift-setup-footer"></div> -->
+            </div>
+          </div>
+        </app-full-layout>
+        <div class="calendar-footer justify-content-end">
+          <div class="modal-footer-button flex">
+            <input type="submit" (click)="submit()" class="btn-input" value="Create"  />
+    
+            <input type="submit" class="btn-input" (click)="resetForm()" value="Reset" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </div>
-  <hr />
-  <div>
-    <app-file-upload></app-file-upload>
-  </div>
-  <hr />
-  <app-employee-shift-details></app-employee-shift-details>
 </div>

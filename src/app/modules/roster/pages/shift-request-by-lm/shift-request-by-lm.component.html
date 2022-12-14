@@ -1,0 +1,297 @@
+<form [formGroup]="shiftRequestLMform">
+  <div class="wrapper">
+    <div class="container">
+      <div class="header-menu"></div>
+      <app-full-layout>
+        <div>
+          <div class="table-header gradient-head flex justify-content-between">
+            <div class="heading">Shift Request</div>
+            <app-location-and-designation-filter
+              (filtersChange)="filterChange($event)"
+              [defaultValues]="defaultFilters"
+              [isLineManager]="true"
+            >
+            </app-location-and-designation-filter>
+
+            <!-- <div class="btn-options flex align-content-center">
+            <a href="#" class="btn-custom"
+              >Advance Filter
+              <i><img src="assets/icons/filter.svg" alt="" /></i>
+            </a>
+          </div> -->
+          </div>
+
+          <div class="shift-setup">
+            <div class="shadow">
+              <app-sub-layout>
+                <div class="shift-card ptb-10-0">
+                  <div class="form-col gap-0 justify-content-between">
+                    <div>
+                      <app-select-box
+                        [label]="'Shift Type'"
+                        [form]="shiftRequestLMform"
+                        [control]="'shift_id'"
+                        [data]="shiftTypeArray"
+                        [defaultValue]="dropDownDefaultValues.shiftType"
+                      ></app-select-box>
+                    </div>
+                    <div>
+                      <app-input-box
+                        [label]="'Shift Name'"
+                        [form]="shiftRequestLMform"
+                        [control]="'shift_name'"
+                      ></app-input-box>
+                    </div>
+                    <div>
+                      <app-time-box
+                        [label]="'From'"
+                        [form]="shiftRequestLMform"
+                        [control]="'start_date'"
+                      ></app-time-box>
+                    </div>
+                    <div>
+                      <app-time-box
+                        [label]="'To'"
+                        [form]="shiftRequestLMform"
+                        [control]="'end_date'"
+                      ></app-time-box>
+                    </div>
+                  </div>
+                  <div class="form-col pt10-0">
+                    <div class="w-100" *ngIf="!shiftNameClick">
+                      <app-input-box
+                        [width]="'100%'"
+                        [label]="'comments'"
+                        [form]="shiftRequestLMform"
+                        [control]="'lm_comment'"
+                      ></app-input-box>
+                    </div>
+                  </div>
+                </div>
+              </app-sub-layout>
+
+              <app-sub-layout *ngIf="shiftNameClick">
+                <div class="shift-card-wrapper">
+                  <div class="shift-header">Extended Mid Break</div>
+                  <div class="shift-card">
+                    <div class="form-col">
+                      <div>
+                        <app-select-box
+                          [label]="'Select Day'"
+                          [form]="shiftRequestLMform"
+                          [control]="'ext_mid_break_day_id'"
+                          [data]="weekDaysArray"
+                          [defaultValue]="dropDownDefaultValues.day"
+                        ></app-select-box>
+                      </div>
+                      <div>
+                        <app-time-box
+                          [label]="'From'"
+                          [form]="shiftRequestLMform"
+                          [control]="'ext_mid_break_time_in'"
+                        ></app-time-box>
+                      </div>
+                      <div>
+                        <app-time-box
+                          [label]="'To'"
+                          [form]="shiftRequestLMform"
+                          [control]="'ext_mid_break_time_out'"
+                        ></app-time-box>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <app-check-box
+                          [color]="'#3080EA'"
+                          [label]="'Specific Period'"
+                          [control]="'specific_period'"
+                          [form]="shiftRequestLMform"
+                          (selectionChanged)="onShiftExtendedChecked($event)"
+                        >
+                        </app-check-box>
+                      </div>
+                      <div
+                        class="form-col"
+                        *ngIf="shiftRequestLMform.get('specific_period').value"
+                      >
+                        <div>
+                          <app-date-box
+                            [label]="'Period From'"
+                            [form]="shiftRequestLMform"
+                            [control]="'shift_revert_date_start'"
+                          ></app-date-box>
+                        </div>
+                        <div>
+                          <app-date-box
+                            [label]="'Period To'"
+                            [form]="shiftRequestLMform"
+                            [control]="'shift_revert_date_end'"
+                          ></app-date-box>
+                        </div>
+                        <div>
+                          <app-select-box
+                            [label]="'Revert To'"
+                            [form]="shiftRequestLMform"
+                            [control]="'revert_shift_id'"
+                            [data]="shiftsArray"
+                            [defaultValue]="dropDownDefaultValues.revert"
+                          ></app-select-box>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </app-sub-layout>
+
+              <app-sub-layout *ngIf="shiftNameClick">
+                <div class="shift-card-wrapper">
+                  <div class="shift-header">Quarter Break</div>
+                  <div class="shift-card">
+                    <div
+                      formArrayName="qrt_break"
+                      class="form-col"
+                      *ngFor="let qrt of qrt_break.controls; let i = index"
+                    >
+                      <div [formGroup]="qrt" class="form-col">
+                        <div>
+                          <app-input-box
+                            [label]="'Quarter Break Name'"
+                            [form]="qrt"
+                            [control]="'qrt_break_title'"
+                          ></app-input-box>
+                        </div>
+                        <div>
+                          <app-time-box
+                            [label]="'From'"
+                            [form]="qrt"
+                            [control]="'qrt_break_time_in'"
+                          ></app-time-box>
+                        </div>
+                        <div class="d-flex">
+                          <app-time-box
+                            [label]="'To'"
+                            [form]="qrt"
+                            [control]="'qrt_break_time_out'"
+                          ></app-time-box>
+
+                          <img
+                            *ngIf="qrt_break.length != i + 1"
+                            class="ags-ml-3 ags-h-w-16"
+                            (click)="pushOrDeleteFromArray('minus', i)"
+                            src="assets/images/roster/minus.svg"
+                            alt=""
+                          />
+                          <img
+                            *ngIf="qrt_break.length == i + 1"
+                            class="ags-ml-3 ags-h-w-16"
+                            (click)="pushOrDeleteFromArray('plus', i)"
+                            src="assets/images/roster/plus.svg"
+                            alt=""
+                          />
+                        </div>
+                        <div *ngIf="i + 1 == qrt_break.length">
+                          <app-check-box
+                            [color]="'#3080EA'"
+                            [label]="'Tolerance'"
+                            [control]="'Tolerance'"
+                            [form]="shiftRequestLMform"
+                            (selectionChanged)="onQrtChecked($event)"
+                          >
+                          </app-check-box>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="form-col"
+                      *ngIf="shiftRequestLMform.get('Tolerance').value"
+                    >
+                      <div>
+                        <app-input-box
+                          [label]="'Consecutive Late'"
+                          [form]="shiftRequestLMform"
+                          [control]="'consecutive_late'"
+                          [type]="'number'"
+                        ></app-input-box>
+                      </div>
+                      <div>
+                        <app-input-box
+                          [label]="'Late Arrival Tolerance (min)'"
+                          [form]="shiftRequestLMform"
+                          [control]="'late_arrival_tolerance'"
+                          [type]="'number'"
+                        ></app-input-box>
+                      </div>
+                      <div>
+                        <app-input-box
+                          [label]="'Attendencec Tolerance (min)'"
+                          [form]="shiftRequestLMform"
+                          [control]="'attendance_tolerance'"
+                          [type]="'number'"
+                        ></app-input-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </app-sub-layout>
+              <div *ngIf="shiftNameClick">
+                <app-approval-details
+                  [form]="shiftRequestLMform"
+                ></app-approval-details>
+              </div>
+            </div>
+            <!-- <div class="shift-setup-footer"></div> -->
+            <div class="calendar-footer justify-content-end">
+              <div class="modal-footer-button flex">
+                <input
+                  type="button"
+                  class="btn-input"
+                  value="Submit"
+                  [disabled]="!this.shiftRequestLMform.valid"
+                  [class.disabled-btn-forms]="!this.shiftRequestLMform.valid"
+                  (click)="submit()"
+                />
+                <input
+                  *ngIf="isUpdating"
+                  type="submit"
+                  class="btn-input"
+                  value="Cancel"
+                  (click)="cancel()"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-full-layout>
+      <app-full-layout>
+        <div class="pt-10">
+          <div class="table-header gradient-head flex justify-content-between">
+            <div class="heading">Shift list</div>
+            <div class="btn-options flex align-content-center">
+              <app-select-box
+                [label]="'Active'"
+                [width]="'105px'"
+                [height]="'20px'"
+                [name]="'market'"
+                [hideLabel]="true"
+                [customClass]="['padding-top-3', 'carret_position_9']"
+              >
+              </app-select-box>
+            </div>
+          </div>
+          <div class="shift-setup">
+            <div class="shadow no-pad">
+              <app-shift-list
+                [data]="shiftsArray"
+                (singleShiftId)="getSingleShift($event)"
+              ></app-shift-list>
+            </div>
+            <div class="shift-setup-footer"></div>
+          </div>
+        </div>
+      </app-full-layout>
+    </div>
+  </div>
+</form>
+
+
+<div>
+  <app-employee-attendence></app-employee-attendence>
+</div>

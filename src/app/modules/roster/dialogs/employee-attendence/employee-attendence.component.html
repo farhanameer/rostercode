@@ -1,0 +1,100 @@
+<div class="modal-custom bg-white custom-w-596">
+    <app-dialog-layout>
+      <div class="gradient-head flex justify-content-between">
+        <div class="heading">Employee Attendence</div>
+        <div class="btn-options flex align-content-center">
+          <a 
+            ><img src="assets/icons/ico-close.svg" alt=""
+          /></a>
+        </div>
+      </div>
+      <!-- Body -->
+  
+      <div class="user-list-employee pt-0">
+        <ul class="overtime-header pt-2">
+          <li>
+            <div class="user-img">
+              <img src="assets/images/img-dummy.png" alt="" />
+            </div>
+            <div class="employee-detail">
+              <div class="heading-lg">Employee Name:<span class="custom-span">Adam Pierce</span> </div>
+              <div class="d-flex col-gap-5">
+              <div class="heading-lg">Shift:<span class="custom-span">Morning(07:00-14:00)</span></div>
+              <div class="green-number">+4</div>
+            </div>
+            </div>
+          </li>
+        </ul>
+        <form class="pt-2">
+          <div class="row m-0 col-gap-36">
+            <div class="">
+              <app-time-box
+                [label]="'Time In'"
+                [color]="'black'"
+                
+              ></app-time-box>
+            </div>
+            <div class="">
+              <app-time-box
+              [color]="'black'"
+                [label]="'Time Out'"
+               
+              ></app-time-box>
+            </div>
+          </div>
+      
+          
+          <div class="row m-0 pt-11 col-gap-36">
+            <div>
+              <app-input-box
+                [label]="'Reason'"
+                
+              ></app-input-box>
+            </div>
+              <div class="form-col pb-0">
+                <input
+                  type=file
+                  class="d-none"
+                  (change)="fileChange($event.target)"
+                  #fileUpload
+                />
+                <div class="file-upload-field" >
+                  <label>Attachment</label>
+                  <i class="bi bi-paperclip"></i>
+                </div>
+               
+              </div>
+           
+          </div>
+        </form>
+      </div>
+  
+      <!-- footer -->
+  
+      <div class="modal-custom-footer">
+        <div class="clues">
+          <span> </span>
+          <span> </span>
+        </div>
+  
+        <div class="modal-footer-button flex">
+          <input
+            type="button"
+            class="btn-input"
+            value="Submit"
+         
+            
+          />
+          <input
+            type="button"
+            class="btn-input"
+            value="Cancel"
+           
+          />
+        </div>
+      </div>
+    </app-dialog-layout>
+  </div>
+  
+ 
+  

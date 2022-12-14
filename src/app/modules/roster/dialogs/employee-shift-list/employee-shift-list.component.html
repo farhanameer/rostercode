@@ -1,0 +1,39 @@
+<app-dialog-layout>
+  <div class="shift-drop-down bg-white height-auto" *ngIf="show" style="position: absolute;" [ngStyle]="{'z-index' : 1, 'top': top , 'bottom' : bottom , 'left' : left }">
+    <div class="shift-dd-header" [ngStyle]="{'background-color' : color}">
+      {{date}}
+      <i
+        ><a (click)="closeModal()"
+          ><img src="assets/icons/ico-close.svg" alt="" /></a
+      ></i>
+    </div>
+    <!-- search panel -->
+    <div class="shift-dd-search ptb-6px height-auto">
+      <div class="w-100">
+        <app-input-box 
+        [width]="'100%'" 
+        [height]="'20px'"
+        (inputChanged)="search($event)">
+      </app-input-box>
+      </div>
+    </div>
+    <!-- users list -->
+    <div class="dd-list height-custom">
+      <ul>
+        <app-employee-card *ngFor="let emp of employees">
+          <li class="height-28">
+            <div class="user-img">
+              <div class="img-icon">
+                <img src="assets/images/img-dummy.png" alt="" />
+              </div>
+              {{emp.emp_name}}
+            </div>
+            <div class="employee-detail">
+              <img src="assets/icons/ico-present-02.svg" alt="" />
+            </div>
+          </li>
+        </app-employee-card>
+      </ul>
+    </div>
+  </div>
+</app-dialog-layout>

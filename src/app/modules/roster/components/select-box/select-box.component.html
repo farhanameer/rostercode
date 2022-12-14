@@ -1,31 +1,54 @@
-<div class="module-style">
-  <!-- <mat-form-field class="cus-m-0" appearance="fill"> -->
-    <mat-label>{{label}}</mat-label>
-    <mat-select panelClass="options-panel">
-      <!-- <mat-option *ngIf="!isLoaded" class="module-style">
-        <div class="skeleton-loader progress pulse"></div>
-      </mat-option>
-      <mat-option *ngIf="!isLoaded" class="module-style">
-        <div class="skeleton-loader progress pulse"></div>
-      </mat-option>
-      <mat-option *ngIf="!isLoaded" class="module-style">
-        <div class="skeleton-loader progress pulse"></div>
-      </mat-option> -->
-      <!-- <input
-        [(ngModel)]="locData['name']"
-        name="searchWord"
-        *ngIf="data.length > 10 && isLoaded"
-        [ngModelOptions]="{ standalone: true }"
-        type="text"
-        class="search-input"
-        placeholder="Search"
-      /> -->
-      <!-- <mat-option *ngIf="data.length == 0 && isLoaded"
-        >No Record Found</mat-option
-      > -->
-      <mat-option *ngFor="let item of data" [value]="item.id">{{
-        item.name
-      }}</mat-option>
-    </mat-select>
-  <!-- </mat-form-field> -->
+<div class="agt-module">
+  <div #wrapperSelect class="comp-wrapper w-h-260 required" [class.required]="form?.get(control)?.errors?.required && form?.get(control)?.touched" [ngStyle]="{ 'width': width , 'height' : height }" >
+    
+      <!-- <input type="text"> -->
+      
+      <select *ngIf="form && control" class="d-none" [formControl]="form?.get(control)">
+        <option *ngFor="let option of data" [value]="option.id" [selected]="hash[option.id]">{{option.name}}</option>
+      </select>
+
+      <select *ngIf="!form && !control" class="d-none">
+        <option *ngFor="let option of data" [value]="option.id" [selected]="hash[option.id]">{{option.name}}</option>
+      </select>
+      
+    <p class="label" [class.d-none]="hideLabel && selectedValue !=''" [class.label_up]="!hideLabel && (isClicked || selectedValue !='')" [class.agt-disabled]="disabled">{{label}}</p>
+
+
+    <div  class="select-selected light-border" [class.agt-disabled-select-selected]="disabled" (click)="toggleDropdown()" #mainContainer>
+      <span class="overflow-text-hidden" [class.agt-disabled]="disabled">{{selectedValue}}</span>
+      <span *ngIf="selectedValue !='' && multiSelect && !hideLabel" [class.agt-disabled]="disabled" class="data-tooltip">{{previousSelectionArray.length}}</span>
+    </div>
+    <!-- <app-error-msg [form]="form" [control]="control"></app-error-msg> -->
+    <div class="select-items select-hide" id="custom-select" #dropdownList>
+
+    <div *ngIf="masterArray.length > 10">
+      <app-input-box [label]="'Search'" class="w-100" [width]="'100%'" [height]="'20px'" [hideLabel]="true" [placeHolder]="'Search'"
+      (inputChanged)="search($event)"
+      ></app-input-box>
+    </div>
+
+    <div *ngIf="data && data.length == 0">
+      No Data Found
+    </div>
+
+    <div *ngFor="let option of data" [class.same-as-selected]="hash[option.id]" (click)="optionSelected(option)"> 
+
+      <app-check-box *ngIf="multiSelect" [checked]="hash[option.id]"></app-check-box> {{option.name}}
+    </div>
+
+
+      <!-- <div>BMW</div>
+      <div class="same-as-selected">Citroen</div>
+      <div>Ford</div>
+      <div>Honda</div>
+      <div>Jaguar</div>
+      <div>Land Rover</div>
+      <div>Mercedes</div>
+      <div>Mini</div>
+      <div>Nissan</div>
+      <div>Toyota</div>
+      <div>Volvo</div> -->
+    </div>
+  </div>
+  <span *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched" class="text-right d-block text-error">required</span>
 </div>

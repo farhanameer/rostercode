@@ -1,0 +1,41 @@
+<app-board-card>
+    <div class="header">
+      <div class="flex space-between w-100">
+        <div class="title-column" [ngStyle]="{ 'color': shift.color }">
+          {{shift.name}}
+        </div>
+
+        <div class="right-menu">
+          <div class="label">{{this.noWeekEnds.length + sunday.length + monday.length + tuesday.length + wednesday.length + thursday.length + friday.length + saturday.length}}</div>
+          <div class="vertical-menu">
+            <div class="dropdown-vertical">
+              <!-- three dots -->
+              <ul
+                class="dropbtn icons showLeft btn-right"
+              >
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <!-- menu -->
+              <div id="myDropdown" class="dropdown-content">
+                <a href="#home">Open</a>
+                <a href="#about">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="search-row">
+      </div>
+    </div>
+    <!-- Job list -->
+    <div *ngFor="let arr of masterArray">
+      <app-employee-shift-card
+      [dayName]="arr.name"
+      [data]="arr.array"
+      (itemDropped)="drop($event)"
+      ></app-employee-shift-card>
+    </div>
+    <!-- Job list - END -->
+  </app-board-card>

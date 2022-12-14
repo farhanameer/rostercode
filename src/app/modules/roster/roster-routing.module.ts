@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EmployeeAttendanceForm } from 'src/app/shared/form/employee-attendance.form';
 import { AttendenceCalenderComponent } from './components/attendence-calender/attendence-calender.component';
 import { CheckInOutCalendarComponent } from './components/check-in-out-calendar/check-in-out-calendar.component';
 import { JobShiftCalenderComponent } from './components/job-shift-calender/job-shift-calender.component';
 import { ShiftsCalenderComponent } from './components/shifts-calender/shifts-calender.component';
 import { SortByDateComponent } from './components/sort-by-date/sort-by-date.component';
 import { SortByEmployeeComponent } from './components/sort-by-employee/sort-by-employee.component';
+import { UploadFilesBoxComponent } from './components/upload-files-box/upload-files-box.component';
 import { AvaliableShiftDialog } from './dialogs/avaliable-shift/avaliable-shift.dialog';
 import { DisclaimerDialog } from './dialogs/disclaimer/disclaimer.dialog';
 import {JobshiftDialog } from './dialogs/jobshift/jobshift.dialog';
@@ -19,6 +21,7 @@ import { SingleShiftDetailDialog } from './dialogs/single-shift-detail/single-sh
 import { RosterCplComponent } from './pages/roster-cpl/roster-cpl.component';
 import { RosterComponent } from './pages/roster/roster.component';
 import { ShiftAllocationComponent } from './pages/shift-allocation/shift-allocation.component';
+import { ShiftRequestByLmComponent } from './pages/shift-request-by-lm/shift-request-by-lm.component';
 import { ShiftRequestComponent } from './pages/shift-request/shift-request.component';
 import { ShiftSetupComponent } from './pages/shift-setup/shift-setup.component';
 import { RosterComponent2 } from './roster.component';
@@ -113,9 +116,16 @@ const routes: Routes = [
     path:'checkInOut',
     component:CheckInOutCalendarComponent
   },
-
-  
+  {
+    path:'RequestLM',
+    component:ShiftRequestByLmComponent
+  },
+  {
+    path:'TestingDialogs',
+    component:UploadFilesBoxComponent
+  },
  
+  
 
 ];
 

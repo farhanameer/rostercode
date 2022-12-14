@@ -1,0 +1,48 @@
+.custom-w-596 {
+    width: 596px;
+  }
+  .pl-36 {
+    padding: 0px 0px 0px 36px;
+  }
+  .pt-11 {
+    padding-top: 11px;
+  }
+  .col-gap-36{
+    column-gap: 36px;
+  }
+ .custom-span{
+    font-weight: 100;
+    padding-left: 2px;
+  }
+  
+    .file-upload-field {
+      width: 260px;
+      height: 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #d8dcdf;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+    .file-upload-field label {
+      color: #3080ea;
+    }
+    
+    .download-attachement {
+      display: flex;
+      align-items: center;
+    }
+    
+ .green-number{
+      height: 15px;
+      width: 17px;
+      background-color:#5dcb5d;
+      color: white;
+     font-size: 12px;
+      text-align: center;
+      border-radius: 2px;
+ }
+ .col-gap-5{
+  column-gap: 10px;
+ }

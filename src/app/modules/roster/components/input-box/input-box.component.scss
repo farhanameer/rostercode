@@ -1,0 +1,23 @@
+.required > input {
+    border-color: #F44437;
+}
+
+.required > label {
+    color: #F44437;
+}
+
+.text-error{
+    color : #F44437
+}
+.ags-bg-transparent{
+    background-color: transparent !important;
+}
+.hide-label{
+    transform: translateY(0px) !important;
+}
+
+.input-box::placeholder{
+   
+    color: #b6b6b6 !important;
+    opacity: 1 !important;
+}

@@ -1,28 +1,48 @@
 <div>
   <div class="shift-management-wrapper pt-0">
     <div class="header">
-      <div class="search-row">
+      <div class="search-row mt-0">
         <form action="" class="flex space-between w-100">
           <div class="left-col">
             <label for="radio1">
-              <input type="radio" value="date" (change)="view = 'date'" />Sort by Date</label
+              <input
+                [checked]="valueType == 'date'"
+                type="radio"
+                value="date"
+                name="sort"
+                (click)="radioChange('date')"
+              />Sort by Date</label
             >
             <label for="radio1">
-              <input type="radio" value="employee" (change)="view = 'employee'" />Sort by
-              Employee</label
-            >
-            <label for="radio1">
-              <input type="radio" value="default" (change)="view = 'default'" />Default
-              View</label
+              <input
+                [checked]="valueType == 'employee'"
+                type="radio"
+                value="employee"
+                name="sort"
+                (click)="radioChange('employee')"
+              />Sort by Employee</label
             >
           </div>
 
-          <input type="text" />
+          <app-input-box 
+            [width]="'105px'" 
+            [height]="'20px'"
+            (inputChanged)="search($event)">
+          </app-input-box>
+
         </form>
       </div>
     </div>
   </div>
-  <app-default-view *ngIf="view == 'default'"></app-default-view>
-  <app-employee-check-box *ngIf="view == 'employee'"></app-employee-check-box>
-  <app-date-check-box *ngIf="view == 'date'"></app-date-check-box>
+
+  <app-employee-check-box
+    *ngIf="view == 'employee'"
+    [modelData]="modelData"
+    [searchedValue]="searchedValue"
+  ></app-employee-check-box>
+  <app-date-check-box
+    *ngIf="view == 'date'"
+    [modelData]="modelData"
+    [searchedValue]="searchedValue"
+  ></app-date-check-box>
 </div>

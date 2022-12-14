@@ -1,27 +1,51 @@
 <!-- Body -->
 <!-- Modal Body -->
-<div class="form-col">
+<div class="form-col pbt-0">
   <div>
-    <app-input-box></app-input-box>
+    <app-select-box
+      [label]="'Select Employee'"
+      [form]="additionalShiftForm"
+      [control]="'employee_id'"
+      [data]="employeesDropdown"
+      (selectionChange)="selectionChanged($event)"
+    ></app-select-box>
   </div>
   <div>
-    <app-input-box></app-input-box>
+    <app-select-box
+      [label]="'Assigned Shift'"
+      [form]="additionalShiftForm"
+      [control]="'additional_shift_id'"
+      [data]="employeesName"
+      [defaultValue]="assignedShiftDefaultValue"
+    ></app-select-box>
   </div>
 </div>
 
 <app-sub-layout>
-  <div class="shift-card-wrapper">
+  <div class="shift-card-wrapper custom-ptb">
     <div class="shift-header">
       <div>Additional Shifts</div>
       &nbsp;
       <div style="padding: 30px">
-        <input type="radio" (click)="view = 'shift'" />
+        <input
+          type="radio"
+          value="shifthours"
+          name="shifthours"
+          (click)="radioChange('shift')"
+          [checked]="valueType == 'shift'"
+        />
         &nbsp;
         <label>Additional Shift</label>
       </div>
       &nbsp;
       <div>
-        <input type="radio" (click)="view = 'hours'" />
+        <input
+          name="shifthours"
+          type="radio"
+          value="hours"
+          (click)="radioChange('hours')"
+          [checked]="valueType == 'hours'"
+        />
         &nbsp;
         <label>Additional Hours</label>
       </div>
@@ -29,10 +53,19 @@
     <div class="shift-card">
       <div class="form-col">
         <div *ngIf="view == 'shift'">
-          <app-select-box [data]="shifts" [form]="additionalShiftForm" [control]="'additionalShift'" [label]="'Additional Shift'"  ></app-select-box>
+          <app-select-box
+            [data]="shifts"
+            [form]="additionalShiftForm"
+            [control]="'additionalShift'"
+            [label]="'Additional Shift'"
+          ></app-select-box>
         </div>
         <div *ngIf="view == 'hours'">
-          <app-input-box [form]="additionalHoursForm" [control]="'additionalShiftHours'" [label]="'Additional Hours Shift'" ></app-input-box>
+          <app-input-box
+            [form]="additionalHoursForm"
+            [control]="'additionalShiftHours'"
+            [label]="'Additional Hours'"
+          ></app-input-box>
         </div>
       </div>
     </div>

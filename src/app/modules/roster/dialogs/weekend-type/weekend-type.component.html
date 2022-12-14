@@ -1,4 +1,4 @@
-<div class="modal-custom bg-white">
+<div class="modal-custom bg-white w-100">
   <app-dialog-layout>
     <div class="gradient-head flex justify-content-between">
       <div class="heading">what Kind of Weekend is It?</div>
@@ -10,25 +10,35 @@
     </div>
     <!-- Body -->
     <div class="overtime-form">
-      <div style="padding: 50px">
-        <app-select-box></app-select-box>
+      <div style="padding: 20px 20px">
+        <app-select-box [label]="'Weekend Type'"
+        [data]="weekendTypes"
+        (selectionChange)="leaveTypeSelection($event)"
+        ></app-select-box>
       </div>
     </div>
 
     <!-- footer -->
 
     <div class="modal-custom-footer">
+      <div class="clues">
+        <span> </span>
+        <span> </span>
+      </div>
+
       <div class="modal-footer-button flex">
         <input
           type="button"
           class="btn-input"
           value="Submit"
-          (click)="activeModal.close('Close click')"
+          [disabled]="!isSelected"
+          [class.disabled-btn-forms]="!isSelected"
+          (click)="onSubmit()"
         />
         <input
           type="button"
           class="btn-input"
-          value="back"
+          value="Cancel"
           (click)="activeModal.close('Close click')"
         />
       </div>

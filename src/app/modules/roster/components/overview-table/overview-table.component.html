@@ -19,10 +19,10 @@
       <td>
         <a href="#">{{ employee.cpl }}</a>
       </td>
-      <td (click)="openOverView()">
+      <td (click)="openOverView(employee)">
         <a>{{ employee.overtime }}</a>
       </td>
-      <td (click)="openHours()">
+      <td (click)="openHours(employee)">
         <a>{{ employee.approved_hours }}</a>
       </td>
     </tr>

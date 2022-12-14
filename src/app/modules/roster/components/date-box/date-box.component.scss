@@ -1,0 +1,83 @@
+.agt-module {
+
+  .comp-wrapper {
+    width: 260px;
+    height: 26px;
+  }
+  .date-wrapper input{
+    height: 100%;
+    width: 100%;
+  }
+  .date-wrapper div input {
+    font: normal normal normal 11px/13px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #343434 !important;
+    background: #ffffff 0% 0% no-repeat padding-box !important;
+    border: 1px solid #d8dcdf ;
+    border-radius: 4px !important;
+    padding-left: 10px !important;
+  }
+  .date-wrapper div input::placeholder {
+    color: #3080ea;
+  }
+  .date-wrapper > div mat-form-field:focus-visible {
+    outline: none !important;
+  }
+  
+  
+  .date-field {
+    position: relative;
+
+    .mat-datepicker-toggle {
+      .mat-button-base {
+        
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+      }
+    }
+  }
+  .toggle-date input:disabled::placeholder {
+    font: normal normal normal 11px/13px Roboto !important;
+    letter-spacing: 0px !important;
+    color: #d8dcdf !important;
+    opacity: 1 !important;
+    height: 24px;
+  }
+
+  .toggle-date mat-datepicker-toggle {
+    position: absolute !important;
+    right: 2px !important;
+    padding: 0 !important;
+  }
+
+  .toggle-date mat-datepicker-toggle button {
+    position: static !important;
+    padding: 0 3px 0 10px !important;
+    text-align: right !important;
+    
+  }
+
+  .mat-datepicker-toggle .mat-button-base .mat-datepicker-toggle-default-icon {
+    height: 16px !important;
+    width: 16px !important;
+  }
+  .agt-float-label {
+    transform: translateY(-15px) !important;
+  }
+
+  .required > input {
+    border-color: #F44437 !important;
+}
+
+.required > label {
+    color: #F44437 !important;
+}
+
+.text-error{
+    color : #F44437 !important
+}
+
+  
+
+}

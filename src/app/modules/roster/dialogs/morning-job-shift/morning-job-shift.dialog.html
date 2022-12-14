@@ -1,76 +1,67 @@
-<div class="wrapper">
-  <div class="container">
-    <div class="header-menu"></div>
+<!-- Modal list -->
 
-    <!-- Modal list -->
+<div class="modal-custom w-530 bg-white">
+  <div class="gradient-head flex justify-content-between">
+    <div class="heading">Morning Shift</div>
+    <div class="btn-options flex align-content-center">
+      <a (click)="activeModal.close('Close click')"
+        ><img src="assets/icons/ico-close.svg" alt=""
+      /></a>
+    </div>
+  </div>
+  <!-- Body -->
 
-    <div class="modal-custom">
-      <div class="gradient-head flex justify-content-between">
-        <div class="heading">Wednesday, October 6</div>
-        <div class="btn-options flex align-content-center">
-          <a href="#"><img src="icons/ico-close.svg" alt="" /></a>
+  <div class="user-list-employee">
+    <div class="search-row pb-shift">
+      <form action="" class="flex space-between w-100">
+        <div class="right-menu d-flex c-gap">
+          <div class="label custom-week">
+            <p class="c-pt-2" [class.bg-custom-imp]="modelData.name != 'No Weekends'">{{modelData.name}}</p>
+          </div>
+          <div class="c-num-label">{{modelData.employees.length}}</div>
         </div>
-      </div>
-      <!-- Body -->
+        <app-input-box 
+          [width]="'105px'" 
+          [height]="'20px'"
+          (inputChanged)="search($event)">
+        </app-input-box>
+      </form>
+    </div>
+    <ul class="c-ul-wid-gap">
+      <app-employee-card *ngFor="let emp of modelData.employees">
+        <li class="c-width-li">
+          <div class="user-img" *ngIf="!emp.picture || emp.picture == 'dummy.jpg'">
+            <img src="assets/images/img-dummy.png" alt="" />
+          </div>
 
-      <div class="user-list-employee">
-        <ul>
-          <li>
-            <div class="user-img">
-              <img src="assets/images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: Bryan Danielson</div>
-              <div class="heading-sm">Employee Code: 98752</div>
-            </div>
-          </li>
-          <li>
-            <div class="user-img">
-              <img src="assets/images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: Bryan Danielson</div>
-              <div class="heading-sm">Employee Code: 98752</div>
-            </div>
-          </li>
-          <li>
-            <div class="user-img">
-              <img src="assets/images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: Bryan Danielson</div>
-              <div class="heading-sm">Employee Code: 98752</div>
-            </div>
-          </li>
-          <li>
-            <div class="user-img">
-              <img src="assets/images/img-dummy.png" alt="" />
-            </div>
-            <div class="employee-detail">
-              <div class="heading-lg">Name: Bryan Danielson</div>
-              <div class="heading-sm">Employee Code: 98752</div>
-            </div>
-          </li>
-        </ul>
-      </div>
+          <div class="user-img" *ngIf="emp.picture && emp.picture != 'dummy.jpg'">
+            <img src="{{emp.picture}}" alt="" />
+          </div>
+          <div class="employee-detail">
+            <div class="heading-lg">{{emp.name}}</div>
+            <div class="heading-sm text-secondary">#{{emp.emp_id}}</div>
+          </div>
+        </li>
+      </app-employee-card>
+      
+    </ul>
+  </div>
 
-      <!-- footer -->
+  <!-- footer -->
 
-      <div class="modal-custom-footer">
-        <div class="clues">
-          <span>
-            <i><img src="assets/icons/icon-cpl.svg" alt="" /></i> CPL Due</span
-          >
-          <span>
-            <i><img src="assets/icons/icon-minus.svg" alt="" /> Absents</i>
-          </span>
-        </div>
+  <div class="modal-custom-footer">
+    <div class="clues">
+      <span> </span>
+      <span> </span>
+    </div>
 
-        <div class="modal-footer-button flex">
-          <input type="button" class="btn-input" value="Submit" />
-          <input type="button" class="btn-input" value="Cancel" />
-        </div>
-      </div>
+    <div class="modal-footer-button flex">
+      <input
+        (click)="activeModal.close('Close click')"
+        type="button"
+        class="btn-input"
+        value="Close"
+      />
     </div>
   </div>
 </div>

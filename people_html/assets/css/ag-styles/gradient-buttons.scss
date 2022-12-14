@@ -1,0 +1,15 @@
+.btn-custom {
+  background: transparent linear-gradient(180deg, #EDEDED 0%, #FAFAFA 100%) 0% 0% no-repeat;
+  border-radius: 3px;
+  border: 1px solid #FFFFFF;
+  padding: 2.5px 5px;
+  font-size: 11px;
+  color: $blue;
+  height: 20px;
+}
+
+.btn-options {
+  padding-right: 10px;
+  min-height: 28px;
+  align-items: center;
+}

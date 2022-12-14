@@ -1,0 +1,134 @@
+[
+    { 
+      "id": 1,
+      "pageNumber": 1,
+      "nextPage":1,
+      "stageName": "Jobs Without Candidates",
+      "count": 5,
+      "jobs": [
+        {
+          "id" : 1,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "Principal UI/UX Designer",
+          "companyName": "Arbisoft",
+          "isActive": true,
+          "addedBy":"Ibtesam"
+        },
+        {
+          "id" : 2,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "Financial Manager",
+          "companyName": "EDx",
+          "isActive": true,
+          "addedBy":"Ibtesam"
+        },
+        {
+          "id" : 3,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "CR Executive",
+          "companyName": "Contoure",
+          "isActive": true,
+          "addedBy":"Ibtesam"
+        },
+        {
+          "id" : 4,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "Principal UI/UX Designer",
+          "companyName": "Systems",
+          "isActive": true,
+          "addedBy":"Ibtesam"
+        },
+        {
+          "id" : 5,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "Sales Head",
+          "companyName": "Unicef",
+          "isActive": true,
+          "addedBy":"Ibtesam"
+        }
+      ]
+    },
+    { 
+      "id": 2,
+      "pageNumber": 1,
+      "nextPage":1,
+      "stageName": "Applied/Suggested",
+      "count": 3,
+      "jobs": [
+        {
+          "id" : 1,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "CR Executive",
+          "companyName": "Contoure",
+          "status": true,
+          "addedBy":"Ibtesam"
+        },
+        {
+          "id" : 2,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "Principal UI/UX Designer",
+          "companyName": "Trafiko",
+          "status": true,
+          "addedBy":"Ibtesam"
+        },
+        {
+          "id" : 3,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "Sales Head",
+          "companyName": "Unicef",
+          "status": true,
+          "addedBy":"Ibtesam"
+        }
+      ]
+    },
+    { 
+      "id": 3,
+      "pageNumber": 1,
+      "nextPage":1,
+      "stageName": "Initially Rejected",
+      "count": 2,
+      "jobs": [
+        {
+          "id" : 1,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "CR Executive",
+          "companyName": "Contoure",
+          "status": true,
+          "addedBy":"Ibtesam"
+        },
+        {
+          "id" : 2,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "Principal UI/UX Designer",
+          "companyName": "Trafiko",
+          "status": true,
+          "addedBy":"Ibtesam"
+        }
+      ]
+    },
+    { 
+      "id": 4,
+      "pageNumber": 1,
+      "nextPage":1,
+      "stageName": "Pre-Screening",
+      "count": 2,
+      "jobs": [
+        {
+          "id" : 1,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "Principal UI/UX Designer",
+          "companyName": "Arbisoft",
+          "status": true,
+          "addedBy":"Ibtesam"
+        },
+        {
+          "id" : 2,
+          "image": "https://pestico.smartdemowp.com/wp-content/uploads/team-1.jpg",
+          "designation": "Financial Manager",
+          "companyName": "EDX",
+          "status": true,
+          "addedBy":"Ibtesam"
+        }
+      ]
+    }
+]

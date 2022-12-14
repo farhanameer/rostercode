@@ -34,10 +34,8 @@ export class CalendarService {
   weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   getNextDay(previousDay: string) {
-    // debugger;
     let nextDay = '';
     this.weekDays.every((currentDay, i) => {
-      // debugger;
       if (previousDay == currentDay) {
         if (i + 1 == this.weekDays.length) {
           nextDay = this.weekDays[0];
@@ -52,10 +50,8 @@ export class CalendarService {
   }
 
   getNumberOfDays(day: string, isEnding = false) {
-    // debugger;
     let i = 0;
     this.weekDays.every((currentDay, index) => {
-      //debugger;
       if (currentDay == day) {
         i = index;
         return false;
@@ -63,14 +59,12 @@ export class CalendarService {
       return true;
     });
     if (isEnding) {
-      // debugger;
       return this.weekDays.length - (i + 1);
     }
     return i; //6
   }
 
   pushNullToArray(array: any, counter: number): any {
-    // debugger;
     if (counter == 0) {
       return;
     }

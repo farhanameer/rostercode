@@ -1,7 +1,9 @@
 <app-dialog-layout>
-  <div class="modal-custom modal-lg bg-white modal-center">
+  <div class="modal-custom modal-lg bg-white modal-center custom-w-800">
     <div class="gradient-head flex justify-content-between">
-      <div class="heading">Shift Management ({{dates.start}} - {{dates.end}})</div>
+      <div class="heading" *ngIf="dates.dateRagne">
+        Shift Management ({{dates.dateRagne.start}} - {{dates.dateRagne.end}})
+      </div>
       <div class="btn-options flex align-content-center">
         <a
           ><img
@@ -12,39 +14,66 @@
       </div>
     </div>
     <!-- Body -->
-    <div class="shift-management-wrapper pt-0">
+    <div class="shift-management-wrapper pb-0">
       <div class="header">
         <div class="search-row">
           <form action="" class="flex space-between w-100">
             <div class="left-col">
               <label for="radio1">
-                <input type="radio" id="date" (click)="display=true" />Sort by
-                Date</label
+                <input
+                  [checked]="valueType == 'date'"
+                  type="radio"
+                  value="date"
+                  name="sort"
+                  (click)="radioChange('date')"
+                />Sort by Date</label
               >
               <label for="radio1">
-                <input type="radio" id="employee" (click)="display=false" />Sort
-                by Employee</label
+                <input
+                  type="radio"
+                  [checked]="valueType == 'employee'"
+                  value="employee"
+                  name="sort"
+                  (click)="radioChange('employee')"
+                />Sort by Employee</label
               >
             </div>
-            <input type="text" />
+            <app-input-box
+              [width]="'105px'"
+              [height]="'20px'"
+              (inputChanged)="search($event)"
+            >
+            </app-input-box>
           </form>
         </div>
       </div>
     </div>
     <!-- footer -->
     <div>
-      <app-sort-by-date *ngIf="display"
-      [dates]=dates
+      <app-sort-by-date
+        *ngIf="view == 'date'"
+        [dates]="dates"
+        [searchedValue]="searchedValue"
       ></app-sort-by-date>
-      <app-sort-by-employee *ngIf="!display"></app-sort-by-employee>
+      <app-sort-by-employee
+        *ngIf="view == 'employee'"
+        [dates]="dates"
+        [searchedValue]="searchedValue"
+      ></app-sort-by-employee>
     </div>
     <div class="modal-custom-footer">
       <ul class="shift-hints" style="display: flex; gap: 20px" git>
-        <li><span></span> Morning Shift (07:00 - 14:00)</li>
         <li>
-          <span class="evening-shift"></span> Evening Shift (14:00 - 00:00)
+          <span class="custom-hw-10"></span> Morning Shift (07:00 - 14:00)
         </li>
-        <li><span class="night-shift"></span> Night Shift (20:00 - 05:00)</li>
+        <li>
+          <span class="evening-shift custom-hw-10"></span> Evening Shift (14:00
+          - 00:00)
+        </li>
+        <li>
+          <span class="night-shift custom-hw-10"></span> Night Shift (20:00 -
+          05:00)
+        </li>
       </ul>
 
       <div class="modal-footer-button flex">

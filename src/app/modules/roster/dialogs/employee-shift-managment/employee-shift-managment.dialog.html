@@ -1,7 +1,10 @@
 <app-dialog-layout>
-  <div class="modal-custom modal-lg bg-white">
+  <div class="modal-custom modal-lg bg-white custom-w-932">
     <div class="gradient-head flex justify-content-between">
-      <div class="heading">Shift Management (01-11-2021 - 01-12-2021)</div>
+      <div class="heading">
+        Shift Management ({{modelData.dateRagne.start}} -
+        {{modelData.dateRagne.end}})
+      </div>
       <div class="btn-options flex align-content-center">
         <a
           ><img
@@ -12,40 +15,77 @@
       </div>
     </div>
     <!-- Body -->
-
     <div class="shift-management-wrapper pt-0">
-      <div class="header">
+      <div class="header pbt-0">
         <div class="search-row">
           <div class="mark-sheet">
             <div class="left-col">
               <label for="radio1">
-                <input type="radio" (click)="view='weekend'" />Mark
-                Weekends</label
+                <input
+                  type="radio"
+                  value="weekend"
+                  [checked]="valueType == 'weekend'"
+                  name="additional"
+                  (click)="radioChange('weekend')"
+                />
+                Mark Weekends</label
               >
-              <label for="radio1" (click)="view='change'">
-                <input type="radio" />Change Shift</label
+              <label for="radio1">
+                <input
+                  #additionalInput
+                  type="radio"
+                  value="change"
+                  name="additional"
+                  [checked]="valueType == 'change'"
+                  [disabled]="this.modelData.dateRagne.start != this.modelData.dateRagne.end"
+                  (click)="radioChange('change')"
+                />Change Shift</label
               >
-              <label for="radio1" (click)="view='additional'">
-                <input type="radio" />Assign Additional Shift</label
+              <label for="radio1">
+                <input
+                  type="radio"
+                  value="additional"
+                  name="additional"
+                  [checked]="valueType == 'additional'"
+                  (click)="radioChange('additional')"
+                  [disabled]="this.modelData.dateRagne.start != this.modelData.dateRagne.end"
+                />Assign Additional Shift</label
               >
             </div>
           </div>
         </div>
       </div>
-      <app-mark-weekend *ngIf="view=='weekend'"></app-mark-weekend>
-      <app-change-shift *ngIf="view=='change'"></app-change-shift>
-      <app-additional-shift *ngIf="view=='additional'"></app-additional-shift>
+      <app-mark-weekend
+        *ngIf="view=='weekend'"
+        [modelData]="modelData"
+      ></app-mark-weekend>
+      <app-change-shift
+        *ngIf="view=='change'"
+        [submitBtn]="submitted"
+        [modelData]="modelData"
+      ></app-change-shift>
+      <app-additional-shift
+        *ngIf="view=='additional'"
+        [additionalShifts]="submitted"
+        [modelData]="modelData"
+      ></app-additional-shift>
     </div>
 
     <!-- footer -->
 
     <div class="modal-custom-footer">
       <ul class="shift-hints" style="display: flex; gap: 20px">
-        <li><span></span> Morning Shift (07:00 - 14:00)</li>
         <li>
-          <span class="evening-shift"></span> Evening Shift (14:00 - 00:00)
+          <span class="custom-hw-10"></span> Morning Shift (07:00 - 14:00)
         </li>
-        <li><span class="night-shift"></span> Night Shift (20:00 - 05:00)</li>
+        <li>
+          <span class="evening-shift custom-hw-10"></span> Evening Shift (14:00
+          - 00:00)
+        </li>
+        <li>
+          <span class="night-shift custom-hw-10"></span> Night Shift (20:00 -
+          05:00)
+        </li>
       </ul>
 
       <div class="modal-footer-button flex">
@@ -53,7 +93,7 @@
           type="button"
           class="btn-input"
           value="Submit"
-          (click)="activeModal.close('Close click')"
+          (click)="submit()"
         />
         <input
           type="button"

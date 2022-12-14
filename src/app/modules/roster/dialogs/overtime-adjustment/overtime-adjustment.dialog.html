@@ -1,4 +1,4 @@
-<div class="modal-custom bg-white">
+<div class="modal-custom bg-white custom-w-596">
   <app-dialog-layout>
     <div class="gradient-head flex justify-content-between">
       <div class="heading">Overtime Hours Adjustment</div>
@@ -17,54 +17,89 @@
             <img src="assets/images/img-dummy.png" alt="" />
           </div>
           <div class="employee-detail">
-            <div class="heading-lg">Name: Bryan Danielson</div>
-            <div class="heading-sm">Employee Code: 98752</div>
+            <div class="heading-lg">Name: {{modelData.name}}</div>
+            <div class="heading-sm">Employee Code: {{modelData.empcode}}</div>
           </div>
         </li>
       </ul>
-      <div class="row">
-        <div class="col">
-          <app-input-box></app-input-box>
+      <form [formGroup]="overTimeForm">
+        <div class="row m-0">
+          <div class="">
+            <app-input-box
+              [label]="'Overtime (hrs)'"
+              [form]="overTimeForm"
+              [control]="'overTime'"
+              overTimeForm
+            ></app-input-box>
+          </div>
+          <div class="pl-36">
+            <app-date-box
+              [width]="'260px'"
+              [label]="'Till Date'"
+              [form]="overTimeForm"
+              [control]="'tillDate'"
+            ></app-date-box>
+          </div>
         </div>
-        <div class="col">
-          <app-date-box></app-date-box>
+        <div class="row m-0">
+          <div class="">
+            <p class="pt-10 font-weight-bold">Adjust Overtime In</p>
+          </div>
+          <div class=""></div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <p>Adjust Overtime In</p>
+        <div class="row pt-10">
+          <div class="col d-flex">
+            <input
+              type="radio"
+              value="cpl"
+              formControlName="type"
+              [checked]="valueType == 'cpl'"
+              (click)="overtimeType('cpl')"
+            />
+            <label class="ml-2">ADD CPL</label>
+          </div>
+
+          <div class="col d-flex ml-1">
+            <input
+              [checked]="valueType == 'payment'"
+              type="radio"
+              value="payment"
+              formControlName="type"
+              (click)="overtimeType('payment')"
+            />
+            <label class="ml-2">Payment For Overtime</label>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="radio" /> &nbsp;
-          <label>Add CPL</label>
+        <div class="row m-0 pt-11">
+          <div class="">
+            <app-input-box
+              [label]="'CPL'"
+              [width]="'260px'"
+              [isdisabled]="valueType=='payment'"
+              [form]="overTimeForm"
+              [control]="'cpl'"
+            ></app-input-box>
+          </div>
+          <div class="pl-36">
+            <app-input-box
+              [form]="overTimeForm"
+              [control]="'payForHours'"
+              [label]="'Pay For Hours'"
+              [isdisabled]="valueType=='cpl'"
+              [form]="overTimeForm"
+              [control]="'givenHours'"
+            ></app-input-box>
+          </div>
         </div>
-        <div class="col">
-          <input type="radio" /> &nbsp;
-          <label>Payment for Overtime</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <app-select-box></app-select-box>
-        </div>
-        <div class="col">
-          <app-input-box></app-input-box>
-        </div>
-      </div>
+      </form>
     </div>
 
     <!-- footer -->
 
     <div class="modal-custom-footer">
       <div class="clues">
-        <span>
-          <i><img src="assets/icons/icon-cpl.svg" alt="" /></i> CPL Due</span
-        >
-        <span>
-          <i><img src="assets/icons/icon-minus.svg" alt="" /> Absents</i>
-        </span>
+        <span> </span>
+        <span> </span>
       </div>
 
       <div class="modal-footer-button flex">
@@ -72,7 +107,9 @@
           type="button"
           class="btn-input"
           value="Submit"
-          (click)="activeModal.close('Close click')"
+          [disabled]="!overTimeForm.valid"
+          [class.disabled-btn-forms]="!overTimeForm.valid"
+          (click)="submit()"
         />
         <input
           type="button"
@@ -96,3 +133,5 @@
           <li><input type="text" /></li>
         </ul>
       </div> -->
+
+<!--  -->

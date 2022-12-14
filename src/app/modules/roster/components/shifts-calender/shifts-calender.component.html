@@ -7,7 +7,7 @@
         (click)="getMonthAndYear()"
     /></a>
     <ul class="years-list">
-      <li *ngFor="let month of months">{{ month }}</li>
+      <li [class.color-blue]="month == months[2]" *ngFor="let month of months">{{ month }}</li>
     </ul>
     <a
       ><img
@@ -23,19 +23,19 @@
         <th scope="col" *ngFor="let weekday of weekDays">{{ weekday }}</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let nestedArray of reshapedData">
+    <tbody (mouseleave)="mouseLeft()">
+      <tr *ngFor="let nestedArray of reshapedData; let upIndex = index">
         <td
           *ngFor="let days of nestedArray"
           [ngStyle]="
             checkIfOK(days.date)
-              ? { 'background-color': 'red' }
+              ? { 'background-color': '#EAF2FD' }
               : { 'background-color': 'white' }
           "
           style="-webkit-user-select: none"
-          (mousedown)="onDragStart(days.date)"
-          (mouseover)="onDrag(days.date)"
-          (mouseup)="onDragOver(days.date)"
+          (mousedown)="onDragStart(days.date, upIndex, $event)"
+          (mouseover)="onDrag(days.date, upIndex)"
+          (mouseup)="onDragOver(days.date, $event , days)"
         >
           <table class="cal-cell">
             <tr>
@@ -46,9 +46,21 @@
             </tr>
 
             <ng-container *ngFor="let shift of days.shifts; let i = index">
-              <tr *ngIf="i + 1 <= 1">
-                <td [ngStyle]="{ color: shift.color }">{{ shift.name }}</td>
-                <td [ngStyle]="{ color: shift.color }">{{ shift.shift_employees }} </td>
+              <tr *ngIf="i + 1 <= 3">
+                <td
+                  id="shiftName"
+                  [ngStyle]="{ color: shift.color }"
+                  (click)="onEvent($event, days.date, shift, true)"
+                >
+                  {{ shift.name }}
+                </td>
+                <td
+                  id="empCount"
+                  [ngStyle]="{ color: shift.color }"
+                  (click)="onEvent($event, days.date, shift, true)"
+                >
+                  {{ shift.shift_employees }}
+                </td>
               </tr>
             </ng-container>
 
@@ -67,9 +79,13 @@
               <td>12</td>
             </tr> -->
 
-            <tr *ngIf="days.shifts.length > 1">
+            <tr *ngIf="days.shifts.length > 3">
               <td>
-                <a href="#">More +{{ days.shifts.length - 1 }}</a>
+                <a
+                  id="openEmpLogs"
+                  (click)="onEvent($event, days.date, days.shifts, false)"
+                  >More +{{ days.shifts.length - 3 }}</a
+                >
               </td>
               <td>&nbsp;</td>
             </tr>
@@ -100,4 +116,14 @@
       </tr>
     </tbody>
   </table>
+  <app-employee-shift-list
+    [show]="show"
+    [left]="left"
+    [bottom]="bottom"
+    [top]="top"
+    (close)="[(show = false)]"
+    [employees]="employees"
+    [date]="date"
+    [color]="shiftColor"
+  ></app-employee-shift-list>
 </div>

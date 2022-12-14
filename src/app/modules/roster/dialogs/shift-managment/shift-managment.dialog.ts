@@ -11,8 +11,10 @@ import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employ
 export class ShiftManagmentDialog implements OnInit {
 
   @Input() dates: any;
-
-  display:boolean;
+  valueType : string  = 'date';
+  view:string="date";
+  single: boolean = false;
+  searchedValue;
 
 
 
@@ -20,11 +22,24 @@ export class ShiftManagmentDialog implements OnInit {
     private customModel:ModalService) { }
 
   ngOnInit(): void {
-    console.log('data was first got' , this.dates);
+    console.log('shift management dialog' , this.dates);
+    
+    if(this.dates.dateRagne.start == this.dates.dateRagne.end){
+      this.single = true;
+    }
+
   }
   open(){
-    this.customModel.showFeaturedDialog(EmployeeShiftManagmentDialog, "");
-this.activeModal.close(ShiftManagmentDialog);
+    console.log('data range to be passed down' , this.dates.dateRange);
+    this.customModel.showFeaturedDialog(EmployeeShiftManagmentDialog, "" , this.dates);
+    this.activeModal.close(ShiftManagmentDialog);
   }
-
+// ********* radio button function
+  radioChange(val:string){
+    this.view=val;
+  }
+  search(event){
+    console.log(event);
+    this.searchedValue = event;
+  }
 }

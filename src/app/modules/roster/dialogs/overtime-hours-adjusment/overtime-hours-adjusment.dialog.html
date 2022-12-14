@@ -1,4 +1,4 @@
-<div class="modal-custom bg-white">
+<div class="modal-custom bg-white custom-w-596">
   <app-dialog-layout>
     <div class="gradient-head flex justify-content-between">
       <div class="heading">Overtime Hours Adjustment</div>
@@ -17,27 +17,38 @@
             <img src="assets/images/img-dummy.png" alt="" />
           </div>
           <div class="employee-detail">
-            <div class="heading-lg">Name: Bryan Danielson</div>
-            <div class="heading-sm">Employee Code: 98752</div>
+            <div class="heading-lg">Name: {{modelData.name}}</div>
+            <div class="heading-sm">Employee Code: {{modelData.empcode}}</div>
           </div>
         </li>
       </ul>
     </div>
 
     <div class="overtime-form">
-      <div class="row" style="margin-left: 20px">
-        <div class="col">
-          <app-input-box></app-input-box>
+      <div class="row m-0">
+        <div class="pl-20">
+          <app-input-box
+            [label]="'Overtime Hours'"
+            [form]="overTimeHoursAdjustmentForm"
+            [control]="'hours'"
+          ></app-input-box>
         </div>
-        <div class="col">
-          <app-select-box></app-select-box>
+        <div class="pl-36">
+          <app-input-box
+            [label]="'Approved Hours'"
+            [form]="overTimeHoursAdjustmentForm"
+            [control]="'toApproveHours'"
+          ></app-input-box>
         </div>
       </div>
-      <br />
-      <div class="row" style="margin-left: 20px">
-        <div class="col">
-          <app-input-box></app-input-box>
-        </div>
+
+      <div class="pt-0-20">
+        <app-input-box
+          [label]="'Comments'"
+          [form]="overTimeHoursAdjustmentForm"
+          [control]="'note'"
+          [width]="'100%'"
+        ></app-input-box>
       </div>
     </div>
 
@@ -45,20 +56,18 @@
 
     <div class="modal-custom-footer">
       <div class="clues">
-        <span>
-          <i><img src="assets/icons/icon-cpl.svg" alt="" /></i> CPL Due</span
-        >
-        <span>
-          <i><img src="assets/icons/icon-minus.svg" alt="" /> Absents</i>
-        </span>
+        <span> </span>
+        <span> </span>
       </div>
 
       <div class="modal-footer-button flex">
         <input
           type="button"
           class="btn-input"
+          [disabled]="!this.overTimeHoursAdjustmentForm.valid"
+          [class.disabled-btn-forms]="!this.overTimeHoursAdjustmentForm.valid"
           value="Submit"
-          (click)="activeModal.close('Close click')"
+          (click)="submit()"
         />
         <input
           type="button"

@@ -23,7 +23,6 @@ import { DateBoxComponent } from './components/date-box/date-box.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { ButtonComponent } from './components/button/button.component';
 import { EmployeeShiftAlloctionComponent } from './components/employee-shift-alloction/employee-shift-alloction.component';
-import { EmployeeShiftDetailsComponent } from './components/employee-shift-details/employee-shift-details.component';
 import { BoardCardComponent } from './components/board-card/board-card.component';
 import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
 import { EmployeeShiftCardComponent } from './components/employee-shift-card/employee-shift-card.component';
@@ -70,6 +69,22 @@ import { DefaultViewComponent } from './components/default-view/default-view.com
 import { EmployeeCheckBoxComponent } from './components/employee-check-box/employee-check-box.component';
 import { DateCheckBoxComponent } from './components/date-check-box/date-check-box.component';
 import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.component';
+import { EmployeeShiftListComponent } from './dialogs/employee-shift-list/employee-shift-list.component';
+import { EventComponent } from './dialogs/event/event.component';
+import { CalenderSetupComponent } from './dialogs/calender-setup/calender-setup.component';
+import { LocationAndDesignationFilterComponent } from './components/location-and-designation-filter/location-and-designation-filter.component';
+import { ShiftRequestByLmComponent } from './pages/shift-request-by-lm/shift-request-by-lm.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragAndDropComponent } from './components/drag-drop/drag-drop.component';
+import { SingleSortByEmployeeComponent } from './components/single-sort-by-employee/single-sort-by-employee.component';
+import { SingleEmployeeCheckBoxComponent } from './components/single-employee-check-box/single-employee-check-box.component';
+import { ApprovalDetailsComponent } from './components/approval-details/approval-details.component';
+import { EmployeeAttendenceComponent } from './dialogs/employee-attendence/employee-attendence.component';
+
+
 
 
 
@@ -86,7 +101,6 @@ import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.compon
     ButtonComponent,
     EmployeeShiftAlloctionComponent,
     ShiftAllocationComponent,
-    EmployeeShiftDetailsComponent,
     BoardCardComponent,
     EmployeeCardComponent,
     EmployeeShiftCardComponent,
@@ -130,6 +144,18 @@ import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.compon
     EmployeeCheckBoxComponent,
     DateCheckBoxComponent,
     WeekendTypeComponent,
+    EmployeeShiftListComponent,
+    EventComponent,
+    CalenderSetupComponent,
+    LocationAndDesignationFilterComponent,
+    ShiftRequestByLmComponent,
+    DragAndDropComponent,
+    SingleSortByEmployeeComponent,
+    SingleEmployeeCheckBoxComponent,
+    ApprovalDetailsComponent,
+    EmployeeAttendenceComponent
+    
+
    
   ],
   imports: [
@@ -141,7 +167,10 @@ import { WeekendTypeComponent } from './dialogs/weekend-type/weekend-type.compon
     ReactiveFormsModule,
     RosterRoutingModule,
     NgbModule,
-
+    MatInputModule,
+    MatDatepickerModule,
+    NgxMaterialTimepickerModule , 
+    DragDropModule
   ],
   providers: [ModalService, NgbActiveModal, NgbModal],
 })

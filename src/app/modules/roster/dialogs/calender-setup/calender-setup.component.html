@@ -1,0 +1,103 @@
+<app-dialog-layout>
+  <div class="modal-custom modal-lg bg-white modal-center">
+    <div class="gradient-head flex justify-content-between">
+      <div class="heading">Work Calendar Setup</div>
+      <div class="btn-options flex align-content-center">
+        <a (click)="activeModal.close('Close click')"
+          ><img src="assets/icons/ico-close.svg" alt=""
+        /></a>
+      </div>
+    </div>
+    <!-- Body -->
+    <div class="shift-management-wrapper p-20">
+      <div class="header m-0">
+        <div class="search-row m-0">
+          <form action="" class="flex space-between w-100" [formGroup]="workCalenderSetupForm">
+            <div>
+              <app-select-box 
+                [label]="'Period Start Year'" 
+                [data]="years"
+                [form]="workCalenderSetupForm"
+                [control]="'periodStartYear'"
+              ></app-select-box>
+            </div>
+            <div>
+              <app-select-box 
+                [label]="'Period End Year'" 
+                [data]="years"
+                [form]="workCalenderSetupForm"
+                [control]="'periodEndYear'"
+                ></app-select-box>
+            </div>
+            <div>
+              <app-select-box 
+                [label]="'Weekend'" 
+                [data]="weekDays"
+                [form]="workCalenderSetupForm"
+                [multiSelect]="true"
+                [control]="'weekend'"
+                ></app-select-box>
+            </div>
+          </form>
+        </div>
+        <div class="search-row m-0 custom-pt--15">
+          <form action="" class="flex space-between w-100">
+            <div>
+              <app-select-box 
+                [label]="'Half Day'" 
+                [data]="weekDays"
+                [form]="workCalenderSetupForm"
+                [control]="'halfDay'"></app-select-box>
+            </div>
+            <div>
+              <app-time-box 
+                [label]="'From'"
+                [form]="workCalenderSetupForm"
+                [control]="'from'"></app-time-box>
+            </div>
+            <div>
+              <app-time-box 
+                [label]="'To'"
+                [form]="workCalenderSetupForm"
+                [control]="'to'"></app-time-box>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="shift-setup">
+      <app-sub-layout>
+        <div class="shift-card-wrapper pt0-20">
+          <div class="shift-header">Set Public Holidays</div>
+          <div class="shift-card">
+            <div class="row pb-10" *ngFor="let holiday of holidayStatus">
+              <div class="col" *ngFor="let singleHoliday of holiday">
+                <app-check-box 
+                  [label]="singleHoliday.name" 
+                  [checked]="singleHoliday.status" 
+                  (selectionChanged)="selectionChange($event,singleHoliday)"></app-check-box>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-sub-layout>
+    </div>
+    <div class="modal-custom-footer">
+      <div class="clues">
+        <span> </span>
+        <span> </span>
+      </div>
+
+      <div class="modal-footer-button flex">
+        <input type="button" class="btn-input" value="Submit" (click)=submit()/>
+        <input
+          (click)="activeModal.close('Close click')"
+          type="button"
+          class="btn-input"
+          value="Cancel"
+        />
+      </div>
+    </div>
+    <!-- footer -->
+  </div>
+</app-dialog-layout>

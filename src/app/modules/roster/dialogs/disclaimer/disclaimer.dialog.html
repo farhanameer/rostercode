@@ -1,4 +1,80 @@
-<!-- calender -->
-<app-date-check-box></app-date-check-box>
-<app-employee-check-box></app-employee-check-box>
-<app-weekend-type></app-weekend-type>
+<div class="modal-custom bg-white Custom-width-disclaimer">
+  <app-dialog-layout>
+    <form>
+      <div class="gradient-head flex justify-content-between">
+        <div class="heading">Disclaimer</div>
+        <div class="btn-options flex align-content-center">
+          <a (click)="activeModal.close('Close click')"
+            ><img src="assets/icons/ico-close.svg" alt=""
+          /></a>
+        </div>
+      </div>
+      <!-- Body -->
+      <div class="d-flex align-items-center custom-paragraph">
+        <p>
+          This disclaimer is for awareness and in best interest for the employee
+          and employees regarding labor rights.
+        </p>
+      </div>
+      <div class="overtime-form custom-p20">
+        <div class="Custom-disclaimer">
+          <div>
+            <div
+              class="table-header gradient-head flex justify-content-between"
+            >
+              <div class="heading">Information Disclaimer</div>
+              <div class="btn-options flex align-content-center"></div>
+            </div>
+          </div>
+          <div class="shift-setup">
+            <app-sub-layout>
+              <div class="shift-card">
+                <div class="form-col p-10">
+                  <div>
+                    <p class="custom-font-size">
+                      International Labour Regulations require to give their
+                      employees at least one Holiday per week. By Selecting no
+                      weekend you must accept that this has been take into
+                      considertaion and the selected employee will be
+                      compensated monetarily or with a Componsatory leave at a
+                      later stage
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </app-sub-layout>
+          </div>
+        </div>
+
+        <div class="d-flex pt">
+          <app-check-box
+            [label]="'I accept the terms & condition mentioned above'"
+          >
+          </app-check-box>
+        </div>
+      </div>
+
+      <!-- footer -->
+
+      <div class="modal-custom-footer">
+        <div class="clues">
+          <div class="d-flex">
+            <app-check-box [label]="'Do not Show this Again'"> </app-check-box>
+          </div>
+
+          <span> </span>
+        </div>
+
+        <div class="modal-footer-button flex">
+          <input type="submit" class="btn-input" value="Accept" (click)="activeModal.close('Close click')"/>
+          <input
+            (click)="activeModal.close('Close click')"
+            type="button"
+            class="btn-input"
+            value="Cancel"
+          />
+        </div>
+      </div>
+    </form>
+  </app-dialog-layout>
+</div>

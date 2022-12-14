@@ -1,3 +1,4 @@
+import { ShiftRequestDataService } from './../../services/data/shiftRequest.data';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -7,10 +8,33 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./shift-request.component.css']
 })
 export class ShiftRequestComponent implements OnInit {
+  
+  constructor(private fb:FormBuilder , private shiftRequestService : ShiftRequestDataService) { }
 
-  constructor(private fb:FormBuilder) { }
+  shiftTypeArray : any;
 
   ngOnInit(): void {
+    this.getShiftTypes();
+  }
+
+  async getShiftTypes(){
+    const data = await this.shiftRequestService.getShiftTypes();
+    let shifts = data["data"]["payload"];
+    if(!Array.isArray(shifts)){
+      console.log('error occured');
+    }
+    const shiftsArray = [];
+    shifts.forEach(shift =>{
+      shiftsArray.push({
+        id : shift.shift_type_id , 
+        name : shift.shift_type_name
+      })
+    });
+    console.log(shiftsArray);
+    this.shiftTypeArray = shiftsArray;
+
+    console.log(this.shiftTypeArray);
+
   }
 
   shiftRequestForm=this.fb.group({
