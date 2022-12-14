@@ -33,9 +33,14 @@ export class RosterCplComponent implements OnInit {
     console.log(object);
   }
   loopAbleShifts;
+  currentDate : any;
   getNewShifts(shifts){
     this.loopAbleShifts = shifts;
     console.log('event catched',shifts);
+  }
+  dateChanged(date){
+    this.currentDate = date;
+    console.log('date changed' , date);
   }
   selectionChanged(selection){
 

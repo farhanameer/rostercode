@@ -123,6 +123,8 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
 
     params["reporting_to_id"] = lineManagerId;
 
+    this.dateChange.emit(params["year_month"]);
+
     if(this.filters) {
       if(this.filters["employeeType"] !=undefined) {
         params['is_roster_employees'] = this.filters["employeeType"]
@@ -224,7 +226,7 @@ export class ShiftsCalenderComponent implements OnInit , OnChanges {
     }
 
     this.year_month = moment(this.currentDate).format('YYYY')+'-'+moment(this.currentDate).format('MM');
-    this.dateChange.emit(this.year_month);
+    
     this.currentMonthDates = this.calendar.getCalendar(moment(this.currentDate).format('YYYY'), moment(this.currentDate).format('MMM'), this.weekDays);
     this.getLMRosterView({
       "client_id" :this.appLocalStorage.getClientId(),

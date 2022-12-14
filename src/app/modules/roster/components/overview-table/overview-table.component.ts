@@ -25,6 +25,7 @@ export class OverviewTableComponent implements OnInit, OnChanges {
   employeeShift = [];
   @Input() search;
   @Input() date;
+
   constructor(
     private dataService: RosterService,
     private customModal: ModalService,
@@ -41,14 +42,18 @@ export class OverviewTableComponent implements OnInit, OnChanges {
       return;
     }
     this.cplEmployees = restul.searchedArray;
-
+    if(this.date && this.currentDate != this.date){
+      this.getListCplAndOvertime();
+      this.currentDate = this.date;
+    }
   }
   //this.year_month = moment(this.currentDate).format('YYYY')+'-'+moment(this.currentDate).format('MM');
   year_month;
   currentDate;
   ngOnInit(): void {
-    this.getListCplAndOvertime();
+    // this.getListCplAndOvertime();
   }
+
 
   
   open(employee:any){
@@ -65,7 +70,8 @@ export class OverviewTableComponent implements OnInit, OnChanges {
     const data = await (this.dataService.listCplAndOvertime({
       "client_id" :this.appLocalStorage.getClientId(), 
        "linemanager_id" :await this.appLocalStorage.getLineManagerId(),
-      "is_roster_emp" : 1   
+      "is_roster_emp" : 1 , 
+      "year_month" : this.currentDate
   }) as Promise<
       PromiseAble<APIType<CplAndOvertime>>
     >);

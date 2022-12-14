@@ -79,7 +79,7 @@
               </div>
               <div class="height-fixed">
                 <app-overview-table [search]="searchValue"
-                
+                [date]="currentDate"
                 ></app-overview-table>
               </div>
             </app-sub-layout>
@@ -88,6 +88,7 @@
             class="w-100"
             [filters]="filters"
             (shifts)="getNewShifts($event)"
+            (dateChange)="dateChanged($event)"
           ></app-shifts-calender>
         </div>
         <div class="calendar-footer">

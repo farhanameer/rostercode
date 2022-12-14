@@ -32,6 +32,7 @@ export class AppLocalStorageService {
     if(!details){
       let lineManager = await this.getLineManagerDetailsFromAPI(this.getUserId());
       if(lineManager["success"]) {
+
         console.log('id' , lineManager);
         const lmDetails = lineManager["data"]["payload"];
         if(Object.entries(lmDetails).length !=0){
@@ -48,11 +49,13 @@ export class AppLocalStorageService {
       
       this.http.get(`${this.shiftRequest}/linemanager-details?emp_id=${user_id}`).subscribe(
         success =>{
+          
           resolve({
             success : true , 
             data : success
           })
         } , error =>{
+          debugger;
           resolve({
             success  : false , 
             error : error
