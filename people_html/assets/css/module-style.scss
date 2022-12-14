@@ -1493,4 +1493,9 @@
   border: none;
   max-width: fit-content !important;
   align-items: center;
+
+}
+.ag-modal.ag-modal2.modal-dialog {
+  display: flex;
+  justify-content: center;
 }

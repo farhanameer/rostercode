@@ -1,6 +1,9 @@
 import { SearchService } from './../../services/data/searchService.service';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalService } from '../../services/modal/modal.service';
+import { EmployeeAttendanceForm } from 'src/app/shared/form/employee-attendance.form';
+import { EmployeeAttendenceComponent } from '../employee-attendence/employee-attendence.component';
 
 @Component({
   selector: 'app-employee-shift-list',
@@ -9,7 +12,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class EmployeeShiftListComponent implements OnInit, OnChanges {
 
-  constructor(  public activeModal: NgbActiveModal,private searchService: SearchService) { }
+  constructor(   
+   private customModal:ModalService ,
+    public activeModal: NgbActiveModal,private searchService: SearchService) { }
   
   @Input() top:any;
   @Input() bottom : any;
@@ -53,6 +58,10 @@ export class EmployeeShiftListComponent implements OnInit, OnChanges {
       }
 
       this.employees = result.searchedArray;
+  }
+  openEmployeeAttendence(){
+    this.customModal.showFeaturedDialog(EmployeeAttendenceComponent, "");
+   
   }
 
 }

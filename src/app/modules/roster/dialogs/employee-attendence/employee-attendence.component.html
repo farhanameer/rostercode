@@ -1,10 +1,12 @@
 <div class="modal-custom bg-white custom-w-596">
     <app-dialog-layout>
       <div class="gradient-head flex justify-content-between">
-        <div class="heading">Employee Attendence</div>
+        <div class="heading">Employee Attendance</div>
         <div class="btn-options flex align-content-center">
           <a 
-            ><img src="assets/icons/ico-close.svg" alt=""
+            ><img 
+            (click)="activeModal.close('Close click')"
+            src="assets/icons/ico-close.svg" alt=""
           /></a>
         </div>
       </div>
