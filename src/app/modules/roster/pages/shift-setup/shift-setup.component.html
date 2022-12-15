@@ -58,8 +58,8 @@
                         ></app-time-box>
                       </div>
 
-                      <div class="form-col p-0">
-                        <div *ngIf="!isUpdating">
+                      <!-- <div class="form-col p-0" *ngIf="!isUpdating">
+                        <div >
                           <app-input-box
                             [label]="'Comments'"
                             [form]="shiftSetUpForm"
@@ -67,7 +67,7 @@
                             [width]="'1149px'"
                           ></app-input-box>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="form-col">
                         <div>
                           <app-select-box
@@ -295,9 +295,11 @@
                   </div>
                 </div>
               </app-sub-layout>
-              <div *ngIf="isUpdating">
+              <div>
                 <app-approval-details
                   [form]="shiftSetUpForm"
+                  [isUpdating]="isUpdating"
+                  [colors]="colors"
                 ></app-approval-details>
               </div>
             </div>
@@ -341,9 +343,9 @@
             <!-- <div class="shift-setup-footer"></div> -->
             <div class="calendar-footer justify-content-end">
               <div class="modal-footer-button flex">
-                <div class="d-flex align-items-center">
+                <!-- <div class="d-flex align-items-center">
                   <app-check-box [label]="'Active'"> </app-check-box>
-                </div>
+                </div> -->
                 <input
                   *ngIf="!isUpdating"
                   type="submit"
@@ -369,8 +371,8 @@
                   (click)="disApprove()"
                 />
                 <input
-                  *ngIf="isUpdating"
-                  type="submit"
+                  
+                  type="button"
                   class="btn-input"
                   value="Cancel"
                   (click)="cancel()"

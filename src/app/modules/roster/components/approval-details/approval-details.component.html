@@ -2,10 +2,11 @@
   <div class="shift-card-wrapper">
     <div class="shift-header">Approval Details</div>
     <div class="shift-card">
-      <div class="form-col no-wrap">
+      <div class="form-col no-wrap" *ngIf="isUpdating">
         <div>
           <app-input-box
-            [color]="'black'"
+            [color]="'black'" 
+            [textColor]="lm_color"
             [label]="'LM Status'"
             [form]="form"
             [control]="'lm_request'"
@@ -31,7 +32,7 @@
       <div class="form-col no-wrap">
         <div>
           <app-input-box
-            [color]="'black'"
+          [textColor]="hr_color"
             [label]="'HR Status'"
             [form]="form"
             [control]="'hr_status'"

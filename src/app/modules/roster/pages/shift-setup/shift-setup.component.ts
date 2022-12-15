@@ -27,7 +27,7 @@ export class ShiftSetupComponent implements OnInit {
   constructor(
     private shiftRequestService: ShiftRequestDataService,
     private fb: FormBuilder,
-    private appLocalStorage: AppLocalStorageService
+    private appLocalStorage: AppLocalStorageService,
   ) {}
 
   shiftTypeArray: any;
@@ -68,13 +68,15 @@ export class ShiftSetupComponent implements OnInit {
       name: 'Saturday',
     },
   ];
-
+  copiedWeekDays = [];
   dropDownDefaultValues = {
     shiftType: {},
     shiftColor: {},
     day : {},
     revert : {}
   };
+
+  colors : any;
   ngOnInit(): void {
     this.shiftSetUpForm = this.fb.group({
       screen_role: [''],
@@ -186,7 +188,35 @@ export class ShiftSetupComponent implements OnInit {
     this.getShiftTypes();
     this.getShiftColors();
     this.getShifts();
+    this.colors = {
+      0 : null , 
+      1 : null , 
+      2 : null,
+      3: null
+    }
+
+    this.shiftStatusColor();
     // this.getShift
+  }
+  
+  async shiftStatusColor(){
+    const res = await this.shiftRequestService.getShiftStatusColors();
+    let allColors = res['data'].payload;
+    console.log(allColors);
+
+    allColors.forEach(cls =>{
+      if(cls.approved) {
+        this.colors[2] = cls.approved;
+      }else if(cls.pending){
+        this.colors[0] = cls.pending;
+      }
+      else if(cls.disapproved){
+        this.colors[3] = cls.disapproved;
+      }else if(cls.lmrequest){
+        this.colors[1] = cls.lmrequest;
+      }
+    });
+    console.log(this.colors);
   }
   
   shiftExtendedValidator(
@@ -226,6 +256,7 @@ export class ShiftSetupComponent implements OnInit {
       return error;
     };
   }
+
   onShiftExtendedChecked(val: any) {
     console.log('onShiftExtendedChecked', val);
     this.isShiftExtended = !this.isShiftExtended;
@@ -346,6 +377,8 @@ export class ShiftSetupComponent implements OnInit {
   async submit() {
     console.log(this.shiftSetUpForm.value);
 
+    
+
     if (this.isUpdating) {
       console.log(this.shiftSetUpForm.value);
       return;
@@ -369,15 +402,19 @@ export class ShiftSetupComponent implements OnInit {
     body.time_in = `${body.time_in}:00`;
     body.time_out = `${body.time_out}:00`;
     body.qrt_break.forEach((br) => {
-      let lengh = br.qrt_break_time_in.split(':');
-      if(lengh.length ==2){
-        br.qrt_break_time_in = `${br.qrt_break_time_in}:00`;
-      }
-      lengh = br.qrt_break_time_out.split(':');
-      if(lengh.length ==2){
-        br.qrt_break_time_in = `${br.qrt_break_time_out}:00`;
-      }
+
+      br.qrt_break_time_in = `${br.qrt_break_time_in}:00`
       br.qrt_break_time_out = `${br.qrt_break_time_out}:00`;
+
+      // let lengh = br.qrt_break_time_in.split(':');
+      // if(lengh.length ==2){
+      //   ;
+      // }
+      // lengh = br.qrt_break_time_out.split(':');
+      // if(lengh.length ==2){
+      //   br.qrt_break_time_in = `${br.qrt_break_time_in}:00`;
+      // }
+      
     });
     body.consecutive_late = Number(body.consecutive_late);
     body.late_arrival_tolerance = Number(body.late_arrival_tolerance);
@@ -418,6 +455,8 @@ export class ShiftSetupComponent implements OnInit {
     delete body.Tolerance;
     delete body.specific_period;
     const response = await this.shiftRequestService.hrInsertShift(body);
+    if(!response["status"]) return;
+    this.getShifts();
     this.resetForm();
     console.log('response', response);
   }
@@ -443,9 +482,13 @@ export class ShiftSetupComponent implements OnInit {
     this.shiftTypeArray = [];
     this.dropDownDefaultValues.shiftColor = {};
     this.dropDownDefaultValues.shiftType = {};
+    this.dropDownDefaultValues.day = {};
+    this.copiedWeekDays = [...this.weekDaysArray];
+    this.weekDaysArray = [];
     setTimeout(() => {
       this.shiftColorArray = this.shiftColorCopiedArray;
       this.shiftTypeArray = this.shiftTypeCopiedArray;
+      this.weekDaysArray = [...this.copiedWeekDays]
     }, 200);
     this.resetFilters = true;
   }
@@ -610,15 +653,17 @@ export class ShiftSetupComponent implements OnInit {
     const qrtBreaks = [];
     const values = this.shiftSetUpForm.value;
     values.qrt_break.forEach(br =>{
-      let lengh = br.qrt_break_time_in.split(':');
-      if(lengh.length ==2){
-        br.qrt_break_time_in = `${br.qrt_break_time_in}:00`;
-      }
-      lengh = br.qrt_break_time_out.split(':');
-      if(lengh.length ==2){
-        br.qrt_break_time_in = `${br.qrt_break_time_out}:00`;
-      }
+      br.qrt_break_time_in = `${br.qrt_break_time_in}:00`;
       br.qrt_break_time_out = `${br.qrt_break_time_out}:00`;
+      // let lengh = br.qrt_break_time_in.split(':');
+      // if(lengh.length ==2){
+      //   br.qrt_break_time_in = `${br.qrt_break_time_in}:00`;
+      // }
+      // lengh = br.qrt_break_time_out.split(':');
+      // if(lengh.length ==2){
+      //   br.qrt_break_time_in = `${br.qrt_break_time_out}:00`;
+      // }
+      // br.qrt_break_time_out = `${br.qrt_break_time_out}:00`;
       qrtBreaks.push(br);
     })
 
@@ -664,6 +709,7 @@ export class ShiftSetupComponent implements OnInit {
       "qrt_break": values.qrt_break
     }
     const res = await this.shiftRequestService.putUpdateShift(body);
+    if(!res["status"]) return;
     const params = {
       screen_role: 'hr',
       client_id: this.appLocalStorage.getClientId(),
@@ -675,6 +721,7 @@ export class ShiftSetupComponent implements OnInit {
       params
     );
     console.log(response);
+    if(!response["status"]) return;
     this.resetForm();
     this.shiftNameClick = false;
   }
@@ -690,6 +737,7 @@ export class ShiftSetupComponent implements OnInit {
       params
     );
     console.log(response);
+    if(!response["status"]) return;
     this.resetForm();
     this.shiftNameClick = false;
   }

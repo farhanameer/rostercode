@@ -104,7 +104,7 @@ export class OvertimeAdjustmentDialog implements OnInit {
       givenHours: this.overTimeForm.value.givenHours,
       givenCPL: this.overTimeForm.value.cpl,
       client_id: this.appLocalStorage.getClientId(),
-      line_manager_id: this.appLocalStorage.getUserId(),
+      line_manager_id:await this.appLocalStorage.getLineManagerId(),
     };
 
     if (this.valueType == 'cpl') {
@@ -115,8 +115,9 @@ export class OvertimeAdjustmentDialog implements OnInit {
     }
     // console.log('my obj', obj);
     const result = await this.overTimeAdjustment.getOvertimeAdjustment(obj);
+    if(!result["status"]) return;
     console.log('Overtime', result);
-    this.activeModal.close('Close click');
+    this.activeModal.close(true);
   }
 
   get validateAForm(): any {

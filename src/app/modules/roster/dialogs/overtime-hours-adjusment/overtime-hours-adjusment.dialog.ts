@@ -47,11 +47,12 @@ export class OvertimeHoursAdjusmentDialog implements OnInit {
       toApproveHours: this.overTimeHoursAdjustmentForm.value.toApproveHours,
       note: this.overTimeHoursAdjustmentForm.value.note,
       client_id: this.appLocalStorage.getClientId(),
-      line_manager_id: this.appLocalStorage.getUserId(),
+      line_manager_id: await this.appLocalStorage.getLineManagerId(),
     };
     const result = await this.hoursAdjustment.getHoursAdjustment(obj);
+    if(!result["status"]) return;
     console.log('Approve Hours', result);
-    this.activeModal.close('Close click');
+    this.activeModal.close(true);
   }
 
   get validateAForm(): any {

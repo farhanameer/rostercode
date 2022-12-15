@@ -14,7 +14,8 @@
       <ul class="overtime-header">
         <li>
           <div class="user-img">
-            <img src="assets/images/img-dummy.png" alt="" />
+            <img *ngIf="modelData.picture == 'dummy.jpg'" src="assets/images/img-dummy.png" alt="" />
+            <img *ngIf="modelData.picture != 'dummy.jpg'" src={{modelData.picture}} alt="" />
           </div>
           <div class="employee-detail">
             <div class="heading-lg">Name: {{modelData.name}}</div>
@@ -73,7 +74,7 @@
           type="button"
           class="btn-input"
           value="Cancel"
-          (click)="activeModal.close('Close click')"
+          (click)="activeModal.close(false)"
         />
       </div>
     </div>

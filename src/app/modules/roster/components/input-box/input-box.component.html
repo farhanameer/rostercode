@@ -5,6 +5,7 @@
       [type]="type"
       [attr.disabled]="isdisabled? true : null"
       id="input-box"
+      [ngStyle]="{'color' : textColor}"
       class="input-box"
       type="text"
       [placeholder]="placeHolder"
@@ -13,6 +14,7 @@
     <input
       *ngIf="form && control"
       [type]="type"
+      [ngStyle]="{'color' : textColor}"
       [attr.disabled]="isdisabled? true : null"
       id="input-box"
       [formControl]="form?.get(control)"
