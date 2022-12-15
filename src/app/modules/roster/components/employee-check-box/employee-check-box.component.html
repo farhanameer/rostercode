@@ -23,7 +23,7 @@
             <div class="col custom-pl-6">
               <li class="custom-w-210">
                 <div class="user-img">
-                  <span></span>
+                  <span [ngStyle]="{'background' : shift.color}"></span>
                 </div>
                 <div class="employee-detail">
                   <div class="heading-lg">{{ shift.start }}</div>
@@ -64,7 +64,7 @@
               <div class="col custom-pl-6">
                 <li class="custom-w-210">
                   <div class="user-img">
-                    <span></span>
+                    <span [ngStyle]="{'background' : shift.color}"></span>
                   </div>
                   <div class="employee-detail">
                     <div class="heading-lg">{{ shift.start }}</div>

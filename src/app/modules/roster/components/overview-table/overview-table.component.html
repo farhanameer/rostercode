@@ -12,7 +12,10 @@
       <td>
         <div class="pic-name-list" (click)="open(employee)">
           <span class="user-img"
-            ><img src="assets/images/img-dummy.png" alt="" /></span
+            >
+            <img *ngIf="employee.picture == 'dummy.jpg'" src="assets/images/img-dummy.png" alt="" />
+            <img *ngIf="employee.picture != 'dummy.jpg'" src={{employee.picture}} alt="" />
+            </span
           >{{ employee.name }}
         </div>
       </td>

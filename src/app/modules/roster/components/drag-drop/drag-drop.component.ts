@@ -97,14 +97,44 @@ export class DragAndDropComponent implements OnInit , OnChanges {
       shift_id : this.shift.id , 
       shift_allocation_emp_list : employees
     });
-    console.log('no weekends',this.noWeekEnds);
-    if(this.noWeekEnds.length >= this.currentLengthOf && this.noWeekEnds.length!=0){
-      this.customModal.showFeaturedDialog(DisclaimerDialog, "");
-      this.currentLengthOf = this.noWeekEnds.length;
-    }
-    this.currentLengthOf = this.noWeekEnds.length;
+    // console.log('no weekends',this.noWeekEnds);
+    // if(this.noWeekEnds.length >= this.currentLengthOf && this.noWeekEnds.length!=0){
+    //   this.customModal.showFeaturedDialog(DisclaimerDialog, "");
+    //   this.currentLengthOf = this.noWeekEnds.length;
+    // }
+    // this.currentLengthOf = this.noWeekEnds.length;
   }
-  drop(event){
+
+
+
+  acceptChange(event){
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+    this.emitChange();
+  }
+  drop(eventCustom){
+
+    let event = eventCustom.event;
+    if(eventCustom.dayName == 'No Weekends') {
+      console.log('no weekends we got here');
+
+      const ref = this.customModal.showFeaturedDialog(DisclaimerDialog, "");
+      ref.closed.subscribe((event) =>{
+        if(event){
+          this.acceptChange(eventCustom.event);
+        }
+        
+      });
+      return;
+    }
     console.log('data being',event.previousContainer.data);
 
     if (event.previousContainer === event.container) {

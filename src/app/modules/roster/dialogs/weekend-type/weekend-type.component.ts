@@ -45,12 +45,12 @@ export class WeekendTypeComponent implements OnInit {
     console.log('weekend Type' , value);
     this.postMArkWeekend(value);
   }
-  postMArkWeekend(value){
+  async postMArkWeekend(value){
     this.markWeekendBody = {
       roster_id : this.roster_id,
       client_id : this.appLocalStorage.getClientId(),
-      leave_type : "value",
-      linemanager_id : this.appLocalStorage.getUserId()
+      leave_type : value.value,
+      linemanager_id : await this.appLocalStorage.getLineManagerId()
     }
   }
 

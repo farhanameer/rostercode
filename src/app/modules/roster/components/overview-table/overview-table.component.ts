@@ -57,13 +57,28 @@ export class OverviewTableComponent implements OnInit, OnChanges {
 
   
   open(employee:any){
-    this.customModal.showFeaturedDialog(SingleShiftDetailDialog, employee);
+    const ref = this.customModal.showFeaturedDialog(SingleShiftDetailDialog, employee);
+    ref.closed.subscribe(event =>{
+      if(event){
+        this.getListCplAndOvertime();
+      }
+    });
   }
   openOverView(employee) {
-    this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, '' , employee);
+    const ref = this.customModal.showFeaturedDialog(OvertimeAdjustmentDialog, '' , employee);
+    ref.closed.subscribe(event =>{
+      if(event){
+        this.getListCplAndOvertime();
+      }
+    });
   }
   openHours(employee) {
-    this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog, '',employee);
+    const ref = this.customModal.showFeaturedDialog(OvertimeHoursAdjusmentDialog, '',employee);
+    ref.closed.subscribe(event =>{
+      if(event){
+        this.getListCplAndOvertime();
+      }
+    });
   }
 
   async getListCplAndOvertime() {

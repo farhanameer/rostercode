@@ -42,7 +42,7 @@ export class SingleShiftAllocationDialog implements OnInit {
       allocateShift:["",Validators.required]
     })
   }
-
+  allocatedShift : any;
   async changeDate(){
     this.singleShiftForm.value.date = moment(this.singleShiftForm.value.date).format("YYYY-MM-DD");
     const params = {
@@ -61,12 +61,28 @@ export class SingleShiftAllocationDialog implements OnInit {
     const res = await this.employeeroster.getEmployeeRoster(params, replace);
     if(res['data']['payload']['data'].length !== 0){
       this.alreadyAllocatedShift = res['data']['payload']['data'][0].shift_name;
+
+      this.allocatedShift = res['data']['payload']['data'][0];
+      this.filterShiftsArray(this.allocatedShift.shift_id);
     }else{
       console.log("Error")
     }
   }
 
-  
+
+
+
+  masterShiftsArray = [];
+  filterShiftsArray(shiftId){
+    const shifts = [];
+    this.masterShiftsArray.forEach(shift =>{
+      if(shift.id !=shiftId){
+        shifts.push(shift);
+      }
+    });
+
+    this.shiftNameArray = shifts;
+  }
   async getShiftDropdown() {
     // this.shiftAllocate = <Array<any>>(await this.shiftRequest.getDefaultList(this.screenRole));
     const data = await this.shiftRequest.getDefaultList(this.screenRole);
@@ -79,11 +95,12 @@ export class SingleShiftAllocationDialog implements OnInit {
     const shiftName = [];
     shifts.forEach(shift => {
       shiftName.push({
-        id: shift.shift_type_id,
+        id: shift.id,
         name: shift.name
       })
     });
     this.shiftNameArray = shiftName;
+    this.masterShiftsArray = [...this.shiftNameArray];
   }
 
 
@@ -91,24 +108,28 @@ export class SingleShiftAllocationDialog implements OnInit {
     return this.singleShiftForm.controls
   }
 
-  submit(){
+  async submit(){
 
     this.singleShiftForm.value.date = moment(this.singleShiftForm.value.date).format("YYYY-MM-DD");
 
     const body = {
       "client_id" : this.appLocalStorage.getClientId(),
-      "linemanager_id" : this.appLocalStorage.getUserId(),
-      "shift_id" : 7,
+      "linemanager_id" : await this.appLocalStorage.getLineManagerId(),
+      "shift_id" : this.allocatedShift.shift_id,
       "employee_id" : this.data.employee_id,
       "rosterDate" : this.singleShiftForm.value.date,
       "additional_shift_id" : this.singleShiftForm.value.allocateShift
     }
+
+    console.log(this.singleShiftForm.value);
     this.assignShift(body);
   }
 
   async assignShift(body){
     const res = await this.rosterService.assignAddtionalShift(body);
-    
+    if(res["status"]){
+      this.activeModal.close(true);
+    }
   }  
 
 }

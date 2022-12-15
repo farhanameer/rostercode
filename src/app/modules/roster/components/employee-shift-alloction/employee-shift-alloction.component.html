@@ -5,6 +5,7 @@
         <div class="table-header gradient-head flex justify-content-between">
           <div class="heading">Shift Allocation</div>
           <app-location-and-designation-filter
+            [showSearch]="true"
             (filtersChange)="filtersChanged($event)"
             [resetFilters]="reset"
           >

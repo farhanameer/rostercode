@@ -50,5 +50,5 @@
       <div>Volvo</div> -->
     </div>
   </div>
-  <span *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched" class="text-right d-block text-error">required</span>
+  <span *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched && !hideLabel" class="text-right d-block text-error">required</span>
 </div>

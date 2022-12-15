@@ -2,6 +2,7 @@
   <div class="toggleable">
     <div>
       <app-employee-shift-alloction [form]="shiftAllocationForm" 
+      
       (filterSelection)="filtersChanged($event)"
       [shifts]="copiedShiftsArray"
       (selectedShift)="shiftSelected($event)"

@@ -15,12 +15,12 @@ export class ShiftAllocationDataService {
   ) {}
 
   createShift(params = {}) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
         const userPayload = {
             "client_id" : this.appLocalStorage.getClientId(),
-            "dept_id" : this.appLocalStorage.getUserId()
+            "dept_id" : await this.appLocalStorage.getLineManagerId()
         }
         params = {...params , ...userPayload};
         this.httpService.createShift(params).subscribe(
@@ -55,12 +55,15 @@ export class ShiftAllocationDataService {
   }
 
   createShiftFile(file) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const response = { data: null, status: false, message: null };
       try {
         
-        
-        this.httpService.createShiftFile(file).subscribe(
+        let formData = new FormData();
+        formData.append('shift_allocation' , file);
+        formData.append('client_id' , this.appLocalStorage.getClientId())
+        formData.append('dept_id' ,  await this.appLocalStorage.getLineManagerId());
+        this.httpService.createShiftFile(formData).subscribe(
           (data) => {
             response.data = data;
             response.message = 'success';

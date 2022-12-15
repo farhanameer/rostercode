@@ -28,7 +28,8 @@ export class AppLocalStorageService {
   }
 
   private async lineManagerDetails(){
-    const details = JSON.parse(localStorage.getItem('line_manage_details'));
+    const details = JSON.parse(localStorage.getItem('line_manager_details'));
+    
     if(!details){
       let lineManager = await this.getLineManagerDetailsFromAPI(this.getUserId());
       if(lineManager["success"]) {
@@ -40,8 +41,8 @@ export class AppLocalStorageService {
         }
         return lmDetails;
       }
-      return details;
     }
+    return details;
   }
 
   private getLineManagerDetailsFromAPI(user_id){
@@ -55,7 +56,6 @@ export class AppLocalStorageService {
             data : success
           })
         } , error =>{
-          debugger;
           resolve({
             success  : false , 
             error : error

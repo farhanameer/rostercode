@@ -12,5 +12,13 @@ export class DisclaimerDialog implements OnInit {
 
   ngOnInit(): void {
   }
+  disableSubmit : boolean = false;
+  acceptance(event){
+    console.log(event);
+    this.disableSubmit = event;
+  }
+  doNotShowDialouge(event){
+    console.log(event);
+  }
 
 }

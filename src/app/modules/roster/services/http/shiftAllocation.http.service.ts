@@ -21,11 +21,8 @@ export class ShiftAllocationHttpService {
     return this.http.post(`${this.shiftAllocation}/CreateShift`, body);
   }
 
-  createShiftFile(file) {
-    let formData = new FormData();
-    formData.append('shift_allocation' , file);
-    formData.append('client_id' , this.appLocalStorage.getClientId())
-    formData.append('dept_id' , this.appLocalStorage.getUserId());
+  createShiftFile(formData) {
+    
     return this.http.post(`${this.shiftAllocation}/CreateShiftInFile`, formData);
   }
 

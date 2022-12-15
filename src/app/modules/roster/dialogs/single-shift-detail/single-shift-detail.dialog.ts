@@ -24,7 +24,12 @@ export class SingleShiftDetailDialog implements OnInit, OnChanges {
   
 
   open(){
-    this.customModal.showFeaturedDialog(SingleShiftAllocationDialog, this.data);
-this.activeModal.close(ShiftAllocationComponent)
+    const ref = this.customModal.showFeaturedDialog(SingleShiftAllocationDialog, this.data);
+    ref.closed.subscribe(event =>{
+      if(event){
+        this.activeModal.close(true)
+      }
+    });
+    // this.activeModal.close(false)
   }
 }

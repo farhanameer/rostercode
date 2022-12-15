@@ -49,6 +49,7 @@
         <div class="d-flex pt">
           <app-check-box
             [label]="'I accept the terms & condition mentioned above'"
+            (selectionChanged)="acceptance($event)"
           >
           </app-check-box>
         </div>
@@ -59,16 +60,17 @@
       <div class="modal-custom-footer">
         <div class="clues">
           <div class="d-flex">
-            <app-check-box [label]="'Do not Show this Again'"> </app-check-box>
+            <app-check-box [label]="'Do not Show this Again'"
+            (selectionChanged)="doNotShowDialouge($event)"> </app-check-box>
           </div>
 
           <span> </span>
         </div>
 
         <div class="modal-footer-button flex">
-          <input type="submit" class="btn-input" value="Accept" (click)="activeModal.close('Close click')"/>
+          <input type="submit" class="btn-input" [disabled]="!disableSubmit" value="Accept" (click)="activeModal.close(true)"/>
           <input
-            (click)="activeModal.close('Close click')"
+            (click)="activeModal.close(false)"
             type="button"
             class="btn-input"
             value="Cancel"

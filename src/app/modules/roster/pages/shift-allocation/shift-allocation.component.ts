@@ -68,8 +68,23 @@ export class ShiftAllocationComponent implements OnInit {
     const shifts = await this.shiftRequestService.getDefaultList('lm' , this.removeDefaultFiltersVallues());
     console.log('shift request being get' , shifts);
 
-    if(!shifts["status"]) return; //posible error message
-    if(!shifts["data"]["status"]) return; //posible error message
+    if(!shifts["status"]){
+      this.shiftsArray = [];
+      this.copiedShiftsArray = [];
+      return;
+    }  //posible error message
+    if(!shifts["data"]["status"]) {
+      this.shiftsArray = [];
+      this.copiedShiftsArray = [];
+      return;
+    } //posible error message
+    if(!Array.isArray(shifts["data"]["payload"])){
+      this.shiftsArray = [];
+      this.copiedShiftsArray = [];
+      debugger;
+      return;  
+    }
+    debugger;
     this.shiftsArray = shifts["data"]["payload"];
     this.copiedShiftsArray = [...this.shiftsArray];
   }
@@ -98,7 +113,7 @@ export class ShiftAllocationComponent implements OnInit {
   async getEmployees(){
     const employee = await this.rosterViewService.getEmployeeList({
       client_id : this.appLocalStorage.getClientId(),
-      dept_id : this.appLocalStorage.getUserId()
+      dept_id : await this.appLocalStorage.getLineManagerId()
     });
 
     console.log('employees' , employee);
@@ -146,6 +161,7 @@ export class ShiftAllocationComponent implements OnInit {
     this.shiftAllocationForm.reset();
     console.log(this.shiftAllocationForm.value);
     this.resetDropDown();
+    this.getEmployees();
     this.reset = !this.reset;
   }
 
@@ -195,7 +211,7 @@ export class ShiftAllocationComponent implements OnInit {
     return newArray;
   }
   employeeChange(data){
-    this.employees = [...this.masterEmployees];
+    // this.employees = [...this.masterEmployees];
     console.log('data after being changed' , data);
     console.log('before removal',this.creatShiftEmployees);
     this.creatShiftEmployees = this.searchAndDeleteIfExists(this.creatShiftEmployees , data.shift_id , 'shift_id');

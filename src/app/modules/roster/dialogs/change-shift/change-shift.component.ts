@@ -123,6 +123,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   }
 
   async swapShift(body){
+    body["linemanager_id"] = await this.appLocalStorage.getLineManagerId();
     const res = await this.rosterService.swapShift(body);
     
   }
@@ -241,7 +242,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     console.log(event);
     const body = {
       client_id : this.appLocalStorage.getClientId(),
-      reporting_to_id : this.appLocalStorage.getUserId(),
+      reporting_to_id : await this.appLocalStorage.getLineManagerId(),
       custom_date : event
     }
     const res = await this.rosterService.getLMRosterView(body);

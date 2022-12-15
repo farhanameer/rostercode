@@ -13,7 +13,9 @@ export class ModalService {
         theComponent
       );
       const modalRef = this.ngbModal.open(theComponent);
-      
+      modalRef.closed.subscribe(() =>{
+        console.log('event closed fuck here');
+      })
       return modalRef;
     }
   
@@ -26,6 +28,8 @@ export class ModalService {
       modalRef.componentInstance.data = employee;
       modalRef.componentInstance.dates = data;
       modalRef.componentInstance.modelData = data;
+
+      
       return modalRef;
     }
 }

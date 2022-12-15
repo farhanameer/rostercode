@@ -26,7 +26,7 @@ export class EmployeeShiftCardComponent implements OnInit , OnChanges {
   ngOnInit(): void {
   }
   drop(event){
-    this.itemDropped.emit(event);
+    this.itemDropped.emit({event : event , dayName : this.dayName});
   }
   open(){
     const data = {

@@ -11,7 +11,7 @@
         <app-date-card *ngFor="let shift of employee.shifts">
           <li>
             <div class="user-img">
-              <span></span>
+              <span [ngStyle]="{'background' : shift.color}"></span>
             </div>
             <div class="employee-detail">
               <div class="heading-lg">{{ shift.start }}</div>
