@@ -197,7 +197,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     const employees = this.modelData.dateRagne.employees;
     const shiftsArray = [];
     const replaceWithArray = [];
-
+    // debugger;
     employees.forEach(employee =>{    
       if(employee.emp_id == $event.value){
         const obj = {
@@ -217,14 +217,30 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
         name : employee.emp_name
       });
     });
-    this.employeesName = shiftsArray;
 
+    const shiftDataArray = []
+    console.log("Swipe Dropdown",this.swipeDropdown);
+    
+    this.swipeDropdown.forEach(entry => {
+      if(entry.id!=this.assignedShiftDefaultValue.id){
+        shiftDataArray.push({
+          id : entry.id, 
+          name : entry.name,
+          color : entry.color
+        });
+      }
+    });
+    this.employeesName = shiftsArray;
+   
     if(this.modelData.dateRagne.start != this.customDate){
+      this.dateChanged(this.customDate);
       return;
     }
     this.replaceWithDropdown = [];
+    this.swipeDropdown = [];
     setTimeout(() => {
       this.replaceWithDropdown = replaceWithArray;
+      this.swipeDropdown = shiftDataArray;
     }, 100);
 
     
@@ -248,6 +264,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     const res = await this.rosterService.getLMRosterView(body);
     console.log("Response",res);
     const payload = res["data"]["payload"];
+    // debugger;
     
     let replaceWithArray = [];
     let shiftDataArray = [];
@@ -275,10 +292,21 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
             color : entry.shift_color
           });
         }
-      } 
-      
+      }  
     });
-  
+
+    console.log("Shift Data Array",shiftDataArray);
+    const changeShiftArray = []
+    shiftDataArray.forEach(entry => {
+      if(entry.id!=this.assignedShiftDefaultValue.id){
+        changeShiftArray.push({
+          id : entry.id, 
+          name : entry.name,
+          color : entry.color
+        });
+      }
+    });
+    console.log("Change Shift Data Array",changeShiftArray);
     this.replaceWithDropdown = [];
     console.log(shiftDataArray)
     this.swipeDropdown = [];
@@ -289,7 +317,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
         this.getDefaultEmployeesAndShifts(this.modelData);
         return;
       }
-      this.swipeDropdown = shiftDataArray;
+      this.swipeDropdown = changeShiftArray;
     }, 100);
   }
 
