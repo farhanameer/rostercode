@@ -57,10 +57,13 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
         "shift_id" : this.swipeShiftForm.value.swipeShift,
         "employee_id" : this.swipeShiftForm.value.employee_id,
         "assigned_shift" : this.assignedShiftDefaultValue.id,
-        "assigned_roster_date" : this.assignedEmployeeShift.start,
+        "assigned_roster_date" : this.assignedEmployeeShift.plan_shift_time_in.split(' ')[0],
         "replaceWithEmployeeId" : null || this.swipeShiftForm.value.replaceWithEmployeeId,
         "rosterDate": this.swipeShiftForm.value.assigned_roster_date
       }
+
+
+      debugger;
           
       this.submitBtn = false;
       if(body.replaceWithEmployeeId){
@@ -208,6 +211,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
           id : employee.shift_id,
           name : employee.shift_name
         }
+        this.assignedEmployeeShift = employee;
         shiftsArray.push(obj);
         return;
       }
@@ -295,18 +299,6 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
       }  
     });
 
-    console.log("Shift Data Array",shiftDataArray);
-    const changeShiftArray = []
-    shiftDataArray.forEach(entry => {
-      if(entry.id!=this.assignedShiftDefaultValue.id){
-        changeShiftArray.push({
-          id : entry.id, 
-          name : entry.name,
-          color : entry.color
-        });
-      }
-    });
-    console.log("Change Shift Data Array",changeShiftArray);
     this.replaceWithDropdown = [];
     console.log(shiftDataArray)
     this.swipeDropdown = [];
@@ -317,7 +309,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
         this.getDefaultEmployeesAndShifts(this.modelData);
         return;
       }
-      this.swipeDropdown = changeShiftArray;
+      this.swipeDropdown = shiftDataArray;
     }, 100);
   }
 

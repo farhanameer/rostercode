@@ -69,7 +69,7 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
         "linemanager_id" : this.appLocalStorage.getUserId(),
         "shift_id" : this.assignedShiftDefaultValue.id,
         "employee_id" : this.additionalShiftForm.value.employee_id,
-        "rosterDate" : this.assignedEmployeeShift.start,
+        "rosterDate" : this.assignedEmployeeShift.plan_shift_time_in.split(' ')[0],
         "additional_shift_id" : null || this.additionalShiftForm.value.additionalShift, 
         "additionalHours" : null || this.additionalHoursForm.value.additionalShiftHours
       }
@@ -182,6 +182,7 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
             id : employee.shift_id,
             name : employee.shift_name
           }
+          this.assignedEmployeeShift = employee;
           return;
         }
         
