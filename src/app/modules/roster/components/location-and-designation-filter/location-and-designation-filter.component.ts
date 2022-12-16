@@ -20,6 +20,9 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
 
   @Input() showSearch = false;
   @Input() isLineManager = false;
+  @Input() isLineManagerView : boolean = true;
+
+
 
   copiedMarketArray = [];
   marketArray : any[] = [];
@@ -157,6 +160,8 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
       this.marketArray = [...this.copiedMarketArray];
     }, 200);
     this.populateFilterValues();
+
+    
     // setTimeout(() => {
     //   this.populateFilterValues();
     // }, 200);
@@ -172,6 +177,7 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
       branchId : {},
       departmentId : {}
     }
+    this.restrictFiltersForLM();
   }
 
 
@@ -557,10 +563,13 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
 
     const params = {
       'country_id'  : defaultThis.locationFilters?.countryId,
-      'line_manager_id' : await defaultThis.appLocalStorage.getLineManagerId()
     }
     if(defaultThis.defaultValues && defaultThis.defaultValues['country_id'] && defaultThis.defaultValues['country_id'] !=null){
       params.country_id = defaultThis.defaultValues['country_id'];
+    }
+
+    if(defaultThis.isLineManagerView){
+      params['line_manager_id'] =  await defaultThis.appLocalStorage.getLineManagerId()
     }
 
 
@@ -570,6 +579,8 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
         params.country_id = lmDetails['country_id'];
       }
     }
+
+
 
 
 

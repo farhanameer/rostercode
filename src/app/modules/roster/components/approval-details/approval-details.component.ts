@@ -25,6 +25,7 @@ export class ApprovalDetailsComponent implements OnInit ,OnChanges {
     if(this.form.value.hr_status == 2){
       this.form.get('hr_status').setValue('Approved');
       this.hr_color = this.colors['2'];
+      console.log('hr color ere' , this.hr_color)
     }
     if(this.form.value.hr_status == 3){
       this.form.get('hr_status').setValue('Disapproved');

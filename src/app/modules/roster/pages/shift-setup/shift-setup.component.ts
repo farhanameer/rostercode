@@ -40,31 +40,31 @@ export class ShiftSetupComponent implements OnInit {
   filters: any;
   weekDaysArray = [
     {
-      id: 0,
+      id: 1,
       name: 'Sunday',
     },
     {
-      id: 1,
+      id: 2,
       name: 'Monday',
     },
     {
-      id: 2,
+      id: 3,
       name: 'Tuesday',
     },
     {
-      id: 3,
+      id: 4,
       name: 'Wednesday',
     },
     {
-      id: 4,
+      id: 5,
       name: 'Thursday',
     },
     {
-      id: 5,
+      id: 6,
       name: 'Friday',
     },
     {
-      id: 6,
+      id: 7,
       name: 'Saturday',
     },
   ];
@@ -644,12 +644,12 @@ export class ShiftSetupComponent implements OnInit {
         shift.color
       );
     }
-    if(shift.ext_mid_break_day_id){
-      
+    if(shift.ext_mid_break_day_id != null){
+      console.log('here we have ' , shift.ext_mid_break_day_id);
       this.dropDownDefaultValues.day = this.searchInArray(
         this.weekDaysArray , 
         'id',
-        shift.ext_mid_break_day_id
+        Number(shift.ext_mid_break_day_id) + 1
       );
     
     }
@@ -660,7 +660,7 @@ export class ShiftSetupComponent implements OnInit {
         shift.revert_shift_id
       );
     }
-    console.log('default values set', this.dropDownDefaultValues.shiftColor);
+    console.log('default values set', this.dropDownDefaultValues);
   }
 
   changeTimeFormate(value) {
@@ -712,7 +712,7 @@ export class ShiftSetupComponent implements OnInit {
       "mid_break_enable": this.shiftSetUpForm.get('mid_break_enable').value,
       "mid_break_time_in": `${this.shiftSetUpForm.get('mid_break_time_in').value}:00`, 
       "mid_break_time_out": `${this.shiftSetUpForm.get('mid_break_time_out').value}:00`,
-      "ext_mid_break_day_id": this.shiftSetUpForm.get('ext_mid_break_day_id').value,
+      "ext_mid_break_day_id": this.shiftSetUpForm.get('ext_mid_break_day_id').value - 1,
       "ext_mid_break_time_in": `${this.shiftSetUpForm.get('ext_mid_break_time_in').value}:00`,
       "ext_mid_break_time_out": `${this.shiftSetUpForm.get('ext_mid_break_time_out').value}:00`,
       "is_roster": this.shiftSetUpForm.get('is_roster').value ? 1 : 0,
