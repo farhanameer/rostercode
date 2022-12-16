@@ -19,28 +19,31 @@
               <img src="assets/images/img-dummy.png" alt="" />
             </div>
             <div class="employee-detail">
-              <div class="heading-lg">Employee Name:<span class="custom-span">Adam Pierce</span> </div>
+              <div class="heading-lg">Employee Name:<span class="custom-span">{{modelData.emp_name}}</span> </div>
               <div class="d-flex col-gap-5">
-              <div class="heading-lg">Shift:<span class="custom-span">Morning(07:00-14:00)</span></div>
-              <div class="green-number">+4</div>
+              <div class="heading-lg">Shift:<span class="custom-span">{{modelData.shift_name}}({{time_in}}-{{time_out}})</span></div>
+              <div class="green-number">{{modelData.addtional_hours}}</div>
             </div>
             </div>
           </li>
         </ul>
-        <form class="pt-2">
+        <form [formGroup]="shiftSetUpForm" class="pt-2">
           <div class="row m-0 col-gap-36">
             <div class="">
               <app-time-box
+              [form]="shiftSetUpForm"
                 [label]="'Time In'"
                 [color]="'black'"
-                
+                [control]="'time_in'"
+    
               ></app-time-box>
             </div>
             <div class="">
               <app-time-box
+              [form]="shiftSetUpForm"
               [color]="'black'"
                 [label]="'Time Out'"
-               
+               [control]="'time_out'"
               ></app-time-box>
             </div>
           </div>
@@ -84,6 +87,7 @@
             type="button"
             class="btn-input"
             value="Submit"
+            (click)="submit()"
          
             
           />

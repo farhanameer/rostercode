@@ -59,8 +59,8 @@ export class EmployeeShiftListComponent implements OnInit, OnChanges {
 
       this.employees = result.searchedArray;
   }
-  openEmployeeAttendence(){
-    this.customModal.showFeaturedDialog(EmployeeAttendenceComponent, "");
+  openEmployeeAttendence(emp){
+    this.customModal.showFeaturedDialog(EmployeeAttendenceComponent, "", emp);
    
   }
 

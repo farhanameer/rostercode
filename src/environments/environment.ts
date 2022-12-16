@@ -159,6 +159,7 @@ export const APIs = {
   //ShiftRequestAndSetup
   ShiftRequestAndSetupUrl: environment.nodeApiUrl + 'ShiftRequestAndSetup',
   workCalendarUrl: environment.nodeApiUrl + 'WorkCalendar',
+  rosterAttendance: environment.nodeApiUrl + 'Attendance'
 };
 
 /*
