@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import moment from 'moment';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { RosterService } from '../../services/data/roster.dataService';
 
@@ -98,6 +99,7 @@ export class OvertimeAdjustmentDialog implements OnInit {
     this.HoursAdjustMent();
   }
   async HoursAdjustMent() {
+    
     let obj = {
       type: this.valueType,
       employee_id: this.modelData.employee_id,
@@ -105,6 +107,7 @@ export class OvertimeAdjustmentDialog implements OnInit {
       givenCPL: this.overTimeForm.value.cpl,
       client_id: this.appLocalStorage.getClientId(),
       line_manager_id:await this.appLocalStorage.getLineManagerId(),
+      givenDate : moment(this.overTimeForm.value.tillDate).format('YYYY-MM-DD')
     };
 
     if (this.valueType == 'cpl') {

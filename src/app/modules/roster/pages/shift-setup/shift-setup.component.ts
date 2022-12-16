@@ -475,6 +475,17 @@ export class ShiftSetupComponent implements OnInit {
     console.log(this.shiftSetUpForm.value);
     this.resetDropDown();
     this.isUpdating = false;
+    this.defaultFilters = {
+      glob_mkt_id : null , 
+      region_id : null , 
+      sub_region_id : null,
+      country_id : null , 
+      state_id : null , 
+      city_id  : null , 
+      branch_id : null , 
+      department_id : null
+    }
+    
   }
   resetFilters = false;
   resetDropDown() {
@@ -490,16 +501,19 @@ export class ShiftSetupComponent implements OnInit {
       this.shiftTypeArray = this.shiftTypeCopiedArray;
       this.weekDaysArray = [...this.copiedWeekDays]
     }, 200);
-    this.resetFilters = true;
+    this.resetFilters = !this.resetFilters;
   }
 
   isUpdating: boolean = false;
   updateAbleShiftId: any;
   defaultFilters : any=null;
   shiftId: any;
+  isDisabled : boolean = false;
+  proll_table_id : any = 0;
   async getSingleShift(id) {
     this.shiftId = id;
     console.log('single Shift Id', id);
+
     const payload = {
       client_id: this.appLocalStorage.getClientId(),
       shift_id: id,
@@ -515,7 +529,15 @@ export class ShiftSetupComponent implements OnInit {
     }
     const shiftData = response['data']['payload'];
     console.log('shift data', shiftData[0]);
+    
     const shift = shiftData[0];
+
+    this.proll_table_id = shift.proll_filter_table_id;
+    if(shift.hr_status != 0 ){
+      this.isDisabled = true;
+    }else{
+      this.isDisabled = false;
+    }
     // this.testform.patchValue({
     //   "testcontrol": testdata.id,
     //   "desc": "testdata value"
@@ -668,30 +690,35 @@ export class ShiftSetupComponent implements OnInit {
     })
 
     let shift_revert_date_start = this.shiftSetUpForm.get('shift_revert_date_start').value
-    shift_revert_date_start = moment(shift_revert_date_start).format('YYYY-MM-DD');
+    if(shift_revert_date_start){
+      shift_revert_date_start = moment(shift_revert_date_start).format('YYYY-MM-DD');
+    }
 
     let shift_revert_date_end = this.shiftSetUpForm.get('shift_revert_date_end').value
-    shift_revert_date_end = moment(shift_revert_date_end).format('YYYY-MM-DD');
+    if(shift_revert_date_end){
+      shift_revert_date_end = moment(shift_revert_date_end).format('YYYY-MM-DD');
+    }
+    
            
     const body = {
       "client_id": this.appLocalStorage.getClientId(),
       "shift_id": this.shiftId,
-      "proll_filter_table_id": 7,
+      "proll_filter_table_id": this.proll_table_id,
       "hr_status": 2,
       "color": "#f2ab01",
       "name": this.shiftSetUpForm.get('name').value,
-      "time_in": this.shiftSetUpForm.get('time_in').value,
-      "time_out": this.shiftSetUpForm.get('time_out').value,
+      "time_in": `${this.shiftSetUpForm.get('time_in').value}:00`,
+      "time_out": `${this.shiftSetUpForm.get('time_out').value}:00`,
       "mid_break_enable": this.shiftSetUpForm.get('mid_break_enable').value,
       "mid_break_time_in": `${this.shiftSetUpForm.get('mid_break_time_in').value}:00`, 
       "mid_break_time_out": `${this.shiftSetUpForm.get('mid_break_time_out').value}:00`,
       "ext_mid_break_day_id": this.shiftSetUpForm.get('ext_mid_break_day_id').value,
       "ext_mid_break_time_in": `${this.shiftSetUpForm.get('ext_mid_break_time_in').value}:00`,
       "ext_mid_break_time_out": `${this.shiftSetUpForm.get('ext_mid_break_time_out').value}:00`,
-      "is_roster": this.shiftSetUpForm.get('is_roster').value,
+      "is_roster": this.shiftSetUpForm.get('is_roster').value ? 1 : 0,
       "consecutive_late": this.shiftSetUpForm.get('consecutive_late').value,
       "late_arrival_tolerance": this.shiftSetUpForm.get('late_arrival_tolerance').value,
-      "attendance_tolerance": this.shiftSetUpForm.get('attendance_tolerance').value,
+      "attendance_tolerance": this.shiftSetUpForm.get('attendance_tolerance').value ? 1 : 0,
       "revert_shift_id": this.shiftSetUpForm.get('revert_shift_id').value,
       "shift_revert_date_start": shift_revert_date_start, 
       "shift_revert_date_end": shift_revert_date_end,
@@ -706,7 +733,8 @@ export class ShiftSetupComponent implements OnInit {
       "department_id": this.filters.departmentId,
       "desg_id": -1,
       "emp_id": -1, 
-      "qrt_break": values.qrt_break
+      "qrt_break": values.qrt_break,
+      "specific_period" : this.shiftSetUpForm.get('specific_period').value ? 1 : 0,
     }
     const res = await this.shiftRequestService.putUpdateShift(body);
     if(!res["status"]) return;
@@ -722,6 +750,7 @@ export class ShiftSetupComponent implements OnInit {
     );
     console.log(response);
     if(!response["status"]) return;
+    this.getShifts();
     this.resetForm();
     this.shiftNameClick = false;
   }

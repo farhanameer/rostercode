@@ -101,28 +101,40 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
             await this.search(this.marketArray , lmDetails.glob_mkt_id , 'marketId' , this.getMarket , null,this);
             await this.search(this.clusterArray , lmDetails.region_id , 'clusterId' , this.getCluster, lmDetails.glob_mkt_id,this);
             await this.search(this.subClusterArray , lmDetails.sub_region_id , 'subClusterId' , this.getSubCluster, lmDetails.region_id ,this);
-           
+            this.locationFilters.marketId = lmDetails.glob_mkt_id;
+            this.locationFilters.clusterId = lmDetails.region_id;
+            this.locationFilters.subClusterId = lmDetails.sub_region_id;
             if(lmDetails.glob_mkt_id != -1){
               if(lmDetails.region_id == -1 && lmDetails.sub_region_id == -1) {
+                
                 await this.getCountries('marketId' , lmDetails.glob_mkt_id);
+                
               }
               if(lmDetails.region_id != -1 && lmDetails.sub_region_id == -1){
+                
                 await this.getCountries('clusterId' , lmDetails.region_id);
               }
               if(lmDetails.region_id != -1 && lmDetails.sub_region_id != -1){
+                
                 await this.getCountries('subClusterId' , lmDetails.sub_region_id);
               }
             }
             else{
               await this.getCountries(null,null,this);
             }
+            this.locationFilters.countryId = lmDetails.country_id;
             await this.search(this.countriesArray , lmDetails.country_id , 'countryId' , this.getCountries, null , this);
+            this.locationFilters.stateId = lmDetails.state_id;
             await this.search(this.statesArray , lmDetails.state_id , 'stateId' , this.getStates, lmDetails.country_id,this);
+            this.locationFilters.cityId = lmDetails.city_id;
             await this.search(this.citiesArray , lmDetails.city_id , 'cityId' , this.getCities, lmDetails.state_id,this);
+            this.locationFilters.branchId = lmDetails.loc_id;
             await this.search(this.branchesArray , lmDetails.loc_id , 'branchId' , this.getBranches, lmDetails.city_id,this);
+            this.locationFilters.departmentId = lmDetails.department_id;
             await this.search(this.departmentArray , lmDetails.department_id , 'departmentId' , this.getDepartments, lmDetails.loc_id,this);
       
             console.log('default filter values',this.defaultFiltersValues);
+            this.applyFilters();
           }
           else{
             console.log('problems')
@@ -169,7 +181,10 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
       await this.search(this.marketArray , this.defaultValues.glob_mkt_id , 'marketId' , this.getMarket , null,this);
       await this.search(this.clusterArray , this.defaultValues.region_id , 'clusterId' , this.getCluster, this.defaultValues.glob_mkt_id,this);
       await this.search(this.subClusterArray , this.defaultValues.sub_region_id , 'subClusterId' , this.getSubCluster, this.defaultValues.region_id ,this);
-     
+      this.locationFilters.marketId = this.defaultValues.glob_mkt_id;
+      this.locationFilters.clusterId = this.defaultValues.region_id;
+      this.locationFilters.subClusterId = this.defaultValues.sub_region_id;
+
       if(this.defaultValues.glob_mkt_id != -1){
         if(this.defaultValues.region_id == -1 && this.defaultValues.sub_region_id == -1) {
           await this.getCountries('marketId' , this.defaultValues.glob_mkt_id);
@@ -184,13 +199,19 @@ export class LocationAndDesignationFilterComponent implements OnInit , AfterView
       else{
         await this.getCountries(null,null,this);
       }
+      this.locationFilters.countryId = this.defaultValues.country_id;
       await this.search(this.countriesArray , this.defaultValues.country_id , 'countryId' , this.getCountries, null , this);
+      this.locationFilters.stateId = this.defaultValues.state_id;
       await this.search(this.statesArray , this.defaultValues.state_id , 'stateId' , this.getStates, this.defaultValues.country_id,this);
+      this.locationFilters.cityId = this.defaultValues.city_id;
       await this.search(this.citiesArray , this.defaultValues.city_id , 'cityId' , this.getCities, this.defaultValues.state_id,this);
+      this.locationFilters.branchId = this.defaultValues.branch_id;
       await this.search(this.branchesArray , this.defaultValues.branch_id , 'branchId' , this.getBranches, this.defaultValues.city_id,this);
+      this.locationFilters.departmentId = this.defaultValues.department_id;
       await this.search(this.departmentArray , this.defaultValues.department_id , 'departmentId' , this.getDepartments, this.defaultValues.branch_id,this);
 
       console.log('default filter values',this.defaultFiltersValues);
+      this.applyFilters();
     }
     else{
       console.log('problems')

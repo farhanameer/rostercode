@@ -145,14 +145,15 @@ export class ShiftRequestByLmComponent implements OnInit {
 
   async submit(){
     // console.warn(this.shiftRequestLMform.value)
+
     const body = {
       "screen_role": "lm",
       "client_id" : this.appLocalStorage.getClientId(),
       "line_manager_id" :await this.appLocalStorage.getLineManagerId(),
       "shift_type_id": this.shiftRequestLMform.value.shift_id,
       "name": this.shiftRequestLMform.value.shift_name,
-      "time_in": this.shiftRequestLMform.value.start_date,
-      "time_out": this.shiftRequestLMform.value.end_date,
+      "time_in": `${this.shiftRequestLMform.value.start_date}:00`,
+      "time_out": `${this.shiftRequestLMform.value.end_date}:00`,
       "lm_request": 1,
       "lm_comment": this.shiftRequestLMform.value.lm_comment,
       "work_hours": 8,

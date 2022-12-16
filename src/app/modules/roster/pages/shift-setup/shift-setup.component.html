@@ -34,6 +34,7 @@
                           [control]="'shift_type_id'"
                           [data]="shiftTypeArray"
                           [defaultValue]="dropDownDefaultValues.shiftType"
+                          [disabled]="isUpdating"
                         ></app-select-box>
                       </div>
                       <div>
@@ -48,6 +49,7 @@
                           [label]="'From'"
                           [form]="shiftSetUpForm"
                           [control]="'time_in'"
+                          [disabled]="isUpdating"
                         ></app-time-box>
                       </div>
                       <div>
@@ -55,6 +57,7 @@
                           [label]="'To'"
                           [form]="shiftSetUpForm"
                           [control]="'time_out'"
+                          [disabled]="isUpdating"
                         ></app-time-box>
                       </div>
 
