@@ -46,9 +46,6 @@ export class EmployeeAttendenceComponent implements OnInit {
 
   async updateAttendance(body){
     const res = await this.dataService.updateAttendance(body);
-    if(res['status']){
-      this.activeModal.close('close')
-    }
   }
 fileChange(e){
 
