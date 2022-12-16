@@ -14,36 +14,33 @@ export interface BooleanFn {
 })
 export class ShiftRequestByLmComponent implements OnInit {
   weekDaysArray = [
+   
     {
-      id : -1,
-      name : 'All'
-    },
-    {
-      id: 0,
+      id: 1,
       name: 'Sunday',
     },
     {
-      id: 1,
+      id: 2,
       name: 'Monday',
     },
     {
-      id: 2,
+      id: 3,
       name: 'Tuesday',
     },
     {
-      id: 3,
+      id: 4,
       name: 'Wednesday',
     },
     {
-      id: 4,
+      id: 5,
       name: 'Thursday',
     },
     {
-      id: 5,
+      id: 6,
       name: 'Friday',
     },
     {
-      id: 6,
+      id: 7,
       name: 'Saturday',
     },
   ];
@@ -61,6 +58,7 @@ export class ShiftRequestByLmComponent implements OnInit {
   isUpdating: boolean = false;
   updateAbleShiftId: any;
   isQrtBreak: boolean = false;
+  colors : any;
 
   constructor(private appLocalStorage: AppLocalStorageService,
     private shiftRequest : ShiftRequestDataService,
@@ -79,6 +77,16 @@ export class ShiftRequestByLmComponent implements OnInit {
     this.screenRole = 'lm';
     this.getShiftList();
     this.getShiftTypes();
+    this.shiftStatusColor();
+
+    this.colors = {
+      0 : null , 
+      1 : null , 
+      2 : null,
+      3: null
+    }
+
+
 
     this.shiftRequestLMform=this.fb.group({
       shift_id:["",Validators.required],
@@ -145,14 +153,15 @@ export class ShiftRequestByLmComponent implements OnInit {
 
   async submit(){
     // console.warn(this.shiftRequestLMform.value)
+
     const body = {
       "screen_role": "lm",
       "client_id" : this.appLocalStorage.getClientId(),
       "line_manager_id" :await this.appLocalStorage.getLineManagerId(),
       "shift_type_id": this.shiftRequestLMform.value.shift_id,
       "name": this.shiftRequestLMform.value.shift_name,
-      "time_in": this.shiftRequestLMform.value.start_date,
-      "time_out": this.shiftRequestLMform.value.end_date,
+      "time_in": `${this.shiftRequestLMform.value.start_date}:00`,
+      "time_out": `${this.shiftRequestLMform.value.end_date}:00`,
       "lm_request": 1,
       "lm_comment": this.shiftRequestLMform.value.lm_comment,
       "work_hours": 8,
@@ -178,6 +187,28 @@ export class ShiftRequestByLmComponent implements OnInit {
 
   }
 
+
+  async shiftStatusColor(){
+    const res = await this.shiftRequest.getShiftStatusColors();
+    let allColors = res['data'].payload;
+    console.log(allColors);
+
+    allColors.forEach(cls =>{
+      if(cls.approved) {
+        this.colors[2] = cls.approved;
+      }else if(cls.pending){
+        this.colors[0] = cls.pending;
+      }
+      else if(cls.disapproved){
+        this.colors[3] = cls.disapproved;
+      }else if(cls.lmrequest){
+        this.colors[1] = cls.lmrequest;
+      }
+    });
+    console.log(this.colors);
+  }
+  
+
   resetForm(){
     console.log('form Cleared');
     this.shiftRequestLMform.markAsPristine();
@@ -201,6 +232,7 @@ export class ShiftRequestByLmComponent implements OnInit {
     }, 200);
   }
   defaultFilters : any;
+  
   async getSingleShift(id) {
     console.log('single Shift Id', id);
     const payload = {
@@ -260,9 +292,9 @@ export class ShiftRequestByLmComponent implements OnInit {
     let counter = 0;
     if (shift.qrt_break) {
       shift.qrt_break.forEach((qrt) => {
-        if(counter != 0){
+        
           this.newqrtbreak();
-        }
+
         qrt.qrt_break_time_in = this.changeTimeFormate(qrt.qrt_break_time_in);
         qrt.qrt_break_time_out = this.changeTimeFormate(qrt.qrt_break_time_out);
         counter = counter + 1;
@@ -369,7 +401,7 @@ export class ShiftRequestByLmComponent implements OnInit {
       this.dropDownDefaultValues.day = this.searchInArray(
         this.weekDaysArray , 
         'id',
-        shift.ext_mid_break_day_id
+        Number(shift.ext_mid_break_day_id) + 1
       );
     
     }
@@ -437,6 +469,7 @@ export class ShiftRequestByLmComponent implements OnInit {
   cancel() {
     this.resetForm();
     this.shiftNameClick = false;
+    this.isUpdating = false;
     this.defaultFilters = {
       glob_mkt_id : null , 
       region_id : null , 

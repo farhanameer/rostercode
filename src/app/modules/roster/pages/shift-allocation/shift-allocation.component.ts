@@ -81,10 +81,10 @@ export class ShiftAllocationComponent implements OnInit {
     if(!Array.isArray(shifts["data"]["payload"])){
       this.shiftsArray = [];
       this.copiedShiftsArray = [];
-      debugger;
+      
       return;  
     }
-    debugger;
+    
     this.shiftsArray = shifts["data"]["payload"];
     this.copiedShiftsArray = [...this.shiftsArray];
   }

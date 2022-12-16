@@ -234,6 +234,8 @@
               <div *ngIf="shiftNameClick">
                 <app-approval-details
                   [form]="shiftRequestLMform"
+                  [isUpdating]="isUpdating"
+                  [colors]="colors"
                 ></app-approval-details>
               </div>
             </div>
@@ -241,6 +243,7 @@
             <div class="calendar-footer justify-content-end">
               <div class="modal-footer-button flex">
                 <input
+                  *ngIf="!isUpdating"
                   type="button"
                   class="btn-input"
                   value="Submit"

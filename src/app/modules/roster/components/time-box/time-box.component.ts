@@ -11,6 +11,7 @@ export class TimeBoxComponent implements OnInit {
   @Input() label : any;
   @Input() form:FormGroup;
   @Input() control:string;
+  @Input() disabled : boolean = false;
   constructor() { }
 
   ngOnInit(): void {

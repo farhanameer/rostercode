@@ -18,6 +18,7 @@ export class InputBoxComponent implements OnInit {
   @Input() placeHolder : string = ' '
   @Output() inputChanged : EventEmitter<any> = new EventEmitter();
   @Input() color:string;
+  @Input() textColor : any;
 
   constructor() {}
 
