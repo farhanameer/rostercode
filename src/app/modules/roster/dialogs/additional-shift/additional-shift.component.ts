@@ -114,7 +114,11 @@ export class AdditionalShiftComponent implements OnInit, OnChanges {
   }
 
   async assignShift(body){
+    body["linemanager_id"] = await this.appLocalStorage.getLineManagerId();
     const res = await this.rosterService.assignAddtionalShift(body);
+    if(res["status"]){
+      this.activeModal.close(true);
+    }
   }
 
   async getDefaultList() {
