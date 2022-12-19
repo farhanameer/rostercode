@@ -61,9 +61,6 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
         "replaceWithEmployeeId" : null || this.swipeShiftForm.value.replaceWithEmployeeId,
         "rosterDate": this.swipeShiftForm.value.assigned_roster_date
       }
-
-
-      debugger;
           
       this.submitBtn = false;
       if(body.replaceWithEmployeeId){
@@ -200,7 +197,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     const employees = this.modelData.dateRagne.employees;
     const shiftsArray = [];
     const replaceWithArray = [];
-    // debugger;
+    
     employees.forEach(employee =>{    
       if(employee.emp_id == $event.value){
         const obj = {
@@ -268,7 +265,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
     const res = await this.rosterService.getLMRosterView(body);
     console.log("Response",res);
     const payload = res["data"]["payload"];
-    // debugger;
+   
     
     let replaceWithArray = [];
     let shiftDataArray = [];
