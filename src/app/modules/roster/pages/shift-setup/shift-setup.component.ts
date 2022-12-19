@@ -485,6 +485,8 @@ export class ShiftSetupComponent implements OnInit {
       branch_id : null , 
       department_id : null
     }
+
+    this.isDisabled = false;
     
   }
   resetFilters = false;
@@ -531,6 +533,10 @@ export class ShiftSetupComponent implements OnInit {
     console.log('shift data', shiftData[0]);
     
     const shift = shiftData[0];
+
+    if(shift.hr_status !=0){
+      this.isDisabled = true;
+    }
 
     this.proll_table_id = shift.proll_filter_table_id;
     if(shift.hr_status != 0 ){
@@ -705,7 +711,7 @@ export class ShiftSetupComponent implements OnInit {
       "shift_id": this.shiftId,
       "proll_filter_table_id": this.proll_table_id,
       "hr_status": 2,
-      "color": "#f2ab01",
+      "color": this.shiftSetUpForm.get('color').value,
       "name": this.shiftSetUpForm.get('name').value,
       "time_in": `${this.shiftSetUpForm.get('time_in').value}:00`,
       "time_out": `${this.shiftSetUpForm.get('time_out').value}:00`,
@@ -735,9 +741,17 @@ export class ShiftSetupComponent implements OnInit {
       "emp_id": -1, 
       "qrt_break": values.qrt_break,
       "specific_period" : this.shiftSetUpForm.get('specific_period').value ? 1 : 0,
+      hr_comment: this.shiftSetUpForm.get('hr_comment').value
     }
     const res = await this.shiftRequestService.putUpdateShift(body);
     if(!res["status"]) return;
+
+    if(this.isDisabled){
+      this.getShifts();
+      this.resetForm();
+      this.shiftNameClick = false;
+      return;
+    }
     const params = {
       screen_role: 'hr',
       client_id: this.appLocalStorage.getClientId(),

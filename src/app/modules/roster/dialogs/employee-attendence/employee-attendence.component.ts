@@ -4,6 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import  moment  from 'moment';
+import { LinkCheckerService } from '../../services/linkChecker.service';
 
 @Component({
   selector: 'app-employee-attendence',
@@ -17,7 +18,8 @@ export class EmployeeAttendenceComponent implements OnInit {
   constructor(private fb:FormBuilder,
               public activeModal: NgbActiveModal, 
               private appLocalStorage : AppLocalStorageService,
-              private dataService : AttendanceDataService) { }
+              private dataService : AttendanceDataService,
+              public linkService : LinkCheckerService) { }
   shiftSetUpForm: FormGroup;
   ngOnInit(): void {
     this.time_in = moment(this.modelData.plan_shift_time_in).format('HH:mm');

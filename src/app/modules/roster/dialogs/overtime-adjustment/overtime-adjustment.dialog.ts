@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { RosterService } from '../../services/data/roster.dataService';
+import { LinkCheckerService } from '../../services/linkChecker.service';
 
 @Component({
   selector: 'app-overtime-adjustment',
@@ -15,7 +16,8 @@ export class OvertimeAdjustmentDialog implements OnInit {
     private fb: FormBuilder,
     public activeModal: NgbActiveModal,
     private appLocalStorage: AppLocalStorageService,
-    private overTimeAdjustment: RosterService
+    private overTimeAdjustment: RosterService,
+    public linkService : LinkCheckerService
   ) {}
   @Input() modelData: any;
   overTimeForm: FormGroup;

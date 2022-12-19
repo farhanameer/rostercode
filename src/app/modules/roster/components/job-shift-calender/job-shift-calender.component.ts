@@ -105,6 +105,7 @@ export class JobShiftCalenderComponent implements OnInit {
     this.currentYearData = this.calendar.getCalendar(year, null, this.weekDaysPreset);
     this.currentYearMonthsData = [...this.currentYearData];
     this.getHolidays(year);
+
   }
 
 
@@ -127,8 +128,8 @@ export class JobShiftCalenderComponent implements OnInit {
 
     const params = {
       "client_id" : this.appLocalStorage.getClientId(),
-      "year" : this.modelData['year'],
-      "country_id" : this.modelData['country_id']
+      "year" : moment(this.currentDate).format('YYYY'),
+      "country_id" : this.filters.countryId
     }
     console.log("Country Year", params);
     const res = await this.holidayService.getWorkCalendarSetting(params);
@@ -196,14 +197,14 @@ export class JobShiftCalenderComponent implements OnInit {
     const params = {
       'client_id' : this.appLocalStorage.getClientId(),
       'year' : year , 
-      "glob_mkt_id": this.filters.marketId,
-      "region_id": this.filters.clusterId,
-      "sub_region_id": this.filters.subClusterId,
-      "country_id": this.filters.countryId,
-      "state_id": this.filters.stateId,
-      "city_id": this.filters.cityId,
-      "loc_id": this.filters.branchId,
-      "department_id": this.filters.departmentId
+      "glob_mkt_id": this.filters.marketId || -1,
+      "region_id": this.filters.clusterId || -1,
+      "sub_region_id": this.filters.subClusterId || -1,
+      "country_id": this.filters.countryId || -1,
+      "state_id": this.filters.stateId || -1,
+      "city_id": this.filters.cityId || -1,
+      "loc_id": this.filters.branchId || -1,
+      "department_id": this.filters?.departmentId || -1
     }
     const holidays = await this.holidayService.getHoliday(params);
     console.log('holidays' , holidays);
@@ -264,6 +265,10 @@ export class JobShiftCalenderComponent implements OnInit {
     
 
     console.log('year Data' , this.currentYearData);
+
+    if(this.filters && this.filters.countryId !=-1){
+      this.getWorkCalendarSetting();
+    }
   }
 
   checkHolidaysInRange(holiday){
@@ -330,7 +335,11 @@ export class JobShiftCalenderComponent implements OnInit {
         }, 
         filters : this.filters
       });
-      
+      ref.closed.subscribe(event=>{
+        if(event){
+          this.getCalendar(moment(this.currentDate).format('YYYY'));
+        }
+      })
   }
 
   edit(singleDate){

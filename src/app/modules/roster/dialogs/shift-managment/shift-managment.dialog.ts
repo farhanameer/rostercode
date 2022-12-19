@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { LinkCheckerService } from '../../services/linkChecker.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employee-shift-managment.dialog';
 
@@ -19,9 +20,11 @@ export class ShiftManagmentDialog implements OnInit {
 
 
   constructor(public activeModal: NgbActiveModal,
-    private customModel:ModalService) { }
+    private customModel:ModalService,
+    public linkService : LinkCheckerService) { }
 
   ngOnInit(): void {
+    
     console.log('shift management dialog' , this.dates);
     
     if(this.dates.dateRagne.start == this.dates.dateRagne.end){

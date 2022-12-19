@@ -1,0 +1,63 @@
+.required > input {
+    border-color: #F44437;
+}
+
+.required > label {
+    color: #F44437;
+}
+
+.text-error{
+    color : #F44437
+}
+.ags-bg-transparent{
+    background-color: transparent !important;
+}
+.hide-label{
+    transform: translateY(0px) !important;
+}
+
+.input-box::placeholder{
+   
+    color: #b6b6b6 !important;
+    opacity: 1 !important;
+}
+
+
+.agt-module .select-items {
+    position: absolute;
+    background-color: #fff;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%) !important;
+    max-height: 302px;
+    overflow-y: auto;
+}
+
+.agt-module .select-items > div {
+    color: #343434 !important;
+}
+
+.agt-module .select-items > div, .agt-module .select-selected {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    color: #3080EA;
+    font-size: 11px;
+    font: normal normal normal 11px/13px Roboto;
+}
+
+.agt-module .select-items > div:hover, .agt-module .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+

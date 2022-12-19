@@ -1,0 +1,39 @@
+<div class="agt-module w-100" >
+  <div class="comp-wrapper" [class.required]="form?.get(control)?.errors?.required && form?.get(control)?.touched" [ngStyle]="{ 'width': width , 'height' : height }">
+    <input
+    *ngIf="!form && !control"
+      [type]="type"
+      [attr.disabled]="isdisabled? true : null"
+      id="input-box"
+      [ngStyle]="{'color' : textColor}"
+      class="input-box"
+      type="text"
+      [placeholder]="placeHolder"
+      (keyup)="inputChange($event)"
+    />
+    <input
+      *ngIf="form && control"
+      [type]="type"
+      [ngStyle]="{'color' : textColor}"
+      [attr.disabled]="isdisabled? true : null"
+      id="input-box"
+      [formControl]="form?.get(control)"
+      class="input-box"
+      type="text"
+      [placeholder]="placeHolder"
+      (keyup)="inputChange($event)"
+      [id]="control"
+    />
+    <label class="label" [for]="control" [class.ags-bg-transparent]="isdisabled? true : null" [ngStyle]="{ color: color }" *ngIf="!hideLabel">{{ label }}</label>
+
+
+    <div id="custom-select" class="select-items touched" >
+      <div (click)="optionChanged(option)" *ngFor="let option of searchedArray">{{option.name}}</div>
+    </div>
+  </div>
+  <span
+    class="text-right text-error d-block"
+    *ngIf="form?.get(control)?.errors?.required && form?.get(control)?.touched"
+    >required</span
+  >
+</div>

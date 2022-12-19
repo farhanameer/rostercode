@@ -45,6 +45,7 @@
           type="button"
           class="btn-input"
           value="Allocate Shift"
+          [disabled]="!linkService.isLineManagerPortal()"
           (click)="open()"
         />
         <input

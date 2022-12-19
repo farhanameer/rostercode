@@ -16,6 +16,7 @@ export class DateBoxComponent implements OnInit {
   @Input() width : string;
   @Input() height : string;
   @Input() hideLabel : Boolean = false;
+  @Input() disabled : Boolean = false;
 
   @Output() dateChanged : EventEmitter<any> = new EventEmitter()
   

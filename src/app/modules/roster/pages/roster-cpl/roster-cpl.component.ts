@@ -3,6 +3,7 @@ import { AppLocalStorageService } from 'src/app/services/app-local-storage.servi
 import { ClusterAndSubClusterDataService } from '../../services/data/clusterAndSubCluster.data.service';
 import { RosterService } from '../../services/data/rosterView.data.service';
 import { ShiftRequestDataService } from '../../services/data/shiftRequest.data';
+import { LinkCheckerService } from '../../services/linkChecker.service';
 
 @Component({
   selector: 'app-roster-cpl',
@@ -15,7 +16,8 @@ export class RosterCplComponent implements OnInit {
   constructor(private clusterAndSubCluster : ClusterAndSubClusterDataService,
     private rosterView : RosterService,
     private appLocalStorageService : AppLocalStorageService,
-    private shiftRequestService : ShiftRequestDataService) { }
+    private shiftRequestService : ShiftRequestDataService,
+    public linkService : LinkCheckerService) { }
   clientTypesArray : any = [];
   reportingTypesArray : any = [];
   departmentsArray : any = [];
@@ -88,8 +90,9 @@ export class RosterCplComponent implements OnInit {
   }
 
   async getDepartments(){
-    const bodyParams = {
-      line_manager_id : this.appLocalStorageService.getUserId()
+    let bodyParams = {};
+    if(this.linkService.isLineManagerPortal()){
+      bodyParams['line_manager_id'] = await this.appLocalStorageService.getLineManagerId();
     }
     const data =await this.clusterAndSubCluster.getDepartment(bodyParams);
     if(!data["status"]) return;
@@ -101,9 +104,14 @@ export class RosterCplComponent implements OnInit {
   async getEmployees(departmentId){
     console.log('getClientTypes');
     const params = {
-      dept_id : this.appLocalStorageService.getUserId(),
       client_id : this.appLocalStorageService.getClientId(),
       department_id : departmentId
+    }
+    if(this.linkService.isLineManagerPortal()){
+      params['dept_id'] = await this.appLocalStorageService.getLineManagerId();
+    }
+    if(!this.linkService.isLineManagerPortal()){
+      return;
     }
     const data =await this.rosterView.getEmployeeList(params);
     if(!data["status"]) return;
@@ -117,7 +125,8 @@ export class RosterCplComponent implements OnInit {
     const params = {
       department_id : departmentId
     }
-    const data =await this.shiftRequestService.getDefaultList('lm' , params);
+    let portal = this.linkService.isLineManagerPortal() ? 'lm' : 'hr';
+    const data =await this.shiftRequestService.getDefaultList(portal , params);
     if(!data["status"]) return;
     console.log(data["payload"]);
     this.shiftsArray = this.transformDropDownData(data["data"]["payload"] , 'id' , 'name');

@@ -15,6 +15,7 @@
         [formControl]="form?.get(control)"
         #inputRef
         (dateChange)="dateChange($event)"
+        [disabled]="disabled"
 
       />
       <p class="label" [class.d-none]="hideLabel && inputRef?.value !=''" [class.agt-float-label]="inputRef?.value != ''">

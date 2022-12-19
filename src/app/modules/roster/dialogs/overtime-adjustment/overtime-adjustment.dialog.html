@@ -108,8 +108,9 @@
           type="button"
           class="btn-input"
           value="Submit"
-          [disabled]="!overTimeForm.valid"
-          [class.disabled-btn-forms]="!overTimeForm.valid"
+          
+          [disabled]="!overTimeForm.valid || !linkService.isLineManagerPortal()"
+          [class.disabled-btn-forms]="!overTimeForm.valid || !linkService.isLineManagerPortal()"
           (click)="submit()"
         />
         <input

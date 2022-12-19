@@ -87,9 +87,8 @@
             type="button"
             class="btn-input"
             value="Submit"
+            [disabled]="!shiftSetUpForm.valid || !linkService.isLineManagerPortal()"
             (click)="submit()"
-         
-            
           />
           <input
             type="button"

@@ -5,6 +5,7 @@ import { RosterViewHttpService } from '../http/rosterVIew.http.service';
 import { Injectable } from '@angular/core';
 import { AppLocalStorageService } from '../../../../services/app-local-storage.service';
 import { RosterToastService } from '../roster.toast.service';
+import { LinkCheckerService } from '../linkChecker.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class RosterService {
   constructor(
     private httpService: RosterViewHttpService,
     private appLocalStorage: AppLocalStorageService,
-    private toastService: RosterToastService
+    private toastService: RosterToastService,
+    private linkService : LinkCheckerService
   ) {}
 
   getEmployeeList(params = {}) {
@@ -224,26 +226,50 @@ export class RosterService {
           reporting_to_id: this.appLocalStorage.getUserId(),
         };
 
-        this.httpService.getLMRosterView(params).subscribe(
-          (data) => {
-            response.data = data;
-            response.message = 'success';
-            response.status = true;
-            if (
-              data['payload'] &&
-              !Array.isArray(data['payload']) &&
-              typeof data['payload'] == 'string'
-            ) {
-              this.toastService.toast(data['payload'], 'success-toast');
+        if(this.linkService.isLineManagerPortal()){
+          this.httpService.getLMRosterView(params).subscribe(
+            (data) => {
+              response.data = data;
+              response.message = 'success';
+              response.status = true;
+              if (
+                data['payload'] &&
+                !Array.isArray(data['payload']) &&
+                typeof data['payload'] == 'string'
+              ) {
+                this.toastService.toast(data['payload'], 'success-toast');
+              }
+              resolve(response);
+            },
+            (err) => {
+              response.message = err;
+              this.toastService.toast(err.error.error, 'error-toast');
+              resolve(response);
             }
-            resolve(response);
-          },
-          (err) => {
-            response.message = err;
-            this.toastService.toast(err.error.error, 'error-toast');
-            resolve(response);
-          }
-        );
+          );
+        }else{
+          delete params['reporting_to_id'];
+          this.httpService.getHRRosterView(params).subscribe(
+            (data) => {
+              response.data = data;
+              response.message = 'success';
+              response.status = true;
+              if (
+                data['payload'] &&
+                !Array.isArray(data['payload']) &&
+                typeof data['payload'] == 'string'
+              ) {
+                this.toastService.toast(data['payload'], 'success-toast');
+              }
+              resolve(response);
+            },
+            (err) => {
+              response.message = err;
+              this.toastService.toast(err.error.error, 'error-toast');
+              resolve(response);
+            }
+          );
+        }
       } catch (error) {
         response.message = error;
         this.toastService.toast(error, 'error-toast');
@@ -265,7 +291,9 @@ export class RosterService {
           linemanager_id: this.appLocalStorage.getUserId(),
           is_roster_emp: 1,
         };
-
+        if(!this.linkService.isLineManagerPortal()){
+          delete body['linemanager_id'];
+        }
         this.httpService.listCplAndOvertime(body).subscribe(
           (data: APIType<CplAndOvertime>) => {
             response.data = data;

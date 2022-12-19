@@ -83,6 +83,7 @@ import { SingleSortByEmployeeComponent } from './components/single-sort-by-emplo
 import { SingleEmployeeCheckBoxComponent } from './components/single-employee-check-box/single-employee-check-box.component';
 import { ApprovalDetailsComponent } from './components/approval-details/approval-details.component';
 import { EmployeeAttendenceComponent } from './dialogs/employee-attendence/employee-attendence.component';
+import { InputBoxWithOptionsComponent } from './components/input-box with-options/input-box.component';
 
 
 
@@ -153,7 +154,8 @@ import { EmployeeAttendenceComponent } from './dialogs/employee-attendence/emplo
     SingleSortByEmployeeComponent,
     SingleEmployeeCheckBoxComponent,
     ApprovalDetailsComponent,
-    EmployeeAttendenceComponent
+    EmployeeAttendenceComponent,
+    InputBoxWithOptionsComponent
     
 
    
