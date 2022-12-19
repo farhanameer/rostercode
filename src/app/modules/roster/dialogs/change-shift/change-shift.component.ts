@@ -63,7 +63,7 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
       }
 
 
-      debugger;
+      
           
       this.submitBtn = false;
       if(body.replaceWithEmployeeId){
@@ -128,6 +128,9 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
   async swapShift(body){
     body["linemanager_id"] = await this.appLocalStorage.getLineManagerId();
     const res = await this.rosterService.swapShift(body);
+    if(res["status"]) {
+      this.activeModal.close(true);
+    }
     
   }
   screenRole = "lm";
