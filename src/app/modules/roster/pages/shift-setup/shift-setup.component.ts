@@ -86,11 +86,11 @@ export class ShiftSetupComponent implements OnInit {
       time_in: [null, Validators.required],
       time_out: ['', Validators.required],
       mid_break_enable: [0],
-      mid_break_time_in: ['', Validators.required],
-      mid_break_time_out: ['', Validators.required],
-      ext_mid_break_day_id: ['', Validators.required],
-      ext_mid_break_time_in: ['', Validators.required],
-      ext_mid_break_time_out: ['', Validators.required],
+      mid_break_time_in: [''],
+      mid_break_time_out: [''],
+      ext_mid_break_day_id: [''],
+      ext_mid_break_time_in: [''],
+      ext_mid_break_time_out: [''],
       is_roster: [0],
       is_default: [0],
       Tolerance: [false],
@@ -347,9 +347,9 @@ export class ShiftSetupComponent implements OnInit {
 
   newqrtbreak() {
     const qrtForm = this.fb.group({
-      qrt_break_title: ['', Validators.required],
-      qrt_break_time_in: ['', Validators.required],
-      qrt_break_time_out: ['', Validators.required],
+      qrt_break_title: [''],
+      qrt_break_time_in: [''],
+      qrt_break_time_out: [''],
     });
 
     this.qrt_break.push(qrtForm);

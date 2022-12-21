@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LinkCheckerService } from '../../services/linkChecker.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { EmployeeShiftManagmentDialog } from '../employee-shift-managment/employee-shift-managment.dialog';
+import moment from 'moment';
 
 @Component({
   selector: 'app-shift-managment',
@@ -17,7 +18,8 @@ export class ShiftManagmentDialog implements OnInit {
   single: boolean = false;
   searchedValue;
   shiftsArray = [];
-
+  time_in_footer;
+  time_out_footer;
 
   constructor(public activeModal: NgbActiveModal,
     private customModel:ModalService,
@@ -31,6 +33,9 @@ export class ShiftManagmentDialog implements OnInit {
       this.single = true;
     }
     this.shiftsArray = this.dates.dateRagne.shifts
+    console.log(this.shiftsArray);
+    this.time_in_footer = moment(this.shiftsArray[0].plan_shift_time_in).format("hh:mm");;
+    this.time_out_footer = moment(this.shiftsArray[0].plan_shift_time_out).format("hh:mm");
 
   }
   open(){
