@@ -25,20 +25,20 @@
 
 
 
-::-webkit-scrollbar {
-  width: auto !important;
-  position: inherit !important;
-}
-::-webkit-scrollbar-thumb {
-  background:inherit !important;
+// ::-webkit-scrollbar {
+//   width: auto !important;
+//   position: inherit !important;
+// }
+// ::-webkit-scrollbar-thumb {
+//   background:inherit !important;
 
-}
-::-webkit-scrollbar-track{
-  box-shadow: none;
-  border-radius: 6px;
-  background-color: #f1f1f1;
-  position: fixed !important;
-}
+// }
+// ::-webkit-scrollbar-track{
+//   box-shadow: none;
+//   border-radius: 6px;
+//   background-color: #f1f1f1;
+//   position: fixed !important;
+// }
 
 .disabled-btn-forms{
   background: transparent linear-gradient(180deg,#ededed,#fafafa) 0 0 no-repeat padding-box;
@@ -627,20 +627,20 @@
     color: #3080ea !important;
   }
 
-  .scroll::-webkit-scrollbar {
-    width: 1px !important;
-    position: relative !important;
-  }
+  // .scroll::-webkit-scrollbar {
+  //   width: 1px !important;
+  //   position: relative !important;
+  // }
 
   /* Track */
-  .scroll::-webkit-scrollbar-track {
-    background: #d8dcdf !important;
-  }
+  // .scroll::-webkit-scrollbar-track {
+  //   background: #d8dcdf !important;
+  // }
 
   /* Handle */
-  .scroll::-webkit-scrollbar-thumb {
-    background: #343434 !important;
-  }
+  // .scroll::-webkit-scrollbar-thumb {
+  //   background: #343434 !important;
+  // }
   /* For Validation */
 
   .fields-wrapper
