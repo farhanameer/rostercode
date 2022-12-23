@@ -94,7 +94,7 @@
         <div class="calendar-footer">
           <ul class="shift-hints" *ngIf="loopAbleShifts?.length<3">
             <li *ngFor="let shift of loopAbleShifts">
-              <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} ({{this.time_in_footer}} - {{this.time_out_footer}})
+              <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} ({{shift.time_in_footer}} - {{shift.time_out_footer}})
             </li>
             <!-- <li>
               <span class="evening-shift custom-hw-10"></span> Evening Shift

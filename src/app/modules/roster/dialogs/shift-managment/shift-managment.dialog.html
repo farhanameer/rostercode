@@ -62,9 +62,9 @@
       ></app-sort-by-employee>
     </div>
     <div class="modal-custom-footer">
-      <ul class="shift-hints" style="display: flex; gap: 20px" git *ngIf="shiftsArray?.length<3">
-        <li *ngFor="let shift of shiftsArray">
-          <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} ({{this.time_in_footer}} - {{this.time_out_footer}})
+      <ul class="shift-hints" style="display: flex; gap: 20px" git *ngIf="loopAbleShifts?.length<3">
+        <li *ngFor="let shift of loopAbleShifts">
+          <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} ({{shift.time_in_footer}} - {{shift.time_out_footer}})
         </li>
         <!-- <li>
           <span class="evening-shift custom-hw-10"></span> Evening Shift (14:00
@@ -75,8 +75,8 @@
           05:00)
         </li> -->
       </ul>
-      <ul class="shift-hints" style="display: flex; gap: 20px" git *ngIf="shiftsArray?.length>2"> 
-        <li *ngFor="let shift of shiftsArray">
+      <ul class="shift-hints" style="display: flex; gap: 20px" git *ngIf="loopAbleShifts?.length>2"> 
+        <li *ngFor="let shift of loopAbleShifts">
           <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> Click Me
         </li>
         <!-- <li>

@@ -36,18 +36,26 @@ export class RosterCplComponent implements OnInit {
     console.log(object);
   }
   loopAbleShifts;
-  time_in_footer;
-  time_out_footer;
+  // time_in_footer;
+  // time_out_footer;
   currentDate : any;
+  // shiftsAndTimeArray = [];
   getNewShifts(shifts){
-    this.loopAbleShifts = shifts;
+    this.loopAbleShifts = [];
     console.log('event catched',shifts);
-    // console.log("Time in SHIFTS", shifts[0].plan_shift_time_in);
-    this.time_in_footer = moment(shifts[0].plan_shift_time_in).format("hh:mm");;
-    this.time_out_footer = moment(shifts[0].plan_shift_time_out).format("hh:mm");
-    console.log("Time in", this.time_in_footer);
-    console.log("Time out", this.time_out_footer);
+    let mapArray = [];
+    shifts.forEach(element => {
+      const obj = {
+        id : element.id,
+        name : element.name,
+        time_in_footer : moment(element.plan_shift_time_in).format("hh:mm"),
+        time_out_footer : moment(element.plan_shift_time_out).format("hh:mm")
+      }
+      mapArray.push(obj);
+    });
+    this.loopAbleShifts = mapArray;
     console.log("Loop Able Shifts", this.loopAbleShifts);
+    
   }
   dateChanged(date){
     this.currentDate = date;

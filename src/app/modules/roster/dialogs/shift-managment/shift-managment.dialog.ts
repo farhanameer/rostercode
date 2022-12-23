@@ -20,6 +20,7 @@ export class ShiftManagmentDialog implements OnInit {
   shiftsArray = [];
   time_in_footer;
   time_out_footer;
+  loopAbleShifts
 
   constructor(public activeModal: NgbActiveModal,
     private customModel:ModalService,
@@ -34,8 +35,23 @@ export class ShiftManagmentDialog implements OnInit {
     }
     this.shiftsArray = this.dates.dateRagne.shifts
     console.log(this.shiftsArray);
-    this.time_in_footer = moment(this.shiftsArray[0].plan_shift_time_in).format("hh:mm");;
-    this.time_out_footer = moment(this.shiftsArray[0].plan_shift_time_out).format("hh:mm");
+
+    // this.time_in_footer = moment(this.shiftsArray[0].plan_shift_time_in).format("hh:mm");;
+    // this.time_out_footer = moment(this.shiftsArray[0].plan_shift_time_out).format("hh:mm");
+
+    
+    let mapArray = [];
+    this.shiftsArray.forEach(element => {
+      const obj = {
+        id : element.id,
+        name : element.name,
+        time_in_footer : moment(element.plan_shift_time_in).format("hh:mm"),
+        time_out_footer : moment(element.plan_shift_time_out).format("hh:mm")
+      }
+      mapArray.push(obj);
+    });
+    this.loopAbleShifts = mapArray;
+    console.log("Loop Able Shifts", this.loopAbleShifts);
 
   }
   open(){
