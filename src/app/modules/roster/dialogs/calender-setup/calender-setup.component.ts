@@ -136,7 +136,6 @@ export class CalenderSetupComponent implements OnInit {
       "half_time_out": this.workCalenderSetupForm.value.to,
       "startYear": this.workCalenderSetupForm.value.periodStartYear,
       "endYear": this.workCalenderSetupForm.value.periodEndYear,
-<<<<<<< HEAD
       // "glob_mkt_id": -1,
       // "region_id": -1,
       // "sub_region_id": -1,
@@ -146,8 +145,6 @@ export class CalenderSetupComponent implements OnInit {
       // "loc_id": -1,
       // "department_id": -1
 
-=======
->>>>>>> 4e89f2f49f0a9d3166cd155458aa1c391fc50fb0
       "glob_mkt_id": this.modelData["filters"].marketId,
       "region_id": this.modelData["filters"].clusterId,
       "sub_region_id": this.modelData["filters"].subClusterId,

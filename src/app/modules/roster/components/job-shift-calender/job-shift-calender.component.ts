@@ -109,6 +109,23 @@ export class JobShiftCalenderComponent implements OnInit {
   }
 
 
+  // searchInArray(array = [] , value){
+  //   if(array.length == 0 ){
+  //     return false;
+  //   }
+  //   let found = false;
+  //   array.every(item =>{
+  //     if(item == value){
+  //       found = true;
+  //       return false;
+  //     }
+  //     return true;
+  //   });
+
+  //   return found;
+  // }
+
+
   searchInArray(array = [] , value){
     if(array.length == 0 ){
       return false;
@@ -124,37 +141,12 @@ export class JobShiftCalenderComponent implements OnInit {
 
     return found;
   }
-<<<<<<< HEAD
-
-
-  searchInArray(array = [] , value){
-    if(array.length == 0 ){
-      return false;
-    }
-    let found = false;
-    array.every(item =>{
-      if(item == value){
-        found = true;
-        return false;
-      }
-      return true;
-    });
-
-    return found;
-  }
-=======
->>>>>>> 4e89f2f49f0a9d3166cd155458aa1c391fc50fb0
   async getWorkCalendarSetting(){
 
     const params = {
       "client_id" : this.appLocalStorage.getClientId(),
-<<<<<<< HEAD
       "year" : this.modelData['year'],
       "country_id" : this.modelData['country_id']
-=======
-      "year" : moment(this.currentDate).format('YYYY'),
-      "country_id" : this.filters.countryId
->>>>>>> 4e89f2f49f0a9d3166cd155458aa1c391fc50fb0
     }
     console.log("Country Year", params);
     const res = await this.holidayService.getWorkCalendarSetting(params);
