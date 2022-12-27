@@ -19,6 +19,10 @@ export class RosterViewHttpService {
     return this.http.get(`${this.roster}/GetLmRoster`, { params });
   }
 
+  getHRRosterView(params = {}) {
+    return this.http.get(`${this.roster}/GetHrRoster`, { params });
+  }
+
   listCplAndOvertime(body = {}) {
     return this.http.post(`${this.roster}/CplAndOvertime`, body);
   }

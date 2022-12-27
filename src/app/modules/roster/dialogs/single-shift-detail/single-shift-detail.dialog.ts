@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShiftAllocationComponent } from '../../pages/shift-allocation/shift-allocation.component';
+import { LinkCheckerService } from '../../services/linkChecker.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { SingleShiftAllocationDialog } from '../single-shift-allocation/single-shift-allocation.dialog';
 
@@ -13,7 +14,8 @@ import { SingleShiftAllocationDialog } from '../single-shift-allocation/single-s
 export class SingleShiftDetailDialog implements OnInit, OnChanges {
   @Input() data:any;
   constructor(public activeModal: NgbActiveModal,
-    private customModal: ModalService) { }
+    private customModal: ModalService,
+    public linkService : LinkCheckerService) { }
     
   ngOnInit(): void {
     console.log(this.data);

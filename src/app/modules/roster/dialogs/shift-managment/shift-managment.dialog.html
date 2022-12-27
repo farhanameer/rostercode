@@ -62,9 +62,22 @@
       ></app-sort-by-employee>
     </div>
     <div class="modal-custom-footer">
-      <ul class="shift-hints" style="display: flex; gap: 20px" git>
-        <li *ngFor="let shift of shiftsArray">
-          <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} (07:00 - 14:00)
+      <ul class="shift-hints" style="display: flex; gap: 20px" git *ngIf="loopAbleShifts?.length<3">
+        <li *ngFor="let shift of loopAbleShifts">
+          <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} ({{shift.time_in_footer}} - {{shift.time_out_footer}})
+        </li>
+        <!-- <li>
+          <span class="evening-shift custom-hw-10"></span> Evening Shift (14:00
+          - 00:00)
+        </li>
+        <li>
+          <span class="night-shift custom-hw-10"></span> Night Shift (20:00 -
+          05:00)
+        </li> -->
+      </ul>
+      <ul class="shift-hints" style="display: flex; gap: 20px" git *ngIf="loopAbleShifts?.length>2"> 
+        <li *ngFor="let shift of loopAbleShifts">
+          <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> Click Me
         </li>
         <!-- <li>
           <span class="evening-shift custom-hw-10"></span> Evening Shift (14:00
@@ -77,7 +90,9 @@
       </ul>
 
       <div class="modal-footer-button flex">
-        <input type="button" class="btn-input" value="Edit" (click)="open()" />
+        <input type="button" class="btn-input"
+         [disabled]="!linkService.isLineManagerPortal()"
+         value="Edit" (click)="open()" />
         <input
           type="button"
           class="btn-input"

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppLocalStorageService } from 'src/app/services/app-local-storage.service';
 import { RosterService } from '../../services/data/roster.dataService';
+import { LinkCheckerService } from '../../services/linkChecker.service';
 
 @Component({
   selector: 'app-overtime-hours-adjusment',
@@ -16,7 +17,8 @@ export class OvertimeHoursAdjusmentDialog implements OnInit {
     private fb: FormBuilder,
     public activeModal: NgbActiveModal,
     private appLocalStorage: AppLocalStorageService,
-    private hoursAdjustment: RosterService
+    private hoursAdjustment: RosterService,
+    public linkService : LinkCheckerService
   ) {}
 
   ngOnInit(): void {

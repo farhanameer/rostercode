@@ -105,6 +105,7 @@ export class JobShiftCalenderComponent implements OnInit {
     this.currentYearData = this.calendar.getCalendar(year, null, this.weekDaysPreset);
     this.currentYearMonthsData = [...this.currentYearData];
     this.getHolidays(year);
+
   }
 
 
@@ -123,12 +124,37 @@ export class JobShiftCalenderComponent implements OnInit {
 
     return found;
   }
+<<<<<<< HEAD
+
+
+  searchInArray(array = [] , value){
+    if(array.length == 0 ){
+      return false;
+    }
+    let found = false;
+    array.every(item =>{
+      if(item == value){
+        found = true;
+        return false;
+      }
+      return true;
+    });
+
+    return found;
+  }
+=======
+>>>>>>> 4e89f2f49f0a9d3166cd155458aa1c391fc50fb0
   async getWorkCalendarSetting(){
 
     const params = {
       "client_id" : this.appLocalStorage.getClientId(),
+<<<<<<< HEAD
       "year" : this.modelData['year'],
       "country_id" : this.modelData['country_id']
+=======
+      "year" : moment(this.currentDate).format('YYYY'),
+      "country_id" : this.filters.countryId
+>>>>>>> 4e89f2f49f0a9d3166cd155458aa1c391fc50fb0
     }
     console.log("Country Year", params);
     const res = await this.holidayService.getWorkCalendarSetting(params);
@@ -196,14 +222,14 @@ export class JobShiftCalenderComponent implements OnInit {
     const params = {
       'client_id' : this.appLocalStorage.getClientId(),
       'year' : year , 
-      "glob_mkt_id": this.filters.marketId,
-      "region_id": this.filters.clusterId,
-      "sub_region_id": this.filters.subClusterId,
-      "country_id": this.filters.countryId,
-      "state_id": this.filters.stateId,
-      "city_id": this.filters.cityId,
-      "loc_id": this.filters.branchId,
-      "department_id": this.filters.departmentId
+      "glob_mkt_id": this.filters.marketId || -1,
+      "region_id": this.filters.clusterId || -1,
+      "sub_region_id": this.filters.subClusterId || -1,
+      "country_id": this.filters.countryId || -1,
+      "state_id": this.filters.stateId || -1,
+      "city_id": this.filters.cityId || -1,
+      "loc_id": this.filters.branchId || -1,
+      "department_id": this.filters?.departmentId || -1
     }
     const holidays = await this.holidayService.getHoliday(params);
     console.log('holidays' , holidays);
@@ -264,6 +290,10 @@ export class JobShiftCalenderComponent implements OnInit {
     
 
     console.log('year Data' , this.currentYearData);
+
+    if(this.filters && this.filters.countryId !=-1){
+      this.getWorkCalendarSetting();
+    }
   }
 
   checkHolidaysInRange(holiday){
@@ -363,7 +393,13 @@ export class JobShiftCalenderComponent implements OnInit {
       "country_id" : this.filters.countryId , 
       filters : this.filters
     }
-    this.customModal.showFeaturedDialog(CalenderSetupComponent,'' , this.modelData)
+    const ref = this.customModal.showFeaturedDialog(CalenderSetupComponent,'' , this.modelData)
+    ref.closed.subscribe((event) =>{
+      console.log('reference' , event);
+      if(event){
+        this.getWorkCalendarSetting();
+      }
+    });
   }
 }
 

@@ -27,6 +27,24 @@ export class EventComponent implements OnInit {
   isUpdating : Boolean = false;
   eventArray = [];
   hdescValue : any;
+  array = [
+    {
+      name : 'Eid' , 
+      value : 1
+    },
+    {
+      name : 'Ramazan' , 
+      value : 2
+    },
+    {
+      name : 'Quaid Day' , 
+      value : 3
+    },
+    {
+      name : 'Labour Day' , 
+      value : 4
+    }
+  ];
   ngOnInit(): void {
     const holidayData = this.modelData.holiday;
     this.eventArray = this.modelData.holiday.event;
@@ -91,7 +109,7 @@ export class EventComponent implements OnInit {
     await this.holidayService.addHoliday({
       start_date: this.eventForm.get('start_date').value,
       end_date: this.eventForm.get('end_date').value,
-      hdesc: this.hdescValue,
+      hdesc: this.eventForm.get('hdesc').value,
       year : this.year , 
       country_id : this.filters.countryId , 
       state_id : this.filters.stateId , 
@@ -102,7 +120,7 @@ export class EventComponent implements OnInit {
       region_id : this.filters.clusterId , 
       sub_region_id : this.filters.subClusterId
     });
-    this.activeModal.close('Close click')
+    this.activeModal.close(true)
   }
 
   async updateEvent(){
@@ -121,7 +139,7 @@ export class EventComponent implements OnInit {
       region_id : this.filters.clusterId , 
       sub_region_id : this.filters.subClusterId
     });
-    await this.activeModal.close('Close click')
+    await this.activeModal.close(true)
   }
 
   get validateAForm(): any {

@@ -64,9 +64,10 @@
       <div class="modal-footer-button flex">
         <input
           type="button"
+          
           class="btn-input"
-          [disabled]="!this.overTimeHoursAdjustmentForm.valid"
-          [class.disabled-btn-forms]="!this.overTimeHoursAdjustmentForm.valid"
+          [disabled]="!this.overTimeHoursAdjustmentForm.valid || !linkService.isLineManagerPortal()"
+          [class.disabled-btn-forms]="!this.overTimeHoursAdjustmentForm.valid || !linkService.isLineManagerPortal()"
           value="Submit"
           (click)="submit()"
         />

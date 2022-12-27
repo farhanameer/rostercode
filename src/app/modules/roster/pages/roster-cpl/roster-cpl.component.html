@@ -92,9 +92,22 @@
           ></app-shifts-calender>
         </div>
         <div class="calendar-footer">
-          <ul class="shift-hints">
+          <ul class="shift-hints" *ngIf="loopAbleShifts?.length<3">
             <li *ngFor="let shift of loopAbleShifts">
-              <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} (07:00 - 14:00)
+              <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> {{shift.name}} ({{shift.time_in_footer}} - {{shift.time_out_footer}})
+            </li>
+            <!-- <li>
+              <span class="evening-shift custom-hw-10"></span> Evening Shift
+              (14:00 - 00:00)
+            </li>
+            <li>
+              <span class="night-shift custom-hw-10"></span> Night Shift (20:00
+              - 05:00)
+            </li> -->
+          </ul>
+          <ul class="shift-hints" *ngIf="loopAbleShifts?.length>2">
+            <li *ngFor="let shift of loopAbleShifts">
+              <span class="custom-hw-10" [ngStyle]="{'background-color' : shift.color}"></span> Click Me
             </li>
             <!-- <li>
               <span class="evening-shift custom-hw-10"></span> Evening Shift

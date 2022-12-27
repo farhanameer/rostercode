@@ -3,6 +3,8 @@ import { AppLocalStorageService } from 'src/app/services/app-local-storage.servi
 import { ClusterAndSubClusterDataService } from '../../services/data/clusterAndSubCluster.data.service';
 import { RosterService } from '../../services/data/rosterView.data.service';
 import { ShiftRequestDataService } from '../../services/data/shiftRequest.data';
+import { LinkCheckerService } from '../../services/linkChecker.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-roster-cpl',
@@ -15,7 +17,8 @@ export class RosterCplComponent implements OnInit {
   constructor(private clusterAndSubCluster : ClusterAndSubClusterDataService,
     private rosterView : RosterService,
     private appLocalStorageService : AppLocalStorageService,
-    private shiftRequestService : ShiftRequestDataService) { }
+    private shiftRequestService : ShiftRequestDataService,
+    public linkService : LinkCheckerService) { }
   clientTypesArray : any = [];
   reportingTypesArray : any = [];
   departmentsArray : any = [];
@@ -33,10 +36,26 @@ export class RosterCplComponent implements OnInit {
     console.log(object);
   }
   loopAbleShifts;
+  // time_in_footer;
+  // time_out_footer;
   currentDate : any;
+  // shiftsAndTimeArray = [];
   getNewShifts(shifts){
-    this.loopAbleShifts = shifts;
+    this.loopAbleShifts = [];
     console.log('event catched',shifts);
+    let mapArray = [];
+    shifts.forEach(element => {
+      const obj = {
+        id : element.id,
+        name : element.name,
+        time_in_footer : moment(element.plan_shift_time_in).format("hh:mm"),
+        time_out_footer : moment(element.plan_shift_time_out).format("hh:mm")
+      }
+      mapArray.push(obj);
+    });
+    this.loopAbleShifts = mapArray;
+    console.log("Loop Able Shifts", this.loopAbleShifts);
+    
   }
   dateChanged(date){
     this.currentDate = date;
@@ -88,8 +107,9 @@ export class RosterCplComponent implements OnInit {
   }
 
   async getDepartments(){
-    const bodyParams = {
-      line_manager_id : this.appLocalStorageService.getUserId()
+    let bodyParams = {};
+    if(this.linkService.isLineManagerPortal()){
+      bodyParams['line_manager_id'] = await this.appLocalStorageService.getLineManagerId();
     }
     const data =await this.clusterAndSubCluster.getDepartment(bodyParams);
     if(!data["status"]) return;
@@ -101,9 +121,14 @@ export class RosterCplComponent implements OnInit {
   async getEmployees(departmentId){
     console.log('getClientTypes');
     const params = {
-      dept_id : this.appLocalStorageService.getUserId(),
       client_id : this.appLocalStorageService.getClientId(),
       department_id : departmentId
+    }
+    if(this.linkService.isLineManagerPortal()){
+      params['dept_id'] = await this.appLocalStorageService.getLineManagerId();
+    }
+    if(!this.linkService.isLineManagerPortal()){
+      return;
     }
     const data =await this.rosterView.getEmployeeList(params);
     if(!data["status"]) return;
@@ -117,7 +142,8 @@ export class RosterCplComponent implements OnInit {
     const params = {
       department_id : departmentId
     }
-    const data =await this.shiftRequestService.getDefaultList('lm' , params);
+    let portal = this.linkService.isLineManagerPortal() ? 'lm' : 'hr';
+    const data =await this.shiftRequestService.getDefaultList(portal , params);
     if(!data["status"]) return;
     console.log(data["payload"]);
     this.shiftsArray = this.transformDropDownData(data["data"]["payload"] , 'id' , 'name');

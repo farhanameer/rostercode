@@ -12,6 +12,7 @@ export class CheckBoxComponent implements OnInit {
   @Input() control: string;
   @Input() color: string;
   @Input() checked: Boolean = false;
+  @Input() disabled : Boolean = false;
   @Output() selectionChanged = new EventEmitter<any>();
   constructor() {}
 
@@ -21,8 +22,9 @@ export class CheckBoxComponent implements OnInit {
   }
 
   selectionChange(checkedValue) {
+    if(this.disabled) return;
     this.form?.get(this.control).setValue(checkedValue.checked);
     this.selectionChanged.emit(checkedValue.checked);
-    console.log(checkedValue.checked);
+    console.log('check box checking',checkedValue.checked);
   }
 }

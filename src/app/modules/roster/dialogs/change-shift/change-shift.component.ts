@@ -61,9 +61,6 @@ export class ChangeShiftComponent implements OnInit, OnChanges {
         "replaceWithEmployeeId" : null || this.swipeShiftForm.value.replaceWithEmployeeId,
         "rosterDate": this.swipeShiftForm.value.assigned_roster_date
       }
-
-
-      debugger;
           
       this.submitBtn = false;
       if(body.replaceWithEmployeeId){
