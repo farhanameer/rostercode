@@ -1,4 +1,4 @@
-import * as config from "../../config.json";
+import * as config from '../../config.json';
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
@@ -19,144 +19,139 @@ export const environment = {
 
 // APIS
 export const APIs = {
-  getFilters: environment.phpApiHeader_300_23 + "getFilters",
-  setFilters: environment.phpApiHeader + "setFilters",
-  rosterLogin: environment.phpApiHeader + "rosterLogin",
+  getFilters: environment.phpApiHeader_300_23 + 'getFilters',
+  setFilters: environment.phpApiHeader + 'setFilters',
+  rosterLogin: environment.phpApiHeader + 'rosterLogin',
 
   employeeAttendacneYearly:
-    environment.phpApiHeader + "employeeAttendacneYearly",
+    environment.phpApiHeader + 'employeeAttendacneYearly',
   employeeAttendacneCalenderYearly:
-    environment.phpApiHeader + "employeeAttendacneCalenderYearly",
+    environment.phpApiHeader + 'employeeAttendacneCalenderYearly',
 
-  getMenus: environment.nodeApiUrl + "Menu/getMenus",
-  getLandingSubMenus: environment.nodeApiUrl + "Menu/getLandingSubMenus",
-  getSubMenus: environment.nodeApiUrl + "Menu/getSubMenus",
-  getPortals: environment.nodeApiUrl + "Menu/getPortals",
+  getMenus: environment.nodeApiUrl + 'Menu/getMenus',
+  getLandingSubMenus: environment.nodeApiUrl + 'Menu/getLandingSubMenus',
+  getSubMenus: environment.nodeApiUrl + 'Menu/getSubMenus',
+  getPortals: environment.nodeApiUrl + 'Menu/getPortals',
 
   // ------------------------ Leave phase - 2
   // Leave Setup
-  getGeoGroups: environment.phpApiHeader_300_23 + "getGeoGroups",
-  getCompanies: environment.phpApiHeader_300_23 + "getCompanies",
+  getGeoGroups: environment.phpApiHeader_300_23 + 'getGeoGroups',
+  getCompanies: environment.phpApiHeader_300_23 + 'getCompanies',
   getCountriesByGeoGroups:
-    environment.phpApiHeader_300_23 + "getCountriesByGeoGroups",
+    environment.phpApiHeader_300_23 + 'getCountriesByGeoGroups',
   getGeoFilterDataByParent:
-    environment.phpApiHeader_300_23 + "getGeoFilterDataByParent",
-  getLeaveSetupList: environment.phpApiHeader_300_23 + "getLeaveSetupList",
-  getLeaveSetupDetail: environment.phpApiHeader_300_23 + "getLeaveSetupDetail",
+    environment.phpApiHeader_300_23 + 'getGeoFilterDataByParent',
+  getLeaveSetupList: environment.phpApiHeader_300_23 + 'getLeaveSetupList',
+  getLeaveSetupDetail: environment.phpApiHeader_300_23 + 'getLeaveSetupDetail',
 
   // Leave Type & Rules Setup
-  getLeaveTypes: environment.phpApiHeader_300_23 + "getLeaveTypes",
+  getLeaveTypes: environment.phpApiHeader_300_23 + 'getLeaveTypes',
   getSandwichRuleTypes:
-    environment.phpApiHeader_300_23 + "getSandwichRuleTypes",
+    environment.phpApiHeader_300_23 + 'getSandwichRuleTypes',
   getShortLeaveDailyLimit:
-    environment.phpApiHeader_300_23 + "getShortLeaveDailyLimit",
-  getYearEndBasis: environment.phpApiHeader_300_23 + "getYearEndBasis",
+    environment.phpApiHeader_300_23 + 'getShortLeaveDailyLimit',
+  getYearEndBasis: environment.phpApiHeader_300_23 + 'getYearEndBasis',
   getShortLeaveCriteriaOptions:
-    environment.phpApiHeader_300_23 + "getShortLeaveCriteriaOptions",
+    environment.phpApiHeader_300_23 + 'getShortLeaveCriteriaOptions',
   getHalfLeaveCriteriaOptions:
-    environment.phpApiHeader_300_23 + "getHalfLeaveCriteriaOptions",
-  getCalculationBasis: environment.phpApiHeader_300_23 + "getCalculationBasis",
-  saveLeaveSetup: environment.phpApiHeader_300_23 + "saveLeaveSetup",
+    environment.phpApiHeader_300_23 + 'getHalfLeaveCriteriaOptions',
+  getCalculationBasis: environment.phpApiHeader_300_23 + 'getCalculationBasis',
+  saveLeaveSetup: environment.phpApiHeader_300_23 + 'saveLeaveSetup',
 
   // Reasons
-  getReasonsBySetup: environment.phpApiHeader_300_23 + "getReasonsBySetup",
+  getReasonsBySetup: environment.phpApiHeader_300_23 + 'getReasonsBySetup',
 
   // Eligibility & Entitlement Setup
   getCriteriaSetupFeildsBySetupType:
-    environment.phpApiHeader_300_23 + "getCriteriaSetupFeildsBySetupType",
+    environment.phpApiHeader_300_23 + 'getCriteriaSetupFeildsBySetupType',
   getSubDepartmentsByDepartment:
-    environment.phpApiHeader_300_23 + "getSubDepartmentsByDepartment",
+    environment.phpApiHeader_300_23 + 'getSubDepartmentsByDepartment',
 
   // Leave List
   getHRLeaveApplicationList:
-    environment.phpApiHeader_300_23 + "hr/GetHRLeaveApplicationList",
+    environment.phpApiHeader_300_23 + 'hr/GetHRLeaveApplicationList',
   getLMLeaveApplicationList:
-    environment.phpApiHeader_300_23 + "lm/GetLMLeaveApplicationLIst",
+    environment.phpApiHeader_300_23 + 'lm/GetLMLeaveApplicationLIst',
   getEmployeeLeaveApplicationList:
-    environment.phpApiHeader_300_23 + "user/EmployeeLeaveApplicationList",
+    environment.phpApiHeader_300_23 + 'user/EmployeeLeaveApplicationList',
 
   // Apply Leave
-  applyLeave: environment.phpApiHeader_300_23 + "user/applyLeave",
+  applyLeave: environment.phpApiHeader_300_23 + 'user/applyLeave',
   getApplicableLeaveByEmployee:
-    environment.phpApiHeader_300_23 + "getApplicableLeaveByEmployee",
+    environment.phpApiHeader_300_23 + 'getApplicableLeaveByEmployee',
 
   // Leave Detail
   getLeaveBalanceByEmployee:
-    environment.phpApiHeader_300_23 + "getLeaveBalanceByEmployee",
+    environment.phpApiHeader_300_23 + 'getLeaveBalanceByEmployee',
   getApplicationApprovelDetail:
-    environment.phpApiHeader_300_23 + "user/GetApplicationApprovelDetail",
+    environment.phpApiHeader_300_23 + 'user/GetApplicationApprovelDetail',
   getLeaveApplicationDetail:
-    environment.phpApiHeader_300_23 + "user/GetLeaveApplicationDetail",
-  getApplicationLog: environment.phpApiHeader_300_23 + "user/getApplicationLog",
-  lMLeaveStatus: environment.phpApiHeader_300_23 + "lm/LMLeaveStatus",
-  setLeaveStatusByHR: environment.phpApiHeader_300_23 + "hr/SetLeaveStatusByHR",
+    environment.phpApiHeader_300_23 + 'user/GetLeaveApplicationDetail',
+  getApplicationLog: environment.phpApiHeader_300_23 + 'user/getApplicationLog',
+  lMLeaveStatus: environment.phpApiHeader_300_23 + 'lm/LMLeaveStatus',
+  setLeaveStatusByHR: environment.phpApiHeader_300_23 + 'hr/SetLeaveStatusByHR',
   WithdrawApplication:
-    environment.phpApiHeader_300_23 + "user/WithdrawApplication",
+    environment.phpApiHeader_300_23 + 'user/WithdrawApplication',
 
   //Payroll Setup
-  postSetup: environment.nodeApiUrl + "PayrollSetup/filterScreen",
-  searchSetup: environment.nodeApiUrl + "PayrollSetup/filterScreen/search",
-  addUpdateSetup: environment.nodeApiUrl + "PayrollSetup/filterScreen/update",
-  getDropdowns: environment.nodeApiUrl + "PayrollSetup/filterScreen/dropdowns",
+  postSetup: environment.nodeApiUrl + 'PayrollSetup/filterScreen',
+  searchSetup: environment.nodeApiUrl + 'PayrollSetup/filterScreen/search',
+  addUpdateSetup: environment.nodeApiUrl + 'PayrollSetup/filterScreen/update',
+  getDropdowns: environment.nodeApiUrl + 'PayrollSetup/filterScreen/dropdowns',
 
   //MIS Headers
-  getMISHeaders: environment.nodeApiUrl + "PayrollSetup/filterScreen/headers",
+  getMISHeaders: environment.nodeApiUrl + 'PayrollSetup/filterScreen/headers',
   updateHeaders:
-    environment.nodeApiUrl + "PayrollSetup/filterScreen/headers/update",
+    environment.nodeApiUrl + 'PayrollSetup/filterScreen/headers/update',
   searchHeaders:
-    environment.nodeApiUrl + "PayrollSetup/filterScreen/headers/search",
+    environment.nodeApiUrl + 'PayrollSetup/filterScreen/headers/search',
 
   //Insurance Setup
   updateInsurance:
-    environment.nodeApiUrl + "PayrollSetup/filterScreen/insuranceUpdate",
+    environment.nodeApiUrl + 'PayrollSetup/filterScreen/insuranceUpdate',
 
   //payroll Dashboard
-  getNewHires: environment.nodeApiUrl + "PayrollDashboard/getNewHires",
-  getLeavers: environment.nodeApiUrl + "PayrollDashboard/getLeavers",
+  getNewHires: environment.nodeApiUrl + 'PayrollDashboard/getNewHires',
+  getLeavers: environment.nodeApiUrl + 'PayrollDashboard/getLeavers',
   getSalaryChanges:
-    environment.nodeApiUrl + "PayrollDashboard/getSalaryChanges",
-  getExpenses: environment.nodeApiUrl + "PayrollDashboard/getExpenses",
-  getAttendance: environment.nodeApiUrl + "PayrollDashboard/getAttendance",
+    environment.nodeApiUrl + 'PayrollDashboard/getSalaryChanges',
+  getExpenses: environment.nodeApiUrl + 'PayrollDashboard/getExpenses',
+  getAttendance: environment.nodeApiUrl + 'PayrollDashboard/getAttendance',
   getLoanDeduction:
-    environment.nodeApiUrl + "PayrollDashboard/getLoanDeduction",
+    environment.nodeApiUrl + 'PayrollDashboard/getLoanDeduction',
 
-  getHeadCount: environment.nodeApiUrl + "PayrollDashboard/getHeadCount",
-  getOtherChanges: environment.nodeApiUrl + " PayrollDashboard/getOtherChanges",
+  getHeadCount: environment.nodeApiUrl + 'PayrollDashboard/getHeadCount',
+  getOtherChanges: environment.nodeApiUrl + ' PayrollDashboard/getOtherChanges',
 
   // MongoDB Apis
-  creatMenusCache: environment.mongoApiUrl + " ",
+  creatMenusCache: environment.mongoApiUrl + ' ',
 
   // Encode & Decode
-  encryptAesCode: environment.phpApiHeader_300 + "EncryptAesCode",
-  decryptAesCode: environment.phpApiHeader_300 + "DecryptAesCode",
+  encryptAesCode: environment.phpApiHeader_300 + 'EncryptAesCode',
+  decryptAesCode: environment.phpApiHeader_300 + 'DecryptAesCode',
 
-
-  
   /* DMS Modules Api */
   // Add Documents
-  document: environment.nodeApiUrl + "Document", // Setup Physical Location
-  fileUpload : environment.nodeApiUrl + "file",
-  imageUpload: environment.nodeApiUrl + "file/upload",
-
+  document: environment.nodeApiUrl + 'Document', // Setup Physical Location
+  imageUpload: environment.nodeApiUrl + 'file/upload',
 
   // get company location filters
-  staticData: environment.nodeApiUrl + "StaticData",
+  staticData: environment.nodeApiUrl + 'StaticData',
 
   // get branches based on cities
-  orgChart: environment.nodeApiUrl + "Orgchart",
+  orgChart: environment.nodeApiUrl + 'Orgchart',
 
   // Personal Files Setup
-  createLocation: environment.nodeApiUrl + "Document/locationList",
-  getLocation: environment.nodeApiUrl + "Document/locationList",
+  createLocation: environment.nodeApiUrl + 'Document/locationList',
+  getLocation: environment.nodeApiUrl + 'Document/locationList',
   createDocumentCategoryField:
-    environment.nodeApiUrl + "DocumentCategories/:id/fields",
+    environment.nodeApiUrl + 'DocumentCategories/:id/fields',
   getDocumentCategoryField:
-    environment.nodeApiUrl + "DocumentCategories/:id/fields",
-  documentCategories: environment.nodeApiUrl + "DocumentCategories",
+    environment.nodeApiUrl + 'DocumentCategories/:id/fields',
+  documentCategories: environment.nodeApiUrl + 'DocumentCategories',
 
   /* NMS Module Api */
-
-  notificationUrl: environment.nodeApiUrl + "Notification",
+  notificationUrl: environment.nodeApiUrl + 'Notification',
   // Roster Module Api
   rosterUrl: environment.nodeApiUrl + 'roster',
   // Shift Allocation
@@ -164,8 +159,13 @@ export const APIs = {
   //ShiftRequestAndSetup
   ShiftRequestAndSetupUrl: environment.nodeApiUrl + 'ShiftRequestAndSetup',
   workCalendarUrl: environment.nodeApiUrl + 'WorkCalendar',
+  rosterAttendance: environment.nodeApiUrl + 'Attendance'
 };
 
+
+
+
+//
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

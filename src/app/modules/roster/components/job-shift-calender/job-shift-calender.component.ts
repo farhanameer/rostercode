@@ -46,7 +46,9 @@ export class JobShiftCalenderComponent implements OnInit {
   };
 
   constructor(private calendar: CalendarService,public activeModal: NgbActiveModal,
-    private customModal: ModalService , private holidayService : HolidayDataService , private appLocalStorage : AppLocalStorageService) { }
+    private customModal: ModalService , private holidayService : HolidayDataService , 
+    private appLocalStorage : AppLocalStorageService,
+) { }
 
   filterChange($event){
     console.log('in job shift calendar',$event);
@@ -104,6 +106,92 @@ export class JobShiftCalenderComponent implements OnInit {
     this.currentYearMonthsData = [...this.currentYearData];
     this.getHolidays(year);
   }
+
+
+  searchInArray(array = [] , value){
+    if(array.length == 0 ){
+      return false;
+    }
+    let found = false;
+    array.every(item =>{
+      if(item == value){
+        found = true;
+        return false;
+      }
+      return true;
+    });
+
+    return found;
+  }
+  async getWorkCalendarSetting(){
+
+    const params = {
+      "client_id" : this.appLocalStorage.getClientId(),
+      "year" : this.modelData['year'],
+      "country_id" : this.modelData['country_id']
+    }
+    console.log("Country Year", params);
+    const res = await this.holidayService.getWorkCalendarSetting(params);
+    if(!res['status']) return; 
+    // this.holidayStatus = res['data'].publicHolidays;
+    const holidays = res['data'].workCalendarSetting;
+
+    let weekendId = holidays.weekend_id;
+    let wdayArray = `${holidays.wday_id}`.split(',');
+    let halfDayId = holidays.half_day_id;
+    let halfDayColor = holidays.half_day_color;
+    let wDayColor = holidays.wday_color;
+
+    let hash = {
+      'Sun' : 0 , 
+      'Mon' : 1,
+      'Tue' : 2,
+      'Wed' : 3,
+      'Thu' : 4 , 
+      'Fri' : 5 ,
+      'Sat' : 6
+    }
+    let giantArray = [];
+    this.currentYearData.forEach(year =>{
+      
+      year.totalDaysInMonth.forEach(day=>{
+        if(day.date){
+          if(halfDayId == hash[day.day]){
+            day.color = halfDayColor;
+            return;
+          }
+          if(this.searchInArray(wdayArray , hash[day.day])){
+            day.color = wDayColor;
+            return;
+          }
+        }
+      });
+
+      giantArray.push(year);
+    });
+
+    this.currentYearData = [];
+    this.currentYearData = giantArray;
+    // let counter = Math.ceil(holidays.length/5);
+    // // let holidayStatus2 = [];
+    // let loopCounter = 0;
+    // for(let i = 1; i<=counter; i++){
+    //   let array = [];
+    //   for(let j = 0; j<5; j++){
+    //     if(holidays[loopCounter]){
+    //       array.push(holidays[loopCounter]);
+    //     }
+    //     loopCounter = loopCounter + 1;
+    //   }
+      
+      
+      
+    // }
+    
+  }
+
+
+
   async getHolidays(year){
     const params = {
       'client_id' : this.appLocalStorage.getClientId(),
@@ -234,13 +322,18 @@ export class JobShiftCalenderComponent implements OnInit {
       const date = `${year}-${month}-${day}`;
       if(!singleDate.date) return;
       if(singleDate.start_date && !open) return;
-      this.customModal.showFeaturedDialog(EventComponent,"" , {
+      let ref = this.customModal.showFeaturedDialog(EventComponent,"" , {
         holiday : {
           start_date: date , 
           end_date : date , 
           event : this.eventArray
         }, 
         filters : this.filters
+      });
+      ref.closed.subscribe(event =>{
+        if(event){
+          this.getWorkCalendarSetting();
+        }
       });
   }
 
@@ -267,7 +360,8 @@ export class JobShiftCalenderComponent implements OnInit {
     if(this.filters && this.filters.countryId ==-1) return;
     this.modelData = {
       "year" : moment(this.currentDate).format('YYYY'),
-      "country_id" : this.filters.countryId
+      "country_id" : this.filters.countryId , 
+      filters : this.filters
     }
     this.customModal.showFeaturedDialog(CalenderSetupComponent,'' , this.modelData)
   }

@@ -59,7 +59,10 @@ export class CalenderSetupComponent implements OnInit {
   }
 
   async postWorkCalendarSetting(body){
-    const res = await this.holiday.workCalendarSetting(body);    
+    const res = await this.holiday.workCalendarSetting(body);
+    if(res['status']){
+      this.activeModal.close(true);
+    }    
   }
 
   selectionChange(value,holiday){
@@ -133,14 +136,23 @@ export class CalenderSetupComponent implements OnInit {
       "half_time_out": this.workCalenderSetupForm.value.to,
       "startYear": this.workCalenderSetupForm.value.periodStartYear,
       "endYear": this.workCalenderSetupForm.value.periodEndYear,
-      "glob_mkt_id": -1,
-      "region_id": -1,
-      "sub_region_id": -1,
-      "country_id": 154,
-      "state_id": -1,
-      "city_id": -1,
-      "loc_id": -1,
-      "department_id": -1
+      // "glob_mkt_id": -1,
+      // "region_id": -1,
+      // "sub_region_id": -1,
+      // "country_id": 154,
+      // "state_id": -1,
+      // "city_id": -1,
+      // "loc_id": -1,
+      // "department_id": -1
+
+      "glob_mkt_id": this.modelData["filters"].marketId,
+      "region_id": this.modelData["filters"].clusterId,
+      "sub_region_id": this.modelData["filters"].subClusterId,
+      "country_id": this.modelData["filters"].countryId,
+      "state_id": this.modelData["filters"].stateId,
+      "city_id": this.modelData["filters"].cityId,
+      "loc_id": this.modelData["filters"].branchId,
+      "department_id": this.modelData["filters"].departmentId
     }
     console.log(this.workCalendarSetting);
     let publicHolidays = [];
